@@ -1,0 +1,149 @@
+$color: #eb661b;
+$border-color: $color;
+$background-footer: #000000;
+
+footer{
+    background-color: $background-footer;
+    font-size: 1.1em;
+
+    .container, .row{
+        height: 100%;
+    }
+
+    #logo{
+        margin-top: 10vh;
+    }
+
+    #middle-box{
+        margin-top: 16vh;
+        position: relative;
+        height: 100%;
+
+        color: white;
+
+        #association-ul{
+            border-bottom: 2px solid $border-color;
+            margin-left: 1em;
+            padding: 0;
+
+            font-weight: bold;
+
+            li{
+                display: inline-block;
+                list-style-type: none;
+                width: 131px;
+            }
+
+            li:nth-child(1){
+                text-align: left;
+            }
+
+            li:nth-child(2){
+                text-align: center;
+            }
+            li:nth-child(3){
+                text-align: right;
+            }
+
+            li:hover{
+                a{
+                    color: $color;
+                }
+            }
+        }
+
+        span{
+            font-size: 1.2em;
+            color: $color;
+            margin-top: 0.2em;
+            font-weight: bold;
+        }
+
+        span, ul{
+            display: inline-block;
+            vertical-align: top;
+        }
+    }
+
+
+    #mentions{
+        margin-top: 5vh;
+        text-align: center;
+        color: white;
+    }
+
+    #menu-ul{
+        margin-top: 10vh;
+
+        li{
+            border-left: 2px solid $border-color;
+            list-style-type: none;
+            padding-top: 0.3em;
+            padding-left: 1em;
+
+            font-size: 1em;
+            color: white;
+            font-weight: bold;
+        }
+
+        li:hover{
+            a{
+                color: $color;
+            }
+            border-left: 3px solid white;
+        }
+    }
+
+    a, a:hover{
+        color: white;
+        text-decoration: none;
+    }
+}
+
+@media screen and (min-width: 200px) and (max-width: 640px)
+{
+    footer{
+        #logo{
+            text-align: center;
+        }
+ 
+        #middle-box{
+            margin-top: 6vh;
+            margin-left: 6%;
+
+            #association-ul{
+                display: block;
+                border: none;
+
+                li{
+                    border-left: 2px solid $border-color;
+                    display: block;
+                    width: auto;
+                    list-style-type: none;
+                    padding-top: 0.3em;
+                    padding-left: 1em;
+
+                    font-size: 1em;
+                    color: white;
+                }
+
+                li:hover{
+                    a{
+                        color: $color;
+                    }
+                    border-left: 3px solid white;
+                }
+
+                @for $i from 1 through 3 {
+                    li:nth-child(#{$i}){
+                        text-align: left;
+                    }
+                }
+            }
+
+            #menu-ul{
+                margin-top: 6vh;
+            }
+        }
+    }
+}
