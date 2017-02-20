@@ -44,7 +44,7 @@ function mdq_assoc_init(){
 		'menu_position' => 9,
 		'capability_type'=>'post',
 		'supports' => array('title', 'thumbnail'),
-        'taxonomies' => array( 'category' ),
+        'taxonomies' => array( 'category', 'theme_mdq', 'age_mdq' ),
 	));
 }
 
@@ -62,6 +62,7 @@ function register_plugin_style_activite() {
 **/
 function mdq_event_metaboxes(){
 	add_meta_box('monsuperslide','Description','mdq_event_meta_description','activite','normal','high');
+    add_meta_box('monsuperslide_association','Association lié à l\'activité','mdq_event_meta_liste_assoc','activite','normal');
 	add_meta_box('monsuperslide_time','Date de début','mdq_event_meta_date','activite','normal');
 }
 
@@ -88,4 +89,6 @@ function mdq_event_savepost($post_id, $post){
 	update_post_meta($post_id,'mdq_event_description',$_POST['event_description']);
 	update_post_meta($post_id,'mdq_event_start',$_POST['event_datedebut']);
 	update_post_meta($post_id,'mdq_event_end',$_POST['event_datefin']);
+	update_post_meta($post_id,'mdq_association_id',$_POST['event_assoc_list']);
+	update_post_meta($post_id,'mdq_event_adresse',$_POST['event_adresse']);
 }
