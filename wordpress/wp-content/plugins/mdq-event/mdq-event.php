@@ -10,6 +10,8 @@
 require_once("inc/metabox.php");
 
 add_action('init', 'mdq_assoc_init');                                   // Initialisation de Wordpress
+// Register style sheet.
+add_action( 'wp_enqueue_scripts', 'register_plugin_style_activite');
 add_action('add_meta_boxes', 'mdq_event_metaboxes');                    // Ajout des meta_box
 add_action('save_post', 'mdq_event_savepost',10, 2);					// Capture l'édition d'article avec 2 arguments
 
@@ -45,6 +47,15 @@ function mdq_assoc_init(){
         'taxonomies' => array( 'category' ),
 	));
 }
+
+/**
+ * Register and enqueue style sheet.
+ */
+function register_plugin_style_activite() {
+	wp_register_style( 'mdq-event', plugins_url( 'mdq-event/css/css_mdq-event.css' ) );
+	wp_enqueue_style( 'mdq-event' );
+}
+
 
 /**
 * Ajoute des meta box pour les contenus

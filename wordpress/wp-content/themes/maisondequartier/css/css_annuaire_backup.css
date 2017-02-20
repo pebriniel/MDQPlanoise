@@ -1,0 +1,141 @@
+header {
+  display: block;
+  background-color: orange;
+  height: 116px;
+  width: 100%;
+}
+
+div {
+  position: relative;
+}
+
+select {
+  /* make arrow and background */
+  background: linear-gradient(45deg, transparent 50%, black 50%), linear-gradient(135deg, black 50%, transparent 50%), linear-gradient(to right, red, red);
+  background-position: calc(100% - 21px) calc(1em + 2px), calc(100% - 16px) calc(1em + 2px), 100% 0;
+  background-size: 5px 5px, 5px 5px, 2.5em 2.5em;
+  background-repeat: no-repeat;
+  /* styling and reset */
+  border: thin solid black;
+  font: 300 1em/100% "Helvetica Neue", Arial, sans-serif;
+  line-height: 100%;
+  padding: 0.5em 3.5em 0.5em 1em;
+  /* reset */
+  border-radius: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+#annuaire .custom-input-padding {
+  padding-top: 0.2em;
+  padding-right: 1.4em;
+  color: #eb661b;
+  font-size: 2.8em;
+}
+#annuaire #search {
+  margin-top: 70px;
+}
+#annuaire #search input {
+  height: 50px;
+  width: 485px;
+}
+#annuaire #search select {
+  height: 50px;
+  width: 333px;
+}
+#annuaire #page {
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+}
+#annuaire #page li {
+  display: inline-block;
+  list-style-type: none;
+}
+#annuaire #page li a {
+  margin: 0.1em;
+  padding-left: 0.4em;
+  padding-right: 0.4em;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  text-decoration: none;
+  color: black;
+}
+#annuaire #page li a:hover {
+  background-color: #eb661b;
+  border-radius: 10%;
+  color: white;
+}
+#annuaire #content {
+  padding-top: 63px;
+}
+#annuaire #content .content-annuaire {
+  position: relative;
+  height: 250px;
+}
+#annuaire #content .content-annuaire .content-ta {
+  position: absolute;
+  width: 98%;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire {
+  width: 100%;
+  max-height: 212px;
+  border: 2px solid black;
+}
+#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .logo {
+  position: relative;
+  display: inline-block;
+  width: 30%;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 1em;
+}
+#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .logo img {
+  vertical-align: bottom;
+}
+#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire h3 {
+  color: #eb661b;
+  text-align: center;
+}
+#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 69%;
+  max-height: 204px;
+  border-left: 1px solid black;
+}
+#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption h3 {
+  font-size: 2em;
+  font-weight: bold;
+}
+#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption p:nth-child(2) {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption p:nth-child(3) {
+  text-align: center;
+}
+#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption p:nth-child(3) .btn-association {
+  padding-left: 3em;
+  padding-right: 3em;
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #eb661b;
+  color: white;
+}
+#annuaire #content .background {
+  width: 100%;
+  position: absolute;
+  height: 210px;
+  background: url("../../img/background-div-annuaire.png") bottom right no-repeat;
+  z-index: 1;
+}
+
+/*# sourceMappingURL=css_annuaire.css.map */

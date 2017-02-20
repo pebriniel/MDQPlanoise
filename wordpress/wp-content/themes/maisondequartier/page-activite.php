@@ -32,12 +32,12 @@ function mdq_showActiviteHtml($post){
     <?php
 }
 
-function mdq_list_cat($id_cat){
+function mdq_list_cat($name_tax){
     $categories = get_categories( array(
         'hide_empty' => 0,
         'orderby' => 'name',
         'order'   => 'ASC',
-        'parent' => $id_cat
+        'taxonomy' => $name_tax
     ) );
 
 
@@ -83,7 +83,7 @@ function mdq_list_cat($id_cat){
                 <div class="dropdown" id="dropdown-theme">
                     <button class="dropbtn">Thèmes <i class="glyphicon glyphicon-chevron-down" id="chevron-theme"></i></button>
                     <div class="dropdown-content">
-                        <?= mdq_list_cat(1); ?>
+                        <?= mdq_list_cat("theme_mdq"); ?>
                     </div>
                 </div>
             </div>
@@ -91,7 +91,7 @@ function mdq_list_cat($id_cat){
                 <div class="dropdown">
                     <button id="btnAge" class="dropbtn">Âges <i class="glyphicon glyphicon-chevron-down" id="chevron-age"></i></button>
                     <div class="dropdown-content">
-                        <?= mdq_list_cat(8); ?>
+                        <?= mdq_list_cat("age_mdq"); ?>
                     </div>
                 </div>
             </div>
@@ -100,6 +100,7 @@ function mdq_list_cat($id_cat){
     <div class="container">
         <div class="row">
             <?php
+            /* affichage individuel d'une activté */
             if (get_query_var('activite')){
                 if($article = get_post( $activite )){
                     if($article->post_type == 'activite'){
@@ -111,6 +112,7 @@ function mdq_list_cat($id_cat){
                     }
                 }
             }
+            /* affichage de la liste des activités */
             else{
                 query_posts(array( 'post_type'=>'activite'));
                 if ( have_posts() ){

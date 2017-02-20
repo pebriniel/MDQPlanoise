@@ -6,7 +6,6 @@
  Version:      1.0.0
  License:      GNU General Public License v2 or later
  License URI:  http://www.gnu.org/licenses/gpl-2.0.html
- Tags:         light, dark, two-columns, right-sidebar, responsive-layout, accessibility-ready
  Text Domain:  maison-quartier-child
 */
 
@@ -39,136 +38,293 @@ header {
     color: #ffffff;
     text-decoration: none; }
 
+/*
 main{
     margin-top: 8vh;
+}*/
+
+/* page accueil */
+#wrapper {
+  position: relative;
+  width: 100%;
+  height: 50%;
+  padding-top: 4%;
+}
+
+.carousel { width: 570px;}
+.carousel a{ display : block; float: left; width: 570px; height: 270px; }
+
+#article{
+  height: 50%;
+  width: 100%;
+  position: relative;
 }
 
 
-/* -- page activité -- */
-.btn-savoir {
-  width: 50%;
-  -webkit-transition: .3s;
-  transition: .3s; }
+/* page annuaire association */
 
-.btn-savoir:hover {
-  border: inset 1px 1px 1px 1px #ff6633;
-  background-color: #fff;
-  color: #ff6633; }
-
-.card {
-  border: 1px solid black; }
-
-.title {
-  font-size: 3.3em;
-  margin-top: 0; }
-
-.date {
-  font-size: 1.5em;
-  text-align: center;
-  margin-top: 55%; }
-
-.descri {
-  font-size: 1.3em; }
-
-.card-content {
-  padding: 20px; }
-
-.card-container {
-  margin-top: 40px; }
-
-.card-footer {
-  background-color: black;
-  text-align: center; }
-
-.voir-fichasso {
-  color: #fff;
-  font-size: 150%;
-  text-decoration: none;
-  padding-bottom: 3px;
-  padding-top: 1px;
-  padding-left: 3px;
-  padding-right: 3px;
-  -webkit-transition: .3s;
-  transition: .3s; }
-
-.voir-fichasso:link {
-  text-decoration: none; }
-
-.voir-fichasso:visited {
-  text-decoration: none;
-  color: #fff; }
-
-.voir-fichasso:hover {
-  text-decoration: none;
-  color: #ff6633; }
-
-.voir-fichasso:active {
-  text-decoration: none; }
-
-.search-box {
-  display: inline-block;
-  width: 70%;
-  height: 35px;
-  border: 1px solid #a3a1a1;
-  position: relative;
-  background: #fff; }
-
-.search-box input[type=text] {
-  border: none;
-  box-shadow: none;
-  display: inline-block;
-  background: transparent; }
-
-.search-box input[type=text]:hover, .search-box input[type=text]:focus, .search-box input[type=text]:active {
-  box-shadow: none; }
-
-.search-box .search-btn {
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  bottom: 0px;
-  color: #ff6633;
-  font-size: 17px;
-  padding: 5px 10px 1px; }
-
-#transition {
-  background-color: #ff6633;
-  height: 50px;
-  padding-top: 8px;
-  padding-right: 70px;
-  padding-left: 70px; }
-
-.dropbtn {
-  background-color: #fff;
-  color: #000;
-  font-size: 1.3em;
-  width: 100%;
-  height: 34px;
-  border: 1px solid #a3a1a1; }
-
-#dropdown-theme {
-  margin-right: 3%; }
-
-.dropdown-content {
+main .morecontent span {
   display: none;
+}
+main .morelink {
+  display: block;
+}
+
+#annuaire .custom-input-padding {
+  padding-top: 0.1em;
+  padding-right: 1.6em;
+  color: #eb661b;
+  font-size: 2em;
+  border: 0px;
+}
+#annuaire #search {
+  margin-top: 0px;
+  position: relative;
+  padding: 1em;
+  min-height: 5em;
+  background-color: #eb661b;
+}
+#annuaire #search input {
+  height: 3em;
+  width: 485px;
+}
+#annuaire #search select {
+  height: 3em;
+  width: 333px;
+}
+#annuaire #search input, #annuaire #search select {
+  box-shadow: none;
+  border: none;
+  background: white;
+}
+#annuaire #search:before,
+#annuaire #search:after {
+  content: "";
   position: absolute;
-  background-color: #f9f9f9;
+  background-color: #eb661b;
+  padding: 1em;
+  height: 5em;
+  top: 0;
+  bottom: 0;
   width: 100%;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1; }
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  border-bottom: 1px solid #a3a1a1;
+}
+#annuaire #search:after {
+  left: 100%;
+}
+#annuaire #search:before {
+  right: 100%;
+}
+#annuaire #page {
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+}
+#annuaire #page li {
+  display: inline-block;
+  list-style-type: none;
+}
+#annuaire #page li a {
+  margin: 0.1em;
+  padding-left: 0.4em;
+  padding-right: 0.4em;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
   text-decoration: none;
-  display: block; }
+  color: black;
+}
+#annuaire #page li a:hover {
+  background-color: #eb661b;
+  border-radius: 10%;
+  color: white;
+}
+#annuaire #content {
+  padding-top: 10vh;
+}
+#annuaire #content .content-annuaire {
+  position: relative;
+  height: 250px;
+}
+#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire {
+  width: 100%;
+  padding-bottom: 0.7em;
+  background: url("../../img/background-div-annuaire.png") bottom right no-repeat;
+}
+#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .logo {
+  position: relative;
+  display: inline-block;
+  width: 25%;
+  box-sizing: border-box;
+  text-align: center;
+}
+#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .logo img {
+  vertical-align: bottom;
+}
+#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire h3 {
+  color: #eb661b;
+  text-align: center;
+}
+#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 73%;
+  border: 1px solid black;
+}
+#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption h3 {
+  font-size: 2em;
+  font-weight: bold;
+}
+#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption p:nth-child(2) {
+  padding-left: 2em;
+  padding-right: 2em;
+  letter-spacing: 0.4px;
+}
+#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption p:nth-child(3) {
+  text-align: center;
+}
+#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption p:nth-child(3) .btn-association {
+  padding-left: 3em;
+  padding-right: 3em;
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #eb661b;
+  color: white;
+}
 
-.dropdown-content a:hover {
-  background-color: #ff6633;
-  color: #fff; }
+@media screen and (min-width: 200px) and (max-width: 640px) {
+  #annuaire #search select {
+    width: 98.1%;
+    margin-top: 1em;
+  }
+  #annuaire #content {
+    padding-top: 4em;
+  }
+  #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .logo {
+    display: none;
+  }
+  #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption {
+    width: 98%;
+  }
+}
 
-.dropdown:hover .dropdown-content {
-  display: block; }
+/*# sourceMappingURL=css_annuaire.css.map */
 
-/*# sourceMappingURL=style-activites-bootstrap.css.map */
+/* footer */
+#footer {
+  background-color: #000000;
+  font-size: 1.1em;
+}
+#footer .container, #footer .row {
+  height: 100%;
+}
+#footer #logo {
+  margin-top: 10vh;
+}
+#footer #middle-box {
+  margin-top: 16vh;
+  position: relative;
+  height: 100%;
+  color: white;
+}
+#footer #middle-box #association-ul {
+  border-bottom: 2px solid #eb661b;
+  margin-left: 1em;
+  padding: 0;
+  font-weight: bold;
+}
+#footer #middle-box #association-ul li {
+  display: inline-block;
+  list-style-type: none;
+  width: 131px;
+}
+#footer #middle-box #association-ul li:nth-child(1) {
+  text-align: left;
+}
+#footer #middle-box #association-ul li:nth-child(2) {
+  text-align: center;
+}
+#footer #middle-box #association-ul li:nth-child(3) {
+  text-align: right;
+}
+#footer #middle-box #association-ul li:hover a {
+  color: #eb661b;
+}
+#footer #middle-box span {
+  font-size: 1.2em;
+  color: #eb661b;
+  margin-top: 0.2em;
+  font-weight: bold;
+}
+#footer #middle-box span, footer #middle-box ul {
+  display: inline-block;
+  vertical-align: top;
+}
+#footer #mentions {
+  margin-top: 5vh;
+  text-align: center;
+  color: white;
+}
+#footer #menu-ul {
+  margin-top: 10vh;
+}
+#footer #menu-ul li {
+  border-left: 2px solid #eb661b;
+  list-style-type: none;
+  padding-top: 0.3em;
+  padding-left: 1em;
+  font-size: 1em;
+  color: white;
+  font-weight: bold;
+}
+#footer #menu-ul li:hover {
+  border-left: 3px solid white;
+}
+#footer #menu-ul li:hover a {
+  color: #eb661b;
+}
+#footer a, #footer a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+@media screen and (min-width: 200px) and (max-width: 640px) {
+  #footer #logo {
+    text-align: center;
+  }
+  #footer #middle-box {
+    margin-top: 6vh;
+    margin-left: 6%;
+  }
+  #footer #middle-box #association-ul {
+    display: block;
+    border: none;
+  }
+  #footer #middle-box #association-ul li {
+    border-left: 2px solid #eb661b;
+    display: block;
+    width: auto;
+    list-style-type: none;
+    padding-top: 0.3em;
+    padding-left: 1em;
+    font-size: 1em;
+    color: white;
+  }
+  #footer #middle-box #association-ul li:hover {
+    border-left: 3px solid white;
+  }
+  #footer #middle-box #association-ul li:hover a {
+    color: #eb661b;
+  }
+  #footer #middle-box #association-ul li:nth-child(1) {
+    text-align: left;
+  }
+  #footer #middle-box #association-ul li:nth-child(2) {
+    text-align: left;
+  }
+  #footer #middle-box #association-ul li:nth-child(3) {
+    text-align: left;
+  }
+  #footer #middle-box #menu-ul {
+    margin-top: 6vh;
+  }
+}
+/*# sourceMappingURL=css_footer.css.map */
