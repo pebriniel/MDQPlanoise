@@ -29,27 +29,34 @@
 		<!--[if lt IE 8]>
 			<p class="ancient-browser-alert">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/" target="_blank">upgrade your browser</a>.</p>
 		<![endif]-->
-		<div class="container page-container">
 			<?php do_action('before'); ?>
 
-			<header class="container-fluid">
-			  <nav class=" navbar-fixed-top">
-				<a href="<?php echo esc_url(home_url('/')); ?>" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
-					<img class="col-md-2 logoPS" src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/logo.svg" alt="Logo <?php echo esc_attr(get_bloginfo('name', 'display')); ?>"/>
-				</a>
-				<?php
-					echo wp_nav_menu(
-						array(
-							'menu' => 'Project Nav',
-							'container' => false,
-							'menu_id' => 'nav',
-							'menu_class' => 'col-md-7 col-md-push-1 list-inline'
-						)
-					);
-				?>
-				<a class="col-md-1" href="#">Connexion</a>
-			  </nav>
-			</header>
+			<header class="page-header">
+	  <div class="row">
+	  <nav class=" navbar-fixed-top">
+	    <div class="col-md-2 logoPS">
+	      <a href="<?php echo esc_url(home_url('/')); ?>" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
+	        <img src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/logo.svg" alt="Logo <?php echo esc_attr(get_bloginfo('name', 'display')); ?>"/>
+	      </a>
+	    </div>
+	    <div class="col-md-8 col-xs-10">
+	  <?php
+	    echo wp_nav_menu(
+	      array(
+	        'menu' => 'Project Nav',
+	        'container' => false,
+	        'menu_id' => 'nav',
+	        'menu_class' => 'list-inline text-right'
+	      )
+	    );
+	  ?>
+	</div>
+	<div class="col-md-2 col-xs-1 connexion">
+	  <a href="#">Connexion</a>
+	</div>
+	  </nav>
+	</div>
+	</header>
 
 
-			<div id="content" class="row row-with-vspace site-content">
+			<!-- <div id="content" class="row row-with-vspace site-content"> -->

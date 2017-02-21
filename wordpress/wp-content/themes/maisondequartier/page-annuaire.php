@@ -17,7 +17,6 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
 ?>
 
 <?php get_sidebar('left'); ?>
-			<div class="col-md-<?php echo $main_column_size; ?> content-area" id="main-column">
 					<main id="annuaire" class="site-main" role="main">
             <div id="search" class="container">
                 <div class="row">

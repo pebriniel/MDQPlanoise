@@ -199,6 +199,26 @@ function ficheassocation_metabox($object){
 		<textarea name="ficheassocation_desc" rows="4" cols="50" style="width:100%; resize:none;"><?= esc_attr(get_post_meta($object->ID, '_desc', true)); ?></textarea>
 	</div>
 
+	<div class="meta-box-item-title">
+		<label for="ficheassocation_school">Ouverture période scolaire</label>
+	</div>
+	<div class="meta-box-item-content">
+		<textarea name="ficheassocation_school" rows="4" cols="50" style="width:100%; resize:none;"><?= esc_attr(get_post_meta($object->ID, '_school', true)); ?></textarea>
+	</div>
+
+	<div class="meta-box-item-title">
+		<label for="ficheassocation_smallHolidays">Ouverture petites vacances</label>
+	</div>
+	<div class="meta-box-item-content">
+		<textarea name="ficheassocation_smallHolidays" rows="4" cols="50" style="width:100%; resize:none;"><?= esc_attr(get_post_meta($object->ID, '_smallHolidays', true)); ?></textarea>
+	</div>
+
+	<div class="meta-box-item-title">
+		<label for="ficheassocation_bigHolidays">Ouverture grandes vacances</label>
+	</div>
+	<div class="meta-box-item-content">
+		<textarea name="ficheassocation_bigHolidays" rows="4" cols="50" style="width:100%; resize:none;"><?= esc_attr(get_post_meta($object->ID, '_bigHolidays', true)); ?></textarea>
+	</div>
 	<?php
 }
 
@@ -231,8 +251,12 @@ function ficheassocation_savepost($post_id, $post){
 	$dayclose = !isset($_POST['ficheassocation_dayclose']);
 	$logo = !isset($_POST['ficheassocation_logo']);
 
+	$school = !isset($_POST['ficheassocation_school']);
+	$smallHolidays = !isset($_POST['ficheassocation_smallHolidays']);
+	$bigHolidays = !isset($_POST['ficheassocation_bigHolidays']);
+
 	// Le champ est défini et le token est bon ?
-	if(!wp_verify_nonce($_POST['ficheassocation_nonce'] , 'ficheassocation') || $nameAsso || $email || $phone || $address || $postalcode || $city || $siteweb || $description || $timeopen || $timeclose || $dayopen || $dayclose || $logo){
+	if(!wp_verify_nonce($_POST['ficheassocation_nonce'] , 'ficheassocation') || $nameAsso || $email || $phone || $address || $postalcode || $city || $siteweb || $description || $logo || $school || $smallHolidays || $bigHolidays){
 		return $post_id;
 	}
 
@@ -256,5 +280,10 @@ function ficheassocation_savepost($post_id, $post){
 	update_post_meta($post_id,'_dayopen',$_POST['ficheassocation_dayopen']);
 	update_post_meta($post_id,'_dayclose',$_POST['ficheassocation_dayclose']);
 	update_post_meta($post_id,'_logo',$_POST['ficheassocation_logo']);
+
+	update_post_meta($post_id,'_school',$_POST['ficheassocation_school']);
+	update_post_meta($post_id,'_smallHolidays',$_POST['ficheassocation_smallHolidays']);
+	update_post_meta($post_id,'_bigHolidays',$_POST['ficheassocation_bigHolidays']);
+
 
 }

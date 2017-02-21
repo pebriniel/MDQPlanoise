@@ -7,13 +7,8 @@
 
 get_header();
 
-/**
- * determine main column size from actived sidebar
- */
-$main_column_size = bootstrapBasicGetMainColumnSize();
-?>
-<?php get_sidebar('left'); ?>
-				<div class="col-md-<?php echo $main_column_size; ?> content-area" id="main-column">
+get_sidebar('left'); ?>
+				<div class="col-md-12 content-area" id="main-column">
 					<main id="home" class="site-main" role="main">
 						<?php
 							/* Include the Post-Format-specific template for the content.

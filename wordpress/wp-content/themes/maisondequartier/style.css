@@ -9,50 +9,81 @@
  Text Domain:  maison-quartier-child
 */
 
-/* header */
-header {
-  height: 10vh;
-  width: 100vw;
-  background-color: #ffffff; }
-  header .col-md-2 {
-    padding: 0%;
-    margin-left: 0.5%; }
-  header .navbar-fixed-top {
-    background-color: white;
-    border-bottom: 1px solid #eb661b; }
-  header #nav {
-    vertical-align: middle;
-    padding-top: 5%; }
-  header #nav li {
-    list-style: none;
-    font-size: 1.3em;
-    margin-right: 4%; }
-  header #nav li a {
-    color: black;
-    font-weight: bold; }
-  header #nav li:hover {
-    background-color: #eb661b;
-    padding: 1%;
-    color: #ffffff; }
-  header #nav li a:hover {
-    color: #ffffff;
-    text-decoration: none; }
-
-/*
 main{
-    margin-top: 8vh;
-}*/
-
-/* page accueil */
-#wrapper {
-  position: relative;
-  width: 100%;
-  height: 50%;
-  padding-top: 4%;
+    height: 80vh;
 }
 
-.carousel { width: 570px;}
-.carousel a{ display : block; float: left; width: 570px; height: 270px; }
+/* header */
+.page-header {
+  /*height: 100px;*/
+  /*width: 100vw;*/
+  /*background-color: #e6e6f6;*/
+  margin-top: 0%; }
+  .page-header .navbar-fixed-top {
+    height: 100px;
+    background-color: white;
+    border-bottom: 1px solid #ff6633; }
+  .page-header #nav {
+    list-style: none;
+    font-size: 1.3em;
+    padding-right: 5%;
+    margin-bottom: 0%; }
+  .page-header #nav li {
+    margin-right: 4%;
+    padding: 0.5% 1%;
+    margin-top: 66px; }
+  .page-header #nav li a {
+    color: #000000;
+    font-weight: bold; }
+  .page-header #nav li:hover {
+    padding: 0.5% 1%;
+    background-color: #ff6633; }
+    .page-header #nav li:hover a {
+      color: #ffffff;
+      text-decoration: none; }
+  .page-header .connexion {
+    margin-top: 55px; }
+    .page-header .connexion a {
+      color: #ff6633;
+      text-decoration: none;
+      font-size: 1.3em;
+      font-weight: bold;
+      border: 2px solid #ff6633;
+      padding: 3%;}
+  .page-header .connexion:hover a {
+    color: #ffffff;
+    background-color: #ff6633; }
+
+  @media screen and (max-width: 1024px){
+    .page-header #nav {
+      list-style: none;
+      font-size: 0.8em;
+      padding-right: 5%;
+      margin-bottom: 0%; }
+    .page-header .connexion a {
+        color: #ff6633;
+        text-decoration: none;
+        font-size: 0.8em;
+        font-weight: bold;
+        border: 2px solid #ff6633;
+        padding: 3%;}
+    .page-header .logoPS{
+        width: 20%;
+        height: 20%;}
+
+  }
+
+/* page accueil */
+
+#content .carousel {
+  padding: 0;
+  margin-bottom: 3%; }
+#content .carousel-slide .item {
+  height: 50px; }
+#content .carousel-inner .item {
+  height: 300px; }
+#content .carousel-inner .carousel-caption {
+  color: #ff6633; }
 
 #article{
   height: 50%;
@@ -73,7 +104,7 @@ main .morelink {
 #annuaire .custom-input-padding {
   padding-top: 0.1em;
   padding-right: 1.6em;
-  color: #eb661b;
+  color: #ff6633;
   font-size: 2em;
   border: 0px;
 }
@@ -82,7 +113,7 @@ main .morelink {
   position: relative;
   padding: 1em;
   min-height: 5em;
-  background-color: #eb661b;
+  background-color: #ff6633;
 }
 #annuaire #search input {
   height: 3em;
@@ -101,7 +132,7 @@ main .morelink {
 #annuaire #search:after {
   content: "";
   position: absolute;
-  background-color: #eb661b;
+  background-color: #ff6633;
   padding: 1em;
   height: 5em;
   top: 0;
@@ -133,7 +164,7 @@ main .morelink {
   color: black;
 }
 #annuaire #page li a:hover {
-  background-color: #eb661b;
+  background-color: #ff6633;
   border-radius: 10%;
   color: white;
 }
@@ -147,7 +178,7 @@ main .morelink {
 #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire {
   width: 100%;
   padding-bottom: 0.7em;
-  background: url("../../img/background-div-annuaire.png") bottom right no-repeat;
+  background: url("img/img_annuaire/background-div-annuaire.png") bottom right no-repeat;
 }
 #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .logo {
   position: relative;
@@ -160,7 +191,7 @@ main .morelink {
   vertical-align: bottom;
 }
 #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire h3 {
-  color: #eb661b;
+  color: #ff6633;
   text-align: center;
 }
 #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption {
@@ -186,7 +217,7 @@ main .morelink {
   padding-right: 3em;
   font-size: 1em;
   font-weight: bold;
-  background-color: #eb661b;
+  background-color: #ff6633;
   color: white;
 }
 
@@ -226,7 +257,7 @@ main .morelink {
   color: white;
 }
 #footer #middle-box #association-ul {
-  border-bottom: 2px solid #eb661b;
+  border-bottom: 2px solid #ff6633;
   margin-left: 1em;
   padding: 0;
   font-weight: bold;
@@ -267,7 +298,7 @@ main .morelink {
   margin-top: 10vh;
 }
 #footer #menu-ul li {
-  border-left: 2px solid #eb661b;
+  border-left: 2px solid #ff6633;
   list-style-type: none;
   padding-top: 0.3em;
   padding-left: 1em;
@@ -279,7 +310,7 @@ main .morelink {
   border-left: 3px solid white;
 }
 #footer #menu-ul li:hover a {
-  color: #eb661b;
+  color: #ff6633;
 }
 #footer a, #footer a:hover {
   color: white;
@@ -299,7 +330,7 @@ main .morelink {
     border: none;
   }
   #footer #middle-box #association-ul li {
-    border-left: 2px solid #eb661b;
+    border-left: 2px solid #ff6633;
     display: block;
     width: auto;
     list-style-type: none;
@@ -312,7 +343,7 @@ main .morelink {
     border-left: 3px solid white;
   }
   #footer #middle-box #association-ul li:hover a {
-    color: #eb661b;
+    color: #ff6633;
   }
   #footer #middle-box #association-ul li:nth-child(1) {
     text-align: left;

@@ -9,29 +9,11 @@ get_header();
 
 $search_tax_cat = null;
 $search_tax_age = null;
+$search_tax_cat_id = null;
+$search_tax_age_id = null;
 if(!empty( $_POST)){
-    if(isset($_POST['select-cat'])){
-        $input = intval($_POST['select-cat']);
-        if($input != "null"){
-            $search_tax_cat = array(
-                'taxonomy' => 'theme_mdq', //or tag or custom taxonomy
-                'field' => 'id',
-                'terms' => array(intval($input))
-            );
-        }
-    }
-
-    if(isset($_POST['select-cat'])){
-        $input = intval($_POST['select-age']);
-        if($input != "null"){
-            $search_tax_age = array(
-                'taxonomy' => 'age_mdq', //or tag or custom taxonomy
-                'field' => 'id',
-                'terms' => array(intval($input))
-            );
-        }
-    }
-
+    get_post_activite('select-cat', 'theme_mdq', $search_tax_cat, $search_tax_cat_id);
+    get_post_activite('select-age', 'age_mdq', $search_tax_age, $search_tax_age_id);
 }
 
 function mdq_showActiviteHtml($post){
@@ -42,12 +24,14 @@ function mdq_showActiviteHtml($post){
             <div class="card-content">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="<?php echo $url ?>" class="img-responsive img" alt="" />
+                        <div class="img-activite">
+                            <img src="<?php echo $url ?>" class="img-responsive img" alt="" />
+                        </div>
                         <p class="date "><?= $post->mdq_event_start; ?></p>
                     </div>
                     <div class="col-md-8">
                         <h2 class="title"><?= $post->post_title; ?></h2>
-                        <p class="descri"><?= $post->mdq_event_description; ?></p>
+                        <p class="descri-activite"><?= $post->mdq_event_description; ?></p>
                         <div class="text-center">
                             <button type="button" name="button" class="btn btn-primary btn-savoir">En savoir plus</button>
                         </div>
@@ -60,7 +44,7 @@ function mdq_showActiviteHtml($post){
     <?php
 }
 
-function mdq_list_cat($name_tax){
+function mdq_list_cat($name_tax, $val = null){
     $categories = get_categories( array(
         'hide_empty' => 0,
         'orderby' => 'name',
@@ -71,8 +55,12 @@ function mdq_list_cat($name_tax){
 
     $list_cat = "";
     foreach( $categories as $category ) {
+        $select = "";
+        if($val == $category->term_id){
+            $select = "selected";
+        }
         $category_link = sprintf(
-            '<option value="%1$s">%2$s</option>',
+            '<option value="%1$s" '.$select.'>%2$s</option>',
             esc_html( $category->term_id ),
             esc_html( $category->name )
         );
@@ -84,20 +72,18 @@ function mdq_list_cat($name_tax){
 }
 
 ?>
-
-<main>
-    <div class="container-fluid">
-        <div class="row" id="transition">
-            <div class="col-md-5">
-                <div class="search-box">
-                    <form class="search-form">
-                        <input class="form-control" type="text">
-                        <button class="btn btn-link search-btn">
-                            <i class="glyphicon glyphicon-search"></i>
-                        </button>
-                    </form>
-                </div>
+<main id="activite">
+    <div class="row" id="transition">
+        <div class="col-md-6">
+            <div class="search-box">
+                <form class="search-form">
+                    <input class="form-control" type="text">
+                    <button class="btn btn-link search-btn">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </form>
             </div>
+        </div>
 
             <!-- DROPDOWN -->
             <?php
@@ -106,36 +92,23 @@ function mdq_list_cat($name_tax){
                 /* affichage des thèmes */
 
             ?>
-            <form action="#" method="post">
-                <div class="col-md-2">
-                    <!-- <div class="dropdown" id="dropdown-theme">
-                        <button class="dropbtn">Thèmes <i class="glyphicon glyphicon-chevron-down" id="chevron-theme"></i></button>
-                        <div class="dropdown-content">
-                            <?= mdq_list_cat("theme_mdq"); ?>
-                        </div>
-                    </div> -->
-                    <select class="dropbtn" name="select-cat">
-                        <option value="null">--</option>
-                        <?= mdq_list_cat("theme_mdq"); ?>
-                    </select>
-                </div>
-                <div class="col-md-2 col-md-push-2">
-                    <!-- <div class="dropdown">
-                        <button id="btnAge" class="dropbtn">Âges <i class="glyphicon glyphicon-chevron-down" id="chevron-age"></i></button>
-                        <div class="dropdown-content">
-                            <!-- <?= mdq_list_cat("age_mdq"); ?> -->
-                        <!-- </div> -->
-                    <select class="dropbtn" name="select-age">
-                        <option value="null">--</option>
-                        <?= mdq_list_cat("age_mdq"); ?>
-                    </select>
-                </div>
-                </div>
-                <div class="col-md-2">
-                    <input type="submit" name="" value="Envoyer" />
-                </div>
-            </form>
-        </div>
+        <form action="#" method="post">
+            <div class="col-md-2 col-xs-4 select-container">
+                <select class="select-menu" name="select-cat">
+                    <option value="null">--</option>
+                    <?= mdq_list_cat("theme_mdq", $search_tax_cat_id); ?>
+                </select>
+            </div>
+            <div class="col-md-2 col-xs-4 select-container">
+                <select class="select-menu" name="select-age">
+                    <option value="null">--</option>
+                    <?= mdq_list_cat("age_mdq", $search_tax_age_id); ?>
+                </select>
+            </div>
+            <div class="col-md-1 col-xs-3 ">
+                <input  class="btn-valid" type="submit" name="" value="Envoyer" />
+            </div>
+        </form>
     </div>
     <div class="container">
         <div class="row">

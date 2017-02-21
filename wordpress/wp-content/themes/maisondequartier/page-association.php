@@ -15,7 +15,8 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
 ?>
 
 <?php get_sidebar('left'); ?>
-				<div class="col-md-<?php echo $main_column_size; ?> content-area" id="main-column">
+			<!-- saloperie qui faisait chié pour le footer -->
+				<!-- <div class="col-md-<?php echo $main_column_size; ?> content-area" id="main-column"> -->
 					<main id="onepageasso" class="site-main" role="main">
 						<?php
 						if(get_query_var('fiche')){
@@ -200,8 +201,8 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
 		 <p><?php echo  $infosAsso->_city; ?></p>
 		 <p><?php echo  $infosAsso->_tel; ?></p>
 		 <p><?php echo '<a href="'.$infosAsso->_link.'">'.$infosAsso->_link.'</a>'; ?></p>
-		 <p>Ouverture: <?php echo  $infosAsso->_timeopen;?></p>
-		 <p>- <?php echo $infosAsso->_timeclose;?></p>
+		 <p>Ouverture: <?php echo  $infosAsso->_school;?></p>
+		 <p>- <?php echo $infosAsso->_smallHolidays;?></p>
 
 		 <h4>Jours d'ouverture : </h4>
 		 <p>Du : <?php echo $infosAsso->_dayopen; ?> </p>
@@ -252,6 +253,6 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
 		</div>
 	</form>
  </div>
-					</main>
-				</div>
+</main>
+
 <?php get_footer(); ?>

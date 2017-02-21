@@ -1,51 +1,64 @@
-<?php
+<main>
+<!-- carousel bootstrap -->
+<div class="container carousel" id="content">
 
-query_posts(array( 'post_type'=>'carrousel'));
-if ( have_posts() ){
-		while ( have_posts() ){
-				the_post();
-				global $post;
-	?>
-<div class="container">
-	<!-- carousel bootstrap -->
-	<div class="row carousel">
-		<div id="carousel" class="carousel slide" data-interval="3000" data-ride="carousel">
-			<!-- Indicators -->
-			<ol class="carousel-indicators">
-				<li data-target="#carousel" data-slide-to="0" class="active"></li>
-				<li data-target="#carousel" data-slide-to="1"></li>
-				<li data-target="#carousel" data-slide-to="2"></li>
-				<li data-target="#carousel" data-slide-to="3"></li>
-			</ol>
-
-			<!-- Wrapper for slides -->
-			<div class="carousel-inner" role="listbox">
-				<div class="item active">
-					<img src="<?= $post->_link;?>" alt="<?= $post->_link;?>">
-						<div class="carousel-caption">
-							<h3><?= $post->_name;?></h3>
-							<p><?= $post->_date;?></p>
-						</div>
+<div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel">
+	<!-- Indicators -->
+	<ol class="carousel-indicators">
+		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		<li data-target="#myCarousel" data-slide-to="1"></li>
+		<li data-target="#myCarousel" data-slide-to="2"></li>
+		<li data-target="#myCarousel" data-slide-to="3"></li>
+	</ol>
+	<!-- Wrapper for slides -->
+	<div class="carousel-inner" role="listbox">
+		<div class="item active">
+			<img src="wp-content/themes/maisonquartier/img/img_onepageasso/photo.jpg" alt="évènement1">
+				<div class="carousel-caption">
+					<h3>Nom évènement 1</h3>
+					<p>Date</p>
 				</div>
-
-			<!-- Left and right controls -->
-			<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-				<span class="sr-only">Previous</span>
-			</a>
-			<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-				<span class="sr-only">Next</span>
-			</a>
+		</div>
+		<div class="item">
+			<img src="wp-content/themes/maisonquartier/img/img_onepageasso/photo.jpg" alt="évènement2">
+			<div class="carousel-caption">
+				<h3>Nom évènement 2</h3>
+				<p>Date</p>
+			</div>
+		</div>
+		<div class="item">
+			<img src="wp-content/themes/maisonquartier/img/img_onepageasso/photo.jpg" alt="évènement3">
+			<div class="carousel-caption">
+				<h3>Nom évènement 3</h3>
+				<p>Date</p>
+			</div>
+		</div>
+		<div class="item">
+			<img src="wp-content/themes/maisonquartier/img/img_onepageasso/photo.jpg" alt="évènement4">
+			<div class="carousel-caption">
+				<h3>Nom évènement 4</h3>
+				<p>Date</p>
+			</div>
 		</div>
 	</div>
+	<!-- Left and right controls -->
+	<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+		<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+		<span class="sr-only">Previous</span>
+	</a>
+	<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+		<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+		<span class="sr-only">Next</span>
+	</a>
 </div>
-<?php
-		}
-
-	}
- ?>
+</div>
 <!-- fin de carousel -->
+
+<!-- agenda -->
+<div class="agenda col-md-6">
+
+</div>
+<!-- fin agenda -->
 
 <section class="row" <?php post_class(); ?>>
 	<?php
@@ -54,7 +67,7 @@ if ( have_posts() ){
 		$query->the_post();
 		global $post;
 		?>
-		<article class="col-md-4 masonry grid-item">
+		<article class="col-md-4">
 			<header class="entry-header">
 				<h1 class="entry-title"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
 
@@ -109,6 +122,8 @@ if ( have_posts() ){
 	</article><!-- #post-## -->
 		<?php  } // End loop ?>
 </section>
-</div>
+
+</main>
+
 
 <?php get_footer(); ?>
