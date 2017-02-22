@@ -19,6 +19,9 @@
 		<link rel="profile" href="http://gmpg.org/xfn/11">
 		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
 
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	    <script src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/js/readmore.js" type="text/javascript"></script>
+
         <meta name="description" content="Maison de Quartier">
         <meta name="author" content="Anthony Boussad Houda et Pauline">
 
@@ -39,20 +42,17 @@
 	        <img src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/logo.svg" alt="Logo <?php echo esc_attr(get_bloginfo('name', 'display')); ?>"/>
 	      </a>
 	    </div>
-	    <div class="col-md-8 col-xs-10">
+	    <div class="col-md-10 col-xs-10">
 	  <?php
 	    echo wp_nav_menu(
 	      array(
-	        'menu' => 'Project Nav',
+	        'menu' => 'menu_header',
 	        'container' => false,
 	        'menu_id' => 'nav',
 	        'menu_class' => 'list-inline text-right'
 	      )
 	    );
 	  ?>
-	</div>
-	<div class="col-md-2 col-xs-1 connexion">
-	  <a href="#">Connexion</a>
 	</div>
 	  </nav>
 	</div>

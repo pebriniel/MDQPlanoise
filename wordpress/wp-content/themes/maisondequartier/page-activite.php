@@ -130,7 +130,7 @@ function mdq_list_cat($name_tax, $val = null){
                     $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
                     query_posts(array(
-                        "posts_per_page" => 50,
+                        "posts_per_page" => 1,
                         "paged" => $paged,
                         "post_type" => "activite",
                         "orderby" => "mdq_event_start",
@@ -151,9 +151,12 @@ function mdq_list_cat($name_tax, $val = null){
                     }
 
                     $args = array();
-                    $test = paginate_links( $args );
-                    print_r($test);
-
+                    $page = paginate_links( $args );
+                    ?>
+                    <div class="col-md-12 col-xs-12" id="page">
+                        <?= $page ; ?>
+                    </div>
+                    <?php
                 }
             }
             ?>

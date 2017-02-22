@@ -1,37 +1,36 @@
 <?php
 
 /**
- * Plugin Name: Gestion des membres pour les associations
- * Description: Gestion des membres pour les associations de Planoise
+ * Plugin Name: Gestion des évènements
+ * Description: Gestion des évènements pour la Maison de Quartier
  * Version:     0.1
- * Author:      Boussad Sadadou, Houda Bouthalil
+ * Author:      Boussad Sadadou, Houda Boutalil
  */
 
 require_once("inc/metabox.php");
 
-add_action('init', 'mdq_membre_assoc_init');                                    // Initialisation de Wordpress
-add_action( 'wp_enqueue_scripts', 'register_membre_style_activite');            // Register style sheet.
-add_action('add_meta_boxes', 'mdq_membre_assoc_metaboxes');                     // Ajout des meta_box
-add_action('save_post', 'mdq_membre_assoc_savepost', 10, 2);					// Capture l'édition d'article avec 2 arguments
+add_action('init', 'mdq_members_init');                                   // Initialisation de Wordpress
+add_action('add_meta_boxes', 'mdq_members_metaboxes');                    // Ajout des meta_box
+add_action('save_post', 'mdq_members_savepost', 10, 2);					// Capture l'édition d'article avec 2 arguments
 
 /**
  *  Initiation d'un formulaire pour la page
  */
 
 
-function mdq_membre_assoc_init(){
+function mdq_members_init(){
 
     $labels = array(
 	  'name' => 'Membres',
-	  'singular_name' => 'membre',
-	  'add_new' => 'Ajouter un membre',
-	  'add_new_item' => 'Ajouter un nouveau membre',
-	  'edit_item' => 'Editer un membre',
-	  'new_item' => 'Nouveau membre',
-	  'view_item' => 'Voir le membre',
-	  'search_items' => 'Rechercher un membre',
-	  'not_found' =>  'Aucun membre',
-	  'not_found_in_trash' => 'Aucun membre dans la corbeille',
+	  'singular_name' => 'members',
+	  'add_new' => 'Ajouter une activité',
+	  'add_new_item' => 'Ajouter un nouvelle activité',
+	  'edit_item' => 'Editer une activité',
+	  'new_item' => 'Nouvelle activité',
+	  'view_item' => 'Voir l\'activité',
+	  'search_items' => 'Rechercher une activité',
+	  'not_found' =>  'Aucune activité',
+	  'not_found_in_trash' => 'Aucune activité dans la corbeille',
 	  'parent_item_colon' => '',
 	  'menu_name' => 'Membres'
 	);
@@ -48,20 +47,11 @@ function mdq_membre_assoc_init(){
 }
 
 /**
- * Register and enqueue style sheet.
- */
-function register_membre_style_activite() {
-	wp_register_style( 'mdq-membre', plugins_url( 'mdq-assoc-members/css/css_mdq-membre.css' ) );
-	wp_enqueue_style( 'mdq-membre' );
-}
-
-
-/**
 * Ajoute des meta box pour les contenus
 **/
-function mdq_membre_assoc_metaboxes(){
-	add_meta_box('monsuperslide','Description','mdq_member_meta_description','members','normal','high');
-    add_meta_box('monsuperslide_association','Association lié à l\'activité','mdq_member_meta_liste_assoc','members','normal');
+function mdq_members_metaboxes(){
+	add_meta_box('monsuperslide','Description','mdq_members_description','members','normal','high');
+	add_meta_box('monsuperslideassociation','liste_membre_assoc','mdq_members_liste_assoc','members','normal','high');
 }
 
 
@@ -70,10 +60,10 @@ function mdq_membre_assoc_metaboxes(){
 * @param int $post_id Id du contenu édité
 * @param object $post contenu édité
 **/
-function mdq_membre_assoc_savepost($post_id, $post){
+function mdq_members_savepost($post_id, $post){
 
 	// Le champ est défini et le token est bon ?
-	if(!isset($_POST['event_description']) || !wp_verify_nonce($_POST['monsuperslider_nonce'], 'monsuperslider')){
+	if(!isset($_POST['members_description']) || !wp_verify_nonce($_POST['monsuperslider_nonce'], 'monsuperslider') || !wp_verify_nonce($_POST['monsuperslideassociation_nonce'], 'monsuperslideassociation')){
 		return $post_id;
 	}
 
@@ -84,9 +74,7 @@ function mdq_membre_assoc_savepost($post_id, $post){
 	}
 
 	// On met à jour la meta !
-	update_post_meta($post_id,'mdq_event_description',$_POST['event_description']);
-	update_post_meta($post_id,'mdq_event_start',$_POST['event_datedebut']);
-	update_post_meta($post_id,'mdq_event_end',$_POST['event_datefin']);
-	update_post_meta($post_id,'mdq_association_id',$_POST['event_assoc_list']);
-	update_post_meta($post_id,'mdq_event_adresse',$_POST['event_adresse']);
+	update_post_meta($post_id,'mdq_members_description',$_POST['members_description']);
+	update_post_meta($post_id,'mdq_members_associations',$_POST['membres_assoc_list']);
+
 }

@@ -10,7 +10,8 @@
 */
 
 main{
-    height: 80vh;
+    overflow: hidden;
+    min-height: 95vh;
 }
 
 /* header */
@@ -70,8 +71,14 @@ main{
     .page-header .logoPS{
         width: 20%;
         height: 20%;}
-
   }
+
+.page-header .reduit{
+    height: 80px
+  }
+.page-header .reduit #nav{
+    background-color: red;
+}
 
 /* page accueil */
 
@@ -92,7 +99,7 @@ main{
 }
 
 
-/* page annuaire association */
+/* pour le js readmore sur plusieurs pages */
 
 main .morecontent span {
   display: none;
@@ -101,6 +108,7 @@ main .morelink {
   display: block;
 }
 
+/* page annuaire association */
 #annuaire .custom-input-padding {
   padding-top: 0.1em;
   padding-right: 1.6em;
@@ -173,11 +181,11 @@ main .morelink {
 }
 #annuaire #content .content-annuaire {
   position: relative;
-  height: 250px;
+  height: 270px;
 }
 #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire {
   width: 100%;
-  padding-bottom: 0.7em;
+  padding-bottom: 0.9em;
   background: url("img/img_annuaire/background-div-annuaire.png") bottom right no-repeat;
 }
 #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .logo {
@@ -197,12 +205,13 @@ main .morelink {
 #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption {
   display: inline-block;
   box-sizing: border-box;
-  width: 73%;
+  width: 75%;
   border: 1px solid black;
 }
 #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption h3 {
   font-size: 2em;
   font-weight: bold;
+  height: 61px;
 }
 #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption p:nth-child(2) {
   padding-left: 2em;
@@ -359,3 +368,123 @@ main .morelink {
   }
 }
 /*# sourceMappingURL=css_footer.css.map */
+
+/*CONTACT*/
+
+
+
+#contact #mdq-logo {
+    width: 300px;
+    margin-top: 4%;
+}
+
+#contact #mdq {
+    text-align: center;
+    font-size: 3em;
+    margin-bottom: 0;
+}
+
+#contact #nous-contacter {
+    text-align: center;
+    font-size: 3em;
+    margin-top: 5%;
+}
+
+#contact form {
+    max-width: 600px;
+    text-align: center;
+    margin: 20px auto;
+}
+
+#contact input, #contact textarea {
+    border: 1px solid #a3a1a1;
+    padding: 1em;
+    display: block;
+    width: 100%;
+    margin-top: 1em;
+    font-family: 'Merriweather', sans-serif;
+    resize: none;
+}
+
+#contact #input-submit {
+    color: white;
+    font-weight: bold;
+    background: #ff6633;
+    cursor: pointer;
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+
+#contact #input-submit:hover {
+    border: inset 1px 1px 1px 1px #ff6633;
+    background-color: #fff;
+    color: #ff6633;
+}
+
+#contact textarea {
+    height: 178px;
+}
+
+#contact .half {
+    float: left;
+    width: 48%;
+    margin-bottom: 1em;
+}
+
+#contact .right {
+    width: 50%;
+}
+
+#contact .left {
+    margin-right: 2%;
+}
+
+@media (max-width: 480px) {
+    #contact .half {
+        width: 100%;
+        float: none;
+        margin-bottom: 0;
+    }
+
+    #contact #mdq, #contact #nous-contacter {
+        font-size: 2em;
+    }
+
+    #contact img {
+        width: 200px;
+    }
+}
+
+#contact .cf:before, #contact .cf:after {
+    content: " ";
+    display: table;
+
+}
+
+#contact .cf:after {
+    clear: both;
+}
+
+/* affichage des pages d'activités */
+#page{
+    width: 100%;
+    margin-top: 4em;
+    display: block;
+    text-align: center;
+}
+#page .page-numbers, #page a, #page a:hover{
+    margin-top: 1em;
+    padding: 1em;
+    color: black;
+    text-decoration: none;
+    font-size: 1.3em;
+    border-radius: 20%;
+}
+#page .page-numbers:hover:not(.current){
+    background-color: #eb661b;
+    color: white;
+}
+#page .current{
+    background-color: black;
+    color: white;
+}
