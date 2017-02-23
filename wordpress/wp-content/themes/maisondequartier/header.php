@@ -12,7 +12,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" <?php language_attributes(); ?>> <!--<![endif]-->
 	<head>
 		<meta charset="utf-8" />
-		<meta charset="<?php bloginfo('charset'); ?>"> 
+		<meta charset="<?php bloginfo('charset'); ?>">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width">
 
@@ -23,6 +23,7 @@
 
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	    <script src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/js/readmore.js" type="text/javascript"></script>
+	    <script src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/js/readmoreFiche.js" type="text/javascript"></script>
 			<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
 
 

@@ -9,10 +9,7 @@
  Text Domain:  maison-quartier-child
 */
 
-body{
-  overflow: hidden;
-}
-main{
+main{ 
     overflow: hidden;
     min-height: 95vh;
 }

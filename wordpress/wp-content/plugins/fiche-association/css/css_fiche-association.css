@@ -13,7 +13,7 @@ body {
   padding-top: 60px; }
 
 #onepageasso .navbar-default {
-  background: #eb661b; }
+  background: #ff6633; }
 #onepageasso .navbar-default a {
   color: #ffffff; }
 #onepageasso .onglets {
@@ -23,10 +23,15 @@ body {
   height: 90%;
   margin: 0; }
 #onepageasso .logo .thumbnail .caption h3 {
-  color: #eb661b; }
+  color: #ff6633;
+  font-size: 3em;
+  font-weight: 900;
+  text-transform: uppercase; }
+
+
 #onepageasso .carteVisite {
   margin-top: 3%;
-  border: 3px solid #eb661b;
+  border: 3px solid #ff6633;
   padding: 2%;
   -webkit-box-shadow: 7px 7px 12px -6px #575557;
   -moz-box-shadow: 7px 7px 12px -6px #575557;
@@ -34,11 +39,19 @@ body {
   margin-bottom: 5%; }
 #onepageasso .carteVisite .thumbnail {
   vertical-align: middle; }
-#onepageasso .description p {
-  font-size: 1.5em; }
-#onepageasso .description button {
+#onepageasso .descrip p {
+  font-size: 1.2em;
+  text-align :justify; }
+#onepageasso .morecontent span {
+  display: none; }
+
+#onepageasso .morelink {
+  display: block;
+  position: relative;}
+
+#onepageasso .descrip button {
   font-size: 1.5em;
-  background-color: #eb661b;
+  background-color: #ff6633;
   color: #ffffff; }
 #onepageasso .carousel {
   padding: 0;
@@ -48,14 +61,16 @@ body {
 #onepageasso .carousel-inner .item {
   height: 300px; }
 #onepageasso .carousel-inner .carousel-caption {
-  color: #eb661b; }
+  color: #ff6633; }
 #onepageasso .screenshot .col-md-4 {
-  margin-bottom: 5%;
   padding: 0; }
 #onepageasso .screenshot .thumbnail {
   padding: 2%; }
+#onepageasso .screenshot .thumbnail img{
+width: 100%;}
+
 #onepageasso .membres .thumbnail .caption {
-  background-color: #eb661b;
+  background-color: #ff6633;
   color: #ffffff; }
 #onepageasso .prezmembres {
   border: 1px solid black;
@@ -65,7 +80,7 @@ body {
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;
-  color: #eb661b;
+  color: #ff6633;
   padding-bottom: 3%; }
 #onepageasso .prezmembres svg {
   float: right;
@@ -75,10 +90,21 @@ body {
   margin-bottom: 5%; }
 #onepageasso .loc .adresseAsso h2 {
   padding-bottom: 4%;
-  font-size: 3em; }
+  color: #ff6633;
+  font-weight: 900;
+  font-size: 2.5em; }
 #onepageasso .loc .adresseAsso h4 {
-  padding-bottom: 2%;
-  font-size: 2em; }
+  font-size: 1.5em; }
+#onepageasso .loc .adresseAsso p {
+  font-size: 1em;
+  text-align: justify;
+  margin-left: 5% !important;
+  margin-right: 5% !important; }
+#onepageasso .loc .adresseAsso h3 {
+  font-size: 1.2em;
+  font-weight: 900;
+  margin-left: 5% !important;
+  margin-right: 5% !important; }
 #onepageasso .adresseAsso {
   text-align: center;
   padding: 3% 0%; }
@@ -92,7 +118,7 @@ body {
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;
-  color: #eb661b;
+  color: #ff6633;
   padding-bottom: 2%; }
 #onepageasso .contact {
   padding: 0%; }
@@ -112,7 +138,9 @@ body {
   margin-right: auto;
   margin-bottom: 2%; }
 #onepageasso .btn {
-  background-color: #eb661b;
+  background-color: #ff6633 !important;
   color: #ffffff; }
+#onepageasso li {
+  list-style: none; }
 
 /*# sourceMappingURL=style_onepageasso.css.map */
