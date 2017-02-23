@@ -9,7 +9,7 @@
  Text Domain:  maison-quartier-child
 */
 
-main{ 
+main{
     overflow: hidden;
     min-height: 95vh;
 }
@@ -114,11 +114,11 @@ main .container{
   border: 2px solid #ff6633;}
 .contenu .globalArticle{
   margin: 3% 0%;
-  border: 1px solid black;
+  border: 2px solid black;
   height: 340px;
   padding: 4% 4%;}
-/*.contenu .globalArticle:hover{
-  border: 2px solid #ff6633;}*/
+.contenu .globalArticle:hover{
+  border: 2px solid #ff6633;}
 .contentAgenda .pictoAgenda, .contentAgenda .prezEvent{
     padding: 0%;}
 .blockAgenda{
@@ -294,11 +294,11 @@ margin-top: 1%;
   text-align: right;
 }
 #footer #middle-box #association-ul li:hover a {
-  color: #eb661b;
+  color: #ff6633;
 }
 #footer #middle-box span {
   font-size: 1.2em;
-  color: #eb661b;
+  color: #ff6633;
   margin-top: 0.2em;
   font-weight: bold;
 }
@@ -512,10 +512,10 @@ margin-top: 1%;
     height: 90%;
     margin: 0; }
   #apropos .logo .thumbnail .caption h3 {
-    color: #eb661b; }
+    color: #ff6633; }
   #apropos .carteVisite {
     margin-top: 3%;
-    border: 3px solid #eb661b;
+    border: 3px solid #ff6633;
     padding: 2%;
     -webkit-box-shadow: 7px 7px 12px -6px #575557;
     -moz-box-shadow: 7px 7px 12px -6px #575557;
@@ -539,7 +539,7 @@ margin-top: 1%;
     color: #ff6633;}
   #apropos .missionsAsso h2 {
     text-align: center;
-    color: #eb661b;
+    color: #ff6633;
     text-transform: uppercase;
     font-weight: bold;
     padding-bottom: 2%; }
@@ -603,7 +603,7 @@ margin-top: 1%;
     font-weight: bold;
     text-transform: uppercase;
     text-align: center;
-    color: #eb661b;
+    color: #ff6633;
     padding-bottom: 3%; }
 /*fin a propos*/
 
