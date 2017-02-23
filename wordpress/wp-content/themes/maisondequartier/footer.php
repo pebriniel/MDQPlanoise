@@ -10,7 +10,7 @@
 		<div class="container">
 				<div class="row">
 						<div class="col-md-3 col-xs-12" id="logo">
-								<img src="wp-content/themes/maisonquartier/img/logo-footer.png" alt="...">
+								<img src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/logo-footer.png" alt="...">
 						</div>
 						<div class="col-md-6 col-xs-12">
 								<div id="middle-box">

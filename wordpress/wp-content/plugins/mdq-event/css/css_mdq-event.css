@@ -1,22 +1,10 @@
 /* -- page activité -- */
 
 .btn-savoir {
-    background-color: #ff6633;
-    color: #fff;
-    width: 50%;
-    border: 0;
-    -webkit-transition: .3s;
-    transition: .3s;
-}
-
-.btn-savoir:hover {
-    border: inset 1px 1px 1px 1px #ff6633;
-    background-color: #fff;
     color: #ff6633;
-}
-
-.card {
-    border: 1px solid black;
+    width: 50%;
+    border: 1px solid #ff6633;
+    background-color: white;
 }
 
 .title {
@@ -30,7 +18,9 @@
 .date {
     font-size: 1.5em;
     text-align: center;
+    margin-top: 55%;
 }
+
 
 .img-activite{
     width: 100%;
@@ -50,15 +40,19 @@
 .card-content {
     padding: 20px;
 }
-
 .card-container {
     margin-top: 30px;
+}
+
+.card {
+    border: 1px solid black;
 }
 
 .card-footer {
     background-color: black;
     text-align: center;
 }
+
 
 .voir-fichasso {
     color: #fff;
@@ -120,13 +114,30 @@
     padding: 5px 10px 1px;
 }
 
+
 #transition {
     background-color: #ff6633;
-    height: 50px;
-    padding-top: 8px;
-    padding-right: 0px;
-    padding-left: 70px;
-    /*width: 100vw;*/
+    height: 60px;
+    padding-top: 18px;
+    position: relative;
+}
+
+#transition:before, #transition:after {
+    content: "";
+    position: absolute;
+    background-color: #ff6633;
+    height: 60px;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+#transition:after {
+    left: 100%;
+}
+
+#transition:before {
+    right: 100%;
 }
 
 .select-menu {
@@ -137,15 +148,23 @@
     width: 100%;
 }
 
-.btn-valid {
+#btn-valid {
     height: 34px;
     background-color: #fff;
-    color: #000;
+    border: 1px solid #c5c5c5;
     font-size: 1em;
     width: 100%;
+    -webkit-transition: .3s;
+    transition: .3s;
 }
 
-@media screen and (max-width: 992px) {
+#btn-valid:hover {
+    border: 1px solid #fff;
+    color: #fff!important;
+    background-color: #ff6633;
+}
+
+@media screen and (max-width: 991px) {
     .date {
         margin-top: 0;
         font-size: 2em;
@@ -155,21 +174,30 @@
         padding-right: 0px;
         background-color: #fff;
     }
+    #transition:before {
+        background: none;
+    }
+    #transition:after {
+        background: none;
+    }
     .card-container {
         margin-top: 50px;
     }
     .search-box {
         width: 100%;
     }
-    .btn-valid {
-        margin-left: 5%;
-        border: none;
+    #btn-valid {
         margin-top: 10px;
+    }
+    #btn-valid:hover {
+        border: none;
     }
     .select-menu {
         margin-top: 10px;
     }
+    .title {
+        text-align: center;
+    }
 }
-
 
 /*# sourceMappingURL=style-activites-bootstrap.css.map */

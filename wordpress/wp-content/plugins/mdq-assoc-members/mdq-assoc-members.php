@@ -23,14 +23,14 @@ function mdq_members_init(){
     $labels = array(
 	  'name' => 'Membres',
 	  'singular_name' => 'members',
-	  'add_new' => 'Ajouter une activité',
-	  'add_new_item' => 'Ajouter un nouvelle activité',
-	  'edit_item' => 'Editer une activité',
-	  'new_item' => 'Nouvelle activité',
-	  'view_item' => 'Voir l\'activité',
-	  'search_items' => 'Rechercher une activité',
-	  'not_found' =>  'Aucune activité',
-	  'not_found_in_trash' => 'Aucune activité dans la corbeille',
+	  'add_new' => 'Ajouter un membre',
+	  'add_new_item' => 'Ajouter un nouveau membre',
+	  'edit_item' => 'Editer un membre',
+	  'new_item' => 'Nouveau membre',
+	  'view_item' => 'Voir le membre',
+	  'search_items' => 'Rechercher un membre',
+	  'not_found' =>  'Aucun membre',
+	  'not_found_in_trash' => 'Aucun membre dans la corbeille',
 	  'parent_item_colon' => '',
 	  'menu_name' => 'Membres'
 	);

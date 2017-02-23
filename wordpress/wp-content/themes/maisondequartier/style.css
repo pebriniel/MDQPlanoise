@@ -9,77 +9,65 @@
  Text Domain:  maison-quartier-child
 */
 
+body{
+  overflow: hidden;
+}
 main{
     overflow: hidden;
     min-height: 95vh;
 }
 
-/* header */
-.page-header {
-  /*height: 100px;*/
-  /*width: 100vw;*/
-  /*background-color: #e6e6f6;*/
-  margin-top: 0%; }
-  .page-header .navbar-fixed-top {
-    height: 100px;
-    background-color: white;
-    border-bottom: 1px solid #ff6633; }
-  .page-header #nav {
-    list-style: none;
-    font-size: 1.3em;
-    padding-right: 5%;
-    margin-bottom: 0%; }
-  .page-header #nav li {
-    margin-right: 4%;
-    padding: 0.5% 1%;
-    margin-top: 66px; }
-  .page-header #nav li a {
-    color: #000000;
-    font-weight: bold; }
-  .page-header #nav li:hover {
-    padding: 0.5% 1%;
-    background-color: #ff6633; }
-    .page-header #nav li:hover a {
-      color: #ffffff;
-      text-decoration: none; }
-  .page-header .connexion {
-    margin-top: 55px; }
-    .page-header .connexion a {
-      color: #ff6633;
-      text-decoration: none;
-      font-size: 1.3em;
-      font-weight: bold;
-      border: 2px solid #ff6633;
-      padding: 3%;}
-  .page-header .connexion:hover a {
-    color: #ffffff;
-    background-color: #ff6633; }
-
-  @media screen and (max-width: 1024px){
-    .page-header #nav {
-      list-style: none;
-      font-size: 0.8em;
-      padding-right: 5%;
-      margin-bottom: 0%; }
-    .page-header .connexion a {
-        color: #ff6633;
-        text-decoration: none;
-        font-size: 0.8em;
-        font-weight: bold;
-        border: 2px solid #ff6633;
-        padding: 3%;}
-    .page-header .logoPS{
-        width: 20%;
-        height: 20%;}
-  }
-
-.page-header .reduit{
-    height: 80px
-  }
-.page-header .reduit #nav{
-    background-color: red;
+header .menu-burger{
+  display: none;
 }
 
+.page-header {
+    margin-top: 0%;
+    border-bottom: none;
+}
+.page-header #nav li a {
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+.page-header .navbar-fixed-top {
+    height: 100px;
+    background-color: white;
+    border-bottom: 1px solid #ff6633;
+}
+.page-header #nav {
+    list-style: none;
+    padding-right: 5%;
+    margin-bottom: 0%;
+    font-size: 1.3em;
+}
+.page-header #nav li {
+    margin-right: 4%;
+    padding: 0.5% 1%;
+    margin-top: 66px;
+}
+.page-header #nav li a {
+    color: #000000;
+    font-weight: bold;
+}
+.page-header #nav li:hover {
+    padding: 0.5% 1%;
+    background-color: #ff6633;
+}
+.page-header #nav li:hover a {
+    color: #ffffff;
+    text-decoration: none;
+}
+@media screen and (max-width: 992px) {
+    .page-header #nav li {
+        margin-top: 66px;
+    }
+}
+@media screen and (max-width: 850px) {
+    .page-header img {
+        width: 200px;
+        padding-top: 21px;
+    }
+}
 /* page accueil */
 
 #content .carousel {
@@ -106,6 +94,66 @@ main .morecontent span {
 }
 main .morelink {
   display: block;
+}
+
+main .container{
+  padding: 0%
+}
+.container .carousel{
+  padding: 0;
+  margin: 4% 0%; }
+#content .carousel-slide .item {
+  height: 50px; }
+#content .carousel-inner .item {
+  height: 300px; }
+#content .carousel-inner .carousel-caption {
+  color: #ff6633; }
+.contenu{
+  height: 340px;
+  margin-bottom: 2%;}
+.contenu .blockArticle{
+  border: 1px solid green;}
+.contenu .blockArticle:hover{
+  border: 2px solid #ff6633;}
+.contenu .globalArticle{
+  margin: 3% 0%;
+  border: 1px solid black;
+  height: 340px;
+  padding: 4% 4%;}
+/*.contenu .globalArticle:hover{
+  border: 2px solid #ff6633;}*/
+.contentAgenda .pictoAgenda, .contentAgenda .prezEvent{
+    padding: 0%;}
+.blockAgenda{
+  margin-bottom: 3%;}
+.contentAgenda{
+  border: 2px solid #ff6633;
+  padding: 0%;}
+.contentAgenda .pictoAgenda{
+  background-color: #ff6633;
+  color:#ffffff;}
+.pictoAgenda h2{
+  padding-top: 1%;
+  margin: 0%;
+margin-top: 1%;
+  text-align: center;
+  text-transform: uppercase;}
+.prezEvent p{
+  margin-bottom: 0%;
+  padding:1%;}
+.contenu .entry-meta a, .contenu .entry-meta-category-tag a{
+  color: #ff6633;}
+.contenu .globalArticle h2{
+  margin: 0%;
+  margin-bottom: 5%;
+  text-align: center;}
+.contenu .entry-title a, .contenu .entry-content a{
+  color: #ff6633;
+  font-weight: bold;}
+#article{
+  height: 50%;
+  width: 100%;
+  position: relative;
 }
 
 /* page annuaire association */
@@ -152,29 +200,6 @@ main .morelink {
 }
 #annuaire #search:before {
   right: 100%;
-}
-#annuaire #page {
-  text-align: center;
-  font-size: 2em;
-  font-weight: bold;
-}
-#annuaire #page li {
-  display: inline-block;
-  list-style-type: none;
-}
-#annuaire #page li a {
-  margin: 0.1em;
-  padding-left: 0.4em;
-  padding-right: 0.4em;
-  padding-top: 0.2em;
-  padding-bottom: 0.2em;
-  text-decoration: none;
-  color: black;
-}
-#annuaire #page li a:hover {
-  background-color: #ff6633;
-  border-radius: 10%;
-  color: white;
 }
 #annuaire #content {
   padding-top: 10vh;
@@ -230,23 +255,9 @@ main .morelink {
   color: white;
 }
 
-@media screen and (min-width: 200px) and (max-width: 640px) {
-  #annuaire #search select {
-    width: 98.1%;
-    margin-top: 1em;
-  }
-  #annuaire #content {
-    padding-top: 4em;
-  }
-  #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .logo {
-    display: none;
-  }
-  #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption {
-    width: 98%;
-  }
-}
-
 /*# sourceMappingURL=css_annuaire.css.map */
+
+
 
 /* footer */
 #footer {
@@ -465,26 +476,154 @@ main .morelink {
     clear: both;
 }
 
-/* affichage des pages d'activités */
-#page{
-    width: 100%;
-    margin-top: 4em;
-    display: block;
-    text-align: center;
+
+/* --- style des pages --- */
+
+#page {
+  width: 100%;
+  margin-top: 4em;
+  display: block;
+
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
 }
-#page .page-numbers, #page a, #page a:hover{
-    margin-top: 1em;
-    padding: 1em;
-    color: black;
-    text-decoration: none;
-    font-size: 1.3em;
-    border-radius: 20%;
+#page a, #page .current {
+  margin: 0.1em;
+  padding-left: 0.4em;
+  padding-right: 0.4em;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  text-decoration: none;
+  color: black;
 }
-#page .page-numbers:hover:not(.current){
-    background-color: #eb661b;
-    color: white;
+#page a:hover:not(.current) {
+  background-color: #ff6633;
+  color: white;
 }
 #page .current{
     background-color: black;
     color: white;
+}
+
+
+/*page a propos*/
+#apropos {
+  padding-top: 10vh; }
+  #apropos .logo .thumbnail {
+    width: 90%;
+    height: 90%;
+    margin: 0; }
+  #apropos .logo .thumbnail .caption h3 {
+    color: #eb661b; }
+  #apropos .carteVisite {
+    margin-top: 3%;
+    border: 3px solid #eb661b;
+    padding: 2%;
+    -webkit-box-shadow: 7px 7px 12px -6px #575557;
+    -moz-box-shadow: 7px 7px 12px -6px #575557;
+    box-shadow: 7px 7px 12px -6px #575557;
+    margin-bottom: 5%; }
+  #apropos .carteVisite .thumbnail {
+    border: none;
+    vertical-align: middle; }
+  #apropos .carteVisite .thumbnail img{
+    width: 80%;}
+  #apropos .description p {
+    font-size: 1.5em; }
+  #apropos .description button {
+    font-size: 1.5em;
+    border-radius: 0%;
+    background-color: #ff6633;
+    color: #ffffff;
+    border: 1px solid #ff6633;}
+  #apropos .description button:hover{
+    background-color: #ffffff;
+    color: #ff6633;}
+  #apropos .missionsAsso h2 {
+    text-align: center;
+    color: #eb661b;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding-bottom: 2%; }
+  #apropos p .missionsPrez {
+    text-align: center; }
+  #apropos .missions .col-md-4 {
+    margin-bottom: 5%;
+    padding: 0; }
+  #apropos .missions .thumbnail {
+    border-radius: 0%;
+    padding: 2%;
+    padding-top: 5%; }
+  #apropos .thumbnail .localisation, #apropos .thumbnail .solidarity {
+    width: 50%; }
+  #apropos .thumbnail .settings {
+    width: 50%; }
+  #apropos .thumbnail img {
+    padding-bottom: 5%; }
+  #apropos .thumbnail p {
+    padding: 0% 4%; }
+  #apropos .thumbnail {
+    border: 1px solid black;
+    margin: 5%; }
+  #apropos .adresseAsso {
+    text-align: center; }
+  #apropos .scolaire h3 {
+    font-weight: bold;
+    margin-bottom: 4%; }
+  #apropos .vacances h3 {
+    font-weight: bold; }
+  #apropos .vacances p {
+    font-size: 1em; }
+  #apropos ul {
+    padding-left: 0%;
+    margin-left: 0%;
+    list-style: none; }
+  #apropos ul li {
+    font-size: 1em;
+    list-style: none; }
+  #apropos .jours ul li {
+    text-align: left; }
+  #apropos .scolaire .col-md-4 {
+    padding: 0%; }
+  #apropos .map img {
+    float: right;
+    width: 90%;
+    height: 90%; }
+  #apropos .col-md-5 {
+    padding-right: 0%;
+    margin-right: 0%;
+    margin-bottom: 3%; }
+  #apropos #mapid{
+    height: 300px;}
+  #apropos .scolaire {
+    border-right: 2px solid black;
+    padding-right: 5%; }
+  #apropos .adresseMdq {
+    border-right: 2px solid black;
+    padding-right: 5%; }
+  #apropos .loc h2 {
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    color: #eb661b;
+    padding-bottom: 3%; }
+/*fin a propos*/
+
+
+/* -- responsive -- */
+@media screen and (min-width: 200px) and (max-width: 640px) {
+  #annuaire #search select {
+    width: 98.1%;
+    margin-top: 1em;
+  }
+  #annuaire #content {
+    padding-top: 4em;
+  }
+  #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .logo {
+    display: none;
+  }
+  #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption {
+    width: 98%;
+  }
 }

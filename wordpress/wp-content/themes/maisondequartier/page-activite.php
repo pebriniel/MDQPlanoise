@@ -33,7 +33,7 @@ function mdq_showActiviteHtml($post){
                         <h2 class="title"><?= $post->post_title; ?></h2>
                         <p class="descri-activite"><?= $post->mdq_event_description; ?></p>
                         <div class="text-center">
-                            <button type="button" name="button" class="btn btn-primary btn-savoir">En savoir plus</button>
+                            <button type="button" name="button" class="hvr-rectangle-out btn-savoir">En savoir plus</button>
                         </div>
                     </div>
                 </div>
@@ -73,6 +73,7 @@ function mdq_list_cat($name_tax, $val = null){
 
 ?>
 <main id="activite">
+  <div class="container">
     <div class="row" id="transition">
         <div class="col-md-6">
             <div class="search-box">
@@ -105,11 +106,12 @@ function mdq_list_cat($name_tax, $val = null){
                     <?= mdq_list_cat("age_mdq", $search_tax_age_id); ?>
                 </select>
             </div>
-            <div class="col-md-1 col-xs-3 ">
-                <input  class="btn-valid" type="submit" name="" value="Envoyer" />
+            <div class="col-md-2 col-xs-4">
+                <input id="btn-valid" class="hvr-shadow" type="submit" name="" value="Envoyer" />
             </div>
         </form>
     </div>
+  </div>
     <div class="container">
         <div class="row">
             <?php
