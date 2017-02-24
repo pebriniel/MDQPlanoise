@@ -32,6 +32,14 @@
 
 		<!--wordpress head-->
 		<?php wp_head(); ?>
+
+		<script>
+			$(document).ready(function(){
+				$('.menu-burger').click(function() {
+					$(".menu-content").toggleClass("hide-menu");
+			   });
+		   });
+		</script>
 	</head>
 	<body <?php body_class(); ?>>
 		<!--[if lt IE 8]>
@@ -42,12 +50,13 @@
 			<header class="page-header">
 	  <div class="row">
 	  <nav class="navbar-fixed-top">
-	    <div class="col-md-2 logoPS">
+	    <div class="col-md-2 col-xs-10 logoPS">
 	      <a href="<?php echo esc_url(home_url('/')); ?>" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
 	        <img src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/logo.svg" alt="Logo <?php echo esc_attr(get_bloginfo('name', 'display')); ?>"/>
 	      </a>
-	    </div>
-	    <div class="col-md-10 col-xs-10">
+	    </div> 
+		<a class="menu-burger"><span class="glyphicon glyphicon-th-list"></span></a>
+	    <div class="col-md-10 col-xs-12 menu-content">
 			  <?php
 			    echo wp_nav_menu(
 			      array(

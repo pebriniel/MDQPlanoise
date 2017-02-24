@@ -1,7 +1,5 @@
 <?php get_header(); ?>
 
-
-
     <main id="contact">
 
         <div class="container">
@@ -22,27 +20,12 @@
 
                 <p id="nous-contacter">Nous contacter</p>
 
-                <form class="cf">
-
-                    <div class="half left cf">
-
-                        <input class="form-input" type="text" id="input-name" placeholder="Nom Prénom">
-
-                        <input class="form-input" type="email" id="input-email" placeholder="Adresse mail">
-
-                        <input class="form-input" type="text" id="input-subject" placeholder="Objet">
-
-                    </div>
-
-                    <div class="half right cf">
-
-                        <textarea name="message" type="text" id="input-message" placeholder="Message"></textarea>
-
-                    </div>
-
-                    <input type="submit" value="Submit" id="input-submit">
-
-                </form>
+                <?php
+                   // TO SHOW THE PAGE CONTENTS
+                   while ( have_posts() ) : the_post();
+                          the_content();
+                    endwhile; //resetting the post loop
+                ?>
 
             </div>
 

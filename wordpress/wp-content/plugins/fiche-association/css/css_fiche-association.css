@@ -52,7 +52,18 @@ body {
 #onepageasso .descrip button {
   font-size: 1.5em;
   background-color: #ff6633;
-  color: #ffffff; }
+  color: #ffffff;
+  border-radius: 0%;
+  border: 1px solid #ff6633;
+  font-weight: bold;
+  cursor:pointer;
+  transition: .3s;
+  -webkit-transition: .3s;}
+#onepageasso .descrip button:hover{
+  text-decoration: none;
+  border: inset 1px 1px 1px 1px #ff6633;
+  background-color: #fff !important;
+  color: #ff6633;}
 #onepageasso .carousel {
   padding: 0;
   margin-bottom: 3%; }
@@ -108,12 +119,14 @@ width: 100%;}
 #onepageasso .adresseAsso {
   text-align: center;
   padding: 3% 0%; }
-#onepageasso .map img {
+/*#onepageasso .map img {
   float: right;
   width: 100%;
-  height: 100%; }
+  height: 100%; }*/
+#onepageasso #mapid{
+  height: 400px;}
 #onepageasso .map {
-  padding: 0%; }
+  padding: 6% 2%;}
 #onepageasso form h1 {
   font-weight: bold;
   text-transform: uppercase;
@@ -123,7 +136,7 @@ width: 100%;}
 #onepageasso .contact {
   padding: 0%; }
 #onepageasso .message {
-  width: 60%;
+  width: 60%; 
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 2%; }
@@ -132,14 +145,28 @@ width: 100%;}
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 2%; }
-#onepageasso .selectpicker {
+/*#onepageasso .selectpicker {
   width: 60%;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 2%; }
+  margin-bottom: 2%; }*/
+#onepageasso .form-control{
+  border-radius: 0%;}
+#onepageasso .input-group .input-group-addon{
+  border-radius: 0%;}
 #onepageasso .btn {
+  border-radius: 0%;
+  border: 1px solid #ff6633;
   background-color: #ff6633 !important;
-  color: #ffffff; }
+  color: #ffffff;
+  font-weight: bold;
+  cursor:pointer;
+  transition: .3s;
+  -webkit-transition: .3s;}
+#onepageasso .btn:hover {
+  border: inset 1px 1px 1px 1px #ff6633;
+  background-color: #fff !important;
+  color: #ff6633;}
 #onepageasso li {
   list-style: none; }
 
