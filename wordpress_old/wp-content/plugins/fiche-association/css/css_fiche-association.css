@@ -1,0 +1,173 @@
+/*
+ Theme Name:   Maison de Quartier
+ Description:  Theme de la maison de quartierS
+ Author:       Pauline Friquet, Anthony Tournier, Boussad Sadadou? Houda Bouthalil
+ Template:     bootstrap-basic
+ Version:      1.0.0
+ License:      GNU General Public License v2 or later
+ License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+ Text Domain:  maison-quartier-child
+*/
+
+body {
+  padding-top: 60px; }
+
+#onepageasso .navbar-default {
+  background: #ff6633; }
+#onepageasso .navbar-default a {
+  color: #ffffff; }
+#onepageasso .onglets {
+  margin-top: 1%; }
+#onepageasso .logo .thumbnail {
+  width: 90%;
+  height: 90%;
+  margin: 0; }
+#onepageasso .logo .thumbnail .caption h3 {
+  color: #ff6633;
+  font-size: 3em;
+  font-weight: 900;
+  text-transform: uppercase; }
+
+
+#onepageasso .carteVisite {
+  margin-top: 3%;
+  border: 3px solid #ff6633;
+  padding: 2%;
+  -webkit-box-shadow: 7px 7px 12px -6px #575557;
+  -moz-box-shadow: 7px 7px 12px -6px #575557;
+  box-shadow: 7px 7px 12px -6px #575557;
+  margin-bottom: 5%; }
+#onepageasso .carteVisite .thumbnail {
+  vertical-align: middle; }
+#onepageasso .descrip p {
+  font-size: 1.2em;
+  text-align :justify; }
+#onepageasso .morecontent span {
+  display: none; }
+
+#onepageasso .morelink {
+  display: block;
+  position: relative;}
+
+#onepageasso .descrip button {
+  font-size: 1.5em;
+  background-color: #ff6633;
+  color: #ffffff;
+  border-radius: 0%;
+  border: 1px solid #ff6633;
+  font-weight: bold;
+  cursor:pointer;
+  transition: .3s;
+  -webkit-transition: .3s;}
+#onepageasso .descrip button:hover{
+  text-decoration: none;
+  border: inset 1px 1px 1px 1px #ff6633;
+  background-color: #fff !important;
+  color: #ff6633;}
+#onepageasso .carousel {
+  padding: 0;
+  margin-bottom: 3%; }
+#onepageasso .carousel-slide .item {
+  height: 50px; }
+#onepageasso .carousel-inner .item {
+  height: 300px; }
+#onepageasso .carousel-inner .carousel-caption {
+  color: #ff6633; }
+#onepageasso .screenshot .col-md-4 {
+  padding: 0; }
+#onepageasso .screenshot .thumbnail {
+  padding: 2%; }
+#onepageasso .screenshot .thumbnail img{
+width: 100%;}
+
+#onepageasso .membres .thumbnail .caption {
+  background-color: #ff6633;
+  color: #ffffff; }
+#onepageasso .prezmembres {
+  border: 1px solid black;
+  padding: 2% 2%;
+  margin-bottom: 5%; }
+#onepageasso .prezmembres h2 {
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  color: #ff6633;
+  padding-bottom: 3%; }
+#onepageasso .prezmembres svg {
+  float: right;
+  margin-top: 1%; }
+#onepageasso .loc {
+  border: 1px solid black;
+  margin-bottom: 5%; }
+#onepageasso .loc .adresseAsso h2 {
+  padding-bottom: 4%;
+  color: #ff6633;
+  font-weight: 900;
+  font-size: 2.5em; }
+#onepageasso .loc .adresseAsso h4 {
+  font-size: 1.5em; }
+#onepageasso .loc .adresseAsso p {
+  font-size: 1em;
+  text-align: justify;
+  margin-left: 5% !important;
+  margin-right: 5% !important; }
+#onepageasso .loc .adresseAsso h3 {
+  font-size: 1.2em;
+  font-weight: 900;
+  margin-left: 5% !important;
+  margin-right: 5% !important; }
+#onepageasso .adresseAsso {
+  text-align: center;
+  padding: 3% 0%; }
+/*#onepageasso .map img {
+  float: right;
+  width: 100%;
+  height: 100%; }*/
+#onepageasso #mapid{
+  height: 400px;}
+#onepageasso .map {
+  padding: 6% 2%;}
+#onepageasso form h1 {
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  color: #ff6633;
+  padding-bottom: 2%; }
+#onepageasso .contact {
+  padding: 0%; }
+#onepageasso .message {
+  width: 60%; 
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2%; }
+#onepageasso .input-group {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2%; }
+/*#onepageasso .selectpicker {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2%; }*/
+#onepageasso .form-control{
+  border-radius: 0%;}
+#onepageasso .input-group .input-group-addon{
+  border-radius: 0%;}
+#onepageasso .btn {
+  border-radius: 0%;
+  border: 1px solid #ff6633;
+  background-color: #ff6633 !important;
+  color: #ffffff;
+  font-weight: bold;
+  cursor:pointer;
+  transition: .3s;
+  -webkit-transition: .3s;}
+#onepageasso .btn:hover {
+  border: inset 1px 1px 1px 1px #ff6633;
+  background-color: #fff !important;
+  color: #ff6633;}
+#onepageasso li {
+  list-style: none; }
+
+/*# sourceMappingURL=style_onepageasso.css.map */

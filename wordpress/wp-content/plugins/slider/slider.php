@@ -1,31 +1,26 @@
 <?php
 /*
-Plugin Name: Slider des événements de chaque association
-
-Author:
+Plugin Name: Carrousel des événements de chaque association
+Author: Houda B. - Boussad S.
 
 */
 
-
-
-////////////////////////////
 // Custom Post Type Setup
-////////////////////////////
 add_action( 'init', 'slider_post_type' );
 function slider_post_type() {
 	$labels = array(
-		'name' => 'Evénements',
-		'singular_name' => 'Evénement',
-		'add_new' => __('Add New', 'cpt-bootstrap-carousel'),
-		'add_new_item' => __('Add New slider Image', 'cpt-bootstrap-carousel'),
-		'edit_item' => __('Edit slider Image', 'cpt-bootstrap-carousel'),
-		'new_item' => __('New slider Image', 'cpt-bootstrap-carousel'),
-		'view_item' => __('View slider Image', 'cpt-bootstrap-carousel'),
-		'search_items' => __('Search slider Images', 'cpt-bootstrap-carousel'),
-		'not_found' => __('No slider Image', 'cpt-bootstrap-carousel'),
-		'not_found_in_trash' => __('No slider Images found in Trash', 'cpt-bootstrap-carousel'),
+		'name' => 'Événements',
+		'singular_name' => 'Événement',
+		'add_new' => 'Ajouter un événement',
+		'add_new_item' => 'Ajouter un nouveau slide',
+		'edit_item' => 'Editer un slide',
+		'new_item' => 'New slider Image',
+		'view_item' => 'Voir le slide',
+		'search_items' => 'Rechercher un slide',
+		'not_found' => 'Aucun slide trouvé',
+		'not_found_in_trash' => 'Aucun slide dans la corbeille',
 		'parent_item_colon' => '',
-		'menu_name' => __('slider', 'cpt-bootstrap-carousel')
+		'menu_name' => 'Carrousel des événements'
 	);
 	$args = array(
 		'labels' => $labels,
@@ -40,26 +35,19 @@ function slider_post_type() {
 		'hierarchical' => false,
 		'menu_position' => 10,
 		'menu_icon' => 'dashicons-images-alt',
-		'supports' => array('title','excerpt','thumbnail', 'page-attributes')
+		'supports' => array('title','excerpt','thumbnail',  'page-attributes')
 	);
 	register_post_type('slider', $args);
 }
 
 // Add theme support for featured images if not already present
 function slider_addFeaturedImageSupport() {
-	$supportedTypes = get_theme_support( 'post-thumbnails' );
-	if( $supportedTypes === false ) {
-		add_theme_support( 'post-thumbnails', array( 'slider' ) );
-		add_image_size('featured_preview', 100, 55, true);
-	} elseif( is_array( $supportedTypes ) ) {
-		$supportedTypes[0][] = 'slider';
-		add_theme_support( 'post-thumbnails', $supportedTypes[0] );
-		add_image_size('featured_preview', 100, 55, true);
+		get_theme_support( 'post-thumbnails' );
+		add_theme_support( 'post-thumbnails');
+		add_image_size('featured_preview', 220, 180, true);
+
 	}
-}
 add_action( 'after_setup_theme', 'slider_addFeaturedImageSupport');
 
 // Load in the pages doing everything else!
 require_once('slider-admin.php');
-require_once('slider-settings.php');
-// require_once('slider-frontend.php');

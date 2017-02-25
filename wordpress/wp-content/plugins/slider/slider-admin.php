@@ -1,15 +1,6 @@
 <?php
-/*****************************************************
-* slider-admin.php
-* Code to customise the WordPress admin pages
-******************************************************/
-
-///////////////////
-// ADMIN PAGES
-///////////////////
 
 // Add column in admin list view to show featured image
-// http://wp.tutsplus.com/tutorials/creative-coding/add-a-custom-column-in-posts-and-custom-post-types-admin-screen/
 function slider_get_featured_image($post_ID) {
 	$post_thumbnail_id = get_post_thumbnail_id($post_ID);
 	if ($post_thumbnail_id) {
@@ -18,32 +9,33 @@ function slider_get_featured_image($post_ID) {
 	}
 }
 function slider_columns_head($defaults) {
-	$defaults['featured_image'] = __('Featured Image', 'cpt-bootstrap-carousel');
-	$defaults['category'] = __('Category', 'cpt-bootstrap-carousel');
+	$defaults['featured_image'] = 'Image événement';
+	// $defaults['Association_org'] = 'Association organisatrice';
 	return $defaults;
 }
 function slider_columns_content($column_name, $post_ID) {
 	if ($column_name == 'featured_image') {
 		$post_featured_image = slider_get_featured_image($post_ID);
 		if ($post_featured_image) {
-			echo '<a href="'.get_edit_post_link($post_ID).'"><img src="' . $post_featured_image . '" alt="" style="max-width:100%;" /></a>';
+			echo '<a href="'.get_edit_post_link($post_ID).'"><img src="' . $post_featured_image . '" alt="" style="max-width:50%;" /></a>';
 		}
 	}
-	if ($column_name == 'category') {
-		$post_categories = get_the_terms($post_ID, 'carousel_category');
-		if ($post_categories) {
-			$output = '';
-			foreach($post_categories as $cat){
-				$output .= $cat->name.', ';
-			}
-			echo trim($output, ', ');
-		} else {
-			echo 'No categories';
-		}
-	}
+	// if ($column_name == 'Association_org') {
+	// 	$post_assoc_orga = get_the_terms($post_ID, 'asso_organisatrice');
+	// 	if ($post_categories) {
+	// 		$output = '';
+	// 		foreach($post_categories as $cat){
+	// 			$output .= $cat->name.', ';
+	// 		}
+	// 		echo trim($output, ', ');
+	// 	} else {
+	// 		echo 'Aucune categorie';
+	// 	}
+	// }
 }
 add_filter('manage_slider_posts_columns', 'slider_columns_head');
 add_action('manage_slider_posts_custom_column', 'slider_columns_content', 10, 2);
+
 
 // Extra admin field for image URL
 function slider_image_url(){
@@ -52,53 +44,93 @@ function slider_image_url(){
 	$slider_image_url = isset($custom['slider_image_url']) ?  $custom['slider_image_url'][0] : '';
 	$slider_image_url_openblank = isset($custom['slider_image_url_openblank']) ?  $custom['slider_image_url_openblank'][0] : '0';
 	$slider_image_link_text = isset($custom['slider_image_link_text']) ?  $custom['slider_image_link_text'][0] : '';
-	$slider_video_url = isset($custom['slider_video_url']) ?  $custom['slider_video_url'][0] : '';
-	$slider_video_aspect = isset($custom['slider_video_aspect']) ?  $custom['slider_video_aspect'][0] : '';
 	?>
 	<p>
-		<label><?php _e('Image URL', 'cpt-bootstrap-carousel'); ?>:</label>
+		<label>URL de l'image:</label>
 		<input type="url" name="slider_image_url" value="<?php echo $slider_image_url; ?>" style="width: 100%"/> <br />
-		<small><em><?php _e('(optional - leave blank for no link)', 'cpt-bootstrap-carousel'); ?></em></small>
 	</p>
 
 	<p>
 		<label>
-			<input type="checkbox" name="slider_image_url_openblank" <?php if($slider_image_url_openblank == 1){ echo ' checked="checked"'; } ?> value="1" /> <?php _e('Open link in new window?', 'cpt-bootstrap-carousel'); ?>
+			<input type="checkbox" name="slider_image_url_openblank" <?php if($slider_image_url_openblank == 1){ echo ' checked="checked"'; } ?> value="1" />
+			Ouvrir le lien dans un nouvel onglet ?
 		</label>
 	</p>
 
 	<p>
-		<label><?php _e('Button Text', 'cpt-bootstrap-carousel'); ?>:</label>
+		<label>Lien du texte :</label>
 		<input type="text" name="slider_image_link_text" value="<?php echo $slider_image_link_text; ?>" style="width: 100%"/> <br />
-		<small><em><?php _e('(optional - leave blank for default, only shown if using link buttons)', 'cpt-bootstrap-carousel'); ?></em></small>
 	</p>
 
-	<hr />
-
-	<p><strong>Note: Using a video replaces the slide text &amp; button (if shown), Youtube &amp; Vimeo are supported</strong></p>
-
-	<p>
-		<label><?php _e('Video URL', 'cpt-bootstrap-carousel'); ?>:</label>
-		<input type="text" name="slider_video_url" value="<?php echo $slider_video_url; ?>" style="width: 100%"/> <br />
-		<small><em><?php _e('(use only the url, not the full embed code)', 'cpt-bootstrap-carousel'); ?></em></small>
-	</p>
-
-	<p>
-		<label><?php _e('Video Aspect Ratio', 'cpt-bootstrap-carousel'); ?>:</label>
-		<select name="slider_video_aspect">
-			<option value="embed-responsive-16by9" <?php if ($slider_video_aspect == "embed-responsive-16by9") echo 'selected'; ?>>16:9</option>
-			<option value="embed-responsive-4by3" <?php if ($slider_video_aspect == "embed-responsive-4by3") echo 'selected'; ?>>4:3</option>
-		</select> <br />
-	</p>
 	<?php
 }
+
+function event_asso_meta($object){
+	// On génère un token (SECURITE)
+	wp_nonce_field('slider_asso','sliderasso_nonce');
+	?>
+	<div class="meta-box-item-title">
+		<label for="event_asso_start">Date événement</label>
+	</div>
+	<div class="meta-box-item-content">
+		<input type="datetime-local" name="event_asso_start" style="width:49%;" value="<?= esc_attr(get_post_meta($object->ID, 'event_asso_start', true)); ?>" placeholder="jj/mm/aaaa" />
+		<input type="datetime-local" name="event_asso_end" style="width:49%;" value="<?= esc_attr(get_post_meta($object->ID, 'event_asso_end', true)); ?>" placeholder="jj/mm/aaaa" />
+	</div>
+	<div class="meta-box-item-title">
+		<h4>Adresse de l'évènement</h4>
+	</div>
+	<div class="meta-box-item-content">
+		<input type="text" name="event_asso_address" style="width:49%;" value="<?= esc_attr(get_post_meta($object->ID, 'event_asso_address', true)); ?>" placeholder="adresse" />
+	</div>
+	<?php
+}
+
+function mdq_listing_assoc($object){
+	wp_nonce_field('slider_asso','sliderasso_nonce');
+	?>
+	<div class="meta-box-item-content">
+		<select name="event_listing_asso">
+			<?php
+			query_posts(array('post_type' => 'fiche'));
+
+			if ( have_posts() ){
+				while ( have_posts() ){
+					the_post();
+					global $post;
+					$selected= "";
+					if($post->ID == get_post_meta($object->ID, 'mdq_listing_assoc', true)){
+						$selected = "selected";
+
+					}
+					?>
+						<option value="<?= $post->ID; ?>" <?= $selected; ?>><?= $post->_name; ?></option>
+					<?php
+				}
+			}
+		?>
+		</select>
+	</div>
+	<?php
+}
+
 function slider_admin_init_custpost(){
-	add_meta_box("slider_image_url", "Slide Options", "slider_image_url", "slider", "side", "low");
+	add_meta_box("slider_image_url", "Slide Options", "slider_image_url", "slider", "side", "high");
+
+	add_meta_box('event_by_asso','Informations sur l\'événement','event_asso_meta','slider','normal','high');
+	add_meta_box('event_list_asso','Association organisatrice de  l\'événement','mdq_listing_assoc','slider','normal', 'high');
 }
 add_action("add_meta_boxes", "slider_admin_init_custpost");
-function slider_mb_save_details(){
+
+function slider_save_details(){
 	global $post;
-	if (isset($_POST["slider_image_url"])) {
+
+	$start_date = isset($_POST['event_asso_start']);
+	$end_date = isset($_POST['event_asso_end']);
+	$address_event = isset($_POST['event_asso_address']);
+
+	$list_event_asso = isset($_POST['event_listing_asso']);
+
+	if (isset($_POST["slider_image_url"]) || !wp_verify_nonce($_POST['sliderasso_nonce'], 'slider_asso') || $start_date || $end_date || $address_event || $list_event_asso) {
 		$openblank = 0;
 		if(isset($_POST["slider_image_url_openblank"]) && $_POST["slider_image_url_openblank"] == '1'){
 			$openblank = 1;
@@ -106,78 +138,10 @@ function slider_mb_save_details(){
 		update_post_meta($post->ID, "slider_image_url", esc_url($_POST["slider_image_url"]));
 		update_post_meta($post->ID, "slider_image_url_openblank", $openblank);
 		update_post_meta($post->ID, "slider_image_link_text", sanitize_text_field($_POST["slider_image_link_text"]));
-	}
-	if (isset($_POST["slider_video_url"])) {
-		update_post_meta($post->ID, "slider_video_url", esc_url($_POST["slider_video_url"]));
-		update_post_meta($post->ID, "slider_video_aspect", sanitize_text_field($_POST["slider_video_aspect"]));
+		update_post_meta($post->ID,'event_asso_start',$_POST['event_asso_start']);
+		update_post_meta($post->ID,'event_asso_end',$_POST['event_asso_end']);
+		update_post_meta($post->ID,'event_asso_address',$_POST['event_asso_address']);
+		update_post_meta($post->ID,'mdq_listing_assoc',$_POST['event_listing_asso']);
 	}
 }
-add_action('save_post', 'slider_mb_save_details');
-
-
-///////////////////
-// CONTEXTUAL HELP
-///////////////////
-function slider_contextual_help_tab() {
-    $screen = get_current_screen();
-    if( $screen->post_type === 'slider'){
-        $help = '<p>You can add a <strong>CPT Bootstrap Carousel</strong> image carousel using the shortcode <code>[image-carousel]</code>.</p>
-                <p>You can read the full plugin documentation on the <a href="http://wordpress.org/plugins/cpt-bootstrap-carousel/" target="_blank">WordPress plugins page</a></p>
-                <p>Most settings can be changed in the <a href="">settings page</a> but you can also specify options for individual carousels
-                using the following settings:</p>
-
-                <ul>
-                <li><code>interval</code> <em>(default 5000)</em>
-                <ul>
-                <li>Length of time for the caption to pause on each image. Time in milliseconds.</li>
-                </ul></li>
-
-                <li><code>showcaption</code> <em>(default true)</em>
-                <ul>
-                <li>Whether to display the text caption on each image or not. true or false.</li>
-                </ul></li>
-
-                <li><code>showcontrols</code> <em>(default true)</em>
-                <ul>
-                <li>Whether to display the control arrows or not. true or false.</li>
-                </ul></li>
-
-                <li><code>orderby</code> and <code>order</code> <em>(default menu_order ASC)</em>
-                <ul>
-                <li>What order to display the posts in. Uses WP_Query terms.</li>
-                </ul></li>
-
-                <li><code>category</code> <em>(default all)</em>
-                <ul>
-                <li>Filter carousel items by a comma separated list of carousel category slugs.</li>
-                </ul></li>
-
-                <li><code>image_size</code> <em>(default full)</em>
-                <ul>
-                <li>WordPress image size to use, useful for small carousels</li>
-                </ul></li>
-
-                <li><code>id</code> <em>(default all)</em>
-                <ul>
-                <li>Specify the ID of a specific carousel post to display only one image.</li>';
-        if(isset($_GET['post'])){
-            $help .= '<li>The ID of the post you\'re currently editing is <strong>'.$_GET['post'].'</strong></li>';
-        }
-        $help .= '
-            </ul></li>
-
-        <li><code>twbs</code> <em>(default 3)</em>
-        <ul>
-        <li>Output markup for Twitter Bootstrap Version 2, 3 or 4.</li>
-        </ul></li>
-        </ul>
-        ';
-        $screen->add_help_tab( array(
-            'id' => 'slider_contextual_help',
-            'title' => __('Carousel'),
-            'content' => __($help)
-                ) );
-        }
-    } // if( $screen->post_type === 'slider'){
-add_action('load-post.php', 'slider_contextual_help_tab');
-add_action('load-post-new.php', 'slider_contextual_help_tab');
+add_action('save_post', 'slider_save_details');

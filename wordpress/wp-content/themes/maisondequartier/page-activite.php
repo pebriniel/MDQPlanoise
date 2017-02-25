@@ -20,9 +20,11 @@ get_header();
     width: 100%;
     height: 350px;
 }
-.map-hide{
+.activite-block-hide{
     display: none;
-
+}
+.date-hour{
+    text-align: center;
 }
 </style>
 
@@ -46,33 +48,44 @@ else{
 function mdq_showActiviteHtml($post){
     $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' );
     ?>
-    <article id="article-<?= $post->ID; ?>" class="col-md-6 card-container">
-        <div class="card">
-            <div class="card-content">
-                <div class="row">
-                    <div class="col-md-4 block-1-<?= $post->ID; ?>">
-                        <div class="img-activite">
-                            <img src="<?= $url ?>" class="img-responsive img" alt="" />
-                        </div>
-                        <p class="date "><?= $post->mdq_event_start; ?></p>
-                    </div>
-                    <div class="col-md-8 block-2-<?= $post->ID; ?>">
-                        <h2 class="title"><?= $post->post_title; ?></h2>
-                        <p class="descri-activite"><?= $post->mdq_event_description; ?></p>
-                        <div class="text-center">
-                            <button type="button" name="button" class="hvr-rectangle-out btn-savoir btn-plus-<?= $post->ID; ?> savoir-plus" data-id="<?= $post->ID; ?>" data-toggle="modal" data-target="#ModalActivity"></button>
-                        </div>
-                    </div>
-                    <div class="col-md-4 map-hide map-<?= $post->ID; ?>">
-                        <div id="mapid-<?= $post->ID; ?>" class="map">
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer"><a href="<?= get_site_url()."/association/?fiche=".$post->mdq_association_id; ?>" data-id="$post->ID" class="voir-fichasso">Voir la fiche asso</a></div>
+    <div class="col-md-6 block-activite-6">
+        <div class="block-activite">
+        <div class="col-md-3 col-sm-3 col-xs-3 logo">
+            <img src="<?= $url ?>" />
         </div>
-    </article>
+        <div class="col-md-7 col-sm-7 col-xs-9 description">
+            <h3><?= $post->post_title; ?></h3>
+            <div class="desc">
+                <?= $post->mdq_event_description; ?>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-12 menu">
+            <ul>
+                <li class="li-horaire li-horaire-<?= $post->ID; ?>" data-menu="horaire" data-id="<?= $post->ID; ?>">
+                    <span class="glyphicon glyphicon-calendar"></span><br/>
+                    Date
+                </li>
+                <li class="li-map li-map-<?= $post->ID; ?>" data-menu="map" data-id="<?= $post->ID; ?>">
+                    <span class="glyphicon glyphicon-road"></span><br />
+                    Carte
+                </li>
+                <li data-id="1">
+                    <a href="<?= get_site_url()."/association/?fiche=".$post->mdq_association_id; ?>" data-id="$post->ID">
+                        <span class="glyphicon glyphicon-exclamation-sign"></span><br />
+                            Association
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="macti-<?= $post->ID; ?> col-md-10 col-sm-10 col-xs-12 block-absolute menu-horaire menu-horaire-<?= $post->ID; ?>" data-menu="horaire">
+            <?= $post->mdq_event_date; ?>
+        </div>
+        <div class="macti-<?= $post->ID; ?> col-md-10 col-sm-10 col-xs-12 block-absolute menu-map menu-map-<?= $post->ID; ?>" data-menu="map">
+            map
+        </div>
+    </div>
+    </div>
     <?php
 }
 
@@ -107,7 +120,7 @@ function mdq_list_cat($name_tax, $val = null){
 <main id="activite">
     <div class="container">
         <div class="row" id="transition">
-            <div class="col-md-6">
+            <div class="col-md-5 col-xs-10 ">
                 <div class="search-box">
                     <form class="search-form" method="POST" action="#">
                         <?php
@@ -121,33 +134,28 @@ function mdq_list_cat($name_tax, $val = null){
                 </div>
             </div>
 
-            <!-- DROPDOWN -->
-            <?php
 
 
-            /* affichage des thèmes */
-
-            ?>
             <form action="#" method="post">
-                <div class="col-md-2 col-xs-4 select-container">
+                <div class="col-md-2 col-xs-3 col-xs-push-1 select-container">
                     <select class="select-menu" name="select-cat">
                         <option value="null">--</option>
                         <?= mdq_list_cat("theme_mdq", $search_tax_cat_id); ?>
                     </select>
                 </div>
-                <div class="col-md-2 col-xs-4 select-container">
+                <div class="col-md-2 col-xs-3 col-xs-push-1 select-container">
                     <select class="select-menu" name="select-age">
                         <option value="null">--</option>
                         <?= mdq_list_cat("age_mdq", $search_tax_age_id); ?>
                     </select>
                 </div>
-                <div class="col-md-2 col-xs-4">
-                    <input id="btn-valid" class="hvr-shadow" type="submit" name="" value="Envoyer" />
+                <div class="col-md-2 col-xs-4 col-xs-push-1">
+                    <input id="btn-valid-acti" class="hvr-shadow" type="submit" name="" value="Envoyer" />
                 </div>
             </form>
         </div>
     </div>
-    <div class="container">
+    <div class="container content-activite">
         <div class="row">
             <?php
             /* affichage individuel d'une activté */
@@ -203,38 +211,36 @@ function mdq_list_cat($name_tax, $val = null){
 
     <script>
     $(document).ready(function(){
-        var modal = false;
-        $('.btn-savoir').click(function(){
+        $(".menu li").click(function(){
+            let menu = $(this).data('menu');
             let id = $(this).data('id');
-            let article = $("#article-"+id);
+            var li = this;
+            // $('.block-absolute').hide();
 
-            if(modal){
-                article.removeClass("col-md-12").addClass("col-md-6").show();
-                $(".btn-plus-"+id).removeClass("savoir-plus-close").addClass("savoir-plus");
-                $(".block-2-"+id).removeClass("col-md-4").addClass("col-md-8").show();
-                $(".card-container").show();
-                $(".map-"+id).addClass("map-hide");
-                modal = false;
-            }
-            else{
-                modal = true;
-                $(".card-container").hide();
-                article.removeClass("col-md-6").addClass("col-md-12").show();
-                $(".btn-plus-"+id).removeClass("savoir-plus").addClass("savoir-plus-close");
-                $(".block-2-"+id).removeClass("col-md-8").addClass("col-md-4").show();
-                $(".map-"+id).removeClass("map-hide");
-                if ($('#mapid-'+id).is(':visible')){
-                    console.log('coucou');
-                    var mymap = L.map('mapid-'+id).setView([47.221094, 5.967786], 16);
-                    var marker = L.marker([47.221094, 5.967786]).addTo(mymap);
-                    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYm91c3NhZCIsImEiOiJjaXlhMmxnMW0wMDRzMndxcngwNXNyZ2syIn0.aEfKXXy196Ds4KIdWnu-dw', {
-                        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-                        maxZoom: 18,
-                        id: 'mapbox.streets'
-                    }).addTo(mymap);
+            $(".macti-"+id+"").each(function( index ){
+                console.log(index);
+                var __menu = $(li).data("menu");
+
+                if($(this).hasClass("menu-"+menu+"-"+id)){
+                    if ($('.menu-'+menu+"-"+id).css('display') == 'none'){
+                        $(this).show();
+                        $(li).addClass("active");
+                    }
+                    else{
+                        $(this).hide();
+                        $(li).removeClass("active");
+                        //$("menu-"+$(this).data("menu")).removeClass("active");
+                    }
+                    // $(this).removeClass("block-active-show");
                 }
-            }
-        });
+                else{
+                    $(this).hide();
+                    var _menu = $(this).data('menu');
+                    console.log('_menu '+_menu);
+                    $(".li-"+_menu+"-"+id).removeClass("active");
+                }
+            });
+        })
     });
     </script>
 

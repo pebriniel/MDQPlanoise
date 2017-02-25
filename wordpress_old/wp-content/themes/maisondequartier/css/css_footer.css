@@ -1,0 +1,120 @@
+footer {
+  background-color: #000000;
+  font-size: 1.1em;
+}
+footer .container, footer .row {
+  height: 100%;
+}
+footer #logo {
+  margin-top: 10vh;
+}
+footer #middle-box {
+  margin-top: 16vh;
+  position: relative;
+  height: 100%;
+  color: white;
+}
+footer #middle-box #association-ul {
+  border-bottom: 2px solid #eb661b;
+  margin-left: 1em;
+  padding: 0;
+  font-weight: bold;
+}
+footer #middle-box #association-ul li {
+  display: inline-block;
+  list-style-type: none;
+  width: 131px;
+}
+footer #middle-box #association-ul li:nth-child(1) {
+  text-align: left;
+}
+footer #middle-box #association-ul li:nth-child(2) {
+  text-align: center;
+}
+footer #middle-box #association-ul li:nth-child(3) {
+  text-align: right;
+}
+footer #middle-box #association-ul li:hover a {
+  color: #eb661b;
+}
+footer #middle-box span {
+  font-size: 1.2em;
+  color: #eb661b;
+  margin-top: 0.2em;
+  font-weight: bold;
+}
+footer #middle-box span, footer #middle-box ul {
+  display: inline-block;
+  vertical-align: top;
+}
+footer #mentions {
+  margin-top: 5vh;
+  text-align: center;
+  color: white;
+}
+footer #menu-ul {
+  margin-top: 10vh;
+}
+footer #menu-ul li {
+  border-left: 2px solid #eb661b;
+  list-style-type: none;
+  padding-top: 0.3em;
+  padding-left: 1em;
+  font-size: 1em;
+  color: white;
+  font-weight: bold;
+}
+footer #menu-ul li:hover {
+  border-left: 3px solid white;
+}
+footer #menu-ul li:hover a {
+  color: #eb661b;
+}
+footer a, footer a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+@media screen and (min-width: 200px) and (max-width: 640px) {
+  footer #logo {
+    text-align: center;
+  }
+  footer #middle-box {
+    margin-top: 6vh;
+    margin-left: 6%;
+  }
+  footer #middle-box #association-ul {
+    display: block;
+    border: none;
+  }
+  footer #middle-box #association-ul li {
+    border-left: 2px solid #eb661b;
+    display: block;
+    width: auto;
+    list-style-type: none;
+    padding-top: 0.3em;
+    padding-left: 1em;
+    font-size: 1em;
+    color: white;
+  }
+  footer #middle-box #association-ul li:hover {
+    border-left: 3px solid white;
+  }
+  footer #middle-box #association-ul li:hover a {
+    color: #eb661b;
+  }
+  footer #middle-box #association-ul li:nth-child(1) {
+    text-align: left;
+  }
+  footer #middle-box #association-ul li:nth-child(2) {
+    text-align: left;
+  }
+  footer #middle-box #association-ul li:nth-child(3) {
+    text-align: left;
+  }
+  footer #middle-box #menu-ul {
+    margin-top: 6vh;
+  }
+}
+
+/*# sourceMappingURL=css_footer.css.map */

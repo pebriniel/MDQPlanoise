@@ -24,7 +24,7 @@ get_header();
 					<div class="col-md-4 logo">
 
 						<div class="thumbnail">
-							<span><?= get_the_post_thumbnail($infosAsso->ID); ?></span>
+							<span><?= get_the_post_thumbnail($infosAsso->ID, 'fiche-association'); ?></span>
 							<div class="caption">
 								<h3><?= $infosAsso->_name; ?></h3>
 							</div>
@@ -40,158 +40,95 @@ get_header();
 			<!-- fin carte visite -->
 
 			<!-- carousel bootstrap -->
-			<div class="container carousel">
+		  <div class="container carousel">
 
-				<?php
-				query_posts(array('post_type'=>'slider'));
-				// if ( have_posts() ){
-				// 			 while (have_posts()){
-				// 			 the_post();
-				// 			//  add_image_size($post->ID, 1000, 200, false);
-				// 			 global $post;
-				// 			 echo "<pre>";
-				// 			 print_r($post);
-				// 			 echo get_the_excerpt($post->ID) . " <br/>";
-				// 			 echo get_post_thumbnail_id($post->ID). " <br/>";
-				// 			 echo get_the_post_thumbnail($post->ID);
-				// 			 echo "</pre>";
-				// 		 }
-				// 	 }
+		 <?php
+		 query_posts(array('post_type'=>'slider',
+		 					'meta_key'  => 'mdq_listing_assoc',
+		 					'meta_value' => $infosAsso->ID));
 
-				///////////////////
-				// FRONT END
-				///////////////////
+		 $images = array();
+		 ?>
 
-				// Shortcode
-				function slider_shortcode($atts, $content = null) {
-					// Set default shortcode attributes
-					$options = get_option( 'slider_settings' );
-					if(!$options){
-						slider_set_options ();
-						$options = get_option( 'slider_settings' );
-					}
-					$options['id'] = '';
+		 <div id="myCarousel" class="carousel slide" data-ride="carousel">
+		 	 <!-- Wrapper for slides -->
 
-					// Parse incomming $atts into an array and merge it with $defaults
-					$atts = shortcode_atts($options, $atts);
+		 <?php
 
-					return slider_frontend($atts);
-				}
-				add_shortcode('image-carousel', 'slider_shortcode');
+		 if(have_posts()){
+		 	while ( have_posts() ) {
+		 			the_post();
+		 			global $post;
 
-				// Display carousel
+		 if ( '' != get_the_post_thumbnail(get_the_ID()) ) {
 
-				$id = rand(0, 999);
-				$images = array();
+		 			$post_id = get_the_ID();
+		  			$title = get_the_title();
+		  			$content = get_the_excerpt();
+		 			// $size = image_resize($post->ID, 100, 50);
+		  			$image = get_the_post_thumbnail( get_the_ID());
+		  			$image_src = wp_get_attachment_image_src(get_post_thumbnail_id());
+		 			$image_src = $image_src[0];
+		  			$url = get_post_meta(get_the_ID(), 'slider_image_url', true);
+		  			$url_openblank = get_post_meta(get_the_ID(), 'slider_image_url_openblank', true);
+		  			$link_text = get_post_meta(get_the_ID(), 'slider_image_link_text', true);
+		 			$asso_orga = $infosAsso->_name; //get_post_meta(get_the_ID(), 'mdq_listing_assoc', true);
+		  			$images[] = array('post_id' => $post_id, 'title' => $title, 'content' => $content, 'image' => $image, 'img_src' => $image_src, 'url' => esc_url($url), 'url_openblank' => $url_openblank == "1" ? true : false, 'link_text' => $link_text, 'association' => $asso_orga);
+		 		}
+		 }
 
+		 	?>
+		 	<div class="carousel-inner" role="listbox">
+		 		 <ol class="carousel-indicators">
+		 		<?php
+		 			 $active = 'class="active"';
+		     		 foreach ($images as $key => $image)
+		     		 {
+		 				 static $i = 0;
+		 			?>
+		 		   		<li data-target="#myCarousel" data-slide-to="<?= $i; ?>" <?= $active; ?>></li>
+		 			<?php
+		 				$i ++;
+		 				$active = "";
+		 			}
+		 			?>
+		 		 </ol>
+		 	 <?php
+		 		 $active = "active";
+		 		 foreach ($images as $key => $image)
+		 		 {
+		 			 ?>
+		 			 <div class="item <?= $active; ?>">
+		 				<?= $image['image']; ?>
+		 				 <div class="carousel-caption">
+		 					 <h3><?= $image['title'];?></h3>
+		 					 <p><?= $image['content'];?></p>
+		 					 <a href="<?=  get_site_url()."/association/?fiche=".$image['url_openblank']; ?>"  class="btn btn-association" role="button">voir l'événement</a>
+		 					 <p><?= $image['association'];?></p>
+		 				 </div>
+		 			 </div>
+		 			<?php
 
-				/* affichage du début du carrousel */
-				?>
+		 			$active = "";
+		 		}
+		 		?>
 
-				<!-- id="myCarousel" -->
-				<div id="myCarousel" class="carousel slide" data-ride="carousel">
-					<!-- Wrapper for slides -->
+		 	 <?php  	}  ?>
+		 </div>
 
-					<?php
-					if(have_posts()){
-						//ici tu récupère le contenu de ton plugin slider
-						while ( have_posts() ) {
-							the_post();
-
-							if ( '' != get_the_post_thumbnail(get_the_ID()) ) {
-								// echo "<pre>";
-								$post_id = get_the_ID();
-								// echo $post_id . '<br/>';
-								$title = get_the_title();
-								//		echo $title . '<br/>';
-								$content = get_the_excerpt();
-								//	echo $content . '<br/>';
-								// $size = image_resize($post->ID, 100, 50);
-
-								$image = get_the_post_thumbnail( get_the_ID());
-								//	echo $image . '<br/>';
-								$image_src = wp_get_attachment_image_src(get_post_thumbnail_id());
-								//	echo $image_src . '<br/>';
-								$image_src = $image_src[0];
-								$url = get_post_meta(get_the_ID(), 'slider_image_url', true);
-								//	echo $url . '<br/>';
-								$url_openblank = get_post_meta(get_the_ID(), 'slider_image_url_openblank', true);
-								//	echo $url_openblank . '<br/>';
-								$link_text = get_post_meta(get_the_ID(), 'slider_image_link_text', true);
-								// echo $link_text . '<br/>';
-								$images[] = array('post_id' => $post_id, 'title' => $title, 'content' => $content, 'image' => $image, 'img_src' => $image_src, 'url' => esc_url($url), 'url_openblank' => $url_openblank == "1" ? true : false, 'link_text' => $link_text);
-								// echo "</pre>";
-							}
-						}
-
-						//tu as mis dans la variable $imaages toues les données de tes slides dans un tableau ($images[])
-
-						?>
-						<div class="carousel-inner" role="listbox">
-							<?php
-
-							// Carousel Content
-
-							//il faut maintenant boucle chaque valeur du tableau pour afficher ton slider
-
-							//dans un premier temps pour faire afficher les petits boutons qui permettent de choisir un slide
-							?>
-							<ol class="carousel-indicators">
-								<?php
-								$active = 'class="active"';
-								foreach ($images as $key => $image)
-								{
-									static $i = 0;
-									?>
-									<li data-target="#myCarousel" data-slide-to="<?= $i; ?>" <?= $active; ?>></li>
-									<?php
-									$i ++;
-									$active = "";
-								}
-								?>
-							</ol>
-							<?php
-							$active = "active";
-							foreach ($images as $key => $image)
-							{
-								?>
-								<div class="item <?= $active; ?>">
-									<!-- <img src="wp-content/themes/maisonquartier/img/img_onepageasso/photo.jpg" alt="évènement2"> -->
-									<?= $image['image']; ?>
-									<div class="carousel-caption">
-										<h3><?= $image['title'];?></h3>
-										<p><?= $image['content'];?></p>
-										<a href="<?= $image['url_openblank']; ?>" role="button">Voir événement</a>
-									</div>
-								</div>
-
-								<?php
-								$active = "";
-							}
-							?>
-
-							<?php  	}
-							// 		}
-							// }
-							?>
-						</div>
-
-						<!-- Left and right controls -->
-						<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-							<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-							<span class="sr-only">Précèdent</span>
-						</a>
-						<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-							<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-							<span class="sr-only">Suivant</span>
-						</a>
-					</div>
-					<!-- fin de carousel -->
+		 	 <!-- Left and right controls -->
+		 	 <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+		 		 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true" style="color: #ff6633;"></span>
+		 		 <span class="sr-only">Précèdent</span>
+		 	 </a>
+		 	 <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+		 		 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="color: #ff6633;"></span>
+		 		 <span class="sr-only">Suivant</span>
+		 	 </a>
+		 </div>
+		  <!-- fin de carousel -->
 
 					<!-- activités des associations -->
-					<script src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/js/readmoreFiche.js" type="text/javascript"></script> -->
-
-
 					<div class="container">
 						<div class="row screenshot">
 

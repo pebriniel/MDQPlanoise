@@ -1,28 +1,7 @@
-<main class="container">
+<main>
 <!-- carousel bootstrap -->
-<!-- <div class="row"> -->
-<?php
+<div class="container carousel" id="content">
 
-/* affichage de l'article mis-en-avant */
-	$sticky = get_option('sticky_posts');
-	query_posts(array('showposts' => 1, 'orderby' => 'post_modified',  'post__in' => $sticky , 'order' => 'DESC'));
-	if ( have_posts() ){
-		while ( have_posts() ){
-			the_post();
-			global $post;
-			if(is_sticky()){
-				?>
-
-				<div class="blockCarousel col-md-12">
-					Article à la une
-					<h1><?=	the_title(); ?></div>
-				<?php
-			}
-		}
-	}
-?>
-<div class="blockCarousel col-md-12">
-<div class="carousel col-md-12" id="content">
 <div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel">
 	<!-- Indicators -->
 	<ol class="carousel-indicators">
@@ -62,8 +41,6 @@
 			</div>
 		</div>
 	</div>
-</div>
-<!-- </div> -->
 	<!-- Left and right controls -->
 	<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
 		<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -75,42 +52,24 @@
 	</a>
 </div>
 </div>
-<!-- </div> -->
 <!-- fin de carousel -->
 
 <!-- agenda -->
- <!-- <div class="container"> -->
-	<!-- <div class="row"> -->
-	<div class="blockAgenda col-md-12">
-		<div class="contentAgenda col-md-12">
-			<div class="col-md-2 pictoAgenda">
-				<h2>Agenda</h2>
-				<img src="img/img_accueil/agenda.svg">
-			</div>
-			<div class="col-md-10 prezEvent">
-				<p>Quisque egestas orci vestibulum augue lacinia aliquam.
-				Vestibulum quis ligula faucibus, faucibus justo eget, sodales odio.
-				Nunc tellus elit, varius tempor dolor ut, iaculis porta tortor. In condimentum aliquam enim ac vestibulum.
-				Nullam venenatis ipsum non ultricies iaculis.</p>
-			</div>
-		</div>
-	</div>
-	<!-- </div> -->
-<!-- </div> -->
+<div class="agenda col-md-6">
 
+</div>
 <!-- fin agenda -->
 
-<section <?php post_class(); ?>>
+<section class="row" <?php post_class(); ?>>
 	<?php
 	$query = new WP_query(array('post_type'=>'post','posts_per_page' => 10));
 	while($query->have_posts()) {
 		$query->the_post();
 		global $post;
 		?>
-		<article class="col-md-4 contenu">
-			<div class="globalArticle col-md-12">
+		<article class="col-md-4">
 			<header class="entry-header">
-				<h2 class="entry-title"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
+				<h1 class="entry-title"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
 
 				<?php if ('post' == get_post_type()) {  ?>
 				<div class="entry-meta">
@@ -160,7 +119,6 @@
 
 
 		</footer><!-- .entry-meta -->
-	</div>
 	</article><!-- #post-## -->
 		<?php  } // End loop ?>
 </section>

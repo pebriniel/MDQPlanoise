@@ -12,6 +12,7 @@
 main{
     overflow: hidden;
     min-height: 95vh;
+    margin-top: 32px; 
 }
 
 header .menu-burger{
@@ -124,7 +125,8 @@ header .hide-menu{
         color: white;
     }
 }
-/* page accueil */
+
+/* le caroussel */
 
 #content .carousel {
   padding: 0;
@@ -135,7 +137,32 @@ header .hide-menu{
   height: 300px; }
 #content .carousel-inner .carousel-caption {
   color: #ff6633; }
+  .container .carousel{
+    padding: 0;
+    margin: 4% 0%; }
+  #content .carousel-slide .item {
+    height: 50px; }
+  #content .carousel-inner .item {
+    height: 300px; }
+  #content .carousel-inner .carousel-caption {
+    color: #ff6633; }
+    .carousel-indicators li {
+       background-color: #000;
+       border: 1px solid #ff6633
+    ;
+       width: 14px;
+       height: 14px;
+    }.carousel-circle.active {
+       background-color: #ff6633
+    ;
+    }
+    .carousel-control.right {
+       background-image: none!important;
+    }.carousel-control.left {
+       background-image: none!important;
+    }
 
+/* page accueil */
 #article{
   height: 50%;
   width: 100%;
@@ -155,15 +182,7 @@ main .morelink {
 main .container{
   padding: 0%
 }
-.container .carousel{
-  padding: 0;
-  margin: 4% 0%; }
-#content .carousel-slide .item {
-  height: 50px; }
-#content .carousel-inner .item {
-  height: 300px; }
-#content .carousel-inner .carousel-caption {
-  color: #ff6633; }
+
 #content .contenu{
   height: 340px;
   margin-bottom: 2%;}

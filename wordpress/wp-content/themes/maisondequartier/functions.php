@@ -24,3 +24,14 @@ function get_post_activite($input, $tax, &$search_array, &$search_id){
         }
     }
 }
+
+
+
+// désactiver MAJ du plugin slider
+function stop_plugin_update( $value ) {
+
+    unset( $value->response['slider/slider.php'] );
+
+    return $value;
+}
+add_filter( 'site_transient_update_plugins', 'stop_plugin_update' );

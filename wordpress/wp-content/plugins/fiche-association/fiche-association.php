@@ -4,7 +4,7 @@ Plugin Name: fiche association
 Plugin URI:  https://houdab.student.codeur.online/wordpress/wp-content/plugins/fiche-association/
 Description: annuaire association
 Version:     0.1
-Author:      Boussad S. & Houda B.
+Author:      Houda B. - Boussad S;
 */
 
 
@@ -44,6 +44,7 @@ function ficheassocation_init(){
 		'publicly_queryable' => false,
 		'labels' => $labels,
 		'menu_position' => 9,
+		'menu_icon' => 'dashicons-id',
 		'capability_type'=>'post',
 		'supports' => array('title', 'thumbnail'),
     'taxonomies' => array( 'category', 'theme_mdq', 'age_mdq', 'status_members_mdq' ),
@@ -54,6 +55,8 @@ function ficheassocation_init(){
 
 }
 
+
+
 /**
  * Register and enqueue style sheet.
  */
@@ -61,6 +64,7 @@ function register_plugin_styles() {
 	wp_register_style( 'fiche-association', plugins_url( 'fiche-association/css/css_fiche-association.css' ) );
 	wp_enqueue_style( 'fiche-association' );
 }
+
 
 
 
@@ -83,11 +87,19 @@ function ficheassocation_columnfilter($columns){
 function ficheassocation_column($column){
 	global $post;
 	if($column == 'thumbnail'){
-	 echo edit_post_link(get_the_post_thumbnail($post->ID),null,null,$post->ID);
-	 // echo edit_post_link($post->ID);
-
+	 echo edit_post_link(get_the_post_thumbnail($post->ID, 'fiche-association'),null,null,$post->ID);
 
 	}
+}
+
+// Déclaration de la prise des miniatures
+add_theme_support( 'post-thumbnails' );
+
+// déclaration de la function pour redimentioner les miniatures
+if ( function_exists( 'add_image_size' ) ) {
+
+	add_image_size( 'fiche-association', 220, 180, true ); //(Image recadrée)
+
 }
 
 /**

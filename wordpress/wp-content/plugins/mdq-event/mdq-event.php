@@ -87,8 +87,7 @@ function mdq_event_savepost($post_id, $post){
 
     // On met à jour la meta !
     update_post_meta($post_id,'mdq_event_description',$_POST['event_description']);
-    update_post_meta($post_id,'mdq_event_start',$_POST['event_datedebut']);
-    update_post_meta($post_id,'mdq_event_end',$_POST['event_datefin']);
+    update_post_meta($post_id,'mdq_event_date',$_POST['event_date']);
     update_post_meta($post_id,'mdq_association_id',$_POST['event_assoc_list']);
     update_post_meta($post_id,'mdq_event_adresse',$_POST['event_adresse']);
 }
