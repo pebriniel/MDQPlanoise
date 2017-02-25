@@ -12,6 +12,10 @@
 body {
   padding-top: 60px; }
 
+#onepageasso{
+    padding-top: 5em;
+}
+
 #onepageasso .navbar-default {
   background: #ff6633; }
 #onepageasso .navbar-default a {
@@ -69,13 +73,29 @@ body {
 #onepageasso .screenshot .thumbnail img{
 width: 100%;}
 
+
 #onepageasso .membres .thumbnail .caption {
   background-color: #ff6633;
   color: #ffffff; }
 #onepageasso .prezmembres {
+  position: relative;
   border: 1px solid black;
   padding: 2% 2%;
   margin-bottom: 5%; }
+
+  #onepageasso .prezmembres .membres{
+      height: 350px;
+  }
+  #onepageasso .overflow-content{
+      max-height: 450px;
+      overflow: hidden;
+  }
+  #onepageasso .prezmembres .members-plus{
+      position: absolute;
+      bottom: 1em;;
+      right: 1em;
+  }
+
 #onepageasso .prezmembres h2 {
   font-weight: bold;
   text-transform: uppercase;
@@ -142,5 +162,32 @@ width: 100%;}
   color: #ffffff; }
 #onepageasso li {
   list-style: none; }
+
+
+/* menu navigation association */
+.transition-assoc{
+    width: 100%;
+    position: fixed !important;
+    z-index: 20;
+}
+
+#menu-assoc ul{
+    text-align: center;
+}
+
+#menu-assoc ul li{
+    display: inline-block;
+    padding-left: 1em;
+    padding-right: 1em;
+    font-size: 1.3em;
+    color: white;
+}
+
+
+#menu-assoc ul li a, #menu-assoc ul li a:hover{
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+}
 
 /*# sourceMappingURL=style_onepageasso.css.map */

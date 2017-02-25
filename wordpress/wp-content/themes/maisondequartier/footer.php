@@ -9,10 +9,10 @@
 <footer id="footer">
 		<div class="container">
 				<div class="row">
-						<div class="col-md-3 col-xs-12" id="logo">
+						<div class="col-md-3 col-sm-12 col-xs-12" id="logo">
 								<img src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/logo-footer.png" alt="...">
 						</div>
-						<div class="col-md-6 col-xs-12">
+						<div class="col-md-6 col-sm-6 col-xs-12">
 								<div id="middle-box">
 										<span class="association">Associations :</span>
 										<ul id="association-ul">
@@ -45,7 +45,7 @@
 										</ul>
 								</div>
 						</div>
-						<div class="col-md-3 col-xs-12">
+						<div class="col-md-3 col-sm-6 col-xs-12">
 								<?php
 									echo wp_nav_menu(
 								      array(

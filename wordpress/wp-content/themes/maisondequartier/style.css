@@ -12,7 +12,6 @@
 main{
     overflow: hidden;
     min-height: 95vh;
-    margin-top: 32px; 
 }
 
 header .menu-burger{
@@ -99,7 +98,7 @@ header .hide-menu{
     {
         display: none;
         z-index: 200;
-        height: 100vh;
+        height: auto;
         color: white;
         background-color: #ff6633;
     }
@@ -148,8 +147,7 @@ header .hide-menu{
     color: #ff6633; }
     .carousel-indicators li {
        background-color: #000;
-       border: 1px solid #ff6633
-    ;
+       border: 1px solid #ff6633;
        width: 14px;
        height: 14px;
     }.carousel-circle.active {
@@ -230,126 +228,7 @@ main .container{
   width: 100%;
   position: relative;
 }
-/* page annuaire association */
 
-#annuaire #search {
-    margin-top: 0px;
-    position: relative;
-    padding: 1em;
-    min-height: 5em;
-    background-color: #ff6633;
-}
-
-#annuaire #search input {
-    height: 3em;
-    width: 485px;
-}
-
-#annuaire #search select {
-    height: 3em;
-    width: 333px;
-}
-
-#annuaire #search input, #annuaire #search select {
-    box-shadow: none;
-    border: none;
-    background: white;
-}
-
-#annuaire #search:before, #annuaire #search:after {
-    content: "";
-    position: absolute;
-    background-color: #ff6633;
-    padding: 1em;
-    height: 5em;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-}
-
-#annuaire #search:after {
-    left: 100%;
-}
-
-#annuaire #search:before {
-    right: 100%;
-}
-
-#annuaire #content {
-    padding-top: 10vh;
-}
-
-#annuaire #content .content-annuaire {
-    position: relative;
-    height: 270px;
-}
-
-#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire {
-    width: 100%;
-    padding-bottom: 0.9em;
-    background: url("img/img_annuaire/background-div-annuaire.png") bottom right no-repeat;
-}
-
-#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .logo {
-    position: relative;
-    display: inline-block;
-    width: 25%;
-    box-sizing: border-box;
-    text-align: center;
-}
-
-#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .logo img {
-    vertical-align: bottom;
-}
-
-#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire h3 {
-    color: #ff6633;
-    text-align: center;
-}
-
-#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption {
-    display: inline-block;
-    box-sizing: border-box;
-    width: 75%;
-    border: 1px solid black;
-}
-
-#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption h3 {
-    font-size: 2em;
-    font-weight: bold;
-    height: 61px;
-}
-
-#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption p:nth-child(2) {
-    padding-left: 2em;
-    padding-right: 2em;
-    letter-spacing: 0.4px;
-}
-
-#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption p:nth-child(3) {
-    text-align: center;
-}
-
-#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption p:nth-child(3) .btn-association {
-    padding-left: 3em;
-    padding-right: 3em;
-    font-size: 1em;
-    height: 34px;
-    font-size: 1em;
-    border-radius: 0px;
-    background-color: #ff6633;
-    color: #fff;
-    width: 100%;
-    border: none;
-    transition: .3s;
-    -webkit-transition: .3s;
-}
-
-#annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption p:nth-child(3) .btn-association:hover {
-    background-color: #fff;
-    color: #ff6633;
-    border: 1px solid #ff6633;
-}
 
 .search-box {
     display: inline-block;
@@ -759,8 +638,135 @@ main .container{
 /*fin a propos*/
 
 
-/* -- responsive -- */
-@media screen and (min-width: 200px) and (max-width: 640px) {
+/* -- page annuaire -- */
+
+    #annuaire #search {
+        margin-top: 0px;
+        position: relative;
+        padding: 1em;
+        min-height: 5em;
+        background-color: #ff6633;
+    }
+
+    .trans-annuaire{
+        height: auto;
+    }
+
+    #annuaire #search input {
+        height: 3em;
+        width: 485px;
+    }
+
+    #annuaire #search select {
+        height: 3em;
+        width: 333px;
+    }
+
+    #annuaire #search input, #annuaire #search select {
+        box-shadow: none;
+        border: none;
+        background: white;
+    }
+
+    #annuaire #search:before, #annuaire #search:after {
+        content: "";
+        position: absolute;
+        background-color: #ff6633;
+        padding: 1em;
+        height: 5em;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+    }
+
+    #annuaire #search:after {
+        left: 100%;
+    }
+
+    #annuaire #search:before {
+        right: 100%;
+    }
+
+    #annuaire #content {
+        padding-top: 10vh;
+    }
+
+    #annuaire #content .content-annuaire {
+        position: relative;
+        height: 270px;
+    }
+
+    #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire {
+        width: 100%;
+        padding-bottom: 0.9em;
+        background: url("img/img_annuaire/background-div-annuaire.png") bottom right no-repeat;
+    }
+
+    #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .logo {
+        position: relative;
+        display: inline-block;
+        width: 25%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .logo img {
+        vertical-align: bottom;
+    }
+
+    #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire h3 {
+        color: #ff6633;
+        text-align: center;
+    }
+
+    #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption {
+        display: inline-block;
+        box-sizing: border-box;
+        width: 75%;
+        border: 1px solid black;
+    }
+
+    #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption h3 {
+        font-size: 2em;
+        font-weight: bold;
+        height: 61px;
+    }
+
+    #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption p:nth-child(2) {
+        padding-left: 2em;
+        padding-right: 2em;
+        letter-spacing: 0.4px;
+    }
+
+    #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption p:nth-child(3) {
+        text-align: center;
+    }
+
+    #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption p:nth-child(3) .btn-association {
+        padding-left: 3em;
+        padding-right: 3em;
+        font-size: 1em;
+        height: 34px;
+        font-size: 1em;
+        border-radius: 0px;
+        background-color: #ff6633;
+        color: #fff;
+        width: 100%;
+        border: none;
+        transition: .3s;
+        -webkit-transition: .3s;
+    }
+
+    #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption p:nth-child(3) .btn-association:hover {
+        background-color: #fff;
+        color: #ff6633;
+        border: 1px solid #ff6633;
+    }
+
+@media screen and (min-width: 200px) and (max-width: 767px) {
+#transition{
+    padding-left: 1em;
+}
   #annuaire #search select {
     width: 98.1%;
     margin-top: 1em;
@@ -774,4 +780,18 @@ main .container{
   #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption {
     width: 98%;
   }
+  #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire{
+      background: none;
+      bottom: 0;
+  }
+  .search-box{
+      width: 80%;
+  }
+  .trans-annuaire{
+      height: 110px !important;
+  }
+}
+/* -- responsive -- */
+@media screen and (min-width: 768px) and (max-width: 1200px) {
+
 }
