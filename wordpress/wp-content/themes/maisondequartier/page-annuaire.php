@@ -70,14 +70,14 @@ function mdq_list_field($name_taxo, $value=null){
 				</div>
 			</div>
 			<form action="#" method="post">
-				<div class="col-md-2 col-md-push-1 col-sm-3 col-xs-5 col-xs-push-1 select-container">
+				<div class="col-md-2 col-md-push-2 col-sm-3 col-xs-5 select-container">
 					<select class="select-menu" name="select-field">
 						<option value="null">--</option>
 						<?= mdq_list_field("theme_mdq"); ?>
 					</select>
 				</div>
-				<div class="col-md-2 col-md-push-1 col-sm-3 col-xs-5 col-xs-push-1">
-					<input id="btn-valid" class="hvr-shadow" type="submit" name="" value="Envoyer" />
+				<div class="col-md-2 col-md-push-2 col-sm-3 col-xs-5">
+					<input id="btn-valid-acti" class="btn-valid-acti" type="submit" name="" value="Envoyer" />
 				</div>
 			</form>
 		</div>
@@ -107,15 +107,15 @@ function mdq_list_field($name_taxo, $value=null){
 				<div class="col-md-6">
 					<div class="content-annuaire">
 						<div class="content-ta">
-							<div class="thumbnail-annuaire col-md-12">
-								<div class="logo col-md-2" style="overflow: hidden; height: 125px;">
+							<div class="thumbnail-annuaire col-md-12 col-sm-12">
+								<div class="logo col-md-2 col-sm-2" style="overflow: hidden; height: 125px;">
 									<img src="<?= $url ?>" alt="<?= $url; ?>">
 								</div>
-								<div class="caption  col-md-8">
-									<h3 class="col-md-12"><?= $post->_name; ?></h3>
+								<div class="caption  col-md-8 col-sm-8">
+									<h3 class="col-md-12 col-sm-12"><?= $post->_name; ?></h3>
 
-									<p class="col-md-12 description"><?= $post->_desc;?></p>
-									<p class="col-md-12">
+									<p class="col-md-12 col-sm-12"><?= max_caracter_length($post->_desc, 100);?></p>
+									<p class="col-md-12 col-sm-12">
 										<a href="<?= get_site_url()."/association/?fiche=".$post->ID; ?>" class="btn btn-association" role="button">voir la fiche</a>
 									</p>
 								</div>

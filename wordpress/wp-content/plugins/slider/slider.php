@@ -45,9 +45,19 @@ function slider_addFeaturedImageSupport() {
 		get_theme_support( 'post-thumbnails' );
 		add_theme_support( 'post-thumbnails');
 		add_image_size('featured_preview', 220, 180, true);
-
 	}
 add_action( 'after_setup_theme', 'slider_addFeaturedImageSupport');
+
+
+function slider_addFeaturedImageSupport_slider() {
+
+
+		get_theme_support( 'post-thumbnails' );
+		add_theme_support( 'post-thumbnails');
+		add_image_size('size-carousel-display-home', 1000, 500, true);
+
+	}
+add_action( 'before_setup_theme', 'slider_addFeaturedImageSupport_slider');
 
 // Load in the pages doing everything else!
 require_once('slider-admin.php');

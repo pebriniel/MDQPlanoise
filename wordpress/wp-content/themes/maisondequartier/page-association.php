@@ -9,17 +9,6 @@ get_header();
 
 ?>
 
-<div id="transition" class="row transition-assoc">
-	<div class="col-md-12 col-xs-12" id="menu-assoc">
-		<ul>
-			<li><a href="#cartevisite">Description</a></li>
-			<li><a href="#evenements">Évènements</a></li>
-			<li><a href="#membres">Membres</a></li>
-			<li><a href="#coordonnees">Coordonnées & Horaires</a></li>
-			<li><a href="#join">Contact</a></li>
-		</ul>
-	</div>
-</div>
 
 <main id="onepageasso" class="site-main" role="main">
 
@@ -31,6 +20,71 @@ get_header();
 	if($infosAsso = get_post($fiche)){
 
 		if($infosAsso->post_type == 'fiche'){
+			?>
+
+			<div id="transition" class="row transition-assoc">
+				<div class="col-md-12 col-xs-12" id="menu-assoc">
+					<ul>
+						<?php
+						if($infosAsso->showDescription){
+						?>
+						<li>
+							<a href="#cartevisite">
+								<span class="glyphicon glyphicon-info-sign"></span>
+								<span class="text">Description</span>
+							</a>
+						</li>
+						<?php
+						}
+						if($infosAsso->showCaroussel){
+						?>
+						<li>
+							<a href="#evenements">
+								<span class="glyphicon glyphicon-calendar"></span>
+	                       		<span class="text">Évènements</span>
+							</a>
+						</li>
+						<?php
+						}
+						if($infosAsso->showMembers){
+						?>
+						<li>
+							<a href="#membres">
+								<span class="glyphicon glyphicon-user"></span>
+	                       		<span class="text">Membres</span>
+							</a>
+						</li>
+						<?php
+						}
+						if($infosAsso->showCoordonnees){
+						?>
+						<li>
+							<a href="#coordonnees">
+								<span class="glyphicon glyphicon-home"></span>
+	                       		<span class="text">Coordonnées & Horaires</span>
+							</a>
+						</li>
+						<?php
+						}
+						if($infosAsso->showFormulaire){
+						?>
+						<li>
+							<a href="#join">
+								<span class="glyphicon glyphicon-envelope"></span>
+	                       		<span class="text">Contact</span>
+							</a>
+						</li> 
+						<?php
+						}
+						?>
+					</ul>
+				</div>
+			</div>
+
+		<div class="content-onepage">
+			<?php
+
+
 			if($infosAsso->showDescription){
 				?>
 				<!-- carte visite -->
@@ -353,6 +407,7 @@ get_header();
 
 		}
 		?>
+	</div>
 						</main>
 
 						<?php 	} 	} get_footer(); ?>

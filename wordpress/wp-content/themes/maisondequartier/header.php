@@ -22,13 +22,17 @@
 		<link rel="stylesheet" href="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/css/hover.css" />
 
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	    <script src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/js/readmore.js" type="text/javascript"></script>
-	    <script src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/js/readmoreFiche.js" type="text/javascript"></script>
 			<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
 
 
-        <meta name="description" content="Maison de Quartier">
-        <meta name="author" content="Anthony Boussad Houda et Pauline">
+			<link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.css" rel="stylesheet" media="screen">
+	    <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>
+	    <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.js"></script>
+	    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+      <meta name="description" content="Maison de Quartier">
+      <meta name="author" content="Anthony Boussad Houda et Pauline">
 
 		<!--wordpress head-->
 		<?php wp_head(); ?>
@@ -50,13 +54,13 @@
 			<header class="page-header">
 	  <div class="row">
 	  <nav class="navbar-fixed-top">
-	    <div class="col-md-2 col-xs-10 logoPS">
+	    <div class="col-md-2 col-sm-2 col-xs-10 logoPS">
 	      <a href="<?php echo esc_url(home_url('/')); ?>" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
 	        <img src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/logo.svg" alt="Logo <?php echo esc_attr(get_bloginfo('name', 'display')); ?>"/>
 	      </a>
-	    </div> 
+	    </div>
 		<a class="menu-burger"><span class="glyphicon glyphicon-th-list"></span></a>
-	    <div class="col-md-10 col-xs-12 menu-content">
+	    <div class="col-md-10 col-sm-10 col-xs-12 menu-content">
 			  <?php
 			    echo wp_nav_menu(
 			      array(

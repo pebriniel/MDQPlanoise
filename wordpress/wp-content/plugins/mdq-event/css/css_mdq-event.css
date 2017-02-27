@@ -194,17 +194,17 @@
     #search-box {
         width: 100%;
     }
-    #btn-valid-acti {
-        margin-top: 10px;
-    }
     #btn-valid-acti:hover {
         border: none;
     }
-    .select-menu {
-        margin-top: 10px;
-    }
     .title {
         text-align: center;
+    }
+}
+
+@media screen and (max-width: 767px){
+    .select-menu, #btn-valid-acti {
+        margin-top: 10px;
     }
 }
 

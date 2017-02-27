@@ -53,10 +53,10 @@ function mdq_showActiviteHtml($post){
         <div class="col-md-3 col-sm-3 col-xs-3 logo">
             <img src="<?= $url ?>" />
         </div>
-        <div class="col-md-7 col-sm-7 col-xs-9 description">
+        <div class="col-md-7 col-sm-7 col-xs-9">
             <h3><?= $post->post_title; ?></h3>
             <div class="desc">
-                <?= $post->mdq_event_description; ?>
+                <?= max_caracter_length($post->mdq_event_description, 250); ?>
             </div>
         </div>
         <div class="col-md-2 col-sm-2 col-xs-12 menu">
@@ -71,7 +71,7 @@ function mdq_showActiviteHtml($post){
                 </li>
                 <li data-id="1">
                     <a href="<?= get_site_url()."/association/?fiche=".$post->mdq_association_id; ?>" data-id="$post->ID">
-                        <span class="glyphicon glyphicon-exclamation-sign"></span><br />
+                        <span class="glyphicon glyphicon-info-sign"></span><br />
                             Association
                         </span>
                     </a>
@@ -150,7 +150,7 @@ function mdq_list_cat($name_tax, $val = null){
                     </select>
                 </div>
                 <div class="col-md-2 col-xs-4 col-xs-push-1">
-                    <input id="btn-valid-acti" class="hvr-shadow" type="submit" name="" value="Envoyer" />
+                    <input id="btn-valid-acti" class="btn-valid-acti" type="submit" name="" value="Envoyer" />
                 </div>
             </form>
         </div>

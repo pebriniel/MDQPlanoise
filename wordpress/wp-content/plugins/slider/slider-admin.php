@@ -115,9 +115,10 @@ function mdq_listing_assoc($object){
 
 function slider_admin_init_custpost(){
 	add_meta_box("slider_image_url", "Slide Options", "slider_image_url", "slider", "side", "high");
-
 	add_meta_box('event_by_asso','Informations sur l\'événement','event_asso_meta','slider','normal','high');
 	add_meta_box('event_list_asso','Association organisatrice de  l\'événement','mdq_listing_assoc','slider','normal', 'high');
+
+
 }
 add_action("add_meta_boxes", "slider_admin_init_custpost");
 
