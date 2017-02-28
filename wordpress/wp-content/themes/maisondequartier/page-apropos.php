@@ -21,7 +21,7 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
     <div class="container">
         <div class="col-md-12">
             <div class="row carteVisite">
-                <div class="col-md-3 logo">
+                <div class="col-md-3 logo col-xs-12">
                     <div class="thumbnail">
                         <img src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/img_apropos/logo_mdq.png" alt="logo mdq">
                         <!-- <div class="caption">
@@ -29,7 +29,7 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
                     </div> -->
                 </div>
             </div>
-            <div class="col-md-9 description">
+            <div class="col-md-9 col-xs-12 description">
                 <p>
                     La Maison de quartier est un espace d’accueil et de loisirs ouvert à tous et au service de tous.
                 </p>
@@ -52,13 +52,15 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
 <!-- missions -->
 <div class="container missionsAsso">
     <h2>Nos Missions</h2>
-    <p class="missionsPrez">En tant que structure agréée Centre social par la Caisse d’allocations
+    <div class="missionsPrez">
+    <p>En tant que structure agréée Centre social par la Caisse d’allocations
         familiales du Doubs, des missions lui sont par ailleurs assignées, telles que :
     </p>
+  </div>
 
 
     <div class="row missions">
-        <div class="col-md-4">
+        <div class="col-xs-12 col-md-4 col-lg-4">
             <div class="thumbnail">
                 <img class="localisation" src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/img_apropos/localisation.svg" alt="mission 1">
                 <div class="caption">
@@ -71,7 +73,7 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-xs-12 col-md-4 col-lg-4">
             <div class="thumbnail">
                 <img class="settings" src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/img_apropos/settingsIcon.svg" alt="mission 2">
                 <div class="caption">
@@ -79,12 +81,12 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
                     <p>
                         S’appuyer sur les compétences, les savoir-faire
                         et la créativité des habitants, associations et partenaires,
-                        les mettre en synergie et les valoriser..
+                        les mettre en synergie et les valoriser.
                     </p>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-xs-12 col-md-4 col-lg-4">
             <div class="thumbnail">
                 <img class="solidarity" src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/img_apropos/solidarity.svg" alt="mission 3">
                 <div class="caption">
@@ -98,13 +100,58 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
             </div>
         </div>
     </div>
+    <div class="accroche">
+    <p>N’hésitez pas à pousser les portes de la Maison de quartier! Notre équipe de professionnels vous y réserve le meilleur accueil.</p>
+  </div>
 </div>
 <!-- fin missions -->
+
+<!-- vie Associative -->
+<div class="container compteur">
+  <div class="row">
+    <h2>La Maison de Quartier, c'est aussi:</h2>
+    <div class="ad col-md-4">
+      <div class="adherents col-md-12 col-xs-12">
+        <h3>600</h3>
+        <p>Adhérents</p>
+      </div>
+    </div>
+    <div class="ben col-md-4">
+      <div class="benevoles col-md-12 col-xs-12">
+        <h3>22</h3>
+        <p>Bénévoles</p>
+      </div>
+    </div>
+    <div class="sal col-md-4">
+      <div class="salaries col-md-12 col-xs-12">
+        <h3>18</h3>
+        <p>Salariés</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- fin vie Associative -->
+
+<!-- gallerie photos -->
+<div class="container gallery">
+  <div class="row center-block">
+    <div class="col-md-4">
+      <img src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/img_apropos/mdqActivite1.JPG" alt="activite 1">
+    </div>
+    <div class="col-md-4">
+      <img src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/img_apropos/mdqActivite2.JPG" alt="activite 2">
+    </div>
+    <div class="col-md-4">
+      <img src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/img_apropos/mdqActivite3.jpg" alt="activite 3">
+    </div>
+  </div>
+</div>
+<!-- fin gallerie photos -->
 
 <!-- coordonnées -->
 <div class="container loc">
     <div class="row">
-        <h2>Mes Coordonnées</h2>
+        <h2>Nos Coordonnées</h2>
         <div class="adresseAsso col-md-7">
             <div class="row">
                 <div class="scolaire col-md-5">

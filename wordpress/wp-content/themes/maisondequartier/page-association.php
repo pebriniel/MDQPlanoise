@@ -11,7 +11,22 @@ get_header();
 
 
 <main id="onepageasso" class="site-main" role="main">
-
+	<script>
+		function callMap(adress, id){
+				$.get('http://maps.googleapis.com/maps/api/geocode/json?address='+adress+'&sensor=true', function(reponse){
+					let pos = reponse['results'][0]['geometry']['location'];
+					if ($('#mapid-'+id).is(':visible')){
+						var mymap = L.map('mapid-'+id).setView([pos['lat'], pos['lng']], 16);
+						var marker = L.marker([pos['lat'], pos['lng']]).addTo(mymap);
+						L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYm91c3NhZCIsImEiOiJjaXlhMmxnMW0wMDRzMndxcngwNXNyZ2syIn0.aEfKXXy196Ds4KIdWnu-dw', {
+							attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+							maxZoom: 18,
+							id: 'mapbox.streets'
+						}).addTo(mymap);
+					}
+				});
+		}
+	</script>
 
 
 	<?php
@@ -73,7 +88,7 @@ get_header();
 								<span class="glyphicon glyphicon-envelope"></span>
 	                       		<span class="text">Contact</span>
 							</a>
-						</li> 
+						</li>
 						<?php
 						}
 						?>
@@ -210,51 +225,118 @@ get_header();
 
 	 if($infosAsso->showAgenda){
 	  ?>
+	  	<div class="container" id="as-activite">
+			<?php
+			query_posts(array(
+				'post_type'=>'activite',
+				'meta_key'  => 'mdq_association_id',
+				'meta_value' => $infosAsso->ID));
 
-					<!-- activités des associations -->
-					<div class="container">
-						<div class="row screenshot">
+				if ( have_posts() ){
+					while (have_posts()){
+						the_post();
+						// add_image_size($post->ID, 1000, 200, false);
+						global $post;
+						?>
+					  <div class="col-md-4 thumbnail thumbnail-activite">
+						<div id="acti-<?= $post->ID; ?>" data-id="<?= $post->ID; ?>" class="block-activite acti-<?= $post->ID; ?> content-hidden overflow background-white">
+							<div class="image">
+								<img src="http://boussads.student.codeur.online/wclient/wp-content/uploads/2017/02/P_20170108_184437.jpg" />
+							</div>
+							<div class="title">
+								<h3><?= $post->post_title; ?></h3>
+							</div>
+							<div class="description mtop">
+								<?= $post->mdq_event_description; ?>
+							</div>
+							<div class="horaire mtop"></div>
+								<h4>Horaires</h4>
+								<?= $post->mdq_event_date; ?>
 
-							<?php
-							query_posts(array(
-								'post_type'=>'activite',
-								'meta_key'  => 'mdq_association_id',
-								'meta_value' => $infosAsso->ID));
-
-								if ( have_posts() ){
-									while (have_posts()){
-										the_post();
-										// add_image_size($post->ID, 1000, 200, false);
-										global $post;
-										?>
-										<!-- screenshot -->
-										<div class="col-md-4 activ">
-											<div class="thumbnail">
-												<!-- <img src="wp-content/themes/maisonquartier/img/img_onepageasso/photo.jpg" alt="screenshot activité"> -->
-												<span><?= edit_post_link(get_the_post_thumbnail($post->ID));  ?></span>
-
-												<div class="caption">
-													<h3><?= $post->post_title;?></h3>
-													<p><?= $post->mdq_event_description;?> </p>
-													<p><?= $post->mdq_event_adresse;?> </p>
-													<p><?= $post->mdq_event_start;?> </p>
-													<p><?= $post->mdq_event_end;?> </p>
-
-												</div>
-											</div>
-										</div>
-
-										<?php
-
-									}
-								}
-								?>
+							<div id="mapid-<?= $post->ID; ?>" class="map mtop mbot">
 
 							</div>
-						</div>
-						<!-- fin sreenshot -->
+							<script>
+							$(document).ready(function(){
+								callMap('<?= $post->mdq_event_adresse; ?>', '<?= $post->ID; ?>');
+							});
+							</script>
 
-			<?php
+							<div class="div-hover" data-id="<?= $post->ID; ?>">
+								<span class="gly-<?= $post->ID; ?> glyphicon glyphicon-chevron-down down-chevron" aria-hidden="true"></span>
+							</div>
+
+						</div>
+					</div>
+				<?php
+
+		}
+
+			}
+			?>
+		</div>
+
+		<script>
+					$(document).ready(function(){
+						var last_id = null;
+						$("html").click(function(){
+							$(".block-activite").each(function( index ){
+								let i = $(this).data('id');
+								$("#acti-"+i).addClass("overflow");
+								$("#acti-"+i).removeClass("active");
+								$(".gly-"+i).addClass("glyphicon-chevron-down");
+								$(".gly-"+i).removeClass("glyphicon-chevron-up");
+							});
+						});
+
+						$(".div-hover").click(function(e){
+							e.stopPropagation();
+							var id = $(this).data('id');
+							var button = $(this);
+							console.log(id);
+							$(".block-activite").each(function( index ){
+								console.log(this);
+								if($(this).hasClass("acti-"+id)){
+								console.log('ok');
+									if(!$(this).hasClass("active")){
+										//on cache
+										console.log('lol');
+										$("#acti-"+id).removeClass("overflow");
+										$("#acti-"+id).addClass("active");
+										$(".gly-"+id).removeClass("glyphicon-chevron-down");
+										$(".gly-"+id).addClass("glyphicon-chevron-up");
+										$(button).addClass("che-down");
+									}
+									else{
+										console.log('dev');
+										$("#acti-"+id).addClass("overflow");
+										$("#acti-"+id).removeClass("active");
+										$(".gly-"+id).addClass("glyphicon-chevron-down");
+										$(".gly-"+id).removeClass("glyphicon-chevron-up");
+										$(button).removeClass("che-down");
+										//on affiche
+									}
+								}
+								else{
+									console.log('wtf');
+									let i = $(this).data('id');
+										$("#acti-"+i).addClass("overflow");
+										$("#acti-"+i).removeClass("active");
+										$(".gly-"+i).addClass("glyphicon-chevron-down");
+										$(".gly-"+i).removeClass("glyphicon-chevron-up");
+									//on cache
+								}
+
+							});
+
+							last_id = id;
+						});
+					});
+				</script>
+	<?php
+
+
+
 		}
 		 if($infosAsso->showMembers){
 		?>
@@ -320,7 +402,6 @@ get_header();
 
 		if($infosAsso->showCoordonnees){
 		?>
-
 							<!-- adresse asso -->
 							<div class="container loc" id="coordonnees">
 								<div class="row">
@@ -341,21 +422,10 @@ get_header();
 										</div>
 
 										<div class="map col-md-5">
-											<div id="mapid">
+											<div id="mapid-association">
 											</div>
 											<script>
-											$(document).ready(function(){
-												if ($('#mapid').is(':visible')){
-													console.log('visible');
-													var mymap = L.map('mapid').setView([47.221094, 5.967786], 16);
-													var marker = L.marker([47.221094, 5.967786]).addTo(mymap);
-													L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYm91c3NhZCIsImEiOiJjaXlhMmxnMW0wMDRzMndxcngwNXNyZ2syIn0.aEfKXXy196Ds4KIdWnu-dw', {
-														attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-														maxZoom: 18,
-														id: 'mapbox.streets'
-													}).addTo(mymap);
-												}
-											});
+											callMap('<?= $infosAsso->_address; ?> <?= $infosAsso->_city; ?> <?= $infosAsso->_pc; ?>', "association");
 											</script>
 										</div>
 									</div>

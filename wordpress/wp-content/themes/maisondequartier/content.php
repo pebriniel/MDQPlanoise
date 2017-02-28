@@ -3,10 +3,11 @@
 	<div class="col-md-12" id="carousel">
 
 <?php
- query_posts(array('post_type'=>'slider',
-										'posts_per_page' => 3 ));
-					// 'meta_key'  => 'mdq_listing_assoc',
-					// 'meta_value' => $infosAsso->ID));
+ query_posts(array('post_type'=>'slider', // ICI
+										'posts_per_page' => 3, // ICI
+										'showposts' => 3,
+										'orderby' => 'dateStart',
+									 	'order' => 'DESC')); // ICI
 
  $images = array();
  ?>
@@ -21,9 +22,12 @@
 			the_post();
 			global $post;
 
- if ( '' != get_the_post_thumbnail(get_the_ID(), 'size-carousel-display-home') ) {
+			$count_posts = $post->current_post; // ICI
 
+
+ if ( '' != get_the_post_thumbnail(get_the_ID(), 'size-carousel-display-home') ) {
 				$post_id = get_the_ID();
+
 				$title = get_the_title();
 				$content = get_the_excerpt();
 			// $size = image_resize($post->ID, 100, 50);
@@ -34,13 +38,16 @@
 				$url_openblank = get_post_meta(get_the_ID(), 'slider_image_url_openblank', true);
 				$link_text = get_post_meta(get_the_ID(), 'slider_image_link_text', true);
 				// $asso_orga = $infosAsso->_name;
+
 			 	$asso_orga = get_post_meta(get_the_ID(), 'mdq_listing_assoc', true);
 				$dateStart = get_post_meta(get_the_ID(), 'event_asso_start', true);
+				// $dateTest = date('Y-m-d', $dateStart);
 				$dateEnd = get_post_meta(get_the_ID(), 'event_asso_end', true);
 				$location_event = get_post_meta(get_the_ID(), 'event_asso_address', true);
 				$images[] = array('post_id' => $post_id,
 													'title' => $title,
 													'dateStart' => $dateStart,
+													// 'dateTest' =>$dateTest,
 													'dateEnd' => $dateEnd,
 													'location' => $location_event,
 													'content' => $content,
@@ -75,16 +82,19 @@
 			 foreach ($images as $key => $image)
 			 {
 				 ?>
-				 <div class="item <?= $active; ?>  modal-click ">
+				 <div class="item <?= $active; ?>  modal-click">
 					<?= $image['image']; ?>
 					 <div class="carousel-caption">
 						 <h3 class="img-modal img-responsive" title="<?= $image['title']; ?>"><?= $image['title'];?></h3>
-						 <p><?= $image['content'];?></p>
+
 						 <!-- <a href="<?=  get_site_url()."/association/?fiche=".$image['url_openblank']; ?>"  class="btn-association" role="button">voir l'événement</a> -->
-						 <a class="btn-association img-modal" id="image-<?= $images['post_id']; ?>" data-title="<?= $image['title']; ?>" data-content="<?= $image['content']; ?>" data-img='<?= $image['img_src'] ?>' data-date="<?= $image['dateStart']; ?>" role="button">voir l'événement</a>
-						 <p><?= $image['association'];?></p>
-						 <p><?= $image['location'];?></p>
 						 <p> Du <?= $image['dateStart'];?> au <?= $image['dateEnd']; ?> </p>
+						 <p><?= $image['association'];?></p>
+						 <a class="btn-association img-modal" id="image-<?= $images['post_id']; ?>" data-title="<?= $image['title']; ?>" data-content="<?= $image['content']; ?>" data-img="<?= $image['img_src'] ?>" data-date="<?= $image['dateStart']; ?>" data-location="<?= $image['location']; ?>" data-url="<?=  get_site_url()."/association/?fiche=".$image['association']; ?>" role="button">voir l'événement</a>
+						 <!-- <p><?= $image['location'];?></p> -->
+
+						 <!-- <a data-url="<?= get_site_url()."/association/?fiche=".$images['post_id']; ?>" class="btn btn-association" role="button">voir la fiche</a> -->
+
 					 </div>
 				 </div>
 
@@ -111,7 +121,7 @@
 	<!-- fin de carousel -->
 
 <!-- la modal -->
-<div class="modal" id="modal-gallery" role="dialog">
+<div class="modal container" id="modal-gallery" role="dialog">
 <div class="modal-dialog">
 	<div class="modal-content">
 		<div class="modal-header">
@@ -119,9 +129,10 @@
 				<h3 class="modal-title"></h3>
 		</div>
 		<div class="modal-body">
+
 		</div>
 		<div class="modal-footer">
-				<button class="btn btn-default" data-dismiss="modal">Close</button>
+				<button class="btn btn-default" data-dismiss="modal">Fermer</button>
 		</div>
 	</div>
 </div>
@@ -143,7 +154,10 @@ $(document).ready(function() {
 		let description = $(this).data('content');
 		let date = $(this).data('date');
 		let image = $(this).data('img');
-	var content = $(".modal-body");
+		let location = $(this).data('location');
+		let url = $(this).data('url');
+ 	var content = $(".modal-body");
+
 	var modal_title = $(".modal-title");
 
 	//content.empty();
@@ -156,7 +170,7 @@ $(document).ready(function() {
 
 	// active.addClass("active");
 	modal_title.html(title);
-	content.html("<img src='"+image+"' /><br/>"+description+" "+date);
+	content.html("<img src='"+image+"' /> <p id='modal-date'>Date de l'événement : "+  date + " </p><p id='modal-location'>Lieu : " + location + "</p> <p id='modal-description'>"  + description + "</p><a href='"+url+"'> voir la fiche de l'association</a>");
 
 	// show the modal
 	$("#modal-gallery").modal("show");
@@ -175,28 +189,30 @@ $(document).ready(function() {
 	</div>
 	<div class="col-md-10 prezEvent"> -->
 
-	<section class="cd-horizontal-timeline col-md-12">
+	<section class="cd-horizontal-timeline col-md-12 ">
 		<div class="timeline col-md-12">
 			<div class="events-wrapper col-md-12">
 				<div class="events col-md-12">
 
-					<!-- <ol class="navigation-timeline"> -->
-					<ol>
-
+					<ol class="navigation-timeline">
 
 <?php
+$queryAgenda = new WP_Query( array( 'post_type'=>'slider', // ICI
+															'posts_per_page' => 10, // ICI
+															'orderby' => 'dateStart',
+														 	'order' => 'DESC',
+															'offset' => 3
+														)); // ICI
 
-$current_page_ids = array(get_the_ID());
-query_posts(array('post_type'=>'slider',
-									'posts_per_page' => 8,
-									'post__not_in'  => $current_page_ids ));
+$images = array();
+if($queryAgenda->have_posts()){ // ICI
+	while ($queryAgenda->have_posts() ) { // ICI
+			$queryAgenda->the_post();// ICI
 
-if(have_posts()){
-	while ( have_posts() ) {
-			the_post();
-			global $post;
+			// global $post;
 
-if ( '' != get_the_post_thumbnail(get_the_ID(), 'size-carousel-display-home') ) {
+
+			if ( '' != get_the_post_thumbnail(get_the_ID(), 'size-carousel-display-home') ) {
 
 				$post_id = get_the_ID();
 				$title = get_the_title();
@@ -226,6 +242,7 @@ if ( '' != get_the_post_thumbnail(get_the_ID(), 'size-carousel-display-home') ) 
 													'link_text' => $link_text,
 													'association' => $asso_orga);
 		}
+
 }
 
 				$selected = 'class="selected"';
@@ -234,7 +251,7 @@ if ( '' != get_the_post_thumbnail(get_the_ID(), 'size-carousel-display-home') ) 
 
 
  ?>
-				 <li class="col-md-2 display-date "><a <?= $selected; ?> href="<?= $images['post_id']; ?>" data-date="<?= $image['dateStart']; ?> "><?= $image['dateStart']; ?></a></li>
+				 <li class="col-md-2 display-date "><a <?= $selected; ?> href="<?= $images['post_id']; ?>" data-date="<?= $image['dateStart']; ?> "><?= $image['title']; ?></a></li>
 
 <?php
 
@@ -247,6 +264,10 @@ if ( '' != get_the_post_thumbnail(get_the_ID(), 'size-carousel-display-home') ) 
 	<span class="filling-line" aria-hidden="true"></span>
 			</div>
 		</div>
+		<!-- <ul class="cd-timeline-navigation">
+			<li><a href="<?= $images['post_id']; ?>" class="prev inactive">Prev</a></li>
+			<li><a href="<?= $images['post_id']; ?>" class="next">Next</a></li>
+		</ul> -->
 
 	</div>
 
@@ -260,8 +281,8 @@ if ( '' != get_the_post_thumbnail(get_the_ID(), 'size-carousel-display-home') ) 
 ?>
 					<li <?= $selected; ?> data-date="<?= $image['dateStart']; ?> " class="col-md-6">
 						<h3><?= $image['title'];?></h3>
-						<p><?= $image['content'];?></p>
-						<p><?= $image['location'];?></p>
+						<p id="content"><?= $image['content'];?></p>
+						<p id="location"><?= $image['location'];?></p>
 						<pre> Du <?= $image['dateStart']; ?>  au <?= $image['dateEnd']; ?> </pre>
 					</li>
 

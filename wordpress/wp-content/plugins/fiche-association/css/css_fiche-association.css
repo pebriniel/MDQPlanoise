@@ -10,10 +10,7 @@
 */
 
 body {
-  padding-top: 60px; }
-
-#onepageasso{
-    padding-top: 5em;
+  padding-top: 60px;
 }
 
 #onepageasso .navbar-default {
@@ -31,6 +28,10 @@ body {
   font-size: 3em;
   font-weight: 900;
   text-transform: uppercase; }
+
+ #onepageasso .content-onepage{
+     padding-top: 5em;
+ }
 
 
 #onepageasso .carteVisite {
@@ -94,6 +95,7 @@ width: 100%;}
       position: absolute;
       bottom: 1em;;
       right: 1em;
+      cursor: pointer;
   }
 
 #onepageasso .prezmembres h2 {
@@ -128,12 +130,9 @@ width: 100%;}
 #onepageasso .adresseAsso {
   text-align: center;
   padding: 3% 0%; }
-#onepageasso .map img {
-  float: right;
-  width: 100%;
-  height: 100%; }
 #onepageasso .map {
-  padding: 0%; }
+ height: 500px;
+}
 #onepageasso form h1 {
   font-weight: bold;
   text-transform: uppercase;
@@ -189,5 +188,110 @@ width: 100%;}
     font-weight: bold;
     color: white;
 }
+
+#menu-assoc .glyphicon{
+    display: none;
+}
+
+@media screen and (min-width: 200px) and (max-width: 490px){
+    #menu-assoc .glyphicon{
+        display: block;
+    }
+
+    #menu-assoc .text{
+        display: none;
+    }
+
+    #menu-assoc ul li{
+        padding-left: 0.6em;
+        padding-right: 0.6em;
+    }
+}
+
+@media scren and (min-width: 830px){
+    #menu-assoc ul li{
+        font-size: 0.1em;
+        padding-left: 0.6em;
+        padding-right: 0.6em;
+    }
+}
+
+/* affichage de la carte des associations */
+#mapid-association{
+    height: 100%;
+}
+
+/*
+    -- activité one page assoc
+*/
+
+#as-activite, #as-activite .thumbnail-activite{
+    min-height: 300px;
+}
+
+#as-activite .activite{
+	position: relative;
+	height: 300px;
+}
+#as-activite .content-hidden{
+	position: absolute;
+	height: 300px;
+}
+
+#as-activite .overflow{
+	overflow: hidden;
+}
+
+#as-activite .image{
+	height: 150px;
+	overflow: hidden;
+}
+#as-activite .image, #as-activite .image img{
+	width: 100%;
+}
+#as-activite .map{
+	width: 100%;
+	height: 250px;
+}
+#as-activite .ptop{
+	margin-top: 3em;
+}
+#as-activite .mbot{
+	margin-bottom: 1em;
+}
+
+#as-activite .div-hover{
+	position: absolute;
+	bottom: 0;
+	height: 20%;
+	width: 100%;
+	z-index: 20;
+	text-align: center;
+
+	cursor: pointer;
+
+	background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.92) 54%, rgba(255,255,255,1) 59%);
+	background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,0.92) 54%,rgba(255,255,255,1) 59%);
+	background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,0.92) 54%,rgba(255,255,255,1) 59%); ²
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
+}
+
+#as-activite .down-chevron{
+	color: #ff6633;
+	font-size: 2em;
+	padding-top: 7%;
+}
+
+#as-activite .che-down{
+	bottom: 0;
+	z-index: 500;
+}
+
+#as-activite .active{
+	height: auto;
+    z-index: 100;
+    background-color: white;
+}
+
 
 /*# sourceMappingURL=style_onepageasso.css.map */

@@ -65,7 +65,7 @@ function mdq_showActiviteHtml($post){
                     <span class="glyphicon glyphicon-calendar"></span><br/>
                     Date
                 </li>
-                <li class="li-map li-map-<?= $post->ID; ?>" data-menu="map" data-id="<?= $post->ID; ?>">
+                <li class="li-map li-map-<?= $post->ID; ?>" data-adress="<?= $post->mdq_event_adresse; ?>" data-menu="map" data-id="<?= $post->ID; ?>">
                     <span class="glyphicon glyphicon-road"></span><br />
                     Carte
                 </li>
@@ -81,8 +81,8 @@ function mdq_showActiviteHtml($post){
         <div class="macti-<?= $post->ID; ?> col-md-10 col-sm-10 col-xs-12 block-absolute menu-horaire menu-horaire-<?= $post->ID; ?>" data-menu="horaire">
             <?= $post->mdq_event_date; ?>
         </div>
-        <div class="macti-<?= $post->ID; ?> col-md-10 col-sm-10 col-xs-12 block-absolute menu-map menu-map-<?= $post->ID; ?>" data-menu="map">
-            map
+        <div id="map-<?= $post->ID; ?>" class="macti-<?= $post->ID; ?> col-md-10 col-sm-10 col-xs-12 block-absolute menu-map menu-map-<?= $post->ID; ?>" data-menu="map">
+
         </div>
     </div>
     </div>
@@ -211,6 +211,23 @@ function mdq_list_cat($name_tax, $val = null){
 
     <script>
     $(document).ready(function(){
+
+
+        function callMap(adress, id){
+                $.get('http://maps.googleapis.com/maps/api/geocode/json?address='+adress+'&sensor=true', function(reponse){
+                    let pos = reponse['results'][0]['geometry']['location'];
+                    if ($('#map-'+id).is(':visible')){
+                        var mymap = L.map('map-'+id).setView([pos['lat'], pos['lng']], 16);
+                        var marker = L.marker([pos['lat'], pos['lng']]).addTo(mymap);
+                        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYm91c3NhZCIsImEiOiJjaXlhMmxnMW0wMDRzMndxcngwNXNyZ2syIn0.aEfKXXy196Ds4KIdWnu-dw', {
+                            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                            maxZoom: 18,
+                            id: 'mapbox.streets'
+                        }).addTo(mymap);
+                    }
+                });
+        }
+
         $(".menu li").click(function(){
             let menu = $(this).data('menu');
             let id = $(this).data('id');
@@ -218,7 +235,6 @@ function mdq_list_cat($name_tax, $val = null){
             // $('.block-absolute').hide();
 
             $(".macti-"+id+"").each(function( index ){
-                console.log(index);
                 var __menu = $(li).data("menu");
 
                 if($(this).hasClass("menu-"+menu+"-"+id)){
@@ -236,10 +252,14 @@ function mdq_list_cat($name_tax, $val = null){
                 else{
                     $(this).hide();
                     var _menu = $(this).data('menu');
-                    console.log('_menu '+_menu);
                     $(".li-"+_menu+"-"+id).removeClass("active");
                 }
             });
+
+            if($(li).data('menu') == 'map'){
+                console.log(id+" "+menu);
+                callMap($(li).data('adress'), id);
+            }
         })
     });
     </script>

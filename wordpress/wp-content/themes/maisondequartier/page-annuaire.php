@@ -56,7 +56,7 @@ function mdq_list_field($name_taxo, $value=null){
 <main id="annuaire" class="site-main" role="main">
 	<div class="container">
 		<div id="transition" class="row trans-annuaire">
-			<div class="col-xs-12 col-md-6 col-sm-6">
+			<div class="col-xs-10 col-xs-offset-1 col-md-5 col-sm-5">
 				<div class="search-box">
 					<form class="search-form" action="#" method="post">
 						<?php
@@ -70,14 +70,14 @@ function mdq_list_field($name_taxo, $value=null){
 				</div>
 			</div>
 			<form action="#" method="post">
-				<div class="col-md-2 col-md-push-2 col-sm-3 col-xs-5 select-container">
+				<div class="col-md-2 col-md-push-2 col-sm-2 col-xs-5 col-xs-push-1 select-container">
 					<select class="select-menu" name="select-field">
 						<option value="null">--</option>
 						<?= mdq_list_field("theme_mdq"); ?>
 					</select>
 				</div>
-				<div class="col-md-2 col-md-push-2 col-sm-3 col-xs-5">
-					<input id="btn-valid-acti" class="btn-valid-acti" type="submit" name="" value="Envoyer" />
+				<div class="col-md-2 col-md-push-2 col-sm-2 col-xs-5 col-xs-push-1">
+					<input id="btn-valid" class="btn-valid" type="submit" name="" value="Envoyer" />
 				</div>
 			</form>
 		</div>

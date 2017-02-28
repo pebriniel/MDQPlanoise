@@ -68,7 +68,7 @@
 <script src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/js/jquery-2.1.4.js" type="text/javascript"></script>
 <script src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/js/jquery.mobile.custom.min.js" type="text/javascript"></script>
 <script src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/js/main.js" type="text/javascript"></script>
-
+<script src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/js/modernizr.js" type="text/javascript"></script>
 
 		<!--wordpress footer-->
 		<?php wp_footer(); ?>
