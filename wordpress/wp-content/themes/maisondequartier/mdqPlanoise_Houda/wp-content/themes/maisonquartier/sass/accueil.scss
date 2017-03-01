@@ -1,0 +1,192 @@
+$heightheader : 10vh;
+$widthheader : 100vw;
+$marginNone : 0;
+$paddingNone : 0;
+$fontsizeNav : 1.5em;
+$width : 100vw;
+$height : 100vh;
+$color : #ff6633;
+$white: #fff;
+$percent: 100%;
+
+body{
+  margin: $marginNone;
+  padding: $paddingNone;
+  width: $width;
+  height: $height;
+}
+
+/* header */
+header{
+  height: $heightheader;
+  width : $widthheader;
+  border: 1px solid red;
+
+  #nav{
+    vertical-align: middle;
+    padding-top : 3%;
+  }
+  #nav li{
+    list-style: none;
+    font-size : $fontsizeNav;
+
+  }
+
+}
+/* END header */
+
+/* main */
+main{
+  position: relative;
+  height: 80vh;
+  width: 100vw;
+
+/* carousel */
+  #wrapper {
+    background-color: black;
+    position: relative;
+    width: $percent;
+    height: 50%;
+    // padding-top: 4%;
+  }
+
+  #wrapper ul{
+    // height: $percent;
+    list-style: none;
+  }
+
+  .item{
+    background-color: #fff;
+  }
+
+  img {
+    cursor: pointer;
+    z-index:10;
+  }
+  .eventText, .btn{
+    z-index: 1000;
+    color: #fff;
+    background-color: pink;
+  }
+
+  // .slide_awayL1 {
+  //   position: absolute;
+  //   top: 30%;
+  //   left: 10%;
+  //   width: 10%;
+  //   height: 40%;
+  //   z-index: 100;
+  //   -webkit-transition: width 1s, height 1s, top 1s, left 1s;
+  //   -moz-transition: width 1s, height 1s, top 1s, left 1s;
+  //   -o-transition: width 1s, height 1s, top 1s, left 1s;
+  //   -ms-transition: width 1s, height 1s, top 1s, left 1s;
+  //   transition: width 1s, height 1s, top 1s, left 1s;
+  // }
+  //
+  // .slide_awayL2 {
+  //   position: absolute;
+  //   top: 35%;
+  //   left: 0%;
+  //   width: 10%;
+  //   height: 30%;
+  //   z-index: 10;
+  //   -webkit-transition: width 1s, height 1s, top 1s, left 1s;
+  //   -moz-transition: width 1s, height 1s, top 1s, left 1s;
+  //   -o-transition: width 1s, height 1s, top 1s, left 1s;
+  //   -ms-transition: width 1s, height 1s, top 1s, left 1s;
+  //   transition: width 1s, height 1s, top 1s, left 1s;
+  // }
+  //
+  // .slide_center {
+  //   position: absolute;
+  //   top: 5%;
+  //   left: 20%;
+  //   width: 60%;
+  //   height: 90%;
+  //   z-index: 1000;
+  //   -webkit-transition: width 1s, height 1s, top 1s, left 1s;
+  //   -moz-transition: width 1s, height 1s, top 1s, left 1s;
+  //   -o-transition: width 1s, height 1s, top 1s, left 1s;
+  //   -ms-transition: width 1s, height 1s, top 1s, left 1s;
+  //   transition: width 1s, height 1s, top 1s, left 1s;
+  // }
+  //
+  // .slide_awayR1 {
+  //   position: absolute;
+  //   top: 30%;
+  //   left: 80%;
+  //   width: 10%;
+  //   height: 40%;
+  //   z-index: 100;
+  //   -webkit-transition: width 1s, height 1s, top 1s, left 1s;
+  //   -moz-transition: width 1s, height 1s, top 1s, left 1s;
+  //   -o-transition: width 1s, height 1s, top 1s, left 1s;
+  //   -ms-transition: width 1s, height 1s, top 1s, left 1s;
+  //   transition: width 1s, height 1s, top 1s, left 1s;
+  // }
+  //
+  // .slide_awayR2 {
+  //   position: absolute;
+  //   top: 35%;
+  //   left: 90%;
+  //   width: 10%;
+  //   height: 30%;
+  //   z-index: 10;
+  //   background-color: rgba(0,0,50,0.5);
+  //   -webkit-transition: width 1s, height 1s, top 1s, left 1s;
+  //   -moz-transition: width 1s, height 1s, top 1s, left 1s;
+  //   -o-transition: width 1s, height 1s, top 1s, left 1s;
+  //   -ms-transition: width 1s, height 1s, top 1s, left 1s;
+  //   transition: width 1s, height 1s, top 1s, left 1s;
+  // }
+  //
+  // #sliderCtrl{
+  //   position: relative;
+  // }
+  .noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  /* END carousel */
+
+  /* masonry */
+
+  #article{
+    background-color: yellow;
+    height: $percent;
+    width: $percent;
+    position: relative;
+  }
+  .masonry{
+    background-color: blue;
+  }
+
+  .art-center{
+    background-color: green;
+  }
+  .art1{
+    background-color: pink;
+    padding-bottom: 3%;
+  }
+  .art2{
+    background-color: purple;
+    padding-top: 3%;
+  }
+
+  .eventText{
+    color: $white;
+    z-index: 2000;
+    position: absolute;
+  }
+  .morecontent span {
+    display: none;
+}
+  .morelink {
+    display: block;
+}
+  /* END masonry */
+}
+/* END main */

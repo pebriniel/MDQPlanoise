@@ -128,6 +128,4 @@ function mdq_list_cat($id_cat){
     </div>
 </main>
 
-<?php
-
-get_footer();
+<?php get_footer(); ?>

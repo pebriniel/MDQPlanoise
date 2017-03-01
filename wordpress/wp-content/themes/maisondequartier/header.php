@@ -19,8 +19,11 @@
 		<link rel="profile" href="http://gmpg.org/xfn/11">
 		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
 
-        <meta name="description" content="Maison de Quartier">
-        <meta name="author" content="Anthony Boussad Houda et Pauline">
+    <meta name="description" content="Maison de Quartier">
+    <meta name="author" content="Anthony Boussad Houda et Pauline">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+		<script src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/js/readmore.js" type="text/javascript"></script>
+		<script src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/js/readmoreHome.js" type="text/javascript"></script>
 
 		<!--wordpress head-->
 		<?php wp_head(); ?>
@@ -34,22 +37,22 @@
 
 			<header class="container-fluid">
 			  <nav class=" navbar-fixed-top">
-				<a href="<?php echo esc_url(home_url('/')); ?>" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
-					<img class="col-md-2 logoPS" src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/logo.svg" alt="Logo <?php echo esc_attr(get_bloginfo('name', 'display')); ?>"/>
-				</a>
-				<?php
-					echo wp_nav_menu(
-						array(
-							'menu' => 'Project Nav',
-							'container' => false,
-							'menu_id' => 'nav',
-							'menu_class' => 'col-md-7 col-md-push-1 list-inline'
-						)
-					);
-				?>
-				<a class="col-md-1" href="#">Connexion</a>
-			  </nav>
+					<div class="container">
+					<a href="<?php echo esc_url(home_url('/')); ?>" title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" rel="home">
+						<img class="col-md-2 logoPS" src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/logo.svg" alt="Logo <?php echo esc_attr(get_bloginfo('name', 'display')); ?>"/>
+					</a>
+					<?php
+						echo wp_nav_menu(
+							array(
+								'menu' => 'Project Nav',
+								'container' => false,
+								'menu_id' => 'nav',
+								'menu_class' => 'col-md-7 col-md-push-1 list-inline'
+							)
+						);
+					?>
+					<a class="col-md-1" href="#">Connexion</a>
+				</div>
+			</nav>
 			</header>
-
-
-			<div id="content" class="row row-with-vspace site-content">
+		</div>

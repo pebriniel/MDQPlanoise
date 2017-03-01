@@ -1,12 +1,12 @@
 $(document).ready(function() {
     // Configure/customize these variables.
-    var showChar = 100;  // How many characters are shown by default
+    var showChar = 500;  // How many characters are shown by default
     var ellipsestext = "...";
     var moretext = "Show more >";
     var lesstext = "Show less";
 
 
-    $('.description').each(function() {
+    $('.article').each(function() {
         var content = $(this).html();
 
         if(content.length > showChar) {

@@ -1,6 +1,6 @@
 $(document).ready(function() {
     // Configure/customize these variables.
-    var showChar = 100;  // How many characters are shown by default
+    var showChar = 10;  // How many characters are shown by default
     var ellipsestext = "...";
     var moretext = "Show more >";
     var lesstext = "Show less";
@@ -29,6 +29,7 @@ $(document).ready(function() {
             $(this).addClass("less");
             $(this).html(lesstext);
         }
+
         $(this).parent().prev().toggle();
         $(this).prev().toggle();
         return false;

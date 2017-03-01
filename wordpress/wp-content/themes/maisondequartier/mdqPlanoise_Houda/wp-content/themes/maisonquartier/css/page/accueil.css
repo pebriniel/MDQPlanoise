@@ -1,0 +1,96 @@
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* header */
+header {
+  height: 10vh;
+  width: 100vw;
+  border: 1px solid red;
+}
+header #nav {
+  vertical-align: middle;
+  padding-top: 3%;
+}
+header #nav li {
+  list-style: none;
+  font-size: 1.5em;
+}
+
+/* END header */
+/* main */
+main {
+  position: relative;
+  height: 80vh;
+  width: 100vw;
+  /* carousel */
+  /* END carousel */
+  /* masonry */
+  /* END masonry */
+}
+main #wrapper {
+  background-color: black;
+  position: relative;
+  width: 100%;
+  height: 50%;
+}
+main #wrapper ul {
+  list-style: none;
+}
+main .item {
+  background-color: #fff;
+}
+main img {
+  cursor: pointer;
+  z-index: 10;
+}
+main .eventText, main .btn {
+  z-index: 1000;
+  color: #fff;
+  background-color: pink;
+}
+main .noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+main #article {
+  background-color: yellow;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+main .masonry {
+  background-color: blue;
+}
+main .art-center {
+  background-color: green;
+}
+main .art1 {
+  background-color: pink;
+  padding-bottom: 3%;
+}
+main .art2 {
+  background-color: purple;
+  padding-top: 3%;
+}
+main .eventText {
+  color: #fff;
+  z-index: 2000;
+  position: absolute;
+}
+main .morecontent span {
+  display: none;
+}
+main .morelink {
+  display: block;
+}
+
+/* END main */
+
+/*# sourceMappingURL=accueil.css.map */
