@@ -45,7 +45,6 @@ function stop_plugin_update( $value ) {
 add_filter( 'site_transient_update_plugins', 'stop_plugin_update' );
 
 
-/* -- function add par houda.b */
 // function pour affichage du contenu des articles
 if (!function_exists('bootstrapBasicPostOn')) {
 	/**
@@ -108,8 +107,15 @@ if (!function_exists('bootstrapBasicMoreLinkText')) {
 	 */
 	function bootstrapBasicMoreLinkText()
 	{
-		return __('Lire plus <span class="meta-nav"><a href="'. get_permalink( ) . '"></a></span>', 'bootstrap-basic');
-	}// bootstrapBasicMoreLinkText
+//		return __('Lire plus <span class="meta-nav"><a href="'. get_permalink( ) . '"></a></span>', 'bootstrap-basic');
+    $url = "";
+    if (!is_null($post)){
+
+      $url = '?article=' .$post->ID;
+    }
+
+    return __('<span class="meta-nav"><a href="'. $url . '">(suite...)</a></span>', 'bootstrap-basic');
+  }// bootstrapBasicMoreLinkText
 }
 
 //Pour utiliser les mots-clés et catégories aux pages
@@ -128,3 +134,5 @@ function remove_jquery_migrate( &$scripts){
         $scripts->add( 'jquery', false, array( 'jquery-core' ), '1.2.1' );
     }
 }
+
+

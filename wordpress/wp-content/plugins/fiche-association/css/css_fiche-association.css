@@ -72,7 +72,7 @@ body {
 #onepageasso .screenshot .thumbnail {
   padding: 2%; }
 #onepageasso .screenshot .thumbnail img{
-width: 100%;}
+height: 100%;}
 
 
 #onepageasso .membres .thumbnail .caption {
@@ -156,9 +156,13 @@ width: 100%;}
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 2%; }
-#onepageasso .btn {
+#onepageasso .btn-link {
   background-color: #ff6633 !important;
-  color: #ffffff; }
+  color: #ffffff;
+  margin-top: 5%;
+  margin-left: 20%;
+  padding-right: 1%;
+  padding-left: 1%; }
 #onepageasso li {
   list-style: none; }
 
@@ -193,28 +197,6 @@ width: 100%;}
     display: none;
 }
 
-@media screen and (min-width: 200px) and (max-width: 490px){
-    #menu-assoc .glyphicon{
-        display: block;
-    }
-
-    #menu-assoc .text{
-        display: none;
-    }
-
-    #menu-assoc ul li{
-        padding-left: 0.6em;
-        padding-right: 0.6em;
-    }
-}
-
-@media scren and (min-width: 830px){
-    #menu-assoc ul li{
-        font-size: 0.1em;
-        padding-left: 0.6em;
-        padding-right: 0.6em;
-    }
-}
 
 /* affichage de la carte des associations */
 #mapid-association{
@@ -293,5 +275,63 @@ width: 100%;}
     background-color: white;
 }
 
+#onepageasso .item .carousel-caption{
+  background-color: #fff;
+  opacity: 0.7;
+
+}
 
 /*# sourceMappingURL=style_onepageasso.css.map */
+@media screen and (min-width: 200px) and (max-width: 490px){
+    #menu-assoc .glyphicon{
+        display: block;
+    }
+
+    #menu-assoc .text{
+        display: none;
+    }
+
+    #menu-assoc ul li{
+        padding-left: 0.6em;
+        padding-right: 0.6em;
+    }
+
+    #onepageasso .content-onepage .btn-link {
+      display: none; }
+
+    #onepageasso .carousel-indicators{
+      display: none;  }
+      #onepageasso .carousel-inner img{
+        height: 100%;   }
+}
+
+@media screen and (min-width: 490px) (max-width: 830px) {
+  #onepageasso .content-onepage .btn-link {
+    display: none;}
+
+  #onepageasso .carousel-indicators{
+    display: none;  }
+
+}
+
+@media screen and (min-width: 830px) (max-width: 1024px) {
+    #menu-assoc ul li{
+        font-size: 0.1em;
+        padding-left: 0.6em;
+        padding-right: 0.6em;
+    }
+
+  #onepageasso .content-onepage .btn-link {
+    display: none;}
+
+  #onepageasso .carousel-indicators{
+    display: none;  }
+
+}
+
+
+@media screen and (min-width: 1200px) (max-width: 1400px){
+
+  #onepageasso .carousel-inner img{
+    height: 100%;   }
+}

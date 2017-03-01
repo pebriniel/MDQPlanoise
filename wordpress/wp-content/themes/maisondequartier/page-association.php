@@ -113,11 +113,11 @@ get_header();
 									<h3><?= $infosAsso->_name; ?></h3>
 								</div>
 							</div>
+							<button type="button" name="button" class="btn btn-link center-block">Télécharger la plaquette</button>
 
 						</div>
 						<div class="col-md-8 descrip text-justify">
 							<p><?= $infosAsso->_desc;?></p>
-							<button type="button" name="button" class="btn btn-link center-block">Nous contacter</button>
 						</div>
 					</div>
 				</div>
@@ -146,27 +146,46 @@ get_header();
 
 		 <?php
 
-		 if(have_posts()){
+		  if(have_posts()){
 		 	while ( have_posts() ) {
 		 			the_post();
 		 			global $post;
 
-		 if ( '' != get_the_post_thumbnail(get_the_ID()) ) {
+		 		 if ( '' != get_the_post_thumbnail(get_the_ID(), 'size-carousel-display-home') ) {
+		 				$post_id = get_the_ID();
 
-		 			$post_id = get_the_ID();
-		  			$title = get_the_title();
-		  			$content = get_the_excerpt();
+		 				$title = get_the_title();
+		 				$content = get_the_excerpt();
 		 			// $size = image_resize($post->ID, 100, 50);
-		  			$image = get_the_post_thumbnail( get_the_ID());
-		  			$image_src = wp_get_attachment_image_src(get_post_thumbnail_id());
-		 			$image_src = $image_src[0];
-		  			$url = get_post_meta(get_the_ID(), 'slider_image_url', true);
-		  			$url_openblank = get_post_meta(get_the_ID(), 'slider_image_url_openblank', true);
-		  			$link_text = get_post_meta(get_the_ID(), 'slider_image_link_text', true);
-		 			$asso_orga = $infosAsso->_name; //get_post_meta(get_the_ID(), 'mdq_listing_assoc', true);
-		  			$images[] = array('post_id' => $post_id, 'title' => $title, 'content' => $content, 'image' => $image, 'img_src' => $image_src, 'url' => esc_url($url), 'url_openblank' => $url_openblank == "1" ? true : false, 'link_text' => $link_text, 'association' => $asso_orga);
+		 				$image = get_the_post_thumbnail(get_the_ID(), 'size-carousel-display-home');
+		 				$image_src = wp_get_attachment_image_src(get_post_thumbnail_id());
+		 				$image_src = $image_src[0];
+		 				$url = get_post_meta(get_the_ID(), 'slider_image_url', true);
+		 				$url_openblank = get_post_meta(get_the_ID(), 'slider_image_url_openblank', true);
+		 				$link_text = get_post_meta(get_the_ID(), 'slider_image_link_text', true);
+		 			 	$asso_orga = $infosAsso->_name;
+
+		 			// 	$asso_orga = get_post_meta(get_the_ID(), 'mdq_listing_assoc', true);
+		 				$dateStart = get_post_meta(get_the_ID(), 'event_asso_start', true);
+					//	$dateDisplayStart = date_i18n($format_date, strtotime($dateStart));
+						$dateEnd = get_post_meta(get_the_ID(), 'event_asso_end', true);
+				//		$dateDisplayEnd = date_i18n($format_date, strtotime($dateEnd));
+		 				$location_event = get_post_meta(get_the_ID(), 'event_asso_address', true);
+		 				$images[] = array('post_id' => $post_id,
+		 													'title' => $title,
+		 													'dateStart' => $dateStart,
+		 													'dateEnd' => $dateEnd,
+		 													'location' => $location_event,
+		 													'content' => $content,
+		 													'image' => $image,
+		 													'img_src' => $image_src,
+		 													'url' => esc_url($url),
+		 													'url_openblank' => $url_openblank == "1" ? true : false,
+		 													'link_text' => $link_text,
+		 													'association' => $asso_orga);
+
 		 		}
-		 }
+		  }
 
 		 	?>
 		 	<div class="carousel-inner" role="listbox">
@@ -189,36 +208,91 @@ get_header();
 		 		 foreach ($images as $key => $image)
 		 		 {
 		 			 ?>
-		 			 <div class="item <?= $active; ?>">
-		 				<?= $image['image']; ?>
-		 				 <div class="carousel-caption">
-		 					 <h3><?= $image['title'];?></h3>
-		 					 <p><?= $image['content'];?></p>
-		 					 <a href="<?=  get_site_url()."/association/?fiche=".$image['url_openblank']; ?>"  class="btn btn-association" role="button">voir l'événement</a>
-		 					 <p><?= $image['association'];?></p>
-		 				 </div>
-		 			 </div>
-		 			<?php
+					 <div class="item <?= $active; ?>  modal-click">
+						<?= $image['image']; ?>
+						 <div class="carousel-caption">
+							 <h3 class="img-modal img-responsive" title="<?= $image['title']; ?>"><?= $image['title'];?></h3>
 
-		 			$active = "";
-		 		}
-		 		?>
+							 <p> Du <?= $image['dateStart'];?> au <?= $image['dateEnd']; ?> </p>
+							 <p><?= $image['association'];?></p>
+							 <a class="btn-link img-modal" id="image-<?= $images['post_id']; ?>" data-title="<?= $image['title']; ?>" data-content="<?= $image['content']; ?>" data-img="<?= $image['img_src'] ?>" data-date="<?= $image['dateStart']; ?>" data-location="<?= $image['location']; ?>" data-url="<?=  get_site_url()."/association/?fiche=".$image['association']; ?>" role="button">voir l'événement</a>
 
-		 	 <?php
-		 }  ?>
+						 </div>
+					 </div>
+
+					<?php
+
+					$active = "";
+				}
+				?>
+
+			 <?php  	}  ?>
 		 </div>
 
-		 	 <!-- Left and right controls -->
-		 	 <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-		 		 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true" style="color: #ff6633;"></span>
-		 		 <span class="sr-only">Précèdent</span>
-		 	 </a>
-		 	 <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-		 		 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="color: #ff6633;"></span>
-		 		 <span class="sr-only">Suivant</span>
-		 	 </a>
+			 <!-- Left and right controls -->
+			 <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+				 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true" style="color: #ff6633;"></span>
+				 <span class="sr-only">Précèdent</span>
+			 </a>
+			 <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+				 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="color: #ff6633;"></span>
+				 <span class="sr-only">Suivant</span>
+			 </a>
 		 </div>
-		  <!-- fin de carousel -->
+		</div>
+		<!-- fin de carousel -->
+
+	<!-- la modal -->
+	<div class="modal container" id="modal-gallery" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal">×</button>
+					<h3 class="modal-title"></h3>
+			</div>
+			<div class="modal-body">
+
+			</div>
+			<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal">Fermer</button>
+			</div>
+		</div>
+	</div>
+	</div>
+
+	<script>
+	$(document).ready(function() {
+	 /* change modal title when slide changes */
+	 $("#modal-carousel").on("slid.bs.carousel", function () {
+				$(".modal-title")
+				.html($(this)
+				.find(".active img")
+				.attr("title"));
+	 });
+
+	 /* when clicking a thumbnail */
+	 $(".modal-click .img-modal").click(function(){
+			var title = $(this).data('title');
+			var description = $(this).data('content');
+			var date = $(this).data('date');
+			var image = $(this).data('img');
+			var location = $(this).data('location');
+			var url = $(this).data('url');
+	 		var content = $(".modal-body");
+			var modal_title = $(".modal-title");
+
+		//content.empty();
+		modal_title.empty();
+
+		modal_title.html(title);
+		content.html("<img src='"+image+"' /> <p id='modal-date'>Date de l'événement : "+  date + " </p><p id='modal-location'>Lieu : " + location + "</p> <p id='modal-description'>"  + description + "</p><a href='"+url+"'> voir la fiche de l'association</a>");
+
+		// show the modal
+		$("#modal-gallery").modal("show");
+	});
+
+	});
+	</script>
 
 		  <?php
 	  }

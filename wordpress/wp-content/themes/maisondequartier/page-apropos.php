@@ -24,9 +24,9 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
                 <div class="col-md-3 logo col-xs-12">
                     <div class="thumbnail">
                         <img src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/img_apropos/logo_mdq.png" alt="logo mdq">
-                        <!-- <div class="caption">
-                        <h3>"Lorem ispum dolor sit"</h3>
-                    </div> -->
+                         <div class="caption">
+                        <button type="button" name="button" class="btn center-block">Télécharger la plaquette</button>
+                    </div>
                 </div>
             </div>
             <div class="col-md-9 col-xs-12 description">
@@ -42,7 +42,6 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
                     du quartier.
                 </p>
 
-                <button type="button" name="button" class="btn center-block">Nous contacter</button>
             </div>
         </div>
     </div>
@@ -61,7 +60,8 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
 
     <div class="row missions">
         <div class="col-xs-12 col-md-4 col-lg-4">
-            <div class="thumbnail">
+            <!-- <div class="thumbnail"> -->
+            <div class="thumbnail loca">
                 <img class="localisation" src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/img_apropos/localisation.svg" alt="mission 1">
                 <div class="caption">
                     <!-- <h3>Titre</h3> -->
@@ -74,7 +74,8 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
             </div>
         </div>
         <div class="col-xs-12 col-md-4 col-lg-4">
-            <div class="thumbnail">
+            <!-- <div class="thumbnail"> -->
+            <div class="thumbnail set">
                 <img class="settings" src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/img_apropos/settingsIcon.svg" alt="mission 2">
                 <div class="caption">
                     <!-- <h3>Titre</h3> -->
@@ -87,7 +88,8 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
             </div>
         </div>
         <div class="col-xs-12 col-md-4 col-lg-4">
-            <div class="thumbnail">
+            <!-- <div class="thumbnail"> -->
+              <div class="thumbnail sol">
                 <img class="solidarity" src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/img_apropos/solidarity.svg" alt="mission 3">
                 <div class="caption">
                     <!-- <h3>Titre</h3> -->
@@ -135,13 +137,16 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
 <!-- gallerie photos -->
 <div class="container gallery">
   <div class="row center-block">
-    <div class="col-md-4">
+    <!-- <div class="col-md-4"> -->
+    <div class="act1 col-md-4">
       <img src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/img_apropos/mdqActivite1.JPG" alt="activite 1">
     </div>
-    <div class="col-md-4">
+    <!-- <div class="col-md-4"> -->
+    <div class="act2 col-md-4">
       <img src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/img_apropos/mdqActivite2.JPG" alt="activite 2">
     </div>
-    <div class="col-md-4">
+    <!-- <div class="col-md-4"> -->
+    <div class="act3 col-md-4">
       <img src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/img_apropos/mdqActivite3.jpg" alt="activite 3">
     </div>
   </div>
@@ -204,9 +209,9 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
                     </h4>
                 </div>
                 <div class="telephone col-md-7">
-                    <h4>Tél.: 03 81 87 81 20</h4>
+                    <h4>Tél.: <a href="tel:0381878120"> 03 81 87 81 20</a></h4>
+                    <h4>Email: <a href="mailto:planoise.mdq@besancon.fr">planoise.mdq@besancon.fr</a></h4>
                     <h4>Fax: 03 81 51 65 80</h4>
-                    <h4>planoise.mdq@besancon.fr</h4>
                 </div>
             </div>
         </div>

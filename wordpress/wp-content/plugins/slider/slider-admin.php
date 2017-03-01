@@ -10,6 +10,7 @@ function slider_get_featured_image($post_ID) {
 }
 function slider_columns_head($defaults) {
 	$defaults['featured_image'] = 'Image événement';
+	$defaults['featured_date_start'] = 'Date de début';
 	// $defaults['Association_org'] = 'Association organisatrice';
 	return $defaults;
 }
@@ -20,6 +21,13 @@ function slider_columns_content($column_name, $post_ID) {
 			echo '<a href="'.get_edit_post_link($post_ID).'"><img src="' . $post_featured_image . '" alt="" style="max-width:50%;" /></a>';
 		}
 	}
+
+	if ($column_name == 'featured_date_start') {
+		$x = esc_attr(get_post_meta($post_ID, 'event_asso_start', true));
+		echo $x;
+	}
+
+
 	// if ($column_name == 'Association_org') {
 	// 	$post_assoc_orga = get_the_terms($post_ID, 'asso_organisatrice');
 	// 	if ($post_categories) {
@@ -70,11 +78,18 @@ function event_asso_meta($object){
 	wp_nonce_field('slider_asso','sliderasso_nonce');
 	?>
 	<div class="meta-box-item-title">
-		<label for="event_asso_start">Date événement</label>
+		<h4>Date de début événement</h4>
 	</div>
 	<div class="meta-box-item-content">
-		<input type="datetime-local" name="event_asso_start" style="width:49%;" value="<?= esc_attr(get_post_meta($object->ID, 'event_asso_start', true)); ?>" placeholder="jj/mm/aaaa" />
-		<input type="datetime-local" name="event_asso_end" style="width:49%;" value="<?= esc_attr(get_post_meta($object->ID, 'event_asso_end', true)); ?>" placeholder="jj/mm/aaaa" />
+		<input type="date" name="event_asso_start" style="width:49%;" value="<?= esc_attr(get_post_meta($object->ID, 'event_asso_start', true)); ?>" placeholder="jj/mm/aaaa" />
+		<input type="time" name="event_asso_start_hour" style="width:49%;" value="<?= esc_attr(get_post_meta($object->ID, 'event_asso_hour_start', true)); ?>" placeholder="00h00" />
+	</div>
+	<div class="meta-box-item-title">
+		<h4>Date de fin événement</h4>
+	</div>
+	<div class="meta-box-item-content">
+		<input type="date" name="event_asso_end" style="width:49%;" value="<?= esc_attr(get_post_meta($object->ID, 'event_asso_end', true)); ?>" placeholder="jj/mm/aaaa" />
+		<input type="time" name="event_asso_hour_end" style="width:49%;" value="<?= esc_attr(get_post_meta($object->ID, 'event_asso_hour_end', true)); ?>" placeholder="00h00" />
 	</div>
 	<div class="meta-box-item-title">
 		<h4>Adresse de l'évènement</h4>
@@ -117,8 +132,6 @@ function slider_admin_init_custpost(){
 	add_meta_box("slider_image_url", "Slide Options", "slider_image_url", "slider", "side", "high");
 	add_meta_box('event_by_asso','Informations sur l\'événement','event_asso_meta','slider','normal','high');
 	add_meta_box('event_list_asso','Association organisatrice de  l\'événement','mdq_listing_assoc','slider','normal', 'high');
-
-
 }
 add_action("add_meta_boxes", "slider_admin_init_custpost");
 
@@ -127,6 +140,8 @@ function slider_save_details(){
 
 	$start_date = isset($_POST['event_asso_start']);
 	$end_date = isset($_POST['event_asso_end']);
+	$end_hour_date = isset($_POST['event_asso_hour_start']);
+	$start_hour_date = isset($_POST['event_asso_hour_end']);
 	$address_event = isset($_POST['event_asso_address']);
 
 	$list_event_asso = isset($_POST['event_listing_asso']);
@@ -141,6 +156,8 @@ function slider_save_details(){
 		update_post_meta($post->ID, "slider_image_link_text", sanitize_text_field($_POST["slider_image_link_text"]));
 		update_post_meta($post->ID,'event_asso_start',$_POST['event_asso_start']);
 		update_post_meta($post->ID,'event_asso_end',$_POST['event_asso_end']);
+		update_post_meta($post->ID,'event_asso_hour_start',$_POST['event_asso_hour_start']);
+		update_post_meta($post->ID,'event_asso_hour_end',$_POST['event_asso_hour_end']);
 		update_post_meta($post->ID,'event_asso_address',$_POST['event_asso_address']);
 		update_post_meta($post->ID,'mdq_listing_assoc',$_POST['event_listing_asso']);
 	}

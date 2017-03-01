@@ -1,0 +1,78 @@
+﻿AJUSTEMENT GENERAL 
+A FAIRE - insertion de la font
+A FAIRE - mode d'emploi pour l'administrateur
+A FAIRE - mettre infos texte sur les filtres
+
+
+
+PAGE ACCUEIL : (Boussad & Houda) 
+OK || EN COURS - carrousel : afficher date correctement + nom de l'association (pas l'id)
+EN COURS -  agenda : soigné le design + responsive -> mettre Un seul glyphicon à la place de tous les titres  des événements (au click sur picto, les events s'affichent)
+
+OK	-pb modal sous Safari / Iphone
+
+EN COURS - articles à la une -> supprimer le "par" de auteur
+OK		     -> configurer le "Lire plus"
+
+EN COURS- articles Autres ->  ajouter taxonomy "themes" en bas de l'article 
+OK		   -> configurer le "Lire plus"
+
+A FAIRE ?  AGENDA  !!!!BACK => *conditons sur le nombre de charactère pour tous les textes block affichés
+EN COURS   // BACK =>  *faire apparaitre les autres événement sous forme de "fil d'actualités"
+
+EN COURS   design : optimisation du design global =>design desktop, design mobile, design tablette
+      
+     
+  association !!!! BACK => 
+A FAIRE     *revoir le formulaire de contact qui n'est pas fonctionnel avec le plugin (voir la page contact pour exemple)
+
+		
+PAGE ACTIVITÉ : (popo & anthony)
+anthony 
+OK - mettre la même barre secondaire que la page annuaire
+OK - supprimer borbure verte en bas de picto Association( info)
+OK - changer picto de la map
+A FAIRE -  AFFICHAGE (back) soigner le "Lire plus"
+OK - modifier btn "envoyer du filtre
+OK - titre activité à mettre en orange
+A FAIRE - afficher les coordonnées sur la carte
+ 
+
+PAGE ANNUAIRE : (anthony)
+
+EN COURS - créér un vectoriel similaire à l'image (.png) du background
+A FAIRE - style du titre (minuscule ou majuscule)
+
+
+PAGE A PROPOS - MDQ : (pauline)
+A FAIRE - ajouter seconde barre de navigation
+OK - supprimer ombre dans cadre logo
+EN COURS - alignement des blocks
+OK - supprimer le btn "nous contacter"
+OK - lien du téléphone + lien email
+EN COURS - pouvoir télécharger la PLAQUETTE de la mdq en pdf 
+
+
+FICHE ASSOCIATION  : 
+A FAIRE - block description : ajuster la largeur en fonction des blocks en-dessous
+OK || EN COURS - carrousel :    => régler la taille des images + reprendre style du carrousel de la page d'accueil
+EN COURS	 => responsive ->supp. les 3 btn ronds de navigation + taille image et taille carrousel
+A FAIRE (voir avec Anthony) - intégrer les réseaux sociaux dans la seconde barre de navigation
+A FAIRE - btn des membres : metre la bonne couleur orange + ajout animation
+A FAIRE - formulaire de contact : ajouter l'input "objet" mettre en place pour chaque association
+A FAIRE?? - revoir le block des membres
+A FAIRE??-revoir les bordures ??
+
+
+PAGE CONTACT : (anthony)
+A VERIFIER - régler btn "envoyer" en mode responsive
+
+
+  BONUS (?) 
+   annuaire :
+    faire afficher dans l'annuaire en dessous des logos un logo type PEGI pour voir directement à quel tranche d'âge s'adresse l'association 
+   
+   association :  
+    // FRONT =>  
+      * permettre l'affichage des statistiques du genre (nombre de bénèvole etc.)
+      * boutons de partage de réseaux sociaux

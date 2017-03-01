@@ -66,7 +66,7 @@ function mdq_showActiviteHtml($post){
                     Date
                 </li>
                 <li class="li-map li-map-<?= $post->ID; ?>" data-adress="<?= $post->mdq_event_adresse; ?>" data-menu="map" data-id="<?= $post->ID; ?>">
-                    <span class="glyphicon glyphicon-road"></span><br />
+                    <img src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/map.svg" width="40%;" class="map-icon" alt=""><br/>
                     Carte
                 </li>
                 <li data-id="1">
@@ -77,7 +77,7 @@ function mdq_showActiviteHtml($post){
                     </a>
                 </li>
             </ul>
-        </div>
+        </div> 
         <div class="macti-<?= $post->ID; ?> col-md-10 col-sm-10 col-xs-12 block-absolute menu-horaire menu-horaire-<?= $post->ID; ?>" data-menu="horaire">
             <?= $post->mdq_event_date; ?>
         </div>
@@ -119,15 +119,19 @@ function mdq_list_cat($name_tax, $val = null){
 ?>
 <main id="activite">
     <div class="container">
-        <div class="row" id="transition">
-            <div class="col-md-5 col-xs-10 ">
-                <div class="search-box">
+        <!-- <div class="row" id="transition"> -->
+          <div class="row" id="transition-acti">
+            <!-- <div class="col-md-5 col-xs-10 "> -->
+                <!-- <div class="search-box"> -->
+                <div class="col-md-4 col-xs-10 col-xs-offset-1">
+                    <div class="search-box-acti">
                     <form class="search-form" method="POST" action="#">
                         <?php
                         wp_nonce_field('rechercheannuaire','rechercheannuaire_nonce');
                         ?>
                         <input class="form-control" name="search-activite" type="text">
-                        <button class="btn btn-link search-btn">
+                        <!-- <button class="btn btn-link search-btn"> -->
+                          <button class="btn btn-link search-btn-acti">
                             <i class="glyphicon glyphicon-search"></i>
                         </button>
                     </form>
@@ -138,13 +142,15 @@ function mdq_list_cat($name_tax, $val = null){
 
             <form action="#" method="post">
                 <div class="col-md-2 col-xs-3 col-xs-push-1 select-container">
-                    <select class="select-menu" name="select-cat">
+                    <!-- <select class="select-menu" name="select-cat"> -->
+                    <select class="select-menu-acti" name="select-cat">
                         <option value="null">--</option>
                         <?= mdq_list_cat("theme_mdq", $search_tax_cat_id); ?>
                     </select>
                 </div>
                 <div class="col-md-2 col-xs-3 col-xs-push-1 select-container">
-                    <select class="select-menu" name="select-age">
+
+                    <select class="select-menu-acti" name="select-age">
                         <option value="null">--</option>
                         <?= mdq_list_cat("age_mdq", $search_tax_age_id); ?>
                     </select>
