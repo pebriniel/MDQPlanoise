@@ -4,10 +4,8 @@ Plugin Name: fiche association
 Plugin URI:  https://houdab.student.codeur.online/wordpress/wp-content/plugins/fiche-association/
 Description: annuaire association
 Version:     0.1
-Author:      Boussad S. & Houda B.
+Author:      Houda B. - Boussad S;
 */
-
-
 
 add_action('init', 'ficheassocation_init');									// Initialisation de Wordpress
 // Register style sheet.
@@ -44,15 +42,18 @@ function ficheassocation_init(){
 		'publicly_queryable' => false,
 		'labels' => $labels,
 		'menu_position' => 9,
+		'menu_icon' => 'dashicons-id',
 		'capability_type'=>'post',
 		'supports' => array('title', 'thumbnail'),
-		'taxonomies' => array('category'),
+    'taxonomies' => array( 'category', 'theme_mdq', 'age_mdq', 'status_members_mdq' ),
 		 'map_meta_cap' => true
 	));
 
  // add_image_size('ficheassociation',300,150,true);
 
 }
+
+
 
 /**
  * Register and enqueue style sheet.
@@ -64,15 +65,15 @@ function register_plugin_styles() {
 
 
 
+
 /**
 * Gestion des colonnes pour les slides
 * @param array $columns tableau associatif contenant les column $id => $name
 **/
 function ficheassocation_columnfilter($columns){
-	// $thumb = array('thumbnail' => 'Image');
-	$desc = array('thumbnail' => 'Description');
+	$thumb = array('thumbnail' => 'Image');
 
-	$columns = array_slice($columns, 0, 3) + $desc + array_slice($columns,1,null);
+	$columns = array_slice($columns, 0, 1) + $thumb + array_slice($columns,1,null);
 
 	return $columns;
 }
@@ -84,9 +85,19 @@ function ficheassocation_columnfilter($columns){
 function ficheassocation_column($column){
 	global $post;
 	if($column == 'thumbnail'){
-		// echo edit_post_link(get_the_post_thumbnail($post->ID),null,null,$post->ID);
-		echo $post->_desc;
+	 echo edit_post_link(get_the_post_thumbnail($post->ID, 'fiche-association'),null,null,$post->ID);
+
 	}
+}
+
+// Déclaration de la prise des miniatures
+add_theme_support( 'post-thumbnails' );
+
+// déclaration de la function pour redimentioner les miniatures
+if ( function_exists( 'add_image_size' ) ) {
+
+	add_image_size( 'fiche-association', 220, 180, true ); //(Image recadrée)
+
 }
 
 /**
@@ -94,7 +105,10 @@ function ficheassocation_column($column){
 **/
 function ficheassocation_metaboxes(){
 	if(function_exists('add_meta_box')){
-		add_meta_box('ficheassocation','Profil','ficheassocation_metabox','fiche','normal','high');
+		add_meta_box('ficheassocation','Profil association','ficheassocation_metabox','fiche','normal','high');
+		add_meta_box('ficheassocation_coordonnees','Coordonnées','ficheassociation_coordonnees_metabox','fiche','normal','high');
+		add_meta_box('ficheassocation_horaires','Horaires d\'ouvertures','ficheassocation_horaires_metabox','fiche','normal','high');
+		add_meta_box('ficheassocation_show','Choix d\'affichage des différentes box','ficheassociation_showbox_metabox','fiche','normal','high');
 	}
 }
 
@@ -106,97 +120,145 @@ function ficheassocation_metabox($object){
 	// On génère un token (SECURITE)
 	wp_nonce_field('ficheassocation','ficheassocation_nonce');
 	?>
-
-	<div class="meta-box-item-title">
-		<label for="ficheassocation_name">Nom association</label>
-	</div>
-	<div class="meta-box-item-content">
-		<input type="text" name="ficheassocation_name" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_name', true)); ?>">
-	</div>
-
-	<div class="meta-box-item-title">
-		<label for="ficheassocation_email">Email</label>
-	</div>
-	<div class="meta-box-item-content">
-		<input type="email" name="ficheassocation_email" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_email', true)); ?>">
-	</div>
-
-	<div class="meta-box-item-title">
-		<label for="ficheassocation_address">Adresse</label>
-	</div>
-	<div class="meta-box-item-content">
-		<input type="text" name="ficheassocation_address" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_address', true)); ?>">
-	</div>
-	<div class="meta-box-item-title">
-		<label for="ficheassocation_pc">Code postal</label>
-	</div>
-	<div class="meta-box-item-content">
-		<input type="text" name="ficheassocation_pc" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_pc', true)); ?>">
-	</div>
-	<div class="meta-box-item-title">
-		<label for="ficheassocation_city">Ville</label>
-	</div>
-	<div class="meta-box-item-content">
-		<input type="text" name="ficheassocation_city" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_city', true)); ?>">
-	</div>
-
-	<div class="meta-box-item-title">
-		<label for="ficheassocation_tel">Téléphone</label>
-	</div>
-	<div class="meta-box-item-content">
-		<input type="tel" name="ficheassocation_tel" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_tel', true)); ?>">
-	</div>
-
-	<div class="meta-box-item-title">
-		<label for="ficheassocation_logo">Logo</label>
-	</div>
-	<div class="meta-box-item-content">
-		<input type="file" name="ficheassocation_logo"  value="<?= esc_attr(get_post_meta($object->ID, '_logo', true)); ?>">
-	</div>
-
-	<div class="meta-box-item-title">
-		<label for="ficheassocation_link">Lien siteweb</label>
-	</div>
-	<div class="meta-box-item-content">
-		<input type="url" name="ficheassocation_link" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_link', true)); ?>">
-	</div>
-
-	<div class="meta-box-item-title">
-		<label for="ficheassocation_timeopen">Horaires d'ouverture</label>
-	</div>
-	<div class="meta-box-item-content">
-		<input type="time" name="ficheassocation_timeopen" style="width:30%;" value="<?= esc_attr(get_post_meta($object->ID, '_timeopen', true)); ?>">
-	</div>
-	<div class="meta-box-item-title">
-		<label for="ficheassocation_timeclose">Horaires de fermeture</label>
-	</div>
-	<div class="meta-box-item-content">
-		<input type="time" name="ficheassocation_timeclose" style="width:30%;" value="<?= esc_attr(get_post_meta($object->ID, '_timeclose', true)); ?>">
-	</div>
-
-	<div>
-		<h2>Jours d'ouverture :</h2>
-		<div class="checkbox meta-box-item-title">
-	    <label for="ficheassocation_dayopen">Du</label>
+		<div class="meta-box-item-title">
+			<label for="ficheassocation_name">Nom association</label>
 		</div>
 		<div class="meta-box-item-content">
-			<input type="date" name="ficheassocation_dayopen" value="<?= esc_attr(get_post_meta($object->ID, '_dayopen', true)); ?>">
-	  </div>
+			<input type="text" name="ficheassocation_name" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_name', true)); ?>">
+		</div>
 
-		<div class="checkbox meta-box-item-title">
-			<label for="ficheassocation_dayclose">Jusqu'au</label>
+		<div class="meta-box-item-title">
+			<label for="ficheassocation_desc">Description</label>
 		</div>
 		<div class="meta-box-item-content">
-			<input type="date" name="ficheassocation_dayclose" value="<?= esc_attr(get_post_meta($object->ID, '_dayclose', true)); ?>">
+			<textarea name="ficheassocation_desc" rows="4" cols="50" style="width:100%; resize:none;"><?= esc_attr(get_post_meta($object->ID, '_desc', true)); ?></textarea>
 		</div>
-	</div>
+
+		<?php
+}
+
+/**
+* Metabox pour gérer les coordonnées
+* @param Object $object article/contenu édité
+**/
+function ficheassociation_coordonnees_metabox($object){
+	// On génère un token (SECURITE)
+	wp_nonce_field('ficheassocation','ficheassocation_nonce');
+	?>
+		<div class="meta-box-item-title">
+			<label for="ficheassocation_email">Email</label>
+		</div>
+		<div class="meta-box-item-content">
+			<input type="email" name="ficheassocation_email" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_email', true)); ?>">
+		</div>
+
+		<div class="meta-box-item-title">
+			<label for="ficheassocation_address">Adresse</label>
+		</div>
+		<div class="meta-box-item-content">
+			<input type="text" name="ficheassocation_address" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_address', true)); ?>">
+		</div>
+		<div class="meta-box-item-title">
+			<label for="ficheassocation_pc">Code postal</label>
+		</div>
+		<div class="meta-box-item-content">
+			<input type="text" name="ficheassocation_pc" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_pc', true)); ?>">
+		</div>
+		<div class="meta-box-item-title">
+			<label for="ficheassocation_city">Ville</label>
+		</div>
+		<div class="meta-box-item-content">
+			<input type="text" name="ficheassocation_city" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_city', true)); ?>">
+		</div>
+
+		<div class="meta-box-item-title">
+			<label for="ficheassocation_tel">Téléphone</label>
+		</div>
+		<div class="meta-box-item-content">
+			<input type="tel" name="ficheassocation_tel" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_tel', true)); ?>">
+		</div>
+
+		<div class="meta-box-item-title">
+			<label for="ficheassocation_link">Lien siteweb</label>
+		</div>
+		<div class="meta-box-item-content">
+			<input type="url" name="ficheassocation_link" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_link', true)); ?>">
+		</div>
+
+<?php
+}
 
 
+/**
+* Metabox pour gérer les horaires de l'association
+* @param Object $object article/contenu édité
+**/
+function ficheassocation_horaires_metabox($object){
+	// On génère un token (SECURITE)
+	wp_nonce_field('ficheassocation','ficheassocation_nonce');
+
+	?>
 	<div class="meta-box-item-title">
-		<label for="ficheassocation_desc">Description</label>
+		<label for="ficheassocation_school">Ouverture - période scolaire</label>
 	</div>
 	<div class="meta-box-item-content">
-		<textarea name="ficheassocation_desc" rows="4" cols="50" style="width:100%; resize:none;"><?= esc_attr(get_post_meta($object->ID, '_desc', true)); ?></textarea>
+		<textarea name="ficheassocation_school" rows="4" cols="50" style="width:100%; resize:none;"><?= esc_attr(get_post_meta($object->ID, '_school', true)); ?></textarea>
+	</div>
+
+	<div class="meta-box-item-title">
+		<label for="ficheassocation_smallHolidays">Ouverture - petites vacances</label>
+	</div>
+	<div class="meta-box-item-content">
+		<textarea name="ficheassocation_smallHolidays" rows="4" cols="50" style="width:100%; resize:none;"><?= esc_attr(get_post_meta($object->ID, '_smallHolidays', true)); ?></textarea>
+	</div>
+
+	<div class="meta-box-item-title">
+		<label for="ficheassocation_bigHolidays">Ouverture - grandes vacances</label>
+	</div>
+	<div class="meta-box-item-content">
+		<textarea name="ficheassocation_bigHolidays" rows="4" cols="50" style="width:100%; resize:none;"><?= esc_attr(get_post_meta($object->ID, 'showDescription', true)); ?></textarea>
+	</div>
+	<?php
+}
+
+
+/**
+* Metabox pour gérer l'affichage des différents blocks
+* @param Object $object article/contenu édité
+**/
+function ficheassociation_showbox_metabox($object){
+	// On génère un token (SECURITE)
+	wp_nonce_field('ficheassocation','ficheassocation_nonce');
+
+	?>
+	<div class="meta-box-item-title">
+		<input type="checkbox" name="showDescription" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showDescription', true)), 1 ); ?> />
+		<label for="ficheassocation_school">Affichage du titre et de la description</label>
+	</div>
+
+	<div class="meta-box-item-title">
+		<input type="checkbox" name="showCaroussel" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showCaroussel', true)), 1 ); ?> />
+		<label for="ficheassocation_school">Affichage du caroussel</label>
+	</div>
+
+	<div class="meta-box-item-title">
+		<input type="checkbox" name="showAgenda" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showagenda', true)), 1 ); ?> />
+		<label for="ficheassocation_school">Affichage de l'agenda</label>
+	</div>
+
+	<div class="meta-box-item-title">
+		<input type="checkbox" name="showMembers" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showMembers', true)), 1 ); ?> />
+		<label for="ficheassocation_school">Affichage de les membres</label>
+	</div>
+
+	<div class="meta-box-item-title">
+		<input type="checkbox" name="showCoordonnees" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showCoordonnees', true)), 1 ); ?> />
+		<label for="ficheassocation_school">Affichage des cordonnées</label>
+	</div>
+
+	<div class="meta-box-item-title">
+		<input type="checkbox" name="showFormulaire" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showFormulaire', true)), 1 ); ?> />
+		<label for="ficheassocation_school">Affichage du formulaire de contact</label>
 	</div>
 
 	<?php
@@ -209,14 +271,6 @@ function ficheassocation_metabox($object){
 **/
 function ficheassocation_savepost($post_id, $post){
 
-	// On ne fait rien en cas de save Ajax
-	// if (
-	// 		(defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) ||
-	// 		(defined('DOING_AJAX') && DOING_AJAX)
-	// ) {
-	// 		return false;
-	// }
-
 	$nameAsso = !isset($_POST['ficheassocation_name']) ;
 	$email = !isset($_POST['ficheassocation_email']);
 	$phone = !isset($_POST['ficheassocation_tel']);
@@ -225,14 +279,12 @@ function ficheassocation_savepost($post_id, $post){
 	$city = !isset($_POST['ficheassocation_city']);
 	$siteweb = !isset($_POST['ficheassocation_link']);
 	$description = !isset($_POST['ficheassocation_desc']);
-	$timeopen = !isset($_POST['ficheassocation_timeopen']);
-	$timeclose = !isset($_POST['ficheassocation_timeclose']);
-	$dayopen = !isset($_POST['ficheassocation_dayopen']);
-	$dayclose = !isset($_POST['ficheassocation_dayclose']);
-	$logo = !isset($_POST['ficheassocation_logo']);
+	$school = !isset($_POST['ficheassocation_school']);
+	$smallHolidays = !isset($_POST['ficheassocation_smallHolidays']);
+	$bigHolidays = !isset($_POST['ficheassocation_bigHolidays']);
 
 	// Le champ est défini et le token est bon ?
-	if(!wp_verify_nonce($_POST['ficheassocation_nonce'] , 'ficheassocation') || $nameAsso || $email || $phone || $address || $postalcode || $city || $siteweb || $description || $timeopen || $timeclose || $dayopen || $dayclose || $logo){
+	if(!wp_verify_nonce($_POST['ficheassocation_nonce'] , 'ficheassocation') || $logo || $nameAsso || $email || $phone || $address || $postalcode || $city || $siteweb || $description || $school || $smallHolidays || $bigHolidays){
 		return $post_id;
 	}
 
@@ -251,10 +303,15 @@ function ficheassocation_savepost($post_id, $post){
 	update_post_meta($post_id,'_city',$_POST['ficheassocation_city']);
 	update_post_meta($post_id,'_link',$_POST['ficheassocation_link']);
 	update_post_meta($post_id,'_desc',$_POST['ficheassocation_desc']);
-	update_post_meta($post_id,'_timeopen',$_POST['ficheassocation_timeopen']);
-	update_post_meta($post_id,'_timeclose',$_POST['ficheassocation_timeclose']);
-	update_post_meta($post_id,'_dayopen',$_POST['ficheassocation_dayopen']);
-	update_post_meta($post_id,'_dayclose',$_POST['ficheassocation_dayclose']);
-	update_post_meta($post_id,'_logo',$_POST['ficheassocation_logo']);
+	update_post_meta($post_id,'_school',$_POST['ficheassocation_school']);
+	update_post_meta($post_id,'_smallHolidays',$_POST['ficheassocation_smallHolidays']);
+	update_post_meta($post_id,'_bigHolidays',$_POST['ficheassocation_bigHolidays']);
+
+	update_post_meta($post_id,'showDescription',$_POST['showDescription']);
+	update_post_meta($post_id,'showCaroussel',$_POST['showCaroussel']);
+	update_post_meta($post_id,'showAgenda',$_POST['showAgenda']);
+	update_post_meta($post_id,'showMembers',$_POST['showMembers']);
+	update_post_meta($post_id,'showCoordonnees',$_POST['showCoordonnees']);
+	update_post_meta($post_id,'showFormulaire',$_POST['showFormulaire']);
 
 }
