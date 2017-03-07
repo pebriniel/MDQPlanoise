@@ -30,14 +30,19 @@ get_header();
 
 
 	<?php
+
+
 	query_posts(array('post_type' => 'fiche'));
 
 	if($infosAsso = get_post($fiche)){
+		while(have_posts()){
+						the_post();
+
 
 		if($infosAsso->post_type == 'fiche'){
 			?>
 
-			<div id="transition-asso" class="row transition-assoc">
+			<div id="transition" class="row transition-assoc">
 				<div class="col-md-12 col-xs-12" id="menu-assoc">
 					<ul>
 						<?php
@@ -56,7 +61,7 @@ get_header();
 						<li>
 							<a href="#evenements">
 								<span class="glyphicon glyphicon-calendar"></span>
-	                       		<span class="text">Évènements</span>
+	              <span class="text">Évènements</span>
 							</a>
 						</li>
 						<?php
@@ -106,17 +111,18 @@ get_header();
 					<div class="col-md-12 carteVisite">
 						<div class="col-md-4 logo">
 
-							<div class="thumbnail"><div class="text-center">
-								<span><?= get_the_post_thumbnail($infosAsso->ID, 'fiche-association'); ?></span></div>
+							<div class="thumbnail">
+								<span><?= get_the_post_thumbnail($infosAsso->ID, 'fiche-association'); ?></span>
 								<div class="caption">
 									<h3><?= $infosAsso->_name; ?></h3>
 								</div>
 							</div>
+							<div>Tarif d'adhésion : <?= $infosAsso->_membership; ?></div>
 							<button type="button" name="button" class="btn btn-link-leaflet center-block">Télécharger la plaquette</button>
 
 						</div>
 						<div class="col-md-8 descrip text-justify">
-							<p><?= $infosAsso->_desc;?></p>
+							<p><?= the_content(); // $infosAsso->_desc;?></p>
 						</div>
 					</div>
 				</div>
@@ -169,11 +175,14 @@ get_header();
 						$dateDisplayStart = date_i18n("d/m/Y", strtotime($dateStart));
 						$dateEnd = get_post_meta(get_the_ID(), 'event_asso_end', true);
 						$dateDisplayEnd = date_i18n("d/m/Y", strtotime($dateEnd));
+						$hour = get_post_meta(get_the_ID(), 'event_asso_hour_start', true);
+						$eventHourStart = date_i18n("G:i", strtotime($hour));
 						$location_event = get_post_meta(get_the_ID(), 'event_asso_address', true);
 		 				$images[] = array('post_id' => $post_id,
 		 													'title' => $title,
 		 													'dateStart' => $dateDisplayStart,
 		 													'dateEnd' => $dateDisplayEnd,
+															'heure' => $eventHourStart,
 		 													'location' => $location_event,
 		 													'content' => $content,
 		 													'image' => $image,
@@ -212,7 +221,7 @@ get_header();
 						 <div class="carousel-caption">
 							 <h3 class="img-modal img-responsive" title="<?= $image['title']; ?>"><?= $image['title'];?></h3>
 
-							 <p> Du <?= $image['dateStart'];?> au <?= $image['dateEnd']; ?> </p>
+							 <p> Le <?= $image['dateStart'];?> à <?= $image['heure'];?></p>
 							 <p><?= $image['association'];?></p>
 							 <a class="btn-link img-modal" id="image-<?= $images['post_id']; ?>" data-title="<?= $image['title']; ?>" data-content="<?= $image['content']; ?>" data-img="<?= $image['img_src'] ?>" data-date="<?= $image['dateStart']; ?>" data-location="<?= $image['location']; ?>" data-url="<?=  get_site_url()."/association/?fiche=".$image['association']; ?>" role="button">voir l'événement</a>
 
@@ -299,7 +308,6 @@ get_header();
 	 if($infosAsso->showAgenda){
 	  ?>
 	  	<div class="container" id="as-activite">
-			<h2>Les activités</h2>
 			<?php
 			query_posts(array(
 				'post_type'=>'activite',
@@ -315,7 +323,7 @@ get_header();
 					  <div class="col-md-4 thumbnail thumbnail-activite">
 						<div id="acti-<?= $post->ID; ?>" data-id="<?= $post->ID; ?>" class="block-activite acti-<?= $post->ID; ?> content-hidden overflow background-white">
 							<div class="image">
-							<img src="<?= wp_get_attachment_url( get_post_thumbnail_id($post->ID)); ?>" width="100%" />
+								<img src="http://boussads.student.codeur.online/wclient/wp-content/uploads/2017/02/P_20170108_184437.jpg" />
 							</div>
 							<div class="title">
 								<h3><?= $post->post_title; ?></h3>
@@ -434,9 +442,10 @@ get_header();
 											<div class="col-md-3 membres">
 												<div class="thumbnail">
 													<!-- <img src="wp-content/themes/maisonquartier/img/img_onepageasso/user.jpg" alt="..."> -->
-													<?= get_the_post_thumbnail($post->ID); ?>
+													<?= edit_post_link(get_the_post_thumbnail($post->ID)); ?>
 													<div class="caption">
-														<h3><?= the_title();?></h3>
+														<h3><?= $post->event_title;?></h3>
+														<p><?= $post->mdq_event_description; ?></p>
 													</div>
 												</div>
 											</div>
@@ -488,13 +497,15 @@ get_header();
 											<h4><a href="<?=  $infosAsso->_link;  ?>"><?= $infosAsso->_link; ?></a></h4>
 											<h3>Ouverture - période scolaire :</h3>
 											<p><?= $infosAsso->_school;?></p>
+	<?php if($infosAsso->showsmallHolidays){  ?>
 											<h3>Ouverture - petites vacances :</h3>
-											<p><?= $infosAsso->_smallHolidays;?></p>
+											<p><?= $infosAsso->_smallHolidays; }?></p>
+	<?php if($infosAsso->showbigHolidays){  ?>
 											<h3>Ouverture - grandes vacances : </h3>
-											<p><?= $infosAsso->_bigHolidays;?></p>
+											<p><?= $infosAsso->_bigHolidays; }?></p>
 										</div>
 
-										<div class="col-md-5 map">
+										<div class="map col-md-5">
 											<div id="mapid-association">
 											</div>
 											<script>
@@ -507,6 +518,15 @@ get_header();
 							<!-- fin adresse asso -->
 				<?php
 
+			}
+
+			if($infosAsso->showPartner){
+
+				?>
+
+
+				<div>ici les partenaires ?? voici l'affiche depuis le back : <?= $infosAsso->_partner; ?></div>
+				<?php
 			}
 
 			if($infosAsso->showFormulaire){
@@ -526,10 +546,6 @@ get_header();
 										<div class="input-group">
 											<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
 											<input class="form-control" type="email" name="email" id="email" placeholder="votre email *" />
-										</div>
-										<div class="input-group">
-											<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-											<input class="form-control" type="text" name="objet" id="objet" placeholder="Objet du message*"/>
 										</div>
 									</fieldset>
 
@@ -557,4 +573,4 @@ get_header();
 	</div>
 						</main>
 
-						<?php 	} 	} get_footer(); ?>
+						<?php 	} 	} } get_footer(); ?>
