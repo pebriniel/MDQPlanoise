@@ -14,7 +14,7 @@ function array_msort($array, $cols)
         $eval .= '$colarr[\''.$col.'\'],'.$order.',';
     }
     $eval = substr($eval,0,-1).');';
-    eval($eval);
+    eval($eval); 
     $ret = array();
     foreach ($colarr as $col => $arr) {
         foreach ($arr as $k => $v) {
@@ -255,22 +255,6 @@ $images = callEvent(3, 0);
                    the_content(bootstrapBasicMoreLinkText($post));
                  } 		 ?>
 							</div>
-
-							<footer class="entry-meta">
-								<?php if ('post' == get_post_type()) { // Hide category and tag text for pages on Search ?>
-								<div class="entry-meta-category-tag">
-									<?php
-										/* translators: used between list items, there is a space after the comma */
-										$tags_list = get_the_tag_list('', __(', ', 'bootstrap-basic'));
-										if ($tags_list) {
-									?>
-									<span class="tags-links">
-										<?php echo bootstrapBasicTagsList($tags_list); ?>
-									</span>
-									<?php } ?>
-								</div>
-								<?php } ?>
-							</footer>
 									<?php
 								}
 							}
