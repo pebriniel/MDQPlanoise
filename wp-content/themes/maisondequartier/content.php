@@ -14,7 +14,7 @@ function array_msort($array, $cols)
         $eval .= '$colarr[\''.$col.'\'],'.$order.',';
     }
     $eval = substr($eval,0,-1).');';
-    eval($eval); 
+    eval($eval);
     $ret = array();
     foreach ($colarr as $col => $arr) {
         foreach ($arr as $k => $v) {
@@ -290,7 +290,6 @@ $images = callEvent(3, 0);
 				<div class="globalArticle col-md-12" id="article-<?= $post->ID;?>">
 					<header class="entry-header">
 						<h1 class="entry-title"><?php the_title(); ?></h1>
-
 						<?php if ('post' == get_post_type()) {  ?>
 						<div class="entry-meta">
 							<?php bootstrapBasicPostOn(); ?>

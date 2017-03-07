@@ -73,14 +73,28 @@ function mdq_showActiviteHtml($post){
                         LIMIT 0, 1
                         ";
                 $t = $wpdb->get_results($query, OBJECT);
-
+                echo "lol";
             ?>
 
             <h6><?= $t[0]->post_title; ?></h6>
             <div class="desc">
                 <div style="position: relative">
                     <div id="acti-<?= $post->ID; ?>"  class="content overflow content-activite acti-<?= $post->ID; ?>">
-                        <?= $post->mdq_event_payement; ?>
+                        <p>
+                            <?= $post->mdq_event_payement; ?>
+                        <p>
+                        <br/>
+
+                        <p>
+                            <?php
+                                $terms = wp_get_post_terms( get_the_ID(), 'age_mdq');
+                                for($i = 0; $i < sizeof($terms); $i ++){
+                                    if($i != 0) echo ", ";
+
+                                    echo $terms[$i]->name;
+                                }
+                            ?>
+                        </p>
                     </div>
                 </div>
             </div>
