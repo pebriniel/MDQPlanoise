@@ -1,3 +1,119 @@
+<?php
+/*
+Plugin Name: fiche association
+Plugin URI:  https://houdab.student.codeur.online/wordpre²ss/wp-content/plugins/fiche-association/
+Description: annuaire association
+Version:     0.1
+Author:      Houda B. - Boussad S.
+*/
+
+add_action('init', 'ficheassocation_init');									// Initialisation de Wordpress
+// Register style sheet.
+add_action( 'wp_enqueue_scripts', 'register_plugin_styles');
+
+add_action('add_meta_boxes', 'ficheassocation_metaboxes');					// Ajout des meta_box
+add_action('save_post', 'ficheassocation_savepost',10, 2);					// Capture l'édition d'article avec 2 arguments
+
+add_action('manage_edit-fiche_columns', 'ficheassocation_columnfilter');		// Capture la liste des colonnes pour les slides
+add_action('manage_posts_custom_column', 'ficheassocation_column');			// Permet d'afficher du contenu en plus pour chaque column
+
+/**
+* Permet d'initialiser les fonctionalités liées à la fiche association
+**/
+function ficheassocation_init(){
+
+	$labels = array(
+	  'name' => 'Fiche',
+	  'singular_name' => 'Fiche',
+	  'add_new' => 'Ajouter une Fiche',
+	  'add_new_item' => 'Ajouter une nouvelle Fiche',
+	  'edit_item' => 'Editer une Fiche',
+	  'new_item' => 'Nouvelle Fiche',
+	  'view_item' => 'Voir la Fiche',
+	  'search_items' => 'Rechercher une Fiche',
+	  'not_found' =>  'Aucune Fiche',
+	  'not_found_in_trash' => 'Aucune Fiche dans la corbeille',
+	  'parent_item_colon' => '',
+	  'menu_name' => 'Fiche association'
+	);
+
+	register_post_type('fiche', array(
+		'public' => true,
+		'publicly_queryable' => false,
+		'labels' => $labels,
+		'menu_position' => 9,
+		'menu_icon' => 'dashicons-id',
+		'capability_type'=>'post',
+		'supports' => array('title', 'thumbnail', 'editor'),
+    'taxonomies' => array( 'theme_mdq', 'age_mdq', 'status_members_mdq'),
+		 'map_meta_cap' => true,
+	));
+
+ // add_image_size('ficheassociation',300,150,true);
+
+}
+
+
+
+/**
+ * Register and enqueue style sheet.
+ */
+function register_plugin_styles() {
+	wp_register_style( 'fiche-association', plugins_url( 'fiche-association/css/css_fiche-association.css' ) );
+	wp_enqueue_style( 'fiche-association' );
+}
+
+
+
+
+/**
+* Gestion des colonnes pour les slides
+* @param array $columns tableau associatif contenant les column $id => $name
+**/
+function ficheassocation_columnfilter($columns){
+	$thumb = array('thumbnail' => 'Image');
+
+	$columns = array_slice($columns, 0, 1) + $thumb + array_slice($columns,1,null);
+
+	return $columns;
+}
+
+/**
+* Gestion du contenu d'une colonne
+* @param String $column Id de la colonne traitée
+**/
+function ficheassocation_column($column){
+	global $post;
+	if($column == 'thumbnail'){
+	 echo edit_post_link(get_the_post_thumbnail($post->ID, 'fiche-association'),null,null,$post->ID);
+
+	}
+}
+
+// Déclaration de la prise des miniatures
+add_theme_support( 'post-thumbnails' );
+
+// déclaration de la function pour redimentioner les miniatures
+if ( function_exists( 'add_image_size' ) ) {
+
+	add_image_size( 'fiche-association', 220, 180, true ); //(Image recadrée)
+
+}
+
+/**
+* Ajoute des meta box pour les contenus
+**/
+function ficheassocation_metaboxes(){
+	if(function_exists('add_meta_box')){
+		// add_meta_box('ficheassocation','Profil association','ficheassocation_metabox','fiche','normal','high');
+		add_meta_box('ficheassocation_coordonnees','Profil','ficheassociation_coordonnees_metabox','fiche','normal','high');
+		add_meta_box('ficheassocation_horaires','Horaires d\'ouvertures','ficheassocation_horaires_metabox','fiche','normal','high');
+		add_meta_box('ficheassocation_show','Choix d\'affichage des différentes box','ficheassociation_showbox_metabox','fiche','normal','high');
+	}
+}
+
+
+
 /**
 * Metabox pour gérer les coordonnées
 * @param Object $object article/contenu édité
@@ -75,7 +191,7 @@ function ficheassociation_coordonnees_metabox($object){
 		</div>
 
 		<div class="meta-box-item-title">
-			<label for="ficheassocation_membership">Tarif d'adhésion (préciser la périodicité)</label>
+			<label for="ficheassocation_membership">Adhésion (préciser la périodicité)</label>
 		</div>
 		<div class="meta-box-item-content">
 			<input type="text" name="ficheassocation_membership" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_membership', true)); ?>">
@@ -173,6 +289,20 @@ function ficheassociation_showbox_metabox($object){
 		<label for="showsmallHolidays">Affichage des ouvertues pendant les petites vacances</label>
 	</div>
 
+	<div class="meta-box-item-title">
+		<input type="checkbox" name="showfacebook" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showfacebook', true)), 1 ); ?> />
+		<label for="showfacebook">Affichage du lien facebook</label>
+	</div>
+
+	<div class="meta-box-item-title">
+		<input type="checkbox" name="showtwitter" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showtwitter', true)), 1 ); ?> />
+		<label for="showtwitter">Affichage du lien twitter</label>
+	</div>
+
+	<div class="meta-box-item-title">
+		<input type="checkbox" name="showMembership" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showMembership', true)), 1 ); ?> />
+		<label for="showMembership">Affichage du montant de l'adhésion</label>
+	</div>
 	<?php
 }
 
@@ -235,5 +365,8 @@ function ficheassocation_savepost($post_id, $post){
 	update_post_meta($post_id,'showPartner',$_POST['showPartner']);
 	update_post_meta($post_id,'showsmallHolidays',$_POST['showsmallHolidays']);
 	update_post_meta($post_id,'showbigHolidays',$_POST['showbigHolidays']);
+	update_post_meta($post_id,'showfacebook',$_POST['showfacebook']);
+	update_post_meta($post_id,'showtwitter',$_POST['showtwitter']);
+	update_post_meta($post_id,'showMembership',$_POST['showMembership']);
 
 }
