@@ -61,6 +61,12 @@ function mdq_showActiviteHtml($post){
         </div>
         <div class="col-md-7 col-sm-7 col-xs-9">
             <h3><?= $post->post_title; ?></h3>
+<<<<<<< HEAD
+<<<<<<< HEAD
+            <h6>Association</h6>
+=======
+=======
+>>>>>>> 7df636d9d7a47d35cdb5ec0767a37c63d9bd95a9
             <?php
                 global $wpdb;
                 $asso_orga = get_post_meta(get_the_ID(), 'mdq_association_id', true);
@@ -77,9 +83,14 @@ function mdq_showActiviteHtml($post){
             ?>
 
             <h6><?= $t[0]->post_title; ?></h6>
+<<<<<<< HEAD
+>>>>>>> 7df636d9d7a47d35cdb5ec0767a37c63d9bd95a9
+=======
+>>>>>>> 7df636d9d7a47d35cdb5ec0767a37c63d9bd95a9
             <div class="desc">
-                <div style="position: relative">
+                <div style="position: relative"> 
                     <div id="acti-<?= $post->ID; ?>"  class="content overflow content-activite acti-<?= $post->ID; ?>">
+<<<<<<< HEAD
                         <p>
                             <?= $post->mdq_event_payement; ?>
                         <p>
@@ -95,6 +106,17 @@ function mdq_showActiviteHtml($post){
                                 }
                             ?>
                         </p>
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+                        Tarif :
+=======
+                        <?= $post->mdq_event_payement; ?>
+>>>>>>> 7df636d9d7a47d35cdb5ec0767a37c63d9bd95a9
+=======
+                        <?= $post->mdq_event_payement; ?>
+>>>>>>> 7df636d9d7a47d35cdb5ec0767a37c63d9bd95a9
+>>>>>>> c388fa01ae6a9938be1fbaa44148e9778f18b501
                     </div>
                 </div>
             </div>
@@ -125,7 +147,15 @@ function mdq_showActiviteHtml($post){
         <div class="macti-<?= $post->ID; ?> col-md-10 col-sm-10 col-xs-12 block-absolute menu-description menu-description-<?= $post->ID; ?>" data-menu="description">
             <div class="col-md-12 col-sm-1é col-xs-12">
                 <h3><?= $post->post_title; ?></h3>
+<<<<<<< HEAD
+<<<<<<< HEAD
+                <h6>Association</h6>
+=======
                 <h6><?= $t[0]->post_title; ?></h6>
+>>>>>>> 7df636d9d7a47d35cdb5ec0767a37c63d9bd95a9
+=======
+                <h6><?= $t[0]->post_title; ?></h6>
+>>>>>>> 7df636d9d7a47d35cdb5ec0767a37c63d9bd95a9
                 <div class="desc">
                     <div style="position: relative">
                         <div id="acti-<?= $post->ID; ?>"  class="content overflow content-activite acti-<?= $post->ID; ?>">
