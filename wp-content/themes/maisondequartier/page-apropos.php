@@ -85,7 +85,7 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
 
 <!-- missions -->
 <div class="container missionsAsso" id="missionsAsso">
-    <h2>Nos Missions</h2>
+    <h2>nos missions</h2>
     <!-- <div class="missionsPrez">
     <p>En tant que structure agréée Centre social par la Caisse d’allocations
         familiales du Doubs, des missions lui sont par ailleurs assignées, telles que :
@@ -185,7 +185,7 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
 <!-- coordonnées -->
 <div class="container loc" id="loc">
     <div class="row">
-        <h2>Nos Coordonnées</h2>
+        <h2>nos coordonnées</h2>
         <div class="col-md-12">
         <div class="adresseAsso col-md-7">
             <div class="row">
