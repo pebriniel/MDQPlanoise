@@ -57,6 +57,8 @@ function callEvent($limit = 10, $offset = 3){
 					$asso_orga = get_post_meta(get_the_ID(), 'mdq_listing_assoc', true);
 					$dateStart = get_post_meta(get_the_ID(), 'event_asso_start', true);
 					$dateEnd = get_post_meta(get_the_ID(), 'event_asso_end', true);
+					$dateHourStart = get_post_meta(get_the_ID(), 'event_asso_hour_start', true);
+					$dateHourEnd = get_post_meta(get_the_ID(), 'event_asso_hour_end', true);
 					$location_event = get_post_meta(get_the_ID(), 'event_asso_address', true);
 					$date_i = date_i18n("d/m/Y", strtotime($dateStart));
 
@@ -77,6 +79,8 @@ function callEvent($limit = 10, $offset = 3){
 														'dateStart' => date_i18n("d/m/Y", strtotime($dateStart)),
 														'dateEnd' => date_i18n("d/m/Y", strtotime($dateEnd)),
                                                         'dateIdent' => date_i18n("d/m/Y", strtotime($dateStart)),
+                                                        'dateHourStart' => $dateHourStart,
+                                                        'dateHourEnd' => $dateHourEnd,
 														'location' => $location_event,
 														'content' => $content,
 														'image' => $image,
@@ -127,9 +131,9 @@ $images = callEvent(3, 0);
 						 <h3 class="img-modal img-responsive" title="<?= $image['title']; ?>"><?= $image['title'];?></h3>
 
 						 <!-- <a href="<?=  get_site_url()."/association/?fiche=".$image['url_openblank']; ?>"  class="btn-association" role="button">voir l'événement</a> -->
-						 <p> Du <?= $image['dateStart']; ?> au <?= $image['dateEnd']; ?> </p>
+						 <p> Le <?= $image['dateStart']; ?> </p>
 						 <p><?= $image['association_name'];?></p>
-						 <a class="btn-association img-modal img-moda-click" id="image-<?= $images['post_id']; ?>" data-title="<?= $image['title']; ?>" data-content="<?= $image['content']; ?>" data-img="<?= $image['img_src'] ?>" data-date="<?= $image['dateStart']; ?>" data-location="<?= $image['location']; ?>" data-url="<?=  get_site_url()."/association/?fiche=".$image['association']; ?>" role="button">voir l'événement</a>
+						 <a class="btn-association img-modal img-moda-click" id="image-<?= $images['post_id']; ?>" data-title="<?= $image['title']; ?>" data-content="<?= $image['content']; ?>" data-img="<?= $image['img_src'] ?>" data-date="<?= $image['dateStart']; ?>" data-dateend="<?= $image['dateEnd']; ?>" data-hourstart="<?= $image['dateHourStart']; ?>" data-hourend="<?= $image['dateHourEnd']; ?>" data-location="<?= $image['location']; ?>" data-url="<?=  get_site_url()."/association/?fiche=".$image['association']; ?>" role="button">voir l'événement</a>
 						 <!-- <p><?= $image['location'];?></p> -->
 
 						 <!-- <a data-url="<?= get_site_url()."/association/?fiche=".$images['post_id']; ?>" class="btn btn-association" role="button">voir la fiche</a> -->
@@ -185,6 +189,9 @@ $images = callEvent(3, 0);
 			var title = $(this).data('title');
 			var description = $(this).data('content');
 			var date = $(this).data('date');
+			var date_end = $(this).data('dateend');
+			var date_hour = $(this).data('hourstart');
+			var date_hour_end = $(this).data('hourend');
 			var image = $(this).data('img');
 			var location = $(this).data('location');
 			var url = $(this).data('url');
@@ -203,7 +210,7 @@ $images = callEvent(3, 0);
 
 			// active.addClass("active");
 			modal_title.html(title);
-			content.html("<img src='"+image+"' /> <p id='modal-date'>Date de l'événement : "+  date + " </p><p id='modal-location'>Lieu : " + location + "</p> <p id='modal-description'>"  + description + "</p>");
+			content.html("<img src='"+image+"' /> <p id='modal-date'>Date de l'événement : "+  date + " à "+date_hour+" au "+ date_end+" à "+date_hour_end+"</p><p id='modal-location'>Lieu : " + location + "</p> <p id='modal-description'>"  + description + "</p>");
 			footer.html("<a href='"+url+"' class='btn btn-association-asso'> voir la fiche de l'association</a><button class='btn btn-association' data-dismiss='modal'>Fermer</button>");
 			// show the modal
 			$("#modal-gallery").modal("show");
@@ -296,7 +303,7 @@ $images = callEvent(3, 0);
 			global $post;
 			?>
 			<article class="col-md-4 contenu blockArticle">
-				<div class="globalArticle col-md-12">
+				<div class="globalArticle col-md-12" id="article-<?= $post->ID;?>">
 					<header class="entry-header">
 						<h1 class="entry-title"><?php the_title(); ?></h1>
 

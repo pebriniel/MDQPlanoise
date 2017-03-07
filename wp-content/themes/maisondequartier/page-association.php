@@ -37,7 +37,7 @@ get_header();
 		if($infosAsso->post_type == 'fiche'){
 			?>
 
-			<div id="transition" class="row transition-assoc">
+			<div id="transition-asso" class="row transition-assoc">
 				<div class="col-md-12 col-xs-12" id="menu-assoc">
 					<ul>
 						<?php
@@ -106,8 +106,8 @@ get_header();
 					<div class="col-md-12 carteVisite">
 						<div class="col-md-4 logo">
 
-							<div class="thumbnail">
-								<span><?= get_the_post_thumbnail($infosAsso->ID, 'fiche-association'); ?></span>
+							<div class="thumbnail"><div class="text-center">
+								<span><?= get_the_post_thumbnail($infosAsso->ID, 'fiche-association'); ?></span></div>
 								<div class="caption">
 									<h3><?= $infosAsso->_name; ?></h3>
 								</div>
@@ -299,6 +299,7 @@ get_header();
 	 if($infosAsso->showAgenda){
 	  ?>
 	  	<div class="container" id="as-activite">
+			<h2>Les activités</h2>
 			<?php
 			query_posts(array(
 				'post_type'=>'activite',
@@ -314,7 +315,7 @@ get_header();
 					  <div class="col-md-4 thumbnail thumbnail-activite">
 						<div id="acti-<?= $post->ID; ?>" data-id="<?= $post->ID; ?>" class="block-activite acti-<?= $post->ID; ?> content-hidden overflow background-white">
 							<div class="image">
-								<img src="http://boussads.student.codeur.online/wclient/wp-content/uploads/2017/02/P_20170108_184437.jpg" />
+							<img src="<?= wp_get_attachment_url( get_post_thumbnail_id($post->ID)); ?>" width="100%" />
 							</div>
 							<div class="title">
 								<h3><?= $post->post_title; ?></h3>
@@ -433,10 +434,9 @@ get_header();
 											<div class="col-md-3 membres">
 												<div class="thumbnail">
 													<!-- <img src="wp-content/themes/maisonquartier/img/img_onepageasso/user.jpg" alt="..."> -->
-													<?= edit_post_link(get_the_post_thumbnail($post->ID)); ?>
+													<?= get_the_post_thumbnail($post->ID); ?>
 													<div class="caption">
-														<h3><?= $post->event_title;?></h3>
-														<p><?= $post->mdq_event_description; ?></p>
+														<h3><?= the_title();?></h3>
 													</div>
 												</div>
 											</div>
@@ -494,7 +494,7 @@ get_header();
 											<p><?= $infosAsso->_bigHolidays;?></p>
 										</div>
 
-										<div class="map col-md-5">
+										<div class="col-md-5 map">
 											<div id="mapid-association">
 											</div>
 											<script>
@@ -526,6 +526,10 @@ get_header();
 										<div class="input-group">
 											<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
 											<input class="form-control" type="email" name="email" id="email" placeholder="votre email *" />
+										</div>
+										<div class="input-group">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+											<input class="form-control" type="text" name="objet" id="objet" placeholder="Objet du message*"/>
 										</div>
 									</fieldset>
 

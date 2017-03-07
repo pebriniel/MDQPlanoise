@@ -282,10 +282,9 @@ function ficheassocation_savepost($post_id, $post){
 	$school = !isset($_POST['ficheassocation_school']);
 	$smallHolidays = !isset($_POST['ficheassocation_smallHolidays']);
 	$bigHolidays = !isset($_POST['ficheassocation_bigHolidays']);
-	$members = !isset($_POST['ficheassocation_members']);
 
 	// Le champ est défini et le token est bon ?
-	if(!wp_verify_nonce($_POST['ficheassocation_nonce'] , 'ficheassocation') || $logo || $nameAsso || $email || $phone || $address || $postalcode || $city || $siteweb || $description || $school || $smallHolidays || $bigHolidays || $members){
+	if(!wp_verify_nonce($_POST['ficheassocation_nonce'] , 'ficheassocation') || $logo || $nameAsso || $email || $phone || $address || $postalcode || $city || $siteweb || $description || $school || $smallHolidays || $bigHolidays){
 		return $post_id;
 	}
 

@@ -51,12 +51,25 @@ function mdq_showActiviteHtml($post){
         <div class="block-activite">
         <div class="col-md-3 col-sm-3 col-xs-3 logo">
             <img src="<?= $url ?>" />
-            <div>AJOUT TAG ACTIVITE PAR AGE</div>
+            <div>
+                <?php
+                    $v = get_term_by('name', $post->ID, 'tax_mdq_age');
+                    print_r($v);
+                    get_term($post->title);
+                ?>
+            </div>
         </div>
         <div class="col-md-7 col-sm-7 col-xs-9">
             <h3><?= $post->post_title; ?></h3>
             <div class="desc">
-                <?= max_caracter_length($post->mdq_event_description, 250); ?>
+                <div style="position: relative">
+                    <div id="acti-<?= $post->ID; ?>"  class="content overflow content-activite acti-<?= $post->ID; ?>">
+                        <?= $post->mdq_event_description ?>
+                        <div class="div-hover" data-id="<?= $post->ID; ?>">
+                            <span class="gly-<?= $post->ID; ?> glyphicon glyphicon-chevron-down down-chevron" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-md-2 col-sm-2 col-xs-12 menu">
@@ -91,26 +104,28 @@ function mdq_showActiviteHtml($post){
 
 function mdq_list_cat($name_tax, $val = null){
     $categories = get_categories( array(
-        'hide_empty' => 0,
         'orderby' => 'name',
         'order'   => 'ASC',
+
         'taxonomy' => $name_tax
     ) );
 
 
     $list_cat = "";
     foreach( $categories as $category ) {
-        $select = "";
-        if($val == $category->term_id){
-            $select = "selected";
-        }
-        $category_link = sprintf(
-            '<option value="%1$s" '.$select.'>%2$s</option>',
-            esc_html( $category->term_id ),
-            esc_html( $category->name )
-        );
+        if($category->parent == 0){
+            $select = "";
+            if($val == $category->term_id){
+                $select = "selected";
+            }
+            $category_link = sprintf(
+                '<option value="%1$s" '.$select.'>%2$s</option>',
+                esc_html( $category->term_id ),
+                esc_html( $category->name )
+            );
 
-        $list_cat .= $category_link;
+            $list_cat .= $category_link;
+        }
     }
 
     return $list_cat;
@@ -202,12 +217,70 @@ function mdq_list_cat($name_tax, $val = null){
     </div>
 
     <script>
+
+    $(document).ready(function(){
+        var last_id = null;
+        $("html").click(function(){
+            $(".content-activite").each(function( index ){
+                var i = $(this).data('id');
+                $("#acti-"+i).addClass("overflow");
+                $("#acti-"+i).removeClass("active");
+                $(".gly-"+i).addClass("glyphicon-chevron-down");
+                $(".gly-"+i).removeClass("glyphicon-chevron-up");
+            });
+        });
+
+        $(".div-hover").click(function(e){
+            e.stopPropagation();
+            var id = $(this).data('id');
+            var button = $(this);
+            $(".content-activite").each(function( index ){
+                console.log(this);
+                if($(this).hasClass("acti-"+id)){
+                console.log('ok');
+                    if(!$(this).hasClass("active")){
+                        //on cache
+                        console.log('lol');
+                        $("#acti-"+id).removeClass("overflow");
+                        $("#acti-"+id).addClass("active");
+                        $(".gly-"+id).removeClass("glyphicon-chevron-down");
+                        $(".gly-"+id).addClass("glyphicon-chevron-up");
+                        $(button).addClass("che-down");
+                    }
+                    else{
+                        console.log('dev');
+                        $("#acti-"+id).addClass("overflow");
+                        $("#acti-"+id).removeClass("active");
+                        $(".gly-"+id).addClass("glyphicon-chevron-down");
+                        $(".gly-"+id).removeClass("glyphicon-chevron-up");
+                        $(button).removeClass("che-down");
+                        //on affiche
+                    }
+                }
+                else{
+                    console.log('wtf');
+                    var i = $(this).data('id');
+                    $("#acti-"+i).addClass("overflow");
+                    $("#acti-"+i).removeClass("active");
+                    $(".gly-"+i).addClass("glyphicon-chevron-down");
+                    $(".gly-"+i).removeClass("glyphicon-chevron-up");
+                    //on cache
+                }
+
+            });
+
+            last_id = id;
+        });
+    });
+    </script>
+
+    <script>
     $(document).ready(function(){
 
 
         function callMap(adress, id){
                 $.get('http://maps.googleapis.com/maps/api/geocode/json?address='+adress+'&sensor=true', function(reponse){
-                    let pos = reponse['results'][0]['geometry']['location'];
+                    var pos = reponse['results'][0]['geometry']['location'];
                     if ($('#map-'+id).is(':visible')){
                         var mymap = L.map('map-'+id).setView([pos['lat'], pos['lng']], 16);
                         var marker = L.marker([pos['lat'], pos['lng']]).addTo(mymap);
@@ -221,8 +294,8 @@ function mdq_list_cat($name_tax, $val = null){
         }
 
         $(".menu li").click(function(){
-            let menu = $(this).data('menu');
-            let id = $(this).data('id');
+            var menu = $(this).data('menu');
+            var id = $(this).data('id');
             var li = this;
             // $('.block-absolute').hide();
 
