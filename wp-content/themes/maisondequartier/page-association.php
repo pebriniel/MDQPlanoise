@@ -35,7 +35,7 @@ get_header();
 	query_posts(array('post_type' => 'fiche'));
 
 	if($infosAsso = get_post($fiche)){
-		// while(have_posts()){
+		while(have_posts()){
 						the_post();
 
 
@@ -97,6 +97,8 @@ get_header();
 						<?php
 						}
 						?>
+						<li><a href="<?= $infosAsso->_fb; ?>"><span class="fa fa-facebook"></span></a></li>
+						<li><a href="<?= $infosAsso->_twitter; ?>"><span class="fa fa-twitter"></span></a></li>
 					</ul>
 				</div>
 			</div>
@@ -122,14 +124,15 @@ get_header();
 
 						</div>
 						<div class="col-md-8 descrip text-justify">
-							<p><?= get_the_content(); // $infosAsso->_desc;?></p>
+							<p><?= $infosAsso->post_content;?></p>
 						</div>
 					</div>
 				</div>
 				<!-- fin carte visite -->
 			<?php
 
-			}
+		}
+	}
 
 			if($infosAsso->showCaroussel){
 
@@ -524,8 +527,18 @@ get_header();
 
 				?>
 
+				<!-- partenaires association -->
+				<div class="container loc">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-7">
+								<h2>Les partenaires</h2>
+								<p><?= $infosAsso->_partner; ?></p>
+							</div>
+						</div>
+					</div>
+				</div>
 
-				<div>ici les partenaires ?? voici l'affiche depuis le back : <?= $infosAsso->_partner; ?></div>
 				<?php
 			}
 
@@ -591,7 +604,7 @@ get_header();
 								$subject = 'Formulaire de contact';
 								$headers = 'De : <noreply@student.codeur.online>';
 								mail($email, $subject, $body, $headers);
-							} 
+							}
 
 							$emailSent = true;
 
