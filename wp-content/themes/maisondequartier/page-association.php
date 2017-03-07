@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php
 /**
 * The main template file
@@ -557,6 +558,8 @@ get_header();
 
 						<?php 	} 	} get_footer(); ?>
 =======
+=======
+>>>>>>> 7df636d9d7a47d35cdb5ec0767a37c63d9bd95a9
 <?php
 /**
 * The main template file
@@ -1117,4 +1120,7 @@ get_header();
 						</main>
 
 						<?php 	} 	} get_footer(); ?>
+<<<<<<< HEAD
+>>>>>>> 7df636d9d7a47d35cdb5ec0767a37c63d9bd95a9
+=======
 >>>>>>> 7df636d9d7a47d35cdb5ec0767a37c63d9bd95a9
