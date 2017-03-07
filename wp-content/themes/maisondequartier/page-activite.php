@@ -73,7 +73,6 @@ function mdq_showActiviteHtml($post){
                         LIMIT 0, 1
                         ";
                 $t = $wpdb->get_results($query, OBJECT);
-                echo "lol";
             ?>
 
             <h6><?= $t[0]->post_title; ?></h6>
