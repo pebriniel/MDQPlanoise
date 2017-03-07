@@ -71,23 +71,19 @@ if (!function_exists('bootstrapBasicPostOn')) {
 		);
 
     if (is_sticky() == null){
-      $author = 'par <span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s">%3$s</a></span>';
+      $author = 'par <span class="author vcard">%1$s</span>';
 
     } else {
       $author = '';
     }
 
     $author = sprintf($author,
-      esc_url(get_author_posts_url(get_the_author_meta('ID'))),
-      esc_attr(sprintf(__('View all posts by %s', 'bootstrap-basic'), get_the_author())),
       esc_html(get_the_author())
     );
 
 
 		printf(__('<span class="posted-on">Publié le %1$s</span><span class="byline"> %2$s</span>', 'bootstrap-basic'),
-			sprintf('<a href="%1$s" title="%2$s" rel="bookmark">%3$s</a>',
-				esc_url(get_permalink()),
-				esc_attr(get_the_time()),
+			sprintf('%1$s',
 				$time_string
 			),
 			sprintf($author,
@@ -114,7 +110,7 @@ if (!function_exists('bootstrapBasicMoreLinkText')) {
       $url = '?article=' .$post->ID;
     }
 
-    return __('<span class="meta-nav"><a href="'. $url . '">(suite...)</a></span>', 'bootstrap-basic');
+    return __('<span class="meta-nav"><a href="'. $url . '#article-'.$post->ID.'">(suite...)</a></span>', 'bootstrap-basic');
   }// bootstrapBasicMoreLinkText
 }
 

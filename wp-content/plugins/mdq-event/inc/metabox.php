@@ -46,8 +46,13 @@ function mdq_event_meta_liste_assoc($object){
 				while ( have_posts() ){
 					the_post();
 					global $post;
+
+					$selected = "";
+					if($post->ID == get_post_meta($object->ID, 'mdq_association_id', true)){
+						$selected = "selected";
+					}
 					?>
-						<option value="<?= $post->ID; ?>"><?= $post->_name; ?></option>
+						<option value="<?= $post->ID; ?>" <?= $selected; ?>><?= $post->_name; ?></option>
 					<?php
 				}
 			}
