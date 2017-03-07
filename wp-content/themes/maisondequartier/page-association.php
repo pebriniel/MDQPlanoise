@@ -30,19 +30,14 @@ get_header();
 
 
 	<?php
-
-
 	query_posts(array('post_type' => 'fiche'));
 
 	if($infosAsso = get_post($fiche)){
-		while(have_posts()){
-						the_post();
-
 
 		if($infosAsso->post_type == 'fiche'){
 			?>
 
-			<div id="transition" class="row transition-assoc">
+			<div id="transition-assoc" class="row transition-assoc">
 				<div class="col-md-12 col-xs-12" id="menu-assoc">
 					<ul>
 						<?php
@@ -61,7 +56,7 @@ get_header();
 						<li>
 							<a href="#evenements">
 								<span class="glyphicon glyphicon-calendar"></span>
-	              <span class="text">Évènements</span>
+	                       		<span class="text">Évènements</span>
 							</a>
 						</li>
 						<?php
@@ -104,12 +99,13 @@ get_header();
 		<div class="content-onepage">
 			<?php
 
+
 			if($infosAsso->showDescription){
 				?>
 				<!-- carte visite -->
 				<div id="cartevisite" class="container">
-					<div class="col-md-12 carteVisite">
-						<div class="col-md-4 logo">
+					<div class="row carteVisite">
+						<div class="col-md-4 col-sm-6 col-sm-offset-3 col-xs-12 logo">
 
 							<div class="thumbnail">
 								<span><?= get_the_post_thumbnail($infosAsso->ID, 'fiche-association'); ?></span>
@@ -117,12 +113,11 @@ get_header();
 									<h3><?= $infosAsso->_name; ?></h3>
 								</div>
 							</div>
-							<div>Tarif d'adhésion : <?= $infosAsso->_membership; ?></div>
-							<button type="button" name="button" class="btn btn-link-leaflet center-block">Télécharger la plaquette</button>
+							<button type="button" name="button" class="btn btn-link center-block">Télécharger la plaquette</button>
 
 						</div>
-						<div class="col-md-8 descrip text-justify">
-							<p><?= the_content(); // $infosAsso->_desc;?></p>
+						<div class="col-md-8 col-sm-12 col-xs-12 descrip text-justify">
+							<p><?= $infosAsso->_desc;?></p>
 						</div>
 					</div>
 				</div>
@@ -172,17 +167,14 @@ get_header();
 
 		 			// 	$asso_orga = get_post_meta(get_the_ID(), 'mdq_listing_assoc', true);
 		 				$dateStart = get_post_meta(get_the_ID(), 'event_asso_start', true);
-						$dateDisplayStart = date_i18n("d/m/Y", strtotime($dateStart));
+					//	$dateDisplayStart = date_i18n($format_date, strtotime($dateStart));
 						$dateEnd = get_post_meta(get_the_ID(), 'event_asso_end', true);
-						$dateDisplayEnd = date_i18n("d/m/Y", strtotime($dateEnd));
-						$hour = get_post_meta(get_the_ID(), 'event_asso_hour_start', true);
-						$eventHourStart = date_i18n("G:i", strtotime($hour));
-						$location_event = get_post_meta(get_the_ID(), 'event_asso_address', true);
+				//		$dateDisplayEnd = date_i18n($format_date, strtotime($dateEnd));
+		 				$location_event = get_post_meta(get_the_ID(), 'event_asso_address', true);
 		 				$images[] = array('post_id' => $post_id,
 		 													'title' => $title,
-		 													'dateStart' => $dateDisplayStart,
-		 													'dateEnd' => $dateDisplayEnd,
-															'heure' => $eventHourStart,
+		 													'dateStart' => $dateStart,
+		 													'dateEnd' => $dateEnd,
 		 													'location' => $location_event,
 		 													'content' => $content,
 		 													'image' => $image,
@@ -221,7 +213,7 @@ get_header();
 						 <div class="carousel-caption">
 							 <h3 class="img-modal img-responsive" title="<?= $image['title']; ?>"><?= $image['title'];?></h3>
 
-							 <p> Le <?= $image['dateStart'];?> à <?= $image['heure'];?></p>
+							 <p> Du <?= $image['dateStart'];?> au <?= $image['dateEnd']; ?> </p>
 							 <p><?= $image['association'];?></p>
 							 <a class="btn-link img-modal" id="image-<?= $images['post_id']; ?>" data-title="<?= $image['title']; ?>" data-content="<?= $image['content']; ?>" data-img="<?= $image['img_src'] ?>" data-date="<?= $image['dateStart']; ?>" data-location="<?= $image['location']; ?>" data-url="<?=  get_site_url()."/association/?fiche=".$image['association']; ?>" role="button">voir l'événement</a>
 
@@ -456,7 +448,7 @@ get_header();
 								</div>
 								<div class="members-plus">
 									<svg class="more" enable-background="new 0 0 48 48" height="60px" id="Layer_1" version="1.1" viewBox="0 0 48 48" width="60px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-										<path d="M24,0C10.745,0,0,10.745,0,24c0,13.254,10.745,24,24,24s24-10.746,24-24C48,10.745,37.255,0,24,0z   M34.031,24.766c0,1.109-0.9,1.305-1.354,1.332h-6.581l-0.008,6.607c-0.002,1.221-0.933,1.322-1.18,1.326L23.1,34.029  c-0.27-0.006-1.211-0.109-1.209-1.33l0.008-6.602h-6.602c-1.221,0-1.322-0.93-1.328-1.178v-1.809  c0.005-0.27,0.108-1.211,1.328-1.211h6.607l0.008-6.463c0.006-0.306,0.107-1.472,1.288-1.47l1.578,0.002  c1.11,0.001,1.305,0.902,1.331,1.356L26.102,21.9h6.458c0.306,0.006,1.472,0.105,1.472,1.287V24.766z" fill="#ff6633"/>
+										<path d="M24,0C10.745,0,0,10.745,0,24c0,13.254,10.745,24,24,24s24-10.746,24-24C48,10.745,37.255,0,24,0z   M34.031,24.766c0,1.109-0.9,1.305-1.354,1.332h-6.581l-0.008,6.607c-0.002,1.221-0.933,1.322-1.18,1.326L23.1,34.029  c-0.27-0.006-1.211-0.109-1.209-1.33l0.008-6.602h-6.602c-1.221,0-1.322-0.93-1.328-1.178v-1.809  c0.005-0.27,0.108-1.211,1.328-1.211h6.607l0.008-6.463c0.006-0.306,0.107-1.472,1.288-1.47l1.578,0.002  c1.11,0.001,1.305,0.902,1.331,1.356L26.102,21.9h6.458c0.306,0.006,1.472,0.105,1.472,1.287V24.766z" fill="#eb661b"/>
 									</svg>
 								</div>
 							</div>
@@ -497,12 +489,10 @@ get_header();
 											<h4><a href="<?=  $infosAsso->_link;  ?>"><?= $infosAsso->_link; ?></a></h4>
 											<h3>Ouverture - période scolaire :</h3>
 											<p><?= $infosAsso->_school;?></p>
-	<?php if($infosAsso->showsmallHolidays){  ?>
 											<h3>Ouverture - petites vacances :</h3>
-											<p><?= $infosAsso->_smallHolidays; }?></p>
-	<?php if($infosAsso->showbigHolidays){  ?>
+											<p><?= $infosAsso->_smallHolidays;?></p>
 											<h3>Ouverture - grandes vacances : </h3>
-											<p><?= $infosAsso->_bigHolidays; }?></p>
+											<p><?= $infosAsso->_bigHolidays;?></p>
 										</div>
 
 										<div class="map col-md-5">
@@ -518,15 +508,6 @@ get_header();
 							<!-- fin adresse asso -->
 				<?php
 
-			}
-
-			if($infosAsso->showPartner){
-
-				?>
-
-
-				<div>ici les partenaires ?? voici l'affiche depuis le back : <?= $infosAsso->_partner; ?></div>
-				<?php
 			}
 
 			if($infosAsso->showFormulaire){
@@ -573,4 +554,4 @@ get_header();
 	</div>
 						</main>
 
-						<?php 	} 	} } get_footer(); ?>
+						<?php 	} 	} get_footer(); ?>

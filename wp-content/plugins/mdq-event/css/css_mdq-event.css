@@ -461,11 +461,8 @@ h3 {
 }
 
 #activite .active {
-    height: auto;
     z-index: 100;
-    background-color: white;
     padding-bottom: 1em;
-    position: absolute;
     z-index: 500;
 }
 

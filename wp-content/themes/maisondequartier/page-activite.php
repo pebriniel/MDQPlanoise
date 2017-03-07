@@ -61,13 +61,11 @@ function mdq_showActiviteHtml($post){
         </div>
         <div class="col-md-7 col-sm-7 col-xs-9">
             <h3><?= $post->post_title; ?></h3>
+            <h6>Association</h6>
             <div class="desc">
-                <div style="position: relative">
+                <div style="position: relative"> 
                     <div id="acti-<?= $post->ID; ?>"  class="content overflow content-activite acti-<?= $post->ID; ?>">
-                        <?= $post->mdq_event_description ?>
-                        <div class="div-hover" data-id="<?= $post->ID; ?>">
-                            <span class="gly-<?= $post->ID; ?> glyphicon glyphicon-chevron-down down-chevron" aria-hidden="true"></span>
-                        </div>
+                        Tarif :
                     </div>
                 </div>
             </div>
@@ -82,17 +80,31 @@ function mdq_showActiviteHtml($post){
                     <img src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/map.svg" width="40%;" class="map-icon" alt=""><br/>
                     Carte
                 </li>
-                <li data-id="1">
-                    <a href="<?= get_site_url()."/association/?fiche=".$post->mdq_association_id; ?>" data-id="$post->ID">
-                        <span class="glyphicon glyphicon-info-sign"></span><br />
-                            Association
-                        </span>
-                    </a>
+                <li class="li-map li-description-<?= $post->ID; ?>" data-menu="description" data-id="<?= $post->ID; ?>">
+                    <!-- <a href="<?= get_site_url()."/association/?fiche=".$post->mdq_association_id; ?>" data-id="$post->ID">
+                    </a> -->
+                    <span class="glyphicon glyphicon-info-sign"></span><br />
+                        Association
+                    </span>
                 </li>
             </ul>
         </div>
         <div class="macti-<?= $post->ID; ?> col-md-10 col-sm-10 col-xs-12 block-absolute menu-horaire menu-horaire-<?= $post->ID; ?>" data-menu="horaire">
             <?= $post->mdq_event_date; ?>
+        </div>
+
+        <div class="macti-<?= $post->ID; ?> col-md-10 col-sm-10 col-xs-12 block-absolute menu-description menu-description-<?= $post->ID; ?>" data-menu="description">
+            <div class="col-md-12 col-sm-1é col-xs-12">
+                <h3><?= $post->post_title; ?></h3>
+                <h6>Association</h6>
+                <div class="desc">
+                    <div style="position: relative">
+                        <div id="acti-<?= $post->ID; ?>"  class="content overflow content-activite acti-<?= $post->ID; ?>">
+                            <?= $post->mdq_event_description ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="map-<?= $post->ID; ?>" class="macti-<?= $post->ID; ?> col-md-10 col-sm-10 col-xs-12 block-absolute menu-map menu-map-<?= $post->ID; ?>" data-menu="map">
 
