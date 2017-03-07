@@ -1,0 +1,447 @@
+
+@media screen and (max-width: 480px){
+    body{
+        padding-top: 41px
+    }
+    main{
+        padding-top: 0em;
+    }
+    /* affichage du header pour mobile */
+    .page-header .navbar-fixed-top{
+        height: 50px;
+    }
+
+    .page-header .navbar-fixed-top img{
+        width: 120px;
+        padding-top: 0px;
+    }
+    header .menu-burger{
+        top: 0em;
+        right: 1em;
+    }
+}
+
+@media only screen and (min-width: 1100px) {
+  #home .cd-horizontal-timeline {
+    margin: 1em auto;
+  }
+  #home .cd-horizontal-timeline::before {
+    /* never visible - this is used in jQuery to check the current MQ */
+    content: 'desktop';
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  #home .cd-horizontal-timeline .events-content h2 {
+    font-size: 7rem;
+  }
+
+  #home .cd-horizontal-timeline .events-content p {
+    font-size: 1.8rem;
+  }
+}
+
+@media screen and (min-width: 200px) and (max-width: 700px) {
+  #home .cd-horizontal-timeline {
+    height: 450px;
+    width: 450px;
+    margin: 0;
+    padding: 0;}
+  #home .cd-horizontal-timeline .timeline {
+    /*height: 100px;
+    width: 100%;
+    max-width: 800px;*/
+    margin: 0 5%;
+  }
+
+
+  #home .cd-horizontal-timeline .events-content {
+    position: relative;
+    width: 50%;
+    /*margin: 2em 0;*/
+    overflow: hidden;
+    -webkit-transition: height 0.4s;
+    -moz-transition: height 0.4s;
+    transition: height 0.4s;
+  }
+}
+/* -- responsive -- */
+@media screen and (min-width: 200px) and (max-width: 700px) {
+
+  #home  #carousel .carousel-inner .item {
+    height: 250px;  }
+
+  #home .carousel-indicators {
+    display: none; }
+
+  #home #carousel .item img{
+    height: 100%;  }
+
+  #home .carousel-caption {
+    height: 60%;
+    padding: 0;}
+
+  #home .carousel-caption h3 {
+    font-size: 1.5em;
+    text-transform: uppercase;
+    font-weight: bold; }
+
+  #home .carousel-caption p {
+    font-size: 0.9em; }
+  #home #carousel .item .btn-association{
+      padding-left: 1em;
+      padding-right: 1em;
+      padding-top: 0.2em;
+      padding-bottom: 0.2em;
+      font-size: 1.5em;
+   padding-left: 0.5em;
+   padding-right: 0.5em;
+   padding-top: 0.1em;
+   padding-bottom: 0.1em;
+   font-size: 1em; }
+
+  #home #modal-gallery{
+    margin-top: 1%;
+    height: 600px;
+  }
+}
+
+@media screen and (min-width: 700px) and (max-width: 1024px) {
+  #home #carousel .item img{
+    height: 100%;  }
+}
+/* version mobile & tablette */
+@media screen and (min-width: 200px) and (max-width: 767px) {
+
+#transition{
+    padding-left: 1em;
+}
+  #annuaire #search select {
+    width: 98.1%;
+    margin-top: 1em;
+  }
+  #annuaire #content {
+    padding-top: 4em;
+  }
+  #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .logo {
+    display: none;
+  }
+  #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption {
+    width: 98%;
+  }
+  #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire{
+      background: none;
+      bottom: 0;
+  }
+  .search-box{
+      width: 100%;
+  }
+  .trans-annuaire{
+      height: 110px !important;
+  }
+}
+
+@media screen and (max-width: 992px) {
+    .page-header #nav li {
+        margin-top: 66px;
+        margin-right: 0%;
+    }
+}
+@media screen and (max-width: 850px) {
+    .page-header img {
+        width: 200px;
+        padding-top: 21px;
+    }
+}
+
+@media screen and (max-width: 850px)
+{
+
+    header .menu-burger
+    {
+        display: block;
+    }
+    .menu-content
+    {
+        display: none;
+        z-index: 200;
+        height: auto;
+        color: white;
+        background-color: #ff6633;
+    }
+
+    header .menu-item{
+        width: 100%;
+        text-align: left;
+    }
+
+    header .hide-menu{
+        display: block;
+    }
+
+    .page-header #nav li{
+        margin: 0em;
+    }
+
+    .page-header #nav li a{
+        display: block;
+        padding: 1em;
+        width: 100%;
+        height: 100%;
+        color: white;
+    }
+}
+
+@media screen and (min-width: 200px) and (max-width: 700px) {
+  #home .cd-horizontal-timeline {
+    height: 450px;
+    width: 450px;
+    margin: 0;
+    padding: 0;}
+
+  #home .cd-horizontal-timeline .timeline {
+    /*height: 100px;
+    width: 100%;
+    max-width: 800px;*/
+    margin: 0 5%;
+  }
+
+
+  #home .cd-horizontal-timeline .events-content {
+    position: relative;
+    width: 50%;
+    /*margin: 2em 0;*/
+    overflow: hidden;
+    -webkit-transition: height 0.4s;
+    -moz-transition: height 0.4s;
+    transition: height 0.4s;
+  }
+}
+
+@media screen and (min-width: 200px) and (max-width: 640px) {
+  #footer #logo {
+    text-align: center;
+  }
+  #footer #middle-box {
+    margin-top: 6vh;
+    margin-left: 6%;
+  }
+  #footer #middle-box #association-ul {
+    display: block;
+    border: none;
+  }
+  #footer #middle-box #association-ul li {
+    border-left: 2px solid #ff6633;
+    display: block;
+    width: auto;
+    list-style-type: none;
+    padding-top: 0.3em;
+    padding-left: 1em;
+    font-size: 1em;
+    color: white;
+  }
+  #footer #middle-box #association-ul li:hover {
+    border-left: 3px solid white;
+  }
+  #footer #middle-box #association-ul li:hover a {
+    color: #ff6633;
+  }
+  #footer #middle-box #association-ul li:nth-child(1) {
+    text-align: left;
+  }
+  #footer #middle-box #association-ul li:nth-child(2) {
+    text-align: left;
+  }
+  #footer #middle-box #association-ul li:nth-child(3) {
+    text-align: left;
+  }
+  #footer #middle-box #menu-ul {
+    margin-top: 6vh;
+  }
+}
+
+@media (max-width: 480px) {
+    #contact .half {
+        width: 100%;
+        float: none;
+        margin-bottom: 0;
+    }
+
+    #contact #mdq, #contact #nous-contacter {
+        font-size: 2em;
+    }
+
+    #contact img {
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    #contact #contacter {
+        margin-top: 10%;
+        text-align: center;
+    }
+    #contact #mdq-logo {
+        width: 30%;
+        margin-left: 27%;
+    }
+}
+
+@media (max-width: 630px) {
+    #contact .half {
+        width: 80%;
+        margin-left: 10%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #contact .half {
+        margin-left: 10%;
+        width: 80%;
+        float: none;
+        margin-bottom: 0;
+    }
+    #contact #mdq, #contact #nous-contacter {
+        font-size: 2em;
+    }
+    #contact #mdq-logo {
+        margin-left: 25%!important;
+        width: 50%;
+    }
+    #contact #contacter {
+        margin-top: 9%;
+        margin-bottom: 0;
+        font-size: 1.4em;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #transition {
+        background-color: #fff;
+    }
+    #contact #mdq-logo {
+        margin-left: 36%;
+    }
+    #btn-valid {
+        border: 1px solid #FF6633!important;
+        margin-top: 10px;
+    }
+}
+
+@media only screen and (min-width: 1100px) {
+  .cd-horizontal-timeline {
+    margin: 6em auto;
+  }
+  .cd-horizontal-timeline::before {
+    /* never visible - this is used in jQuery to check the current MQ */
+    content: 'desktop';
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .cd-horizontal-timeline .events-content h2 {
+    font-size: 7rem;
+  }
+  .cd-horizontal-timeline .events-content em {
+    font-size: 2rem;
+  }
+  .cd-horizontal-timeline .events-content p {
+    font-size: 1.8rem;
+  }
+}
+
+@media screen and (max-width: 991px) {
+/*
+    .select-menu  {
+        margin-top: 10px;
+    }*/
+}
+
+@media screen and (max-width: 767px){
+    .select-menu , #btn-valid  {
+        margin-top: 10px;
+    }
+}
+
+
+@media screen and (max-width: 850px){
+.modal-dialog{
+    overflow: auto;
+    height: 150vh; }
+
+.modal-content{
+    height: auto; }
+
+ .modal-footer{
+ height: 5vh; }
+}
+
+@media screen and (max-width: 1024px){
+
+#home .modal-dialog .btn-association{
+  width: 20%;
+  margin-left: 7%; }
+
+#home .modal-dialog .btn-association-asso{
+  width: 35%;
+  float: left;
+  margin-left: 5%; }
+}
+
+
+
+@media screen and (max-width: 991px){
+  #apropos .gallery .activite1, #apropos .gallery .activite2, #apropos .gallery .activite3{
+    padding: 0%;
+    margin: 1% 0%;
+  }
+  #apropos .gallery .act1, #apropos .gallery .act2, #apropos .gallery .act3{
+    padding: 0%;
+    margin: 0%;
+  }
+
+  #apropos .gallery img{
+    height: 500px;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 768px){
+  #apropos .gallery .activite1, #apropos .gallery .activite2, #apropos .gallery .activite3{
+    padding: 0%;
+    margin: 1% 0%;
+  }
+  #apropos .gallery .act1, #apropos .gallery .act2, #apropos .gallery .act3{
+    padding: 0%;
+    margin: 0%;
+  }
+
+  #apropos .gallery img{
+    height: 430px;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+  }
+  #apropos .carteVisite .thumbnail{
+    margin-right: 0%;
+  }
+}
+
+@media screen and (max-width: 414px){
+  #apropos .gallery img{
+    height: 300px;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+  }
+  #apropos .carteVisite{
+    margin-right: 1%;
+    margin-left: 1%;
+  }
+  #apropos .missions .thumbnail{
+    margin-left: 1%;
+    margin-right: 1%;
+  }
+}
