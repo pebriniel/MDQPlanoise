@@ -4,7 +4,7 @@ Plugin Name: fiche association
 Plugin URI:  https://houdab.student.codeur.online/wordpre²ss/wp-content/plugins/fiche-association/
 Description: annuaire association
 Version:     0.1
-Author:      Houda B. - Boussad S;
+Author:      Houda B. - Boussad S.
 */
 
 add_action('init', 'ficheassocation_init');									// Initialisation de Wordpress
@@ -44,9 +44,9 @@ function ficheassocation_init(){
 		'menu_position' => 9,
 		'menu_icon' => 'dashicons-id',
 		'capability_type'=>'post',
-		'supports' => array('title', 'thumbnail'),
-    'taxonomies' => array( 'category', 'theme_mdq', 'age_mdq', 'status_members_mdq' ),
-		 'map_meta_cap' => true
+		'supports' => array('title', 'thumbnail', 'editor'),
+    'taxonomies' => array( 'theme_mdq', 'age_mdq', 'status_members_mdq'),
+		 'map_meta_cap' => true,
 	));
 
  // add_image_size('ficheassociation',300,150,true);
@@ -105,18 +105,20 @@ if ( function_exists( 'add_image_size' ) ) {
 **/
 function ficheassocation_metaboxes(){
 	if(function_exists('add_meta_box')){
-		add_meta_box('ficheassocation','Profil association','ficheassocation_metabox','fiche','normal','high');
-		add_meta_box('ficheassocation_coordonnees','Coordonnées','ficheassociation_coordonnees_metabox','fiche','normal','high');
+		// add_meta_box('ficheassocation','Profil association','ficheassocation_metabox','fiche','normal','high');
+		add_meta_box('ficheassocation_coordonnees','Profil','ficheassociation_coordonnees_metabox','fiche','normal','high');
 		add_meta_box('ficheassocation_horaires','Horaires d\'ouvertures','ficheassocation_horaires_metabox','fiche','normal','high');
 		add_meta_box('ficheassocation_show','Choix d\'affichage des différentes box','ficheassociation_showbox_metabox','fiche','normal','high');
 	}
 }
 
+
+
 /**
-* Metabox pour gérer le Profil
+* Metabox pour gérer les coordonnées
 * @param Object $object article/contenu édité
 **/
-function ficheassocation_metabox($object){
+function ficheassociation_coordonnees_metabox($object){
 	// On génère un token (SECURITE)
 	wp_nonce_field('ficheassocation','ficheassocation_nonce');
 	?>
@@ -127,24 +129,6 @@ function ficheassocation_metabox($object){
 			<input type="text" name="ficheassocation_name" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_name', true)); ?>">
 		</div>
 
-		<div class="meta-box-item-title">
-			<label for="ficheassocation_desc">Description</label>
-		</div>
-		<div class="meta-box-item-content">
-			<textarea name="ficheassocation_desc" rows="20" cols="50" style="width:100%; resize:none;"><?= esc_attr(get_post_meta($object->ID, '_desc', true)); ?></textarea>
-		</div>
-
-		<?php
-}
-
-/**
-* Metabox pour gérer les coordonnées
-* @param Object $object article/contenu édité
-**/
-function ficheassociation_coordonnees_metabox($object){
-	// On génère un token (SECURITE)
-	wp_nonce_field('ficheassocation','ficheassocation_nonce');
-	?>
 		<div class="meta-box-item-title">
 			<label for="ficheassocation_email">Email</label>
 		</div>
@@ -185,6 +169,34 @@ function ficheassociation_coordonnees_metabox($object){
 			<input type="url" name="ficheassocation_link" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_link', true)); ?>">
 		</div>
 
+		<div class="meta-box-item-title">
+			<label for="ficheassocation_fb">Lien facebook</label>
+		</div>
+		<div class="meta-box-item-content">
+			<input type="url" name="ficheassocation_fb" style="width:100%;" value="<?= esc_attr(get_post_meta($object->ID, '_fb', true)); ?>">
+		</div>
+
+		<div class="meta-box-item-title">
+			<label for="ficheassocation_tw">Lien twitter</label>
+		</div>
+		<div class="meta-box-item-content">
+			<input type="url" name="ficheassocation_tw" style="width:100%;" value="<?= esc_attr(get_post_meta($object->ID, '_twitter', true)); ?>">
+		</div>
+
+		<div class="meta-box-item-title">
+			<label for="ficheassocation_partner">Partenaires</label>
+		</div>
+		<div class="meta-box-item-content">
+			<textarea name="ficheassocation_partner" rows="5" cols="50" style="width:100%; resize:none;"><?= esc_attr(get_post_meta($object->ID, '_partner', true)); ?></textarea>
+		</div>
+
+		<div class="meta-box-item-title">
+			<label for="ficheassocation_membership">Adhésion (préciser la périodicité)</label>
+		</div>
+		<div class="meta-box-item-content">
+			<input type="text" name="ficheassocation_membership" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_membership', true)); ?>">
+		</div>
+
 <?php
 }
 
@@ -218,6 +230,7 @@ function ficheassocation_horaires_metabox($object){
 	<div class="meta-box-item-content">
 		<textarea name="ficheassocation_bigHolidays" rows="4" cols="50" style="width:100%; resize:none;"><?= esc_attr(get_post_meta($object->ID, '_bigHolidays', true)); ?></textarea>
 	</div>
+
 	<?php
 }
 
@@ -233,34 +246,63 @@ function ficheassociation_showbox_metabox($object){
 	?>
 	<div class="meta-box-item-title">
 		<input type="checkbox" name="showDescription" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showDescription', true)), 1 ); ?> />
-		<label for="ficheassocation_school">Affichage du titre et de la description</label>
+		<label for="showDescription">Affichage du titre et de la description</label>
 	</div>
 
 	<div class="meta-box-item-title">
 		<input type="checkbox" name="showCaroussel" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showCaroussel', true)), 1 ); ?> />
-		<label for="ficheassocation_school">Affichage du caroussel</label>
+		<label for="showCaroussel">Affichage du caroussel</label>
 	</div>
 
 	<div class="meta-box-item-title">
-		<input type="checkbox" name="showAgenda" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showagenda', true)), 1 ); ?> />
-		<label for="ficheassocation_school">Affichage de l'agenda</label>
+		<input type="checkbox" name="showAgenda" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showAgenda', true)), 1 ); ?> />
+		<label for="showAgenda">Affichage de l'agenda</label>
 	</div>
 
 	<div class="meta-box-item-title">
 		<input type="checkbox" name="showMembers" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showMembers', true)), 1 ); ?> />
-		<label for="ficheassocation_school">Affichage de les membres</label>
+		<label for="showMembers">Affichage de les membres</label>
 	</div>
 
 	<div class="meta-box-item-title">
 		<input type="checkbox" name="showCoordonnees" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showCoordonnees', true)), 1 ); ?> />
-		<label for="ficheassocation_school">Affichage des cordonnées</label>
+		<label for="showCoordonnees">Affichage des cordonnées</label>
 	</div>
 
 	<div class="meta-box-item-title">
 		<input type="checkbox" name="showFormulaire" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showFormulaire', true)), 1 ); ?> />
-		<label for="ficheassocation_school">Affichage du formulaire de contact</label>
+		<label for="showFormulaire">Affichage du formulaire de contact</label>
 	</div>
 
+	<div class="meta-box-item-title">
+		<input type="checkbox" name="showPartner" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showPartner', true)), 1 ); ?> />
+		<label for="showPartner">Affichage des partenaires</label>
+	</div>
+
+	<div class="meta-box-item-title">
+		<input type="checkbox" name="showbigHolidays" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showbigHolidays', true)), 1 ); ?> />
+		<label for="showbigHolidays">Affichage des ouvertues pendant les grandes vacances</label>
+	</div>
+
+	<div class="meta-box-item-title">
+		<input type="checkbox" name="showsmallHolidays" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showsmallHolidays', true)), 1 ); ?> />
+		<label for="showsmallHolidays">Affichage des ouvertues pendant les petites vacances</label>
+	</div>
+
+	<div class="meta-box-item-title">
+		<input type="checkbox" name="showfacebook" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showfacebook', true)), 1 ); ?> />
+		<label for="showfacebook">Affichage du lien facebook</label>
+	</div>
+
+	<div class="meta-box-item-title">
+		<input type="checkbox" name="showtwitter" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showtwitter', true)), 1 ); ?> />
+		<label for="showtwitter">Affichage du lien twitter</label>
+	</div>
+
+	<div class="meta-box-item-title">
+		<input type="checkbox" name="showMembership" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showMembership', true)), 1 ); ?> />
+		<label for="showMembership">Affichage du montant de l'adhésion</label>
+	</div>
 	<?php
 }
 
@@ -278,13 +320,17 @@ function ficheassocation_savepost($post_id, $post){
 	$postalcode = !isset($_POST['ficheassocation_pc']);
 	$city = !isset($_POST['ficheassocation_city']);
 	$siteweb = !isset($_POST['ficheassocation_link']);
-	$description = !isset($_POST['ficheassocation_desc']);
+	$facebook = !isset($_POST['ficheassocation_fb']);
+	$twitter = !isset($_POST['ficheassocation_tw']);
+	$partner = !isset($_POST['ficheassocation_partner']);
+	$membership = !isset($_POST['ficheassocation_membership']);
 	$school = !isset($_POST['ficheassocation_school']);
 	$smallHolidays = !isset($_POST['ficheassocation_smallHolidays']);
 	$bigHolidays = !isset($_POST['ficheassocation_bigHolidays']);
 
+
 	// Le champ est défini et le token est bon ?
-	if(!wp_verify_nonce($_POST['ficheassocation_nonce'] , 'ficheassocation') || $logo || $nameAsso || $email || $phone || $address || $postalcode || $city || $siteweb || $description || $school || $smallHolidays || $bigHolidays){
+	if(!wp_verify_nonce($_POST['ficheassocation_nonce'] , 'ficheassocation') || $nameAsso || $logo || $email || $phone || $address || $postalcode || $city || $siteweb || $partner || $school || $smallHolidays || $bigHolidays || $facebook || $twitter || $membership){
 		return $post_id;
 	}
 
@@ -301,8 +347,11 @@ function ficheassocation_savepost($post_id, $post){
 	update_post_meta($post_id,'_address',$_POST['ficheassocation_address']);
 	update_post_meta($post_id,'_pc',$_POST['ficheassocation_pc']);
 	update_post_meta($post_id,'_city',$_POST['ficheassocation_city']);
+	update_post_meta($post_id,'_fb',$_POST['ficheassocation_fb']);
+	update_post_meta($post_id,'_twitter',$_POST['ficheassocation_tw']);
 	update_post_meta($post_id,'_link',$_POST['ficheassocation_link']);
-	update_post_meta($post_id,'_desc',$_POST['ficheassocation_desc']);
+	update_post_meta($post_id,'_partner',$_POST['ficheassocation_partner']);
+	update_post_meta($post_id,'_membership',$_POST['ficheassocation_membership']);
 	update_post_meta($post_id,'_school',$_POST['ficheassocation_school']);
 	update_post_meta($post_id,'_smallHolidays',$_POST['ficheassocation_smallHolidays']);
 	update_post_meta($post_id,'_bigHolidays',$_POST['ficheassocation_bigHolidays']);
@@ -313,5 +362,11 @@ function ficheassocation_savepost($post_id, $post){
 	update_post_meta($post_id,'showMembers',$_POST['showMembers']);
 	update_post_meta($post_id,'showCoordonnees',$_POST['showCoordonnees']);
 	update_post_meta($post_id,'showFormulaire',$_POST['showFormulaire']);
+	update_post_meta($post_id,'showPartner',$_POST['showPartner']);
+	update_post_meta($post_id,'showsmallHolidays',$_POST['showsmallHolidays']);
+	update_post_meta($post_id,'showbigHolidays',$_POST['showbigHolidays']);
+	update_post_meta($post_id,'showfacebook',$_POST['showfacebook']);
+	update_post_meta($post_id,'showtwitter',$_POST['showtwitter']);
+	update_post_meta($post_id,'showMembership',$_POST['showMembership']);
 
 }
