@@ -61,13 +61,39 @@ function mdq_showActiviteHtml($post){
         </div>
         <div class="col-md-7 col-sm-7 col-xs-9">
             <h3><?= $post->post_title; ?></h3>
+            <?php
+                global $wpdb;
+                $asso_orga = get_post_meta(get_the_ID(), 'mdq_association_id', true);
+
+                $query = "SELECT event.*, $wpdb->postmeta.*
+                        FROM $wpdb->posts as event, $wpdb->postmeta
+                        WHERE event.ID = $asso_orga
+                        AND event.post_type = 'fiche'
+                        AND event.ID = $wpdb->postmeta.post_id
+                        LIMIT 0, 1
+                        ";
+                $t = $wpdb->get_results($query, OBJECT);
+            ?>
+
+            <h6><?= $t[0]->post_title; ?></h6>
             <div class="desc">
                 <div style="position: relative">
                     <div id="acti-<?= $post->ID; ?>"  class="content overflow content-activite acti-<?= $post->ID; ?>">
-                        <?= $post->mdq_event_description ?>
-                        <div class="div-hover" data-id="<?= $post->ID; ?>">
-                            <span class="gly-<?= $post->ID; ?> glyphicon glyphicon-chevron-down down-chevron" aria-hidden="true"></span>
-                        </div>
+                        <p>
+                            <?= $post->mdq_event_payement; ?>
+                        <p>
+                        <br/>
+
+                        <p>
+                            <?php
+                                $terms = wp_get_post_terms( get_the_ID(), 'age_mdq');
+                                for($i = 0; $i < sizeof($terms); $i ++){
+                                    if($i != 0) echo ", ";
+
+                                    echo $terms[$i]->name;
+                                }
+                            ?>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -82,17 +108,31 @@ function mdq_showActiviteHtml($post){
                     <img src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/map.svg" width="40%;" class="map-icon" alt=""><br/>
                     Carte
                 </li>
-                <li data-id="1">
-                    <a href="<?= get_site_url()."/association/?fiche=".$post->mdq_association_id; ?>" data-id="$post->ID">
-                        <span class="glyphicon glyphicon-info-sign"></span><br />
-                            Association
-                        </span>
-                    </a>
+                <li class="li-map li-description-<?= $post->ID; ?>" data-menu="description" data-id="<?= $post->ID; ?>">
+                    <!-- <a href="<?= get_site_url()."/association/?fiche=".$post->mdq_association_id; ?>" data-id="$post->ID">
+                    </a> -->
+                    <span class="glyphicon glyphicon-info-sign"></span><br />
+                        Association
+                    </span>
                 </li>
             </ul>
         </div>
         <div class="macti-<?= $post->ID; ?> col-md-10 col-sm-10 col-xs-12 block-absolute menu-horaire menu-horaire-<?= $post->ID; ?>" data-menu="horaire">
             <?= $post->mdq_event_date; ?>
+        </div>
+
+        <div class="macti-<?= $post->ID; ?> col-md-10 col-sm-10 col-xs-12 block-absolute menu-description menu-description-<?= $post->ID; ?>" data-menu="description">
+            <div class="col-md-12 col-sm-1é col-xs-12">
+                <h3><?= $post->post_title; ?></h3>
+                <h6><?= $t[0]->post_title; ?></h6>
+                <div class="desc">
+                    <div style="position: relative">
+                        <div id="acti-<?= $post->ID; ?>"  class="content overflow content-activite acti-<?= $post->ID; ?>">
+                            <?= $post->mdq_event_description ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="map-<?= $post->ID; ?>" class="macti-<?= $post->ID; ?> col-md-10 col-sm-10 col-xs-12 block-absolute menu-map menu-map-<?= $post->ID; ?>" data-menu="map">
 
@@ -217,67 +257,7 @@ function mdq_list_cat($name_tax, $val = null){
     </div>
 
     <script>
-
     $(document).ready(function(){
-        var last_id = null;
-        $("html").click(function(){
-            $(".content-activite").each(function( index ){
-                var i = $(this).data('id');
-                $("#acti-"+i).addClass("overflow");
-                $("#acti-"+i).removeClass("active");
-                $(".gly-"+i).addClass("glyphicon-chevron-down");
-                $(".gly-"+i).removeClass("glyphicon-chevron-up");
-            });
-        });
-
-        $(".div-hover").click(function(e){
-            e.stopPropagation();
-            var id = $(this).data('id');
-            var button = $(this);
-            $(".content-activite").each(function( index ){
-                console.log(this);
-                if($(this).hasClass("acti-"+id)){
-                console.log('ok');
-                    if(!$(this).hasClass("active")){
-                        //on cache
-                        console.log('lol');
-                        $("#acti-"+id).removeClass("overflow");
-                        $("#acti-"+id).addClass("active");
-                        $(".gly-"+id).removeClass("glyphicon-chevron-down");
-                        $(".gly-"+id).addClass("glyphicon-chevron-up");
-                        $(button).addClass("che-down");
-                    }
-                    else{
-                        console.log('dev');
-                        $("#acti-"+id).addClass("overflow");
-                        $("#acti-"+id).removeClass("active");
-                        $(".gly-"+id).addClass("glyphicon-chevron-down");
-                        $(".gly-"+id).removeClass("glyphicon-chevron-up");
-                        $(button).removeClass("che-down");
-                        //on affiche
-                    }
-                }
-                else{
-                    console.log('wtf');
-                    var i = $(this).data('id');
-                    $("#acti-"+i).addClass("overflow");
-                    $("#acti-"+i).removeClass("active");
-                    $(".gly-"+i).addClass("glyphicon-chevron-down");
-                    $(".gly-"+i).removeClass("glyphicon-chevron-up");
-                    //on cache
-                }
-
-            });
-
-            last_id = id;
-        });
-    });
-    </script>
-
-    <script>
-    $(document).ready(function(){
-
-
         function callMap(adress, id){
                 $.get('http://maps.googleapis.com/maps/api/geocode/json?address='+adress+'&sensor=true', function(reponse){
                     var pos = reponse['results'][0]['geometry']['location'];
@@ -322,7 +302,6 @@ function mdq_list_cat($name_tax, $val = null){
             });
 
             if($(li).data('menu') == 'map'){
-                console.log(id+" "+menu);
                 callMap($(li).data('adress'), id);
             }
         })
