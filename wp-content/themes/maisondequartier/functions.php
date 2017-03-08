@@ -12,6 +12,15 @@ function add_query_vars_filter_fiche( $vars ){
   return $vars;
 }
 
+function special_nav_class ($classes, $item) {
+    if (in_array('current-page-ancestor', $classes) || in_array('current-menu-item', $classes) ){
+        $classes[] = 'active ';
+    }
+    return $classes;
+}
+
+add_filter('nav_menu_css_class' , 'special_nav_class' , 10 , 2);
+
 function get_post_activite($input, $tax, &$search_array, &$search_id){
     if(isset($_POST[$input])){
         $search_id = intval($_POST[$input]);
