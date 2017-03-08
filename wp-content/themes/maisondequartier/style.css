@@ -1686,7 +1686,7 @@ footer #middle-box ul {
 }
 
 #apropos .carteVisite {
-  margin-top         : 3%;
+  margin-top         : 10%;
   margin-right       : 0.5%;
   margin-bottom      : 5%;
   margin-left        : 0.5%;
@@ -1728,19 +1728,6 @@ footer #middle-box ul {
 }
 
 /* page a propos */
-
-#apropos .description button {
-  color            : #ffffff;
-  border           : 1px solid #ff6633;
-  border-radius    : 0%;
-  background-color : #ff6633;
-  font-size        : 1.5em;
-}
-
-#apropos .description button:hover {
-  color            : #ff6633;
-  background-color : #ffffff;
-}
 
 #apropos .adresseAsso {
   text-align : center;
@@ -1897,6 +1884,10 @@ footer #middle-box ul {
 #apropos .gallery .activite2 {
   padding : 0%;
 }
+#apropos .gallery .activite1 {
+  padding-left: 0%;
+  padding-right: 0%;
+}
 
 #apropos .gallery .act2 {
   padding : 0% 1%;
@@ -1953,8 +1944,8 @@ footer #middle-box ul {
     text-align : center;
   }
 
-  #apropos .carteVisite .thumbnail {
-    margin-right : 0%;
+  #apropos .carteVisite .logo .thumbnail {
+    width: 100%;
   }
 }
 
@@ -1962,7 +1953,6 @@ footer #middle-box ul {
        and (max-width : 414px) {
   #apropos .gallery img {
     width      : 100%;
-    height     : auto;
     overflow   : hidden;
     text-align : center;
   }
@@ -1972,7 +1962,6 @@ footer #middle-box ul {
     margin-left  : 1%;
   }
     #apropos .missions .anim, #apropos .missions .prox, #apropos .missions .renc{
-        height: auto;
         margin-bottom: 6%;
         border: 1px solid black;
     }
@@ -1990,6 +1979,8 @@ footer #middle-box ul {
 #apropos .partenariat img {
   width  : 80%;
   height : 80%;
+  margin-top: 10%;
+  margin-bottom: 10%;
 }
 
 #apropos .adresseMdq {
@@ -2045,7 +2036,7 @@ footer #middle-box ul {
 
 #apropos .gallery .activite3 {
   padding-right : 0%;
-  padding-left  : 2%;
+  padding-left  : 0%;
 }
 
 #apropos .missions .rencontre p {
@@ -2123,8 +2114,8 @@ footer #middle-box ul {
   }
 
   #apropos .partenariat img {
-    width  : 30%;
-    height : 30%;
+    width  : 50%;
+    height : 50%;
   }
 
   #apropos .map {
