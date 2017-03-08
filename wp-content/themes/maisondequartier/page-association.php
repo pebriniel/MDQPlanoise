@@ -5,7 +5,7 @@
 * @package bootstrap-basic
 */
 
-get_header(); 
+get_header();
 
 ?>
 
@@ -35,7 +35,7 @@ get_header();
 	query_posts(array('post_type' => 'fiche'));
 
 	if($infosAsso = get_post($fiche)){
-		while(have_posts()){
+		// while(have_posts()){
 						the_post();
 
 
@@ -675,4 +675,5 @@ get_header();
 	</div>
 </main>
 
-						<?php 	} 	 } get_footer(); ?>
+						<?php 	// }
+					 } get_footer(); ?>
