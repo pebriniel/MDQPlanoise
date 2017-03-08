@@ -98,7 +98,7 @@ function callEvent($limit = 10, $offset = 3){
 }
 
 
-$images = callEvent(3, 0);
+$images = callEvent(20, 0);
 
 ?>
 	<!-- carousel bootstrap -->
@@ -240,15 +240,10 @@ $images = callEvent(3, 0);
 				<section id="articleUne" class="col-md-12" <?php post_class(); ?>>
 					<article class=" contenu blockArticle">
 						<div class="globalArticle col-md-12">
-              <div class="text-center">
-                <img src="http://aws-cf.ados.fr/prod/photos/7/5/6/7661756/2288897/big-2288897b7d.jpg?v=6" alt="">
-              </div>
 							<header class="entry-header">
 								<h1 class="entry-title"><?php the_title(); ?></h1>
 								<div class="entry-meta">
 									<?php bootstrapBasicPostOn(); ?>
-                  <div class="text-center">
-                  </div>
 								</div>
 							</header>
 							<div class="entry-content">
@@ -260,22 +255,6 @@ $images = callEvent(3, 0);
                    the_content(bootstrapBasicMoreLinkText($post));
                  } 		 ?>
 							</div>
-
-							<footer class="entry-meta">
-								<?php if ('post' == get_post_type()) { // Hide category and tag text for pages on Search ?>
-								<div class="entry-meta-category-tag">
-									<?php
-										/* translators: used between list items, there is a space after the comma */
-										$tags_list = get_the_tag_list('', __(', ', 'bootstrap-basic'));
-										if ($tags_list) {
-									?>
-									<span class="tags-links">
-										<?php echo bootstrapBasicTagsList($tags_list); ?>
-									</span>
-									<?php } ?>
-								</div>
-								<?php } ?>
-							</footer>
 									<?php
 								}
 							}
@@ -292,10 +271,12 @@ $images = callEvent(3, 0);
 	<!-- affichage des articles sauf l'article à la une  -->
 	<section id="articlesAutres"  class="col-md-12" <?php post_class(); ?>>
 		<?php
-
-			$args = array(
+        if (have_posts()){
+            $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+            $args = array(
 				'post_type'=>'post',
-				'posts_per_page' => 10,
+                'paged' => $paged,
+				'posts_per_page' => 100,
 				'post__not_in'  => $sticky,
 				'ignore_sticky_posts' => 1
 			);
@@ -311,7 +292,6 @@ $images = callEvent(3, 0);
 				<div class="globalArticle col-md-12" id="article-<?= $post->ID;?>">
 					<header class="entry-header">
 						<h1 class="entry-title"><?php the_title(); ?></h1>
-
 						<?php if ('post' == get_post_type()) {  ?>
 						<div class="entry-meta">
 							<?php bootstrapBasicPostOn(); ?>
@@ -336,40 +316,19 @@ $images = callEvent(3, 0);
         					} 		 ?>
         			</div>
         			<?php } ?>
-
-
-
-
-				<footer class="entry-meta">
-					<?php if ('post' == get_post_type()) { // Hide category and tag text for pages on Search ?>
-					<div class="entry-meta-category-tag">
-						<?php
-							/* translators: used between list items, there is a space after the comma */
-							$categories_list = get_the_category_list(__(', ', 'bootstrap-basic'));
-							if (!empty($categories_list)) {
-						?>
-						<span class="cat-links">
-							<?php //echo bootstrapBasicCategoriesList($categories_list); ?>
-						</span>
-						<?php } // End if categories ?>
-
-						<?php
-							/* translators: used between list items, there is a space after the comma */
-							//$tags_list = get_the_tag_list('', __(', ', 'bootstrap-basic'));
-							if ($tags_list) {
-						?>
-						<span class="tags-links">
-							<?php echo bootstrapBasicTagsList($tags_list); ?>
-						</span>
-						<?php } // End if $tags_list ?>
-					</div><!--.entry-meta-category-tag-->
-					<?php }  // End if 'post' == get_post_type() ?>
-
-
-				</footer><!-- .entry-meta -->
+ 
 			</div>
 		</article><!-- #post-## -->
-			<?php  } } // End loop ?>
+			<?php  } } // End loop $args = array();
+            $page = paginate_links( $args );
+            ?>
+            <div class="col-md-12 col-xs-12" id="page">
+                <?= $page ; ?>
+            </div>
+            <?php
+
+        }
+        ?>
 	</section>
 
 

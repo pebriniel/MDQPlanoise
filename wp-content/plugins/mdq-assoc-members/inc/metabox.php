@@ -26,7 +26,8 @@ function mdq_members_liste_assoc($object){
 		<select name="membres_assoc_list">
 			<?php
 			query_posts(array(
-				"post_type" => "fiche"
+				"post_type" => "fiche",
+				'posts_per_page' => -1
 			));
 
 			if ( have_posts() ){

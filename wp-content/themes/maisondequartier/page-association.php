@@ -5,7 +5,7 @@
 * @package bootstrap-basic
 */
 
-get_header();
+get_header(); 
 
 ?>
 
