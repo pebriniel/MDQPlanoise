@@ -240,10 +240,15 @@ $images = callEvent(3, 0);
 				<section id="articleUne" class="col-md-12" <?php post_class(); ?>>
 					<article class=" contenu blockArticle">
 						<div class="globalArticle col-md-12">
+              <div class="text-center">
+                <img src="http://aws-cf.ados.fr/prod/photos/7/5/6/7661756/2288897/big-2288897b7d.jpg?v=6" alt="">
+              </div>
 							<header class="entry-header">
 								<h1 class="entry-title"><?php the_title(); ?></h1>
 								<div class="entry-meta">
 									<?php bootstrapBasicPostOn(); ?>
+                  <div class="text-center">
+                  </div>
 								</div>
 							</header>
 							<div class="entry-content">
