@@ -240,10 +240,15 @@ $images = callEvent(3, 0);
 				<section id="articleUne" class="col-md-12" <?php post_class(); ?>>
 					<article class=" contenu blockArticle">
 						<div class="globalArticle col-md-12">
+              <div class="text-center">
+                <img src="http://aws-cf.ados.fr/prod/photos/7/5/6/7661756/2288897/big-2288897b7d.jpg?v=6" alt="">
+              </div>
 							<header class="entry-header">
 								<h1 class="entry-title"><?php the_title(); ?></h1>
 								<div class="entry-meta">
 									<?php bootstrapBasicPostOn(); ?>
+                  <div class="text-center">
+                  </div>
 								</div>
 							</header>
 							<div class="entry-content">
@@ -255,6 +260,22 @@ $images = callEvent(3, 0);
                    the_content(bootstrapBasicMoreLinkText($post));
                  } 		 ?>
 							</div>
+
+							<footer class="entry-meta">
+								<?php if ('post' == get_post_type()) { // Hide category and tag text for pages on Search ?>
+								<div class="entry-meta-category-tag">
+									<?php
+										/* translators: used between list items, there is a space after the comma */
+										$tags_list = get_the_tag_list('', __(', ', 'bootstrap-basic'));
+										if ($tags_list) {
+									?>
+									<span class="tags-links">
+										<?php echo bootstrapBasicTagsList($tags_list); ?>
+									</span>
+									<?php } ?>
+								</div>
+								<?php } ?>
+							</footer>
 									<?php
 								}
 							}
@@ -290,6 +311,7 @@ $images = callEvent(3, 0);
 				<div class="globalArticle col-md-12" id="article-<?= $post->ID;?>">
 					<header class="entry-header">
 						<h1 class="entry-title"><?php the_title(); ?></h1>
+
 						<?php if ('post' == get_post_type()) {  ?>
 						<div class="entry-meta">
 							<?php bootstrapBasicPostOn(); ?>
