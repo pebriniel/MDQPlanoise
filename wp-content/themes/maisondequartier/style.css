@@ -245,7 +245,7 @@ main .container {
 }
 
 #transition {
-  z-index          : 550;
+  z-index          : 1001;
   position         : relative;
   height           : 60px;
   padding-top      : 14px;
