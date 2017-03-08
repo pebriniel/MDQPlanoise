@@ -89,13 +89,25 @@ body {
     font-size: 1.2em;
     text-align: justify;
 }
-
-#onepageasso .descrip button {
-    font-size: 1.5em;
-    background-color: #ff6633;
-    color: #ffffff;
+#onepageasso .tarifAdhesion{
+  text-align: center;
+}
+#onepageasso .carteVisite button{
+  color            : #ffffff;
+  border           : 1px solid #ff6633;
+  border-radius    : 0%;
+  background-color : #ff6633;
+  font-size        : 1.1em;
+  margin-top: 3%;
 }
 
+#onepageasso .carteVisite button:hover{
+  color            : #ff6633;
+  background-color : #ffffff;
+}
+#onepageasso .carteVisite .logo .thumbnail{
+  text-align: center;
+}
 #onepageasso .carousel {
     padding: 0;
     margin-bottom: 3%;
@@ -136,9 +148,16 @@ body {
     height: 100%;
 }
 
-#onepageasso .membres .thumbnail .caption {
+/*#onepageasso .membres .thumbnail .caption {
     background-color: #ff6633;
     color: #ffffff;
+}*/
+#onepageasso .membres .nomMembres{
+  border: 2px solid #ff6633;
+  text-align: center;
+  font-size: 1.5em;
+  margin-bottom: 10%;
+  display: inline-block;
 }
 
 #onepageasso .prezmembres {
@@ -149,7 +168,7 @@ body {
 }
 
 #onepageasso .prezmembres .membres {
-    height: 350px;
+    height: 120px;
 }
 
 #onepageasso .overflow-content {
@@ -213,6 +232,7 @@ body {
 }
 
 #onepageasso .map {
+    padding-right: 0%;
     height: 500px;
 }
 
@@ -249,7 +269,7 @@ body {
     margin-bottom: 2%;
 }
 
-#onepageasso .btn-link, #onepageasso .btn-link-leaflet {
+/*#onepageasso .btn-link, #onepageasso .btn-link-leaflet {
     background-color: #ff6633 !important;
     color: #ffffff;
     padding-right: 1%;
@@ -266,7 +286,7 @@ body {
 #onepageasso .btn-link {
     padding-right: 1%;
     padding-left: 1%;
-}
+}*/
 
 #onepageasso li {
     list-style: none;
@@ -400,9 +420,22 @@ body {
     opacity: 0.7;
 }
 
-#onepageasso .form-group .center-block {
-    background-color: #ff6633;
-    color: #fff;
+#onepageasso .form-group .center-block{
+  color            : #ffffff;
+  border           : 1px solid #ff6633;
+  border-radius    : 0%;
+  background-color : #ff6633;
+  font-size        : 1.1em;
+}
+#onepageasso .form-group .center-block:hover{
+  color            : #ff6633;
+  background-color : #ffffff;
+}
+#onepageasso .contact form{
+  border-radius: 0%;
+}
+#onepageasso .contact input, #onepageasso .contact span, #onepageasso .contact textarea{
+  border-radius: 0%;
 }
 
 
@@ -427,6 +460,9 @@ body {
     }
     #onepageasso .content-onepage .btn-link-leaflet {
         display: none;
+    }
+    #onepageasso .map{
+        padding-left: 0%;
     }
 }
 

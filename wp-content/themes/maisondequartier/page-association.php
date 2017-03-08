@@ -119,7 +119,7 @@ get_header();
 									<h3><?= $infosAsso->_name; ?></h3>
 								</div>
 							</div>
-							<div>Tarif d'adhésion : <?= $infosAsso->_membership; ?></div>
+							<div class="tarifAdhesion">Tarif d'adhésion : <?= $infosAsso->_membership; ?></div>
 							<button type="button" name="button" class="btn btn-link-leaflet center-block">Télécharger la plaquette</button>
 
 						</div>
@@ -430,6 +430,7 @@ get_header();
 						<div id="membres" class="container prezmembres">
 							<h2>Les Membres</h2>
 							<div class="row">
+							<!-- <div class="col-md-12"> -->
 								<?php
 
 								query_posts(array(
@@ -443,14 +444,18 @@ get_header();
 											global $post;
 											?>
 											<div class="col-md-3 membres">
-												<div class="thumbnail">
+												<div class="col-md-12 nomMembres">
+													<p>Machin chose</p>
+													<p>Président</p>
+												<!-- <div class="thumbnail"> -->
 													<!-- <img src="wp-content/themes/maisonquartier/img/img_onepageasso/user.jpg" alt="..."> -->
 													<?= get_the_post_thumbnail($post->ID); ?>
-													<div class="caption">
+												  <!-- <div class="caption"> -->
 														<h3><?= $post->event_title;?></h3>
 														<p><?= $post->mdq_event_description; ?></p>
 													</div>
 												</div>
+											<!-- </div> -->
 											</div>
 											<?php
 										}
