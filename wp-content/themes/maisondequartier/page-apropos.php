@@ -23,31 +23,31 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
       <div class="col-md-12 col-xs-12" id="menu-assoc">
         <ul>
           <li>
-            <a href="#cartevisite">
+            <a class="link" data-id="cartevisite">
               <span class="glyphicon glyphicon-info-sign"></span>
               <span class="text">Description</span>
             </a>
           </li>
           <li>
-            <a href="#missionsAsso">
+            <a class="link" data-id="missionsAsso">
               <span class="glyphicon glyphicon-screenshot"></span>
                           <span class="text">Missions</span>
             </a>
           </li>
           <li>
-            <a href="#compteur">
+            <a class="link" data-id="compteur">
               <span class="glyphicon glyphicon-bullhorn"></span>
-                          <span class="text">Vie Associative</span>
+              <span class="text">Vie Associative</span>
             </a>
           </li>
           <li>
-            <a href="#gallery">
+            <a class="link" data-id="gallery">
               <span class="glyphicon glyphicon-picture"></span>
                           <span class="text">Galerie photos</span>
             </a>
           </li>
           <li>
-            <a href="#loc">
+            <a class="link" data-id="loc">
               <span class="glyphicon glyphicon-envelope"></span>
                           <span class="text">Coordonnées</span>
             </a>
@@ -275,6 +275,23 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
       </div>
     </div>
 <!-- fin coordonnées -->
+
+<script type="text/javascript">
+    function scrollToAnchor(aid){
+        var aTag = $("div[id='"+ aid +"']");
+        console.log(aTag);
+        $('html,body').animate({scrollTop: aTag.offset().top - 200},'slow');
+    }
+
+    $(".link").click(function() {
+       $(".link").removeClass("active");
+       console.log('ok');
+       $(this).addClass("active");
+       scrollToAnchor($(this).data('id'));
+    });
+
+
+</script>
 
 </main>
 
