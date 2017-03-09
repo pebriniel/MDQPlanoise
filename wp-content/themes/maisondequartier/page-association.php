@@ -114,7 +114,7 @@ get_header();
 						<div class="col-md-4 logo">
 
 							<div class="thumbnail">
-								<span><?= get_the_post_thumbnail($infosAsso->ID, 'fiche-association'); ?></span>
+								<span><?= get_the_post_thumbnail($infosAsso->ID, 'resizing-img'); ?></span>
 								<div class="caption">
 									<h3><?= $infosAsso->_name; ?></h3>
 								</div>
