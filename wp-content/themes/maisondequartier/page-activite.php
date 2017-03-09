@@ -102,7 +102,7 @@ function mdq_showActiviteHtml($post){
             <ul>
                 <li class="li-horaire li-horaire-<?= $post->ID; ?>" data-menu="horaire" data-id="<?= $post->ID; ?>">
                     <span class="glyphicon glyphicon-calendar"></span><br/>
-                    Date
+                    Horaire
                 </li>
                 <li class="li-map li-map-<?= $post->ID; ?>" data-adress="<?= $post->mdq_event_adresse; ?>" data-menu="map" data-id="<?= $post->ID; ?>">
                     <img src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/map.svg" width="40%;" class="map-icon" alt=""><br/>
@@ -192,8 +192,6 @@ function mdq_list_cat($name_tax, $val = null){
                     </form>
                 </div>
             </div>
-
-
 
             <form action="#" method="post">
                 <div class="col-md-2 col-xs-3 col-xs-push-1 select-container">

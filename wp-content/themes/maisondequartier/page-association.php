@@ -573,14 +573,21 @@ get_header();
 							$emailTo = $post->_emailcontact;
 							$subject = 'Formulaire de contact de '.$name;
 							$sendCopy = trim($_POST['sendCopy']);
-							$body = "Nom: $name \n\nEmail: $email \n\nMessage : $comments";
-							$headers = 'De : Planoisactive - <'.$emailTo.'>' . "\r\n" . 'Formulaire de contact depuis le site Planoisactive.fr';
+							$body = 'Formulaire de contact depuis le site Planoisactive.fr';
+							$body .= "\n\rNom: $name \n\nEmail: $email \n\nMessage : $comments";
+							$headers = 'From: '.$emailTo . "\r\n" .
+												'Reply-To: '.$email . "\r\n" .
+												'X-Mailer: PHP/' . phpversion();
 
 							mail($emailTo, $subject, $body, $headers);
 
 							if($sendCopy == true) {
 								$subject = 'Formulaire de contact';
-								$headers = 'De : <noreply@student.codeur.online>';
+								// $headers = 'De : <noreply@student.codeur.online>';
+								$headers = 'From: '.$emailTo . "\r\n" .
+	     										'Reply-To: '.$email . "\r\n" .
+	     										'X-Mailer: PHP/' . phpversion();
+
 								mail($email, $subject, $body, $headers);
 							}
 
@@ -595,7 +602,7 @@ get_header();
 	<?php
 						if(isset($emailSent) && $emailSent == true) { ?>
 
-				 	<div class="thanks">
+				 	<div class="thanks" id="form">
 				 		<h1>Merci, <?=$name;?></h1>
 				 		<p>Votre e-mail a &eacute;t&eacute; envoy&eacute; avec succ&egrave;s. Vous recevrez une r&eacute;ponse dans les meilleurs délais.</p>
 				 	</div>
@@ -608,7 +615,7 @@ get_header();
 				 			<p class="error">Une erreur est survenue lors de l'envoi du formulaire.</p>
 				 		<?php } ?>
 
-						<form method="post" action="#" id="contact_form"  class="well form-horizontal" onsubmit=" return verification();">
+						<form method="post" action="#form" id="contact_form"  class="well form-horizontal" onsubmit=" return verification();">
 							<h1>Formulaire de contact</h1>
 							<fieldset>
 								<div class="input-group">
