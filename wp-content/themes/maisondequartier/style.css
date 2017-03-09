@@ -645,14 +645,14 @@ main .container {
 
 #home .contenu .img-article-une {
     margin-top: 2.4%;
-    max-width: 80%;
-    max-height: 157px;
+    /*max-width: 80%;
+    max-height: 157px;*/
     float: right;
 }
 
 #home .contenu .img-article {
     max-width: 90%;
-    max-height: 157px;
+    /*max-height: 157px;*/
 }
 
 #home .contenu .globalArticle h2 {
