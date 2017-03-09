@@ -189,6 +189,10 @@ main .container {
     padding: 0%;
 }
 
+#apropos .container{
+    margin-top: 5em;
+}
+
 #article {
     position: relative;
     width: 100%;
@@ -229,7 +233,6 @@ main .container {
     z-index: 550;
     position: relative;
     height: 60px;
-    padding-top: 14px;
     background-color: #ff6633;
 }
 
@@ -251,6 +254,18 @@ main .container {
     right: 100%;
 }
 
+#transition ul .active{
+    background-color: black;
+}
+
+#transition ul li a{
+    display: block;
+    padding-top: 1em;
+    padding-bottom: 0.9em;
+    padding-right: 1em;
+    padding-left: 1em;
+    cursor: pointer;
+}
 
 /* # sourceMappingURL=css_annuaire.css.map */
 
@@ -489,11 +504,16 @@ main .container {
 
 @media screen and (max-width: 480px) {
     body {
-        padding-top: 41px;
+        padding-top: 10px;
     }
     main {
         padding-top: 0em;
     }
+    #transition, #transition:before, #transition:after{
+        height: 70px;
+        padding-top: 1px;
+    }
+
     /* affichage du header pour mobile */
     .page-header .navbar-fixed-top {
         height: 50px;
@@ -897,6 +917,10 @@ main .container {
     margin-top: 0px;
     padding: 1em;
     background-color: #ff6633;
+}
+
+#annuaire #transition{
+    padding-top: 1em;
 }
 
 
@@ -2082,5 +2106,37 @@ main .container {
 @media screen and (max-width: 390px) {
     #home .contenu .img-article {
         max-width: 90%;
+    }
+}
+
+@media screen and (min-width: 200px) and (max-width: 790px) {
+    #menu-assoc .glyphicon {
+        display: block;
+    }
+    #menu-assoc .text {
+        display: none;
+    }
+    #menu-assoc ul li {
+        padding-left: 0.3em;
+        padding-right: 0.3em;
+    }
+    #onepageasso .carousel-indicators {
+        display: none;
+    }
+    #onepageasso .carousel-inner img {
+        height: 100%;
+    }
+    #onepageasso .content-onepage .btn-link-leaflet {
+        display: none;
+    }
+    #onepageasso .map{
+        padding-left: 0%;
+    }
+
+    #transition ul li a{
+        padding-top: 2.3em;
+        padding-bottom: 0.5em;
+        padding-right: 0.3em;
+        padding-left: 0.3em;
     }
 }

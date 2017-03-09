@@ -49,7 +49,7 @@ get_header();
 						if($infosAsso->showDescription){
 						?>
 						<li>
-							<a href="#cartevisite">
+							<a class="link" data-id="cartevisite">
 								<span class="glyphicon glyphicon-info-sign"></span>
 								<span class="text">Description</span>
 							</a>
@@ -59,7 +59,7 @@ get_header();
 						if($infosAsso->showCaroussel){
 						?>
 						<li>
-							<a href="#evenements">
+							<a class="link" data-id="evenements">
 								<span class="glyphicon glyphicon-calendar"></span>
 	              <span class="text">Évènements</span>
 							</a>
@@ -69,7 +69,7 @@ get_header();
 						if($infosAsso->showMembers){
 						?>
 						<li>
-							<a href="#membres">
+							<a class="link" data-id="membres">
 								<span class="glyphicon glyphicon-user"></span>
 	                       		<span class="text">Membres</span>
 							</a>
@@ -79,7 +79,7 @@ get_header();
 						if($infosAsso->showCoordonnees){
 						?>
 						<li>
-							<a href="#coordonnees">
+							<a class="link" data-id="coordonnees">
 								<span class="glyphicon glyphicon-home"></span>
 	                       		<span class="text">Coordonnées & Horaires</span>
 							</a>
@@ -89,7 +89,7 @@ get_header();
 						if($infosAsso->showFormulaire){
 						?>
 						<li>
-							<a href="#join">
+							<a class="link" data-id="join">
 								<span class="glyphicon glyphicon-envelope"></span>
 	                       		<span class="text">Contact</span>
 							</a>
@@ -659,6 +659,19 @@ get_header();
 		}
 		?>
 	</div>
+
+	<script type="text/javascript">
+	    function scrollToAnchor(aid){
+	        var aTag = $("div[id='"+ aid +"']");
+	        $('html,body').animate({scrollTop: aTag.offset().top - 200},'slow');
+	    }
+
+	    $(".link").click(function() {
+	       $(".link").removeClass("active");
+	       $(this).addClass("active");
+	       scrollToAnchor($(this).data('id'));
+	    });
+	</script>
 </main>
 
 						<?php 	// }

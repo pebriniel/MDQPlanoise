@@ -481,31 +481,6 @@ left: 109px;
 
 /*# sourceMappingURL=style_onepageasso.css.map */
 
-@media screen and (min-width: 200px) and (max-width: 790px) {
-    #menu-assoc .glyphicon {
-        display: block;
-    }
-    #menu-assoc .text {
-        display: none;
-    }
-    #menu-assoc ul li {
-        padding-left: 0.6em;
-        padding-right: 0.6em;
-    }
-    #onepageasso .carousel-indicators {
-        display: none;
-    }
-    #onepageasso .carousel-inner img {
-        height: 100%;
-    }
-    #onepageasso .content-onepage .btn-link-leaflet {
-        display: none;
-    }
-    #onepageasso .map{
-        padding-left: 0%;
-    }
-}
-
 @media screen and (min-width: 490px) and (max-width: 830px) {
     #onepageasso .content-onepage .btn-link-leaflet {
         display: none;
@@ -546,12 +521,6 @@ left: 109px;
 @media screen and (min-width: 1200px) and (max-width: 1400px) {
     #onepageasso .carousel-inner img {
         height: 100%;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    #transition {
-        padding-top: 50px;
     }
 }
 
