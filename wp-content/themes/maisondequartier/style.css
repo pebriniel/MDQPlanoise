@@ -220,10 +220,11 @@ main .container {
 }
 
 #transition {
-    z-index: 550;
+    z-index: 1001;
     position: relative;
     height: 60px;
     background-color: #ff6633;
+    margin-top: 2.5em;
 }
 
 #transition:after, #transition:before {
