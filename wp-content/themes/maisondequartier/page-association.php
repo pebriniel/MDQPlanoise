@@ -570,7 +570,8 @@ get_header();
 									the_post();
 									global $post;
 
-							$emailTo = $post->_emailcontact;
+							$emailTo = "houda.b@codeur.online";
+							// $emailTo = $post->_emailcontact;
 							$subject = 'Formulaire de contact de '.$name;
 							$sendCopy = trim($_POST['sendCopy']);
 							$body = 'Formulaire de contact depuis le site Planoisactive.fr';
