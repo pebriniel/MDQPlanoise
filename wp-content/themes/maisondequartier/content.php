@@ -240,8 +240,9 @@ $images = callEvent(3, 0);
 				<section id="articleUne" class="col-md-12" <?php post_class(); ?>>
 					<article class=" contenu blockArticle">
 						<div class="globalArticle col-md-12">
-              <div class="text-center">
-                <img class="img-article-une" src="http://www.insert-coin.fr/wp-content/uploads/2017/01/1434488767-4566-artwork-e3-rpg.jpg" alt="">
+              <div class="text-center img-article-une">
+                <?= get_the_post_thumbnail($post->ID, 'resizing-img-article'); ?>
+                <!-- <img class="img-article-une" src="http://www.insert-coin.fr/wp-content/uploads/2017/01/1434488767-4566-artwork-e3-rpg.jpg" alt=""> -->
               </div>
 							<header class="entry-header">
 								<h1 class="entry-title"><?php the_title(); ?></h1>
@@ -316,8 +317,9 @@ $images = callEvent(3, 0);
 							<?php bootstrapBasicPostOn(); ?>
 						</div><!-- .entry-meta -->
 						<?php } //endif; ?>
-            <div class="text-center">
-              <img class="img-article" src="http://www.insert-coin.fr/wp-content/uploads/2017/01/1434488767-4566-artwork-e3-rpg.jpg" alt="">
+            <div class="text-center img-article">
+              <?= get_the_post_thumbnail($post->ID, 'resizing-img-article'); ?>
+              <!-- <img class="img-article" src="http://www.insert-coin.fr/wp-content/uploads/2017/01/1434488767-4566-artwork-e3-rpg.jpg" alt=""> -->
             </div>
 					</header><!-- .entry-header -->
 
