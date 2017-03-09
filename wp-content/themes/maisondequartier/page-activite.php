@@ -122,13 +122,22 @@ function mdq_showActiviteHtml($post){
         </div>
 
         <div class="macti-<?= $post->ID; ?> col-md-10 col-sm-10 col-xs-12 block-absolute menu-description menu-description-<?= $post->ID; ?>" data-menu="description">
-            <div class="col-md-12 col-sm-1é col-xs-12">
-                <h3><?= $post->post_title; ?></h3>
-                <h6><?= $t[0]->post_title; ?></h6>
-                <div class="desc">
-                    <div style="position: relative">
-                        <div id="acti-<?= $post->ID; ?>"  class="content overflow content-activite acti-<?= $post->ID; ?>">
-                            <?= $post->mdq_event_description ?>
+            <div class="row">
+                <div class="col-md-8 col-sm-9 col-xs-9">
+                    <h3><?= $post->post_title; ?></h3>
+                    <h6><?= $t[0]->post_title; ?></h6>
+                </div>
+                <div class="col-md-4 col-sm-3 col-xs-3">
+                    <a href="<?= get_site_url()."/association/?fiche=".$post->mdq_association_id; ?>" class="url-association">Voir fiche association</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="desc">
+                        <div style="position: relative">
+                            <div id="acti-<?= $post->ID; ?>"  class="content overflow content-activite acti-<?= $post->ID; ?>">
+                                <?= $post->mdq_event_description ?>
+                            </div>
                         </div>
                     </div>
                 </div>

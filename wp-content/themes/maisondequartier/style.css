@@ -19,21 +19,16 @@
 
 main {
     min-height: 95vh;
-    margin-top: 40px;
+    margin-top: 0px;
     overflow: hidden;
+}
+
+.adminbarfix main{
+    margin-top: 40;
 }
 
 .adminbarfix main {
     margin-top: 1vh;
-}
-
-@media screen and (max-width: 720px) {
-    .adminbarfix {
-        margin-top: 0.5em !important;
-    }
-    .adminbarfix nav {
-        margin-top: 4em;
-    }
 }
 
 header .menu-burger {
@@ -88,13 +83,6 @@ header .menu-burger {
     }
 }
 
-@media screen and (max-width: 850px) {
-    .page-header img {
-        width: 200px;
-        padding-top: 21px;
-    }
-}
-
 header {
     position: relative;
 }
@@ -125,7 +113,9 @@ header .hide-menu {
         display: block;
     }
     .menu-content {
-        z-index: 200;
+        width: 100%;
+        z-index: 1002;
+        margin-top: 0.8em;
         display: none;
         height: auto;
         color: white;
@@ -509,10 +499,18 @@ main .container {
     main {
         padding-top: 0em;
     }
-    #transition, #transition:before, #transition:after{
-        height: 70px;
+    .adminbarfix #transition, #transition:before, #transition:after{
+        height: 80px;
         padding-top: 1px;
     }
+    #transition, #transition:before, #transition:after{
+        height: 60px;
+    }
+
+    .adminbarfix #transition, .adminbarfix #transition:before, .adminbarfix #transition:after{
+        height: 80px;
+    }
+
 
     /* affichage du header pour mobile */
     .page-header .navbar-fixed-top {
@@ -2134,9 +2132,46 @@ main .container {
     }
 
     #transition ul li a{
-        padding-top: 2.3em;
         padding-bottom: 0.5em;
         padding-right: 0.3em;
         padding-left: 0.3em;
+    }
+}
+
+
+@media screen and (min-width: 200px) and (max-width: 481px) {
+    .adminbarfix #transition ul li a{
+        padding-top: 2.8em;
+    }
+    .adminbarfix #transition ul li {
+        padding-left: 0.6em;
+    }
+
+    #transition ul li a{
+        padding-top: 1.5em;
+    }
+    #transition ul li {
+        padding-left: 0.6em;
+    }
+
+}
+
+@media screen and (max-width: 780px) {
+    .adminbarfix {
+        margin-top: 0.5em !important;
+    }
+    .adminbarfix nav {
+        margin-top: 4em;
+    }
+    .page-header .navbar-fixed-top{
+        height: 64px;
+    }
+    header .menu-burger{
+        top: 0.3em;
+        right: 0.5em;
+    }
+    .page-header img {
+        width: 160px;
+        padding-top: 0px;
     }
 }

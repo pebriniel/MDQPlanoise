@@ -430,7 +430,7 @@ h3 {
         display: inline-block;
         width: auto;
         /*width: 32.5%;*/
-        width: 32.5%;
+        width: 32.45%;
         padding: 0;
         margin: 0;
         height: 50px;
@@ -441,7 +441,7 @@ h3 {
 /* permet de cacher les textes */
 #activite .overflow{
     position: absolute;
-    overflow: hidden;
+    overflow: auto;
     height: 160px;
 }
 
@@ -469,5 +469,23 @@ h3 {
 #activite .active .div-hover{
         height: 0%;
 }
+
+.menu-description .url-association{
+    display: block;
+    width: 100%;
+    padding: 1em;
+    background-color: #ff6633;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 1em;
+    margin-right: 1em;
+}
+
+.menu-description .url-association:hover{
+    background-color: white;
+    color: #ff6633;
+}
+
 
 /*# sourceMappingURL=style-activites-bootstrap.css.map */
