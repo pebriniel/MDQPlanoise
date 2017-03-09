@@ -98,7 +98,7 @@ function callEvent($limit = 10, $offset = 3){
 }
 
 
-$images = callEvent(20, 0);
+$images = callEvent(3, 0);
 
 ?>
 	<!-- carousel bootstrap -->
@@ -133,7 +133,7 @@ $images = callEvent(20, 0);
 						 <!-- <a href="<?=  get_site_url()."/association/?fiche=".$image['url_openblank']; ?>"  class="btn-association" role="button">voir l'événement</a> -->
 						 <p> Le <?= $image['dateStart']; ?> </p>
 						 <p><?= $image['association_name'];?></p>
-						 <a class="btn-association img-modal img-moda-click" id="image-<?= $images['post_id']; ?>" data-title="<?= $image['title']; ?>" data-content="<?= $image['content']; ?>" data-img="<?= $image['img_src'] ?>" data-date="<?= $image['dateStart']; ?>" data-dateend="<?= $image['dateEnd']; ?>" data-hourstart="<?= $image['dateHourStart']; ?>" data-hourend="<?= $image['dateHourEnd']; ?>" data-location="<?= $image['location']; ?>" data-url="<?=  get_site_url()."/association/?fiche=".$image['association']; ?>" role="button">voir l'événement</a>
+						 <a class="btn-association img-modal img-moda-click" id="image-<?= $images['post_id']; ?>" data-title="<?= $image['title']; ?>" data-content="<?= $image['content']; ?>" data-img="<?= $image['img_src'] ?>" data-date="<?= $image['dateStart']; ?>" data-dateend="<?= $image['dateEnd']; ?>" data-hourstart="<?= $image['dateHourStart']; ?>" data-hourend="<?= $image['dateHourEnd']; ?>" data-location="<?= $image['location']; ?>" data-url="<?=  get_site_url()."/association/?fiche=".$image['association']; ?>" role="button">Voir l'événement</a>
 						 <!-- <p><?= $image['location'];?></p> -->
 
 						 <!-- <a data-url="<?= get_site_url()."/association/?fiche=".$images['post_id']; ?>" class="btn btn-association" role="button">voir la fiche</a> -->
@@ -240,10 +240,15 @@ $images = callEvent(20, 0);
 				<section id="articleUne" class="col-md-12" <?php post_class(); ?>>
 					<article class=" contenu blockArticle">
 						<div class="globalArticle col-md-12">
+              <div class="text-center">
+                <img class="img-article-une" src="http://www.insert-coin.fr/wp-content/uploads/2017/01/1434488767-4566-artwork-e3-rpg.jpg" alt="">
+              </div>
 							<header class="entry-header">
 								<h1 class="entry-title"><?php the_title(); ?></h1>
 								<div class="entry-meta">
 									<?php bootstrapBasicPostOn(); ?>
+                  <div class="text-center">
+                  </div>
 								</div>
 							</header>
 							<div class="entry-content">
@@ -255,6 +260,22 @@ $images = callEvent(20, 0);
                    the_content(bootstrapBasicMoreLinkText($post));
                  } 		 ?>
 							</div>
+
+							<footer class="entry-meta">
+								<?php if ('post' == get_post_type()) { // Hide category and tag text for pages on Search ?>
+								<div class="entry-meta-category-tag">
+									<?php
+										/* translators: used between list items, there is a space after the comma */
+										$tags_list = get_the_tag_list('', __(', ', 'bootstrap-basic'));
+										if ($tags_list) {
+									?>
+									<span class="tags-links">
+										<?php echo bootstrapBasicTagsList($tags_list); ?>
+									</span>
+									<?php } ?>
+								</div>
+								<?php } ?>
+							</footer>
 									<?php
 								}
 							}
@@ -271,12 +292,10 @@ $images = callEvent(20, 0);
 	<!-- affichage des articles sauf l'article à la une  -->
 	<section id="articlesAutres"  class="col-md-12" <?php post_class(); ?>>
 		<?php
-        if (have_posts()){
-            $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-            $args = array(
+
+			$args = array(
 				'post_type'=>'post',
-                'paged' => $paged,
-				'posts_per_page' => 100,
+				'posts_per_page' => 10,
 				'post__not_in'  => $sticky,
 				'ignore_sticky_posts' => 1
 			);
@@ -297,6 +316,9 @@ $images = callEvent(20, 0);
 							<?php bootstrapBasicPostOn(); ?>
 						</div><!-- .entry-meta -->
 						<?php } //endif; ?>
+            <div class="text-center">
+              <img class="img-article" src="http://www.insert-coin.fr/wp-content/uploads/2017/01/1434488767-4566-artwork-e3-rpg.jpg" alt="">
+            </div>
 					</header><!-- .entry-header -->
 
 
@@ -316,19 +338,40 @@ $images = callEvent(20, 0);
         					} 		 ?>
         			</div>
         			<?php } ?>
- 
+
+
+
+
+				<footer class="entry-meta">
+					<?php if ('post' == get_post_type()) { // Hide category and tag text for pages on Search ?>
+					<div class="entry-meta-category-tag">
+						<?php
+							/* translators: used between list items, there is a space after the comma */
+							$categories_list = get_the_category_list(__(', ', 'bootstrap-basic'));
+							if (!empty($categories_list)) {
+						?>
+						<span class="cat-links">
+							<?php //echo bootstrapBasicCategoriesList($categories_list); ?>
+						</span>
+						<?php } // End if categories ?>
+
+						<?php
+							/* translators: used between list items, there is a space after the comma */
+							//$tags_list = get_the_tag_list('', __(', ', 'bootstrap-basic'));
+							if ($tags_list) {
+						?>
+						<span class="tags-links">
+							<?php echo bootstrapBasicTagsList($tags_list); ?>
+						</span>
+						<?php } // End if $tags_list ?>
+					</div><!--.entry-meta-category-tag-->
+					<?php }  // End if 'post' == get_post_type() ?>
+
+
+				</footer><!-- .entry-meta -->
 			</div>
 		</article><!-- #post-## -->
-			<?php  } } // End loop $args = array();
-            $page = paginate_links( $args );
-            ?>
-            <div class="col-md-12 col-xs-12" id="page">
-                <?= $page ; ?>
-            </div>
-            <?php
-
-        }
-        ?>
+			<?php  } } // End loop ?>
 	</section>
 
 
