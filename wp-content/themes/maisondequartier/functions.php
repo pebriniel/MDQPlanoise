@@ -145,9 +145,6 @@ function margBody(){
 
 // Déclaration de la prise des miniatures
 add_theme_support( 'post-thumbnails' );
-
-// déclaration de la function pour redimentioner les miniatures
 if ( function_exists( 'add_image_size' ) ) {
-
-	add_image_size( 'resizing-img', 200, 100, true ); //(Image recadrée)
+	add_image_size( 'resizing-img', 300, 200, true ); //pour affichage du logo dans la fiche association
 }

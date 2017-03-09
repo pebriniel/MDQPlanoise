@@ -360,6 +360,10 @@ main .container {
 
 /* CONTACT */
 
+#contact{
+    margin-top: 3em;
+}
+
 #contact #mdq-logo {
     width: 70%;
     margin-top: 4%;
