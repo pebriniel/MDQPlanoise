@@ -19,21 +19,16 @@
 
 main {
     min-height: 95vh;
-    margin-top: 40px;
+    margin-top: 0px;
     overflow: hidden;
+}
+
+.adminbarfix main{
+    margin-top: 40;
 }
 
 .adminbarfix main {
     margin-top: 1vh;
-}
-
-@media screen and (max-width: 720px) {
-    .adminbarfix {
-        margin-top: 0.5em !important;
-    }
-    .adminbarfix nav {
-        margin-top: 4em;
-    }
 }
 
 header .menu-burger {
@@ -88,13 +83,6 @@ header .menu-burger {
     }
 }
 
-@media screen and (max-width: 850px) {
-    .page-header img {
-        width: 200px;
-        padding-top: 21px;
-    }
-}
-
 header {
     position: relative;
 }
@@ -125,7 +113,9 @@ header .hide-menu {
         display: block;
     }
     .menu-content {
-        z-index: 200;
+        width: 100%;
+        z-index: 1002;
+        margin-top: 0.8em;
         display: none;
         height: auto;
         color: white;
@@ -189,6 +179,10 @@ main .container {
     padding: 0%;
 }
 
+#apropos .container{
+    margin-top: 5em;
+}
+
 #article {
     position: relative;
     width: 100%;
@@ -226,11 +220,11 @@ main .container {
 }
 
 #transition {
-    z-index: 550;
+    z-index: 1001;
     position: relative;
     height: 60px;
-    padding-top: 14px;
     background-color: #ff6633;
+    margin-top: 2.5em;
 }
 
 #transition:after, #transition:before {
@@ -251,6 +245,18 @@ main .container {
     right: 100%;
 }
 
+#transition ul .active{
+    background-color: black;
+}
+
+#transition ul li a{
+    display: block;
+    padding-top: 1em;
+    padding-bottom: 0.9em;
+    padding-right: 1em;
+    padding-left: 1em;
+    cursor: pointer;
+}
 
 /* # sourceMappingURL=css_annuaire.css.map */
 
@@ -489,11 +495,24 @@ main .container {
 
 @media screen and (max-width: 480px) {
     body {
-        padding-top: 41px;
+        padding-top: 10px;
     }
     main {
         padding-top: 0em;
     }
+    .adminbarfix #transition, #transition:before, #transition:after{
+        height: 80px;
+        padding-top: 1px;
+    }
+    #transition, #transition:before, #transition:after{
+        height: 60px;
+    }
+
+    .adminbarfix #transition, .adminbarfix #transition:before, .adminbarfix #transition:after{
+        height: 80px;
+    }
+
+
     /* affichage du header pour mobile */
     .page-header .navbar-fixed-top {
         height: 50px;
@@ -897,6 +916,10 @@ main .container {
     margin-top: 0px;
     padding: 1em;
     background-color: #ff6633;
+}
+
+#annuaire #transition{
+    padding-top: 1em;
 }
 
 
@@ -2082,5 +2105,74 @@ main .container {
 @media screen and (max-width: 390px) {
     #home .contenu .img-article {
         max-width: 90%;
+    }
+}
+
+@media screen and (min-width: 200px) and (max-width: 790px) {
+    #menu-assoc .glyphicon {
+        display: block;
+    }
+    #menu-assoc .text {
+        display: none;
+    }
+    #menu-assoc ul li {
+        padding-left: 0.3em;
+        padding-right: 0.3em;
+    }
+    #onepageasso .carousel-indicators {
+        display: none;
+    }
+    #onepageasso .carousel-inner img {
+        height: 100%;
+    }
+    #onepageasso .content-onepage .btn-link-leaflet {
+        display: none;
+    }
+    #onepageasso .map{
+        padding-left: 0%;
+    }
+
+    #transition ul li a{
+        padding-bottom: 0.5em;
+        padding-right: 0.3em;
+        padding-left: 0.3em;
+    }
+}
+
+
+@media screen and (min-width: 200px) and (max-width: 481px) {
+    .adminbarfix #transition ul li a{
+        padding-top: 2.8em;
+    }
+    .adminbarfix #transition ul li {
+        padding-left: 0.6em;
+    }
+
+    #transition ul li a{
+        padding-top: 1.5em;
+    }
+    #transition ul li {
+        padding-left: 0.6em;
+    }
+
+}
+
+@media screen and (max-width: 780px) {
+    .adminbarfix {
+        margin-top: 0.5em !important;
+    }
+    .adminbarfix nav {
+        margin-top: 4em;
+    }
+    .page-header .navbar-fixed-top{
+        height: 64px;
+    }
+    header .menu-burger{
+        top: 0.3em;
+        right: 0.5em;
+    }
+    .page-header img {
+        width: 160px;
+        padding-top: 0px;
     }
 }

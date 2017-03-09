@@ -496,6 +496,7 @@ left: 109px;
 
 /*# sourceMappingURL=style_onepageasso.css.map */
 
+<<<<<<< HEAD
 @media screen and (min-width: 200px) and (max-width: 790px) {
     #menu-assoc .glyphicon {
         display: block;
@@ -526,6 +527,8 @@ left: 109px;
     }
 }
 
+=======
+>>>>>>> aa94513c1e484c20da02766136a27bb18a2ba476
 @media screen and (min-width: 490px) and (max-width: 830px) {
     #onepageasso .content-onepage .btn-link-leaflet {
         display: none;
@@ -566,12 +569,6 @@ left: 109px;
 @media screen and (min-width: 1200px) and (max-width: 1400px) {
     #onepageasso .carousel-inner img {
         height: 100%;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    #transition {
-        padding-top: 50px;
     }
 }
 

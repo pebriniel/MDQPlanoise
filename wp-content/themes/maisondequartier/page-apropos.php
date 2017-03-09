@@ -279,18 +279,14 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
 <script type="text/javascript">
     function scrollToAnchor(aid){
         var aTag = $("div[id='"+ aid +"']");
-        console.log(aTag);
         $('html,body').animate({scrollTop: aTag.offset().top - 200},'slow');
     }
 
     $(".link").click(function() {
        $(".link").removeClass("active");
-       console.log('ok');
        $(this).addClass("active");
        scrollToAnchor($(this).data('id'));
     });
-
-
 </script>
 
 </main>

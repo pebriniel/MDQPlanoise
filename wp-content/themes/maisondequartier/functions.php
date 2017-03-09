@@ -143,9 +143,11 @@ function margBody(){
     return $v;
 }
 
-// page annuaire - Add theme support for featured images if not already present
-// function resize_imgActivity() {
-//
-// 		add_image_size('img_resize', 5000, 2000, false);
-// 	}
-// add_action( 'before_setup_theme', 'resize_imgActivity');
+// Déclaration de la prise des miniatures
+add_theme_support( 'post-thumbnails' );
+
+// déclaration de la function pour redimentioner les miniatures
+if ( function_exists( 'add_image_size' ) ) {
+
+	add_image_size( 'resizing-img', 200, 100, true ); //(Image recadrée)
+}
