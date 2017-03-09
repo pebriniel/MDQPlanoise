@@ -136,7 +136,7 @@ function mdq_showActiviteHtml($post){
                     <div class="desc">
                         <div style="position: relative">
                             <div id="acti-<?= $post->ID; ?>"  class="content overflow content-activite acti-<?= $post->ID; ?>">
-                                <?= $post->mdq_event_description ?>
+                                <?= $post->$post_content; ?>
                             </div>
                         </div>
                     </div>
