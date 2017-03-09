@@ -149,7 +149,7 @@ get_header();
 		 $images = array();
 		 ?>
 
-		 <div id="myCarousel" class="carousel slide" data-ride="carousel">
+		 <div id="carousel" class="carousel slide" data-ride="carousel">
 		 	 <!-- Wrapper for slides -->
 
 		 <?php
@@ -207,7 +207,7 @@ get_header();
 		     		 {
 		 				 static $i = 0;
 		 			?>
-		 		   		<li data-target="#myCarousel" data-slide-to="<?= $i; ?>" <?= $active; ?>></li>
+		 		   		<li data-target="#carousel" data-slide-to="<?= $i; ?>" <?= $active; ?>></li>
 		 			<?php
 		 				$i ++;
 		 				$active = "";
@@ -226,7 +226,7 @@ get_header();
 
 							 <p> Le <?= $image['dateStart'];?> à <?= $image['heure'];?></p>
 							 <p><?= $image['association'];?></p>
-							 <a class="btn-link img-modal" id="image-<?= $images['post_id']; ?>" data-title="<?= $image['title']; ?>" data-content="<?= $image['content']; ?>" data-img="<?= $image['img_src'] ?>" data-date="<?= $image['dateStart']; ?>" data-location="<?= $image['location']; ?>" data-url="<?=  get_site_url()."/association/?fiche=".$image['association']; ?>" role="button">voir l'événement</a>
+							 <a class="btn-association img-modal img-moda-click" id="image-<?= $images['post_id']; ?>" data-title="<?= $image['title']; ?>" data-content="<?= $image['content']; ?>" data-img="<?= $image['img_src'] ?>" data-date="<?= $image['dateStart']; ?>" data-location="<?= $image['location']; ?>" data-url="<?=  get_site_url()."/association/?fiche=".$image['association']; ?>" role="button">voir l'événement</a>
 
 						 </div>
 					 </div>
@@ -241,7 +241,7 @@ get_header();
 		 </div>
 
 			 <!-- Left and right controls -->
-			 <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+			 <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
 				 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true" style="color: #ff6633;"></span>
 				 <span class="sr-only">Précèdent</span>
 			 </a>
@@ -253,23 +253,23 @@ get_header();
 		</div>
 		<!-- fin de carousel -->
 
-	<!-- la modal -->
-	<div class="modal container" id="modal-gallery" role="dialog">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-					<button class="close" type="button" data-dismiss="modal">×</button>
-					<h3 class="modal-title"></h3>
-			</div>
-			<div class="modal-body">
+		<!-- la modal -->
+		<div class="modal container" id="modal-gallery" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+						<button class="close" type="button" data-dismiss="modal">×</button>
+						<h3 class="modal-title"></h3>
+				</div>
+				<div class="modal-body">
 
-			</div>
-			<div class="modal-footer">
-					<button class="btn btn-default" data-dismiss="modal">Fermer</button>
+				</div>
+				<div class="modal-footer">
+						<button class="btn btn-default" data-dismiss="modal">Fermer</button>
+				</div>
 			</div>
 		</div>
-	</div>
-	</div>
+		</div>
 
 	<script>
 	$(document).ready(function() {
@@ -283,21 +283,26 @@ get_header();
 
 	 /* when clicking a thumbnail */
 	 $(".modal-click .img-modal").click(function(){
-			var title = $(this).data('title');
-			var description = $(this).data('content');
-			var date = $(this).data('date');
-			var image = $(this).data('img');
-			var location = $(this).data('location');
-			var url = $(this).data('url');
-	 		var content = $(".modal-body");
-			var modal_title = $(".modal-title");
+		 var title = $(this).data('title');
+		 var description = $(this).data('content');
+		 var date = $(this).data('date');
+		 var date_end = $(this).data('dateend');
+		 var date_hour = $(this).data('hourstart');
+		 var date_hour_end = $(this).data('hourend');
+		 var image = $(this).data('img');
+		 var location = $(this).data('location');
+		 var url = $(this).data('url');
+		 var content = $(".modal-body");
+		 var footer = $(".modal-footer");
+
+		 var modal_title = $(".modal-title");
 
 		//content.empty();
 		modal_title.empty();
 
 		modal_title.html(title);
-		content.html("<img src='"+image+"' /> <p id='modal-date'>Date de l'événement : "+  date + " </p><p id='modal-location'>Lieu : " + location + "</p> <p id='modal-description'>"  + description + "</p><a href='"+url+"'> voir la fiche de l'association</a>");
-
+		content.html("<img src='"+image+"' /> <p id='modal-date'>Date de l'événement : "+  date + " à "+date_hour+" au "+ date_end+" à "+date_hour_end+"</p><p id='modal-location'>Lieu : " + location + "</p> <p id='modal-description'>"  + description + "</p>");
+		footer.html("<a href='"+url+"' class='btn btn-association-asso'> voir la fiche de l'association</a><button class='btn btn-association' data-dismiss='modal'>Fermer</button>");
 		// show the modal
 		$("#modal-gallery").modal("show");
 	});

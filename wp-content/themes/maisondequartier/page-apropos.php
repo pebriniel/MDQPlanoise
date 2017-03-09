@@ -71,10 +71,10 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
             </div>
             <div class="col-md-9 col-xs-12 description">
                 <p>
-                    La Maison de quartier  de Planoise est une structure municipale,  agrée centre social par la Caisse d’Allocations Familiales du Doubs.
+                    La Maison de quartier  de Planoise est une structure municipale,  agréee centre social par la Caisse d’Allocations Familiales du Doubs.
                     <br/>
                     <br/>
-                    Elle est animé par une équipe de professionnels qui intervient aux côtés de bénévoles et de partenaires, au service du « vivre ensemble ».
+                    Elle est animée par une équipe de professionnels qui intervient aux côtés de bénévoles et de partenaires, au service du « vivre ensemble ».
                 </p>
 
             </div>
@@ -202,9 +202,9 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
                   </h4>
                 </div>
                 <div class="numeros">
-                  <h4>Tél.: <a href="tel:0381878120"> 03 81 87 81 20</a></h4>
-                  <h4>Mail: <a href="mailto:planoise.mdq@besancon.fr">planoise.mdq@besancon.fr</a></h4>
-                  <h4>Fax: 03 81 51 65 80</h4>
+                  <h4>Tél. : <a href="tel:0381878120"> 03 81 87 81 20</a></h4>
+                  <h4>Courriel : <a href="mailto:planoise.mdq@besancon.fr">planoise.mdq@besancon.fr</a></h4>
+                  <h4>Fax : 03 81 51 65 80</h4>
                 </div>
               </div>
                 <div class="scolaire col-md-7">

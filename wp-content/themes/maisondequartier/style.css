@@ -570,21 +570,24 @@ main .container {
 
 /* -- css houda, #home -- 26 Février 2017 */
 
-#home #carousel {
+#carousel {
     margin-top: 1%;
     margin-bottom: 1%;
 }
 
-#home #carousel .carousel-slide .item {
+#carousel .carousel-slide .item {
     height: 50px;
 }
 
-#home #carousel .carousel-inner .carousel-caption {
+#carousel .carousel-inner .carousel-caption {
     color: #ff6633;
 }
 
-#home .modal-content {
+.modal-content {
     margin-top: 10%;
+    height: 500px;
+    overflow: auto;
+    margin-bottom: 5em;
 }
 
 #home .contenu {
@@ -677,7 +680,7 @@ main .container {
 
 /* 2. juste modif */
 
-#home .carousel-caption {
+.carousel-caption {
     background-color: rgba(255, 255, 255, 0.8);
     text-shadow: none;
     font-weight: bold;
@@ -691,40 +694,35 @@ main .container {
 
 /* 2. ajout new */
 
-#home .carousel-caption h3 {
+.carousel-caption h3 {
     text-transform: uppercase;
     font-size: 2.5em;
     font-weight: bold;
 }
 
-#home .carousel-caption p {
+.carousel-caption p {
     font-size: 1.1em;
 }
 
-#home .modal {
-    height: 1000px;
-    margin-top: 5%;
-}
-
-#home .modal img {
+.modal img {
     height: 200px;
 }
 
-#home .modal-title {
+.modal-title {
     color: #ff6633;
     text-transform: uppercase;
     font-weight: bold;
 }
 
-#home .modal-body {
+.modal-body {
     text-align: justify;
 }
 
-#home .modal-body img {
+.modal-body img {
     margin-bottom: 2%;
 }
 
-#home .modal-footer .btn {
+.modal-footer .btn {
     color: #000;
 }
 
@@ -732,42 +730,42 @@ main .container {
 /* -- responsive -- */
 
 @media screen and (min-width: 200px) and (max-width: 700px) {
-    #home #carousel .carousel-inner .item {
+    #carousel .carousel-inner .item {
         height: 250px;
     }
-    #home .carousel-indicators {
+    .carousel-indicators {
         display: none;
     }
-    #home #carousel .item img {
+    #carousel .item img {
         height: 100%;
     }
-    #home .carousel-caption {
+    .carousel-caption {
         height: 60%;
         padding: 0;
     }
-    #home .carousel-caption h3 {
+    .carousel-caption h3 {
         text-transform: uppercase;
         font-size: 1.5em;
         font-weight: bold;
     }
-    #home .carousel-caption p {
+    .carousel-caption p {
         font-size: 0.9em;
     }
-    #home #carousel .item .btn-association {
+    #carousel .item .btn-association {
         padding-top: 0.1em;
         padding-right: 0.5em;
         padding-bottom: 0.1em;
         padding-left: 0.5em;
         font-size: 1em;
     }
-    #home #modal-gallery {
+    #modal-gallery {
         height: 600px;
         margin-top: 1%;
     }
 }
 
 @media screen and (min-width: 700px) and (max-width: 1024px) {
-    #home #carousel .item img {
+    #carousel .item img {
         height: 100%;
     }
 }
@@ -1046,7 +1044,7 @@ main .container {
 
 /* -- css houda, #home -- 26 Février 2017 */
 
-#home #carousel .item .btn-association {
+#carousel .item .btn-association {
     width: 100%;
     height: 34px;
     margin: 0;
@@ -1064,16 +1062,16 @@ main .container {
     transition: .3s;
 }
 
-#home #carousel .item .btn-association:hover {
+#carousel .item .btn-association:hover {
     text-decoration: none;
 }
 
-#home .carousel-indicators {
+.carousel-indicators {
     position: absolute;
     top: 90%;
 }
 
-#home #carousel .carousel-inner .item {
+#carousel .carousel-inner .item {
     height: 400px;
 }
 
@@ -1588,18 +1586,18 @@ main .container {
 
 .modal-open {
     overflow-y: auto;
-}
+} 
 
-#home .modal-dialog .btn-association-asso {
+.modal-dialog .btn-association-asso {
     width: 50%;
     margin-right: 10%;
 }
 
-#home .modal-dialog .btn-association {
+.modal-dialog .btn-association {
     width: 30%;
 }
 
-#home .modal-dialog .btn-association, #home .modal-dialog .btn-association-asso {
+.modal-dialog .btn-association, .modal-dialog .btn-association-asso {
     height: 34px;
     margin-right: 6%;
     padding-right: 1em;
@@ -1622,7 +1620,7 @@ main .container {
 
 .modal-footer {
     height: 5vh;
-    padding-top: 7px;
+    padding: 1em;
 }
 
 
@@ -2089,7 +2087,7 @@ main .container {
 }
 
 @media screen and (max-width: 700px) {
-    #home .carousel-caption {
+    .carousel-caption {
         height: 50%;
     }
 }

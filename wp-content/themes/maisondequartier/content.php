@@ -45,7 +45,7 @@ function callEvent($limit = 10, $offset = 3){
 
 					$post_id = get_the_ID();
 					$title = get_the_title();
-					$content = get_the_excerpt();
+					$content = get_post_meta(get_the_ID(), 'event_asso_description', true);
 				// $size = image_resize($post->ID, 100, 50);
 					$image = get_the_post_thumbnail(get_the_ID(), 'size-carousel-display-home');
 					$image_src = wp_get_attachment_image_src(get_post_thumbnail_id());
@@ -133,7 +133,7 @@ $images = callEvent(3, 0);
 						 <!-- <a href="<?=  get_site_url()."/association/?fiche=".$image['url_openblank']; ?>"  class="btn-association" role="button">voir l'événement</a> -->
 						 <p> Le <?= $image['dateStart']; ?> </p>
 						 <p><?= $image['association_name'];?></p>
-						 <a class="btn-association img-modal img-moda-click" id="image-<?= $images['post_id']; ?>" data-title="<?= $image['title']; ?>" data-content="<?= $image['content']; ?>" data-img="<?= $image['img_src'] ?>" data-date="<?= $image['dateStart']; ?>" data-dateend="<?= $image['dateEnd']; ?>" data-hourstart="<?= $image['dateHourStart']; ?>" data-hourend="<?= $image['dateHourEnd']; ?>" data-location="<?= $image['location']; ?>" data-url="<?=  get_site_url()."/association/?fiche=".$image['association']; ?>" role="button">Voir l'événement</a>
+						 <a class="btn-association img-modal img-moda-click" id="image-<?= $images['post_id']; ?>" data-title="<?= $image['title']; ?>" data-content="test <?= $image['content']; ?>" data-img="<?= $image['img_src'] ?>" data-date="<?= $image['dateStart']; ?>" data-dateend="<?= $image['dateEnd']; ?>" data-hourstart="<?= $image['dateHourStart']; ?>" data-hourend="<?= $image['dateHourEnd']; ?>" data-location="<?= $image['location']; ?>" data-url="<?=  get_site_url()."/association/?fiche=".$image['association']; ?>" role="button">Voir l'événement</a>
 						 <!-- <p><?= $image['location'];?></p> -->
 
 						 <!-- <a data-url="<?= get_site_url()."/association/?fiche=".$images['post_id']; ?>" class="btn btn-association" role="button">voir la fiche</a> -->
