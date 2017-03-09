@@ -96,7 +96,7 @@ add_theme_support( 'post-thumbnails' );
 // déclaration de la function pour redimentioner les miniatures
 if ( function_exists( 'add_image_size' ) ) {
 
-	add_image_size( 'fiche-association', 150, 80, true ); //(Image recadrée)
+	add_image_size( 'fiche-association', 200, 100, true ); //(Image recadrée)
 
 }
 
