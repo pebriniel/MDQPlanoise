@@ -182,7 +182,7 @@ function mdq_list_cat($name_tax, $val = null){
 
 ?>
 <main id="activite">
-    <div class="container">
+    <div class="container container-menu">
         <!-- <div class="row" id="transition"> -->
           <div class="row" id="transition-acti">
             <!-- <div class="col-md-5 col-xs-10 "> -->
