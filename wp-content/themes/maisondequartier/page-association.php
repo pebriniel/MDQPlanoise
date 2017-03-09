@@ -444,7 +444,7 @@ get_header();
 											global $post;
 											?>
 											<div class="col-md-3 membres">
-												<div class="col-md-12 nomMembres triangle-border">
+												<div class="col-md-12 nomMembres triangle-obtuse">
 														<h3><?= get_the_title();?></h3>
 														<p><?= $post->mdq_members_description; ?>Président</p>
 													</div>
