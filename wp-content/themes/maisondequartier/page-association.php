@@ -428,7 +428,7 @@ get_header();
 
 						<!-- membres asso -->
 						<div id="membres" class="container prezmembres">
-							<h2>Les Membres</h2>
+							<h2>les référents</h2>
 							<div class="row">
 							<!-- <div class="col-md-12"> -->
 								<?php
@@ -443,7 +443,7 @@ get_header();
 											the_post();
 											global $post;
 											?>
-											<div class="col-md-3 membres">
+											<div class="col-md-3 col-xs-12 membres">
 												<div class="col-md-12 nomMembres triangle-obtuse">
 														<h3><?= get_the_title();?></h3>
 														<p><?= $post->mdq_members_description; ?>Président</p>
@@ -470,6 +470,7 @@ get_header();
 								<div class="row">
 									<div class="col-md-12">
 										<div id="infos_asso" class="adresseAsso col-md-7">
+											<div class="coordonneesAccueil col-md-10 col-md-offset-1">
 											<h2><?= $infosAsso->_name; ?></h2>
 											<h4><?= $infosAsso->_address; ?></h4>
 											<h4><?= $infosAsso->_pc; ?> - <?= $infosAsso->_city; ?></h4>
@@ -485,6 +486,7 @@ get_header();
 											<h3>Ouverture - grandes vacances : </h3>
 											<p><?= $infosAsso->_bigHolidays; }?></p>
 										</div>
+									</div>
 
 										<div class="map col-md-5">
 											<div id="mapid-association">
@@ -604,7 +606,7 @@ get_header();
 						if(isset($emailSent) && $emailSent == true) { ?>
 
 				 	<div class="thanks" id="form">
-				 		<h1>Merci, <?=$name;?></h1>
+				 		<h1><i class="glyphicon glyphicon-envelope"></i>Merci, <?=$name;?></h1>
 				 		<p>Votre e-mail a &eacute;t&eacute; envoy&eacute; avec succ&egrave;s. Vous recevrez une r&eacute;ponse dans les meilleurs délais.</p>
 				 	</div>
 
