@@ -155,9 +155,49 @@ body {
 #onepageasso .membres .nomMembres{
   border: 2px solid #ff6633;
   text-align: center;
-  font-size: 1.5em;
   margin-bottom: 10%;
   display: inline-block;
+}
+#onepageasso .membres .nomMembres h3{
+  font-size: 1.2em;
+}
+#onepageasso .membres .triangle-obtuse
+{
+position: relative;
+padding: 0px;
+background: #FFFFFF;
+-webkit-border-radius: 0px;
+-moz-border-radius: 0px;
+border-radius: 0px;
+border: #FF6633 solid 2px;
+}
+
+.triangle-obtuse:after
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 15px 15px 0;
+border-color: #FFFFFF transparent;
+display: block;
+width: 0;
+z-index: 1;
+bottom: -15px;
+left: 110px;
+}
+
+.triangle-obtuse:before
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 16px 16px 0;
+border-color: #FF6633 transparent;
+display: block;
+width: 0;
+z-index: 0;
+bottom: -18px;
+left: 109px;
 }
 
 #onepageasso .prezmembres {

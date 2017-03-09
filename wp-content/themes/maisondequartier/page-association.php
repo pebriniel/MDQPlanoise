@@ -444,47 +444,20 @@ get_header();
 											global $post;
 											?>
 											<div class="col-md-3 membres">
-												<div class="col-md-12 nomMembres">
-													<p>Machin chose</p>
-													<p>Président</p>
-												<!-- <div class="thumbnail"> -->
-													<!-- <img src="wp-content/themes/maisonquartier/img/img_onepageasso/user.jpg" alt="..."> -->
-													<?= get_the_post_thumbnail($post->ID); ?>
-												  <!-- <div class="caption"> -->
-														<h3><?= $post->event_title;?></h3>
-														<p><?= $post->mdq_event_description; ?></p>
+												<div class="col-md-12 nomMembres triangle-border">
+														<h3><?= get_the_title();?></h3>
+														<p><?= $post->mdq_members_description; ?>Président</p>
 													</div>
 												</div>
 											<!-- </div> -->
-											</div>
+
 											<?php
 										}
 									}
-									?>
-								</div>
-								<div class="members-plus">
-									<svg class="more" enable-background="new 0 0 48 48" height="60px" id="Layer_1" version="1.1" viewBox="0 0 48 48" width="60px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-										<path d="M24,0C10.745,0,0,10.745,0,24c0,13.254,10.745,24,24,24s24-10.746,24-24C48,10.745,37.255,0,24,0z   M34.031,24.766c0,1.109-0.9,1.305-1.354,1.332h-6.581l-0.008,6.607c-0.002,1.221-0.933,1.322-1.18,1.326L23.1,34.029  c-0.27-0.006-1.211-0.109-1.209-1.33l0.008-6.602h-6.602c-1.221,0-1.322-0.93-1.328-1.178v-1.809  c0.005-0.27,0.108-1.211,1.328-1.211h6.607l0.008-6.463c0.006-0.306,0.107-1.472,1.288-1.47l1.578,0.002  c1.11,0.001,1.305,0.902,1.331,1.356L26.102,21.9h6.458c0.306,0.006,1.472,0.105,1.472,1.287V24.766z" fill="#ff6633"/>
-									</svg>
+									?></div>
 								</div>
 							</div>
-
-							<script>
-								$(document).ready(function(){
-									var membres = $(".members-plus");
-									membres.hide();
-
-									var members = $('.membres');
-									if(members.length >= 4){
-										$("#membres").addClass("overflow-content");
-										membres.show();
-									}
-
-									membres.click(function(){
-										$("#membres").toggleClass("overflow-content");
-									});
-								});
-							</script>
+>
 							<!-- fin membres asso -->
 			<?php
 
