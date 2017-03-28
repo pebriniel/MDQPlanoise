@@ -4,6 +4,9 @@
  *
  * @package mdq
  */
+
+ // (is_admin_bar_showing()) ? 'id="adminbarfix"' : "";
+
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>  <html class="no-js lt-ie9 lt-ie8 lt-ie7" <?php language_attributes(); ?>> <![endif]-->
@@ -44,14 +47,15 @@
 			   });
 		   });
 		</script>
+
 	</head>
-	<body <?php body_class(); ?>>
+	<body class="<?= margBody(); ?>">
 		<!--[if lt IE 8]>
 			<p class="ancient-browser-alert">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/" target="_blank">upgrade your browser</a>.</p>
 		<![endif]-->
 			<?php do_action('before'); ?>
 
-			<header class="page-header">
+	<header class="page-header">
 	  <div class="row">
 	  <nav class="navbar-fixed-top">
 	    <div class="col-md-2 col-sm-2 col-xs-10 logoPS">
@@ -74,6 +78,30 @@
 			</div>
 	  </nav>
 	</div>
+	<script type="text/javascript">
+		$(document).ready(function()
+    {
+		
+			$('.page-header #nav li:hover a').on( "click", function() {
+				console.log("ok");
+				// $('.page-header #nav li a').css({"color": "#ffffff"; "text-decoration": "none"; });
+
+				// $('.page-header #nav li').css("background-color", "#ff6633");
+
+				$( ".page-header #nav li a" ).removeClass( "class_css_hover" );
+					$( this ).addClass( "class_css_hover" );
+					$( '.page-header #nav li:hover' ).addClass( "class_css_hover" );
+		   
+			});
+
+			$( "menu .onglet:hover" ).bind( 'click' , function(){
+$( "menu .onglet:hover" ).removeClass( "class_css_hover" );
+$( this ).addClass( "class_css_hover" );
+} )
+
+
+	});
+	</script>
 	</header>
 
 

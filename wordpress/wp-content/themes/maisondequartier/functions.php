@@ -12,6 +12,15 @@ function add_query_vars_filter_fiche( $vars ){
   return $vars;
 }
 
+function special_nav_class ($classes, $item) {
+    if (in_array('current-page-ancestor', $classes) || in_array('current-menu-item', $classes) ){
+        $classes[] = 'active ';
+    }
+    return $classes;
+}
+
+add_filter('nav_menu_css_class' , 'special_nav_class' , 10 , 2);
+
 function get_post_activite($input, $tax, &$search_array, &$search_id){
     if(isset($_POST[$input])){
         $search_id = intval($_POST[$input]);
@@ -71,23 +80,19 @@ if (!function_exists('bootstrapBasicPostOn')) {
 		);
 
     if (is_sticky() == null){
-      $author = '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s">%3$s</a></span>';
+      $author = 'par <span class="author vcard">%1$s</span>';
 
     } else {
       $author = '';
     }
 
     $author = sprintf($author,
-      esc_url(get_author_posts_url(get_the_author_meta('ID'))),
-      esc_attr(sprintf(__('View all posts by %s', 'bootstrap-basic'), get_the_author())),
       esc_html(get_the_author())
     );
 
 
-		printf(__('<span class="posted-on">Publié le %1$s</span><span class="byline"> par %2$s</span>', 'bootstrap-basic'),
-			sprintf('<a href="%1$s" title="%2$s" rel="bookmark">%3$s</a>',
-				esc_url(get_permalink()),
-				esc_attr(get_the_time()),
+		printf(__('<span class="posted-on">Publié le %1$s</span><span class="byline"> %2$s</span>', 'bootstrap-basic'),
+			sprintf('%1$s',
 				$time_string
 			),
 			sprintf($author,
@@ -105,7 +110,7 @@ if (!function_exists('bootstrapBasicMoreLinkText')) {
 	 * Custom more link (continue reading) text
 	 * @return string
 	 */
-	function bootstrapBasicMoreLinkText()
+	function bootstrapBasicMoreLinkText($post)
 	{
 //		return __('Lire plus <span class="meta-nav"><a href="'. get_permalink( ) . '"></a></span>', 'bootstrap-basic');
     $url = "";
@@ -114,16 +119,9 @@ if (!function_exists('bootstrapBasicMoreLinkText')) {
       $url = '?article=' .$post->ID;
     }
 
-    return __('<span class="meta-nav"><a href="'. $url . '">(suite...)</a></span>', 'bootstrap-basic');
+    return __('<span class="meta-nav"><a href="'. $url . '#article-'.$post->ID.'">(suite...)</a></span>', 'bootstrap-basic');
   }// bootstrapBasicMoreLinkText
 }
-
-//Pour utiliser les mots-clés et catégories aux pages
-function mypage_settings() {
-// Ajoute les catégories aux page
-register_taxonomy_for_object_type('category', 'page');
-}
-add_action( 'admin_init', 'mypage_settings' );
 
 // stopper le téléchargement automatique de jquery v.1.2.1
 add_filter( 'wp_default_scripts', 'remove_jquery_migrate' );
@@ -133,4 +131,21 @@ function remove_jquery_migrate( &$scripts){
         $scripts->remove( 'jquery');
         $scripts->add( 'jquery', false, array( 'jquery-core' ), '1.2.1' );
     }
+}
+
+function margBody(){
+    $v = "";
+    if(is_admin_bar_showing())
+    {
+        $v = "adminbarfix";
+    }
+
+    return $v;
+}
+
+// Déclaration de la prise des miniatures
+add_theme_support( 'post-thumbnails' );
+if ( function_exists( 'add_image_size' ) ) {
+	add_image_size( 'resizing-img', 200, 150); //pour affichage du logo dans la fiche association
+  add_image_size( 'resizing-img-article', 315, 250); //pour affichage du logo dans la fiche association
 }

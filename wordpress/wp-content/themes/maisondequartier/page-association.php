@@ -30,9 +30,14 @@ get_header();
 
 
 	<?php
+
+
 	query_posts(array('post_type' => 'fiche'));
 
 	if($infosAsso = get_post($fiche)){
+		// while(have_posts()){
+						the_post();
+
 
 		if($infosAsso->post_type == 'fiche'){
 			?>
@@ -44,7 +49,7 @@ get_header();
 						if($infosAsso->showDescription){
 						?>
 						<li>
-							<a href="#cartevisite">
+							<a class="link" data-id="cartevisite">
 								<span class="glyphicon glyphicon-info-sign"></span>
 								<span class="text">Description</span>
 							</a>
@@ -54,9 +59,9 @@ get_header();
 						if($infosAsso->showCaroussel){
 						?>
 						<li>
-							<a href="#evenements">
+							<a class="link" data-id="evenements">
 								<span class="glyphicon glyphicon-calendar"></span>
-	                       		<span class="text">Évènements</span>
+	              <span class="text">Actualités</span>
 							</a>
 						</li>
 						<?php
@@ -64,9 +69,9 @@ get_header();
 						if($infosAsso->showMembers){
 						?>
 						<li>
-							<a href="#membres">
+							<a class="link" data-id="membres">
 								<span class="glyphicon glyphicon-user"></span>
-	                       		<span class="text">Membres</span>
+	                       		<span class="text">Vos interlocuteurs</span>
 							</a>
 						</li>
 						<?php
@@ -74,7 +79,7 @@ get_header();
 						if($infosAsso->showCoordonnees){
 						?>
 						<li>
-							<a href="#coordonnees">
+							<a class="link" data-id="coordonnees">
 								<span class="glyphicon glyphicon-home"></span>
 	                       		<span class="text">Coordonnées & Horaires</span>
 							</a>
@@ -84,7 +89,7 @@ get_header();
 						if($infosAsso->showFormulaire){
 						?>
 						<li>
-							<a href="#join">
+							<a class="link" data-id="join">
 								<span class="glyphicon glyphicon-envelope"></span>
 	                       		<span class="text">Contact</span>
 							</a>
@@ -92,6 +97,8 @@ get_header();
 						<?php
 						}
 						?>
+						<li><a href="<?= $infosAsso->_fb; ?>"><span class="fa fa-facebook"></span></a></li>
+						<li><a href="<?= $infosAsso->_twitter; ?>"><span class="fa fa-twitter"></span></a></li>
 					</ul>
 				</div>
 			</div>
@@ -99,32 +106,33 @@ get_header();
 		<div class="content-onepage">
 			<?php
 
-
 			if($infosAsso->showDescription){
 				?>
 				<!-- carte visite -->
 				<div id="cartevisite" class="container">
-					<div class="row carteVisite">
+					<div class="col-md-12 carteVisite">
 						<div class="col-md-4 logo">
 
 							<div class="thumbnail">
-								<span><?= get_the_post_thumbnail($infosAsso->ID, 'fiche-association'); ?></span>
+								<span><?= get_the_post_thumbnail($infosAsso->ID, 'resizing-img'); ?></span>
 								<div class="caption">
 									<h3><?= $infosAsso->_name; ?></h3>
 								</div>
 							</div>
-							<button type="button" name="button" class="btn btn-link center-block">Télécharger la plaquette</button>
+							<div class="tarifAdhesion">Tarif d'adhésion : <?= $infosAsso->_membership; ?></div>
+							<button type="button" name="button" class="btn btn-link-leaflet center-block">Télécharger la plaquette</button>
 
 						</div>
 						<div class="col-md-8 descrip text-justify">
-							<p><?= $infosAsso->_desc;?></p>
+							<p><?= $infosAsso->post_content;?></p>
 						</div>
 					</div>
 				</div>
 				<!-- fin carte visite -->
 			<?php
 
-			}
+		}
+	}
 
 			if($infosAsso->showCaroussel){
 
@@ -141,7 +149,7 @@ get_header();
 		 $images = array();
 		 ?>
 
-		 <div id="myCarousel" class="carousel slide" data-ride="carousel">
+		 <div id="carousel" class="carousel slide" data-ride="carousel">
 		 	 <!-- Wrapper for slides -->
 
 		 <?php
@@ -167,14 +175,17 @@ get_header();
 
 		 			// 	$asso_orga = get_post_meta(get_the_ID(), 'mdq_listing_assoc', true);
 		 				$dateStart = get_post_meta(get_the_ID(), 'event_asso_start', true);
-					//	$dateDisplayStart = date_i18n($format_date, strtotime($dateStart));
+						$dateDisplayStart = date_i18n("d/m/Y", strtotime($dateStart));
 						$dateEnd = get_post_meta(get_the_ID(), 'event_asso_end', true);
-				//		$dateDisplayEnd = date_i18n($format_date, strtotime($dateEnd));
-		 				$location_event = get_post_meta(get_the_ID(), 'event_asso_address', true);
+						$dateDisplayEnd = date_i18n("d/m/Y", strtotime($dateEnd));
+						$hour = get_post_meta(get_the_ID(), 'event_asso_hour_start', true);
+						$eventHourStart = date_i18n("G:i", strtotime($hour));
+						$location_event = get_post_meta(get_the_ID(), 'event_asso_address', true);
 		 				$images[] = array('post_id' => $post_id,
 		 													'title' => $title,
-		 													'dateStart' => $dateStart,
-		 													'dateEnd' => $dateEnd,
+		 													'dateStart' => $dateDisplayStart,
+		 													'dateEnd' => $dateDisplayEnd,
+															'heure' => $eventHourStart,
 		 													'location' => $location_event,
 		 													'content' => $content,
 		 													'image' => $image,
@@ -196,7 +207,7 @@ get_header();
 		     		 {
 		 				 static $i = 0;
 		 			?>
-		 		   		<li data-target="#myCarousel" data-slide-to="<?= $i; ?>" <?= $active; ?>></li>
+		 		   		<li data-target="#carousel" data-slide-to="<?= $i; ?>" <?= $active; ?>></li>
 		 			<?php
 		 				$i ++;
 		 				$active = "";
@@ -213,9 +224,9 @@ get_header();
 						 <div class="carousel-caption">
 							 <h3 class="img-modal img-responsive" title="<?= $image['title']; ?>"><?= $image['title'];?></h3>
 
-							 <p> Du <?= $image['dateStart'];?> au <?= $image['dateEnd']; ?> </p>
+							 <p> Le <?= $image['dateStart'];?> à <?= $image['heure'];?></p>
 							 <p><?= $image['association'];?></p>
-							 <a class="btn-link img-modal" id="image-<?= $images['post_id']; ?>" data-title="<?= $image['title']; ?>" data-content="<?= $image['content']; ?>" data-img="<?= $image['img_src'] ?>" data-date="<?= $image['dateStart']; ?>" data-location="<?= $image['location']; ?>" data-url="<?=  get_site_url()."/association/?fiche=".$image['association']; ?>" role="button">voir l'événement</a>
+							 <a class="btn-association img-modal img-moda-click" id="image-<?= $images['post_id']; ?>" data-title="<?= $image['title']; ?>" data-content="<?= $image['content']; ?>" data-img="<?= $image['img_src'] ?>" data-date="<?= $image['dateStart']; ?>" data-location="<?= $image['location']; ?>" data-url="<?=  get_site_url()."/association/?fiche=".$image['association']; ?>" role="button">voir l'événement</a>
 
 						 </div>
 					 </div>
@@ -230,7 +241,7 @@ get_header();
 		 </div>
 
 			 <!-- Left and right controls -->
-			 <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+			 <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
 				 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true" style="color: #ff6633;"></span>
 				 <span class="sr-only">Précèdent</span>
 			 </a>
@@ -242,23 +253,23 @@ get_header();
 		</div>
 		<!-- fin de carousel -->
 
-	<!-- la modal -->
-	<div class="modal container" id="modal-gallery" role="dialog">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-					<button class="close" type="button" data-dismiss="modal">×</button>
-					<h3 class="modal-title"></h3>
-			</div>
-			<div class="modal-body">
+		<!-- la modal -->
+		<div class="modal container" id="modal-gallery" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+						<button class="close" type="button" data-dismiss="modal">×</button>
+						<h3 class="modal-title"></h3>
+				</div>
+				<div class="modal-body">
 
-			</div>
-			<div class="modal-footer">
-					<button class="btn btn-default" data-dismiss="modal">Fermer</button>
+				</div>
+				<div class="modal-footer">
+						<button class="btn btn-default" data-dismiss="modal">Fermer</button>
+				</div>
 			</div>
 		</div>
-	</div>
-	</div>
+		</div>
 
 	<script>
 	$(document).ready(function() {
@@ -272,21 +283,26 @@ get_header();
 
 	 /* when clicking a thumbnail */
 	 $(".modal-click .img-modal").click(function(){
-			var title = $(this).data('title');
-			var description = $(this).data('content');
-			var date = $(this).data('date');
-			var image = $(this).data('img');
-			var location = $(this).data('location');
-			var url = $(this).data('url');
-	 		var content = $(".modal-body");
-			var modal_title = $(".modal-title");
+		 var title = $(this).data('title');
+		 var description = $(this).data('content');
+		 var date = $(this).data('date');
+		 var date_end = $(this).data('dateend');
+		 var date_hour = $(this).data('hourstart');
+		 var date_hour_end = $(this).data('hourend');
+		 var image = $(this).data('img');
+		 var location = $(this).data('location');
+		 var url = $(this).data('url');
+		 var content = $(".modal-body");
+		 var footer = $(".modal-footer");
+
+		 var modal_title = $(".modal-title");
 
 		//content.empty();
 		modal_title.empty();
 
 		modal_title.html(title);
-		content.html("<img src='"+image+"' /> <p id='modal-date'>Date de l'événement : "+  date + " </p><p id='modal-location'>Lieu : " + location + "</p> <p id='modal-description'>"  + description + "</p><a href='"+url+"'> voir la fiche de l'association</a>");
-
+		content.html("<img src='"+image+"' /> <p id='modal-date'>Date de l'événement : "+  date + " à "+date_hour+" au "+ date_end+" à "+date_hour_end+"</p><p id='modal-location'>Lieu : " + location + "</p> <p id='modal-description'>"  + description + "</p>");
+		footer.html("<a href='"+url+"' class='btn btn-association-asso'> voir la fiche de l'association</a><button class='btn btn-association' data-dismiss='modal'>Fermer</button>");
 		// show the modal
 		$("#modal-gallery").modal("show");
 	});
@@ -315,7 +331,7 @@ get_header();
 					  <div class="col-md-4 thumbnail thumbnail-activite">
 						<div id="acti-<?= $post->ID; ?>" data-id="<?= $post->ID; ?>" class="block-activite acti-<?= $post->ID; ?> content-hidden overflow background-white">
 							<div class="image">
-								<img src="http://boussads.student.codeur.online/wclient/wp-content/uploads/2017/02/P_20170108_184437.jpg" />
+								<?= get_the_post_thumbnail($post->ID); ?>
 							</div>
 							<div class="title">
 								<h3><?= $post->post_title; ?></h3>
@@ -417,8 +433,9 @@ get_header();
 
 						<!-- membres asso -->
 						<div id="membres" class="container prezmembres">
-							<h2>Les Membres</h2>
+							<h2>Vos interlocuteurs</h2>
 							<div class="row">
+							<!-- <div class="col-md-12"> -->
 								<?php
 
 								query_posts(array(
@@ -432,43 +449,20 @@ get_header();
 											global $post;
 											?>
 											<div class="col-md-3 membres">
-												<div class="thumbnail">
-													<!-- <img src="wp-content/themes/maisonquartier/img/img_onepageasso/user.jpg" alt="..."> -->
-													<?= edit_post_link(get_the_post_thumbnail($post->ID)); ?>
-													<div class="caption">
-														<h3><?= $post->event_title;?></h3>
-														<p><?= $post->mdq_event_description; ?></p>
+												<div class="col-md-12 nomMembres triangle-obtuse">
+														<h3><?= get_the_title();?></h3>
+														<p><?= $post->mdq_members_description; ?>Président</p>
 													</div>
 												</div>
-											</div>
+											<!-- </div> -->
+
 											<?php
 										}
 									}
-									?>
-								</div>
-								<div class="members-plus">
-									<svg class="more" enable-background="new 0 0 48 48" height="60px" id="Layer_1" version="1.1" viewBox="0 0 48 48" width="60px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-										<path d="M24,0C10.745,0,0,10.745,0,24c0,13.254,10.745,24,24,24s24-10.746,24-24C48,10.745,37.255,0,24,0z   M34.031,24.766c0,1.109-0.9,1.305-1.354,1.332h-6.581l-0.008,6.607c-0.002,1.221-0.933,1.322-1.18,1.326L23.1,34.029  c-0.27-0.006-1.211-0.109-1.209-1.33l0.008-6.602h-6.602c-1.221,0-1.322-0.93-1.328-1.178v-1.809  c0.005-0.27,0.108-1.211,1.328-1.211h6.607l0.008-6.463c0.006-0.306,0.107-1.472,1.288-1.47l1.578,0.002  c1.11,0.001,1.305,0.902,1.331,1.356L26.102,21.9h6.458c0.306,0.006,1.472,0.105,1.472,1.287V24.766z" fill="#eb661b"/>
-									</svg>
+									?></div>
 								</div>
 							</div>
-
-							<script>
-								$(document).ready(function(){
-									var membres = $(".members-plus");
-									membres.hide();
-
-									var members = $('.membres');
-									if(members.length >= 4){
-										$("#membres").addClass("overflow-content");
-										membres.show();
-									}
-
-									membres.click(function(){
-										$("#membres").toggleClass("overflow-content");
-									});
-								});
-							</script>
+>
 							<!-- fin membres asso -->
 			<?php
 
@@ -489,10 +483,12 @@ get_header();
 											<h4><a href="<?=  $infosAsso->_link;  ?>"><?= $infosAsso->_link; ?></a></h4>
 											<h3>Ouverture - période scolaire :</h3>
 											<p><?= $infosAsso->_school;?></p>
+	<?php if($infosAsso->showsmallHolidays){  ?>
 											<h3>Ouverture - petites vacances :</h3>
-											<p><?= $infosAsso->_smallHolidays;?></p>
+											<p><?= $infosAsso->_smallHolidays; }?></p>
+	<?php if($infosAsso->showbigHolidays){  ?>
 											<h3>Ouverture - grandes vacances : </h3>
-											<p><?= $infosAsso->_bigHolidays;?></p>
+											<p><?= $infosAsso->_bigHolidays; }?></p>
 										</div>
 
 										<div class="map col-md-5">
@@ -510,48 +506,167 @@ get_header();
 
 			}
 
-			if($infosAsso->showFormulaire){
-			?>
+			if($infosAsso->showPartner){
 
+				?>
 
-
-							<!-- formulaire -->
-							<div class="container contact" id="join">
-								<form method="post" action="#" id="contact_form"  class="well form-horizontal" onsubmit=" return verification();">
-									<h1>Formulaire de contact</h1>
-									<fieldset>
-										<div class="input-group">
-											<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-											<input class="form-control" type="text" name="nom" id="nom" placeholder="votre nom et prénom*"/>
-										</div>
-										<div class="input-group">
-											<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-											<input class="form-control" type="email" name="email" id="email" placeholder="votre email *" />
-										</div>
-									</fieldset>
-
-
-
-									<fieldset>
-										<textarea class="form-control message center-block" rows="12" placeholder="Ecrivez votre message ici..."></textarea>
-									</fieldset>
-
-									<div class="form-group">
-										<label class="col-md-4 control-label"></label>
-										<div class="col-md-4">
-											<button type="submit" class="btn center-block">Envoyer <span class="glyphicon glyphicon-send"></span></button>
-										</div>
-									</div>
-								</form>
-
-
+				<!-- partenaires association -->
+				<div class="container loc">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-7">
+								<h2>Les partenaires</h2>
+								<p><?= $infosAsso->_partner; ?></p>
 							</div>
+						</div>
+					</div>
+				</div>
 
-			<?php
+				<?php
+			}
 
+
+
+			if($infosAsso->showFormulaire){
+
+				//If the form is submitted
+				 if(isset($_POST['submitted'])) {
+
+						//Check to make sure that the name field is not empty
+						if(trim($_POST['contactName']) === '') {
+							$hasError = true;
+						} else {
+							$name = trim($_POST['contactName']);
+						}
+
+
+						//Check to make sure sure that a valid email address is submitted
+						if(trim($_POST['email']) === '')  {
+							$emailError = 'Indiquez une adresse e-mail valide.';
+							$hasError = true;
+						}
+						else if (!filter_var(trim($_POST['email'], FILTER_VALIDATE_EMAIL))) {
+							$hasError = true;
+						}
+						 else {
+							$email = trim($_POST['email']);
+						}
+
+						//Check to make sure comments were entered
+						if(trim($_POST['comments']) === '') {
+							$hasError = true;
+						} else {
+							if(function_exists('stripslashes')) {
+								$comments = stripslashes(trim($_POST['comments']));
+							} else {
+								$comments = trim($_POST['comments']);
+							}
+						}
+
+						//If there is no error, send the email
+						if(!isset($hasError)) {
+
+							// récupération des infos de contact de l'association
+							query_posts(array('post_type'=>'formulaire'));
+							if ( have_posts() ){
+									the_post();
+									global $post;
+
+							$emailTo = "houda.b@codeur.online";
+							// $emailTo = $post->_emailcontact;
+							$admin_email = get_option( 'admin_email' );
+							$subject = 'Formulaire de contact de '.$name;
+							$sendCopy = trim($_POST['sendCopy']);
+							$body = 'Formulaire de contact depuis le site Planoisactive.fr';
+							$body .= "\n\rNom: $name \n\nEmail: $email \n\nMessage : $comments";
+							$headers = 'From: '.$emailTo . "\r\n" .
+												'Reply-To: '.$email . "\r\n" .
+												'Bcc: '.$admin_email . "\r\n" .
+												'X-Mailer: PHP/' . phpversion();
+
+							mail($emailTo, $subject, $body, $headers);
+
+							if($sendCopy == true) {
+								$subject = 'Formulaire de contact';
+		
+								$headers = 'From: '.$emailTo . "\r\n" .
+	     										'Reply-To: '.$email . "\r\n" .
+	     										'X-Mailer: PHP/' . phpversion();
+
+								mail($email, $subject, $body, $headers);
+							}
+
+							$emailSent = true;
+
+						}  } } // FIN IF POST SUBMITTED 
+						?>
+
+						<!-- formulaire -->
+						<div class="container contact" id="join">
+
+				<?php
+					if(isset($emailSent) && wp_verify_nonce('form_asso')) { ?>
+
+				 	<div class="thanks" id="form">
+				 		<h1>Merci, <?=$name;?></h1>
+				 		<p>Votre e-mail a &eacute;t&eacute; envoy&eacute; avec succ&egrave;s. Vous recevrez une r&eacute;ponse dans les meilleurs délais.</p>
+				 	</div>
+
+				 <?php } else { ?>
+
+
+
+				 		<?php if(isset($hasError)) { ?>
+				 			<p class="error">Une erreur est survenue lors de l'envoi du formulaire.</p>
+				 		<?php } ?>
+
+						<form method="post" action="#form" id="contact_form"  class="well form-horizontal" onsubmit=" return verification();">
+
+							<input type="hidden" id="form_asso" name="form_asso" value="<?php wp_create_nonce('form_asso'); ?>" />
+
+							<h1>Formulaire de contact</h1>
+							<fieldset>
+								<div class="input-group">
+									<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+									<input class="form-control" type="text" name="contactName" id="nom" placeholder="votre nom et prénom*" value="<?php if(isset($_POST['contactName'])) echo $_POST['contactName'];?>"/>
+								</div>
+
+								<div class="input-group">
+									<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+									<input class="form-control" type="email" name="email" id="email" placeholder="votre email *" value="<?php if(isset($_POST['email']))  echo $_POST['email'];?>"/>
+								</div>
+							</fieldset>
+
+							<fieldset>
+								<textarea  name="comments" class="form-control message center-block" rows="12" placeholder="Ecrivez votre message ici..."><?php if(isset($_POST['comments'])) { if(function_exists('stripslashes')) { echo stripslashes($_POST['comments']); } else { echo $_POST['comments']; } } ?></textarea>
+							</fieldset>
+							<div class="form-group">
+								<label class="col-md-4 control-label"></label>
+								<div class="col-md-4">
+									<input type="hidden" name="submitted" id="submitted" value="true" /><button type="submit" class="btn center-block">Envoyer <span class="glyphicon glyphicon-send"></span></button>
+								</div>
+							</div>
+						</form>
+					</div>
+
+				 <?php  } 
 		}
 		?>
 	</div>
-						</main>
 
-						<?php 	} 	} get_footer(); ?>
+	<script type="text/javascript">
+	    function scrollToAnchor(aid){
+	        var aTag = $("div[id='"+ aid +"']");
+	        $('html,body').animate({scrollTop: aTag.offset().top - 200},'slow');
+	    }
+
+	    $(".link").click(function() {
+	       $(".link").removeClass("active");
+	       $(this).addClass("active");
+	       scrollToAnchor($(this).data('id'));
+	    });
+	</script>
+</main>
+
+						<?php 	
+					 } get_footer(); ?>

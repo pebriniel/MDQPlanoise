@@ -51,7 +51,7 @@ function contactformasso_init(){
 function contactformasso_metaboxes(){
 	if(function_exists('add_meta_box')){
 		add_meta_box('contactformasso_contact','Informations','contactformasso_contact_metabox','formulaire','normal','high');
-		add_meta_box('monsuperslide_association','Association lié à l\'activité','mdq_event_meta_liste_assoc','formulaire','normal','high');
+		add_meta_box('monsuperslide_association','Association liée à l\'activité','mdq_event_meta_liste_assoc','formulaire','normal','high');
 	}
 }
 
