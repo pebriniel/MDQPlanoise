@@ -7,7 +7,9 @@ Author: Houda B. - Boussad S.
 
 // Custom Post Type Setup
 add_action( 'init', 'slider_post_type' );
+
 function slider_post_type() {
+
 	$labels = array(
 		'name' => 'Événements',
 		'singular_name' => 'Événement',
@@ -42,9 +44,10 @@ function slider_post_type() {
 
 // Add theme support for featured images if not already present
 function slider_addFeaturedImageSupport() {
-		get_theme_support( 'post-thumbnails' );
-		add_theme_support( 'post-thumbnails');
-		add_image_size('featured_preview', 220, 180, true);
+
+	get_theme_support( 'post-thumbnails' );
+	add_theme_support( 'post-thumbnails');
+	add_image_size('featured_preview', 220, 180, true);
 	}
 add_action( 'after_setup_theme', 'slider_addFeaturedImageSupport');
 
@@ -52,12 +55,12 @@ add_action( 'after_setup_theme', 'slider_addFeaturedImageSupport');
 function slider_addFeaturedImageSupport_slider() {
 
 
-		get_theme_support( 'post-thumbnails' );
-		add_theme_support( 'post-thumbnails');
-		add_image_size('size-carousel-display-home', 1000, 500, true);
+	get_theme_support( 'post-thumbnails' );
+	add_theme_support( 'post-thumbnails');
+	add_image_size('size-carousel-display-home', 1000, 500, true);
 
 	}
 add_action( 'before_setup_theme', 'slider_addFeaturedImageSupport_slider');
 
-// Load in the pages doing everything else!
+// Load admin
 require_once('slider-admin.php');

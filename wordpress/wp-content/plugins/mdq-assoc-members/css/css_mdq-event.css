@@ -123,7 +123,6 @@
 #transition {
     background-color: #ff6633;
     height: 50px;
-    padding-top: 8px;
     padding-right: 0px;
     padding-left: 70px;
     /*width: 100vw;*/
@@ -170,5 +169,7 @@
         margin-top: 10px;
     }
 }
+
+
 
 /*# sourceMappingURL=style-activites-bootstrap.css.map */

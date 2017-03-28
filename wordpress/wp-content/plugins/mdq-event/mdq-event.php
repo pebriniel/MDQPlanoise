@@ -54,7 +54,7 @@ function mdq_assoc_init(){
 function register_plugin_style_activite() {
     wp_register_style( 'mdq-event', plugins_url( 'mdq-event/css/css_mdq-event.css' ) );
     wp_enqueue_style( 'mdq-event' );
-}
+} 
 
 
 /**
@@ -62,7 +62,7 @@ function register_plugin_style_activite() {
 **/
 function mdq_event_metaboxes(){
     add_meta_box('monsuperslide','Description','mdq_event_meta_description','activite','normal','high');
-    add_meta_box('monsuperslide_association','Association lié à l\'activité','mdq_event_meta_liste_assoc','activite','normal');
+    add_meta_box('monsuperslide_association','Association liée à l\'activité','mdq_event_meta_liste_assoc','activite','normal');
     add_meta_box('monsuperslide_time','Date de début','mdq_event_meta_date','activite','normal');
 }
 
@@ -87,6 +87,7 @@ function mdq_event_savepost($post_id, $post){
 
     // On met à jour la meta !
     update_post_meta($post_id,'mdq_event_description',$_POST['event_description']);
+    update_post_meta($post_id,'mdq_event_payement',$_POST['event_payement']);
     update_post_meta($post_id,'mdq_event_date',$_POST['event_date']);
     update_post_meta($post_id,'mdq_association_id',$_POST['event_assoc_list']);
     update_post_meta($post_id,'mdq_event_adresse',$_POST['event_adresse']);

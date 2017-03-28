@@ -8,9 +8,20 @@ function mdq_event_meta_description($object){
 	// On génère un token (SECURITE)
 	wp_nonce_field('monsuperslider','monsuperslider_nonce');
 	?>
-	<div class="meta-box-item-content">
-		<textarea name="event_description" style="width:100%;"><?= esc_attr(get_post_meta($object->ID, 'mdq_event_description', true)); ?></textarea>
+	<div class="meta-box-item-title">
+		<h4>Description de l'activité</h4>
 	</div>
+	<div class="meta-box-item-content">
+		<textarea name="event_description" rows="5" style="width:100%;"><?= esc_attr(get_post_meta($object->ID, 'mdq_event_description', true)); ?></textarea>
+	</div>
+
+	<div class="meta-box-item-title">
+		<h4>Payement de l'activité</h4>
+	</div>
+	<div class="meta-box-item-content">
+		<textarea name="event_payement" rows="5" style="width:100%;"><?= esc_attr(get_post_meta($object->ID, 'mdq_event_payement', true)); ?></textarea>
+	</div>
+
 	<?php
 }
 function mdq_event_meta_date($object){
@@ -18,7 +29,7 @@ function mdq_event_meta_date($object){
 	wp_nonce_field('monsuperslider','monsuperslider_nonce');
 	?>
 	<div class="meta-box-item-title">
-		<h4>Adresse de l'évènement</h4>
+		<h4>Adresse de l'activité</h4>
 	</div>
 	<div class="meta-box-item-content">
 		<input type="text" name="event_adresse" style="width:49%;" value="<?= esc_attr(get_post_meta($object->ID, 'mdq_event_adresse', true)); ?>" placeholder="adresse" />
@@ -46,8 +57,13 @@ function mdq_event_meta_liste_assoc($object){
 				while ( have_posts() ){
 					the_post();
 					global $post;
+
+					$selected = "";
+					if($post->ID == get_post_meta($object->ID, 'mdq_association_id', true)){
+						$selected = "selected";
+					}
 					?>
-						<option value="<?= $post->ID; ?>"><?= $post->_name; ?></option>
+						<option value="<?= $post->ID; ?>" <?= $selected; ?>><?= $post->_name; ?></option>
 					<?php
 				}
 			}

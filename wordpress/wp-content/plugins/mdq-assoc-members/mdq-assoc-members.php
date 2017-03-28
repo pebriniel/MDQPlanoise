@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Plugin Name: Gestion des évènements
- * Description: Gestion des évènements pour la Maison de Quartier
+ * Plugin Name: Gestion des membres
+ * Description: Gestion des membres pour la Maison de Quartier
  * Version:     0.1
  * Author:      Boussad Sadadou, Houda Boutalil
  */
@@ -39,7 +39,7 @@ function mdq_members_init(){
 		'public' => true,
 		'publicly_queryable' => false,
 		'labels' => $labels,
-		'menu_position' => 9,
+		'menu_position' => 11,
 		'capability_type'=>'post',
 		'supports' => array('title', 'thumbnail'),
         'taxonomies' => array( 'status_members_mdq' ),
