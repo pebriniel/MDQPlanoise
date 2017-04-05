@@ -327,7 +327,7 @@ function ficheassociation_showbox_metabox($object){
 **/
 function ficheassociation_savepost($post_id, $post){
 
-	$nameAsso = !isset($_POST['ficheassociation_name']) ;
+	$nameAsso = !isset($_POST['ficheassociation_name']);
 	$email = !isset($_POST['ficheassociation_email']);
 	$phone = !isset($_POST['ficheassociation_tel']);
 	$address = !isset($_POST['ficheassociation_address']);
