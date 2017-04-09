@@ -16,7 +16,7 @@ function mdq_event_meta_description($object){
 	</div>
 
 	<div class="meta-box-item-title">
-		<h4>Payement de l'activité</h4>
+		<h4>Tarif de l'activité</h4>
 	</div>
 	<div class="meta-box-item-content">
 		<textarea name="event_payement" rows="5" style="width:100%;"><?= esc_attr(get_post_meta($object->ID, 'mdq_event_payement', true)); ?></textarea>
