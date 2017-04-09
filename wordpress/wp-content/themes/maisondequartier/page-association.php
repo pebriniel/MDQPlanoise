@@ -620,7 +620,7 @@ get_header();
 				 			<p class="error">Une erreur est survenue lors de l'envoi du formulaire.</p>
 				 		<?php } ?>
 
-						<form method="post" action="#form" id="contact_form"  class="well form-horizontal" onsubmit=" return verification();">
+						<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>" id="contact_form"  class="well form-horizontal" onsubmit=" return verification();">
 
 							<input type="hidden" id="form_asso" name="form_asso" value="<?php wp_create_nonce('form_asso'); ?>" />
 

@@ -8,6 +8,9 @@ Author:      Houda B. - Boussad S.
 
 add_action('init', 'ficheassociation_init');	
 
+@ini_set('display_errors', 0);
+
+
 // Register style sheet
 add_action( 'wp_enqueue_scripts', 'register_plugin_styles');
 
@@ -46,8 +49,8 @@ function ficheassociation_init(){
 		'menu_icon' => 'dashicons-id',
 		'capability_type'=>'post',
 		'supports' => array('title', 'thumbnail', 'editor'),
-    'taxonomies' => array( 'theme_mdq', 'age_mdq', 'status_members_mdq'),
-		 'map_meta_cap' => true
+    	'taxonomies' => array( 'theme_mdq', 'age_mdq', 'status_members_mdq'),
+		'map_meta_cap' => true
 	));
 
 
@@ -96,7 +99,7 @@ add_theme_support( 'post-thumbnails' );
 // resizing img
 if ( function_exists( 'add_image_size' ) ) {
 
-	add_image_size( 'fiche-association', 200, 100, true ); 
+	add_image_size( 'fiche-association', 180, 100, true ); 
 }
 
 
@@ -119,12 +122,13 @@ function ficheassociation_metaboxes(){
 * @param Object $object article/contenu édité
 **/
 function ficheassociation_coordonnees_metabox($object){
-	// génération d'un token (SECURITE)
+	// // génération d'un token (SECURITE)
 	// wp_nonce_field('ficheassociation','ficheassociation_nonce');
+	
 	?>
 	<form method="post">
 
-		<input type="hidden" id="ficheassociation" name="ficheassociation" value="<?php wp_create_nonce('ficheassociation'); ?>" />
+		<input type="hidden" id="ficheassociation" name="__nonce" value="<?php echo wp_create_nonce('ficheassociation'); ?>" />
 		
 		<div class="meta-box-item-title">
 			<label for="ficheassociation_name">Nom association</label>
@@ -217,7 +221,7 @@ function ficheassociation_horaires_metabox($object){
 	?>
 	<form method="post"> 
 
-		<input type="hidden" id="ficheassociation" name="ficheassociation" value="<?php wp_create_nonce('ficheassociation'); ?>" />
+		<input type="hidden" id="ficheassociation" name="__nonce" value="<?php echo wp_create_nonce('ficheassociation'); ?>" />
 	
 		<div class="meta-box-item-title">
 			<label for="ficheassociation_school">Ouverture - période scolaire</label>
@@ -255,7 +259,7 @@ function ficheassociation_showbox_metabox($object){
 
 	?>
 	<form method="post">
-		<input type="hidden" id="ficheassociation" name="ficheassociation" value="<?php wp_create_nonce('ficheassociation'); ?>" />
+		<input type="hidden" id="ficheassociation" name="__nonce" value="<?php echo wp_create_nonce('ficheassociation'); ?>" />
 		
 		<div class="meta-box-item-title">
 			<input type="checkbox" name="showDescription" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showDescription', true)), 1 ); ?> />
@@ -343,7 +347,8 @@ function ficheassociation_savepost($post_id, $post){
 	$bigHolidays = !isset($_POST['ficheassociation_bigHolidays']);
  
 
-	if(!wp_verify_nonce('ficheassociation') || $nameAsso || $logo || $email || $phone || $address || $postalcode || $city || $siteweb || $partner || $school || $smallHolidays || $bigHolidays || $facebook || $twitter || $membership){
+	if(!wp_verify_nonce($_POST['__nonce'], 'ficheassociation') && ($nameAsso || $logo || $email || $phone || $address || $postalcode || $city || $siteweb || $partner || $school || $smallHolidays || $bigHolidays || $facebook || $twitter || $membership))
+	{
 		return $post_id;
 	}
 

@@ -62,7 +62,7 @@ function mdq_list_field($name_taxo, $value=null){
 				<div class="search-box">
 					<form class="search-form" action="#" method="post">
 					
-					<input type="hidden" id="rechercheannuaire" name="rechercheannuaire" value="<?php wp_create_nonce('rechercheannuaire'); ?>" />
+					<input type="hidden" id="rechercheannuaire" name="rechercheannuaire" value="<?php echo wp_create_nonce('rechercheannuaire'); ?>" />
 	
 						<?php
 						// wp_nonce_field('rechercheannuaire','rechercheannuaire_nonce');
