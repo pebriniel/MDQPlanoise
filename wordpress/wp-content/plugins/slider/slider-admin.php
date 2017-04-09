@@ -12,7 +12,7 @@ function slider_get_featured_image($post_ID) {
 function slider_columns_head($defaults) {
 	$defaults['featured_image'] = 'Image événement';
 	$defaults['featured_date_start'] = 'Date de début';
-	// $defaults['Association_org'] = 'Association organisatrice';
+
 	return $defaults;
 }
 
@@ -20,7 +20,7 @@ function slider_columns_content($column_name, $post_ID) {
 	if ($column_name == 'featured_image') {
 		$post_featured_image = slider_get_featured_image($post_ID);
 		if ($post_featured_image) {
-			echo '<a href="'.get_edit_post_link($post_ID).'"><img src="' . $post_featured_image . '" alt="" style="max-width:50%;" /></a>';
+			echo '<a href="'.get_edit_post_link($post_ID).'"><img src="' . $post_featured_image . '" alt="" style="{max-width:100%; height: auto;}" /></a>';
 		}
 	}
 
@@ -72,7 +72,7 @@ function event_asso_meta($object){
 	// wp_nonce_field('slider_asso','sliderasso_nonce');
 	?>
 	<form method="post">
-		<input type="hidden" id="sliderasso" name="sliderasso" value="<?php wp_create_nonce('sliderasso'); ?>" />
+		<input type="hidden" id="sliderasso" name="sliderasso" value="<?php echo wp_create_nonce('sliderasso'); ?>" />
 
 		<div class="meta-box-item-title">
 			<h4>Date de début événement</h4>
@@ -109,7 +109,7 @@ function mdq_listing_assoc($object){
 	// wp_nonce_field('slider_asso','sliderasso_nonce');
 	?>
 	<form method="post">
-		<input type="hidden" id="sliderasso" name="sliderasso" value="<?php wp_create_nonce('sliderasso'); ?>" />
+		<input type="hidden" id="sliderasso" name="__nonce" value="<?php echo wp_create_nonce('sliderasso'); ?>" />
 	
 		<div class="meta-box-item-content">
 			<select name="event_listing_asso">
@@ -159,7 +159,7 @@ function slider_save_details(){
 		$img_url = !isset($_POST["slider_image_url"]);
 		$img_url_openblank = !isset($_POST["slider_image_url_openblank"]);
 
-		if (!wp_verify_nonce('sliderasso') || $img_url || $start_date || $end_date || $address_event || $list_event_asso || $start_hour_date || $end_hour_date || $desc_event_asso) {
+		if (!wp_verify_nonce($_POST['__nonce'], 'sliderasso') || $img_url || $start_date || $end_date || $address_event || $list_event_asso || $start_hour_date || $end_hour_date || $desc_event_asso) {
 			
 			$openblank = 0;
 			
@@ -167,8 +167,8 @@ function slider_save_details(){
 
 				$openblank = 1;
 			}
-			update_post_meta($post->ID, "slider_image_url", esc_url($img_url ));
-			update_post_meta($post->ID, "slider_image_url_openblank", $openblank);
+			update_post_meta($post->ID, "slider_image_url", esc_url($_POST["slider_image_url"]));
+			update_post_meta($post->ID, "slider_image_url_openblank", $_POST["slider_image_url_openblank"]);
 			update_post_meta($post->ID, "slider_image_link_text", sanitize_text_field($_POST["slider_image_link_text"]));
 			update_post_meta($post->ID,'event_asso_start',$_POST['event_asso_start']);
 			update_post_meta($post->ID,'event_asso_end',$_POST['event_asso_end']);
