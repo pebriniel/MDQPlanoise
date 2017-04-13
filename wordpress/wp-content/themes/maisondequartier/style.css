@@ -56,7 +56,6 @@ header .menu-burger {
 
 .page-header #nav {
     margin-bottom: 0%;
-    padding-right: 5%;
     font-size: 1.3em;
     list-style: none;
 }
@@ -211,9 +210,7 @@ main .container {
     box-shadow: none;
 }
 
-.search-box input[type=text]:active,
-.search-box input[type=text]:focus,
-.search-box input[type=text]:hover {
+.search-box input[type=text]:active, .search-box input[type=text]:focus, .search-box input[type=text]:hover {
     box-shadow: none;
 }
 
@@ -239,8 +236,7 @@ main .container {
     margin-top: 0em;
 }
 
-#transition:after,
-#transition:before {
+#transition:after, #transition:before {
     content: "";
     position: absolute;
     top: 0;
@@ -282,8 +278,7 @@ main .container {
     font-size: 1.1em;
 }
 
-#footer .container,
-#footer .row {
+#footer .container, #footer .row {
     height: 100%;
 }
 
@@ -334,8 +329,7 @@ main .container {
     font-weight: bold;
 }
 
-#footer #middle-box span,
-footer #middle-box ul {
+#footer #middle-box span, footer #middle-box ul {
     display: inline-block;
     vertical-align: top;
 }
@@ -368,8 +362,7 @@ footer #middle-box ul {
     color: #ff6633;
 }
 
-#footer a,
-#footer a:hover {
+#footer a, #footer a:hover {
     color: white;
     text-decoration: none;
 }
@@ -416,7 +409,16 @@ footer #middle-box ul {
     text-align: center;
 }
 
-#contact input,
+#contact input {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 1em;
+    border: 1px solid #ff6633;
+    font-family: 'Merriweather', sans-serif;
+    resize: none;
+}
+
 #contact textarea {
     display: block;
     width: 100%;
@@ -466,8 +468,7 @@ footer #middle-box ul {
         float: none;
         margin-bottom: 0;
     }
-    #contact #mdq,
-    #contact #nous-contacter {
+    #contact #mdq, #contact #nous-contacter {
         font-size: 2em;
     }
     #contact img {
@@ -475,8 +476,7 @@ footer #middle-box ul {
     }
 }
 
-#contact .cf:after,
-#contact .cf:before {
+#contact .cf:after, #contact .cf:before {
     content: " ";
     display: table;
 }
@@ -497,8 +497,7 @@ footer #middle-box ul {
     font-weight: bold;
 }
 
-#page .current,
-#page a {
+#page .current, #page a {
     margin: 0.1em;
     padding-top: 0.2em;
     padding-right: 0.4em;
@@ -525,20 +524,14 @@ footer #middle-box ul {
     main {
         padding-top: 0em;
     }
-    .adminbarfix #transition,
-    #transition:before,
-    #transition:after {
+    .adminbarfix #transition, #transition:before, #transition:after {
         height: 80px;
         padding-top: 1px;
     }
-    #transition,
-    #transition:before,
-    #transition:after {
+    #transition, #transition:before, #transition:after {
         height: 60px;
     }
-    .adminbarfix #transition,
-    .adminbarfix #transition:before,
-    .adminbarfix #transition:after {
+    .adminbarfix #transition, .adminbarfix #transition:before, .adminbarfix #transition:after {
         height: 80px;
     }
     /* affichage du header pour mobile */
@@ -628,8 +621,7 @@ footer #middle-box ul {
     border: 2px solid #ff6633;
 }
 
-#home .contentAgenda .pictoAgenda,
-.contentAgenda {
+#home .contentAgenda .pictoAgenda, .contentAgenda {
     background-color: #ff6633;
 }
 
@@ -644,8 +636,7 @@ footer #middle-box ul {
     background-color: #ff6633;
 }
 
-#home .pictoAgenda h2,
-.pictoAgenda span {
+#home .pictoAgenda h2, .pictoAgenda span {
     margin-top: 1%;
     padding-top: 1%;
     text-align: center;
@@ -664,8 +655,7 @@ footer #middle-box ul {
     font-style: italic;
 }
 
-#home .contenu .entry-meta a,
-.contenu .entry-meta-category-tag a {
+#home .contenu .entry-meta a, .contenu .entry-meta-category-tag a {
     color: #ff6633;
 }
 
@@ -691,14 +681,12 @@ footer #middle-box ul {
     color: #ff6633;
 }
 
-#home .contenu .entry-title a,
-.contenu .entry-content a {
+#home .contenu .entry-title a, .contenu .entry-content a {
     color: #ff6633;
     font-weight: bold;
 }
 
-#hom *::before,
-#home *::after {
+#hom *::before, #home *::after {
     box-sizing: border-box;
 }
 
@@ -957,15 +945,13 @@ footer #middle-box ul {
     height: auto;
 }
 
-#annuaire #search input,
-#annuaire #search select {
+#annuaire #search input, #annuaire #search select {
     border: none;
     background: white;
     box-shadow: none;
 }
 
-#annuaire #search:after,
-#annuaire #search:before {
+#annuaire #search:after, #annuaire #search:before {
     content: "";
     position: absolute;
     top: 0;
@@ -1159,8 +1145,7 @@ footer #middle-box ul {
         margin-bottom: 0;
         margin-left: 10%;
     }
-    #contact #mdq,
-    #contact #nous-contacter {
+    #contact #mdq, #contact #nous-contacter {
         font-size: 2em;
     }
     #contact #mdq-logo {
@@ -1222,8 +1207,7 @@ footer #middle-box ul {
     overflow: hidden;
 }
 
-#home .cd-horizontal-timeline .events-wrapper::after,
-.cd-horizontal-timeline .events-wrapper::before {
+#home .cd-horizontal-timeline .events-wrapper::after, .cd-horizontal-timeline .events-wrapper::before {
     /* these are used to create a shadow effect at the sides of the timeline */
     z-index: 2;
     content: '';
@@ -1539,22 +1523,19 @@ footer #middle-box ul {
     transform: translateX(0);
 }
 
-.cd-horizontal-timeline .events-content li.enter-right,
-.cd-horizontal-timeline .events-content li.leave-right {
+.cd-horizontal-timeline .events-content li.enter-right, .cd-horizontal-timeline .events-content li.leave-right {
     -moz-animation-name: cd-enter-right;
     -webkit-animation-name: cd-enter-right;
     animation-name: cd-enter-right;
 }
 
-.cd-horizontal-timeline .events-content li.enter-left,
-.cd-horizontal-timeline .events-content li.leave-left {
+.cd-horizontal-timeline .events-content li.enter-left, .cd-horizontal-timeline .events-content li.leave-left {
     -moz-animation-name: cd-enter-left;
     -webkit-animation-name: cd-enter-left;
     animation-name: cd-enter-left;
 }
 
-.cd-horizontal-timeline .events-content li.leave-left,
-.cd-horizontal-timeline .events-content li.leave-right {
+.cd-horizontal-timeline .events-content li.leave-left, .cd-horizontal-timeline .events-content li.leave-right {
     -moz-animation-direction: reverse;
     -webkit-animation-direction: reverse;
     animation-direction: reverse;
@@ -1580,8 +1561,7 @@ footer #middle-box ul {
     font-size: 1.4em;
 }
 
-.cd-horizontal-timeline .events-content em,
-.cd-horizontal-timeline .events-content p {
+.cd-horizontal-timeline .events-content em, .cd-horizontal-timeline .events-content p {
     line-height: 1.6;
 }
 
@@ -1609,8 +1589,7 @@ footer #middle-box ul {
 }
 
 @media screen and (max-width: 767px) {
-    #btn-valid,
-    .select-menu {
+    #btn-valid, .select-menu {
         margin-top: 10px;
     }
 }
@@ -1631,8 +1610,7 @@ footer #middle-box ul {
     width: 30%;
 }
 
-.modal-dialog .btn-association,
-.modal-dialog .btn-association-asso {
+.modal-dialog .btn-association, .modal-dialog .btn-association-asso {
     height: 34px;
     margin-right: 6%;
     padding-right: 1em;
@@ -1800,8 +1778,7 @@ footer #middle-box ul {
 
 /* ajout feuille de style pauline */
 
-#apropos .img-thumbnail,
-#apropos .thumbnail {
+#apropos .img-thumbnail, #apropos .thumbnail {
     box-shadow: none;
 }
 
@@ -1834,9 +1811,7 @@ footer #middle-box ul {
     font-weight: bold;
 }
 
-#apropos .compteur .adherents,
-#apropos .compteur .benevoles,
-#apropos .compteur .salaries {
+#apropos .compteur .adherents, #apropos .compteur .benevoles, #apropos .compteur .salaries {
     margin-bottom: 2%;
     border: 2px solid #ff6633;
     text-align: center;
@@ -1928,15 +1903,11 @@ footer #middle-box ul {
 }
 
 @media screen and (max-width: 768px) {
-    #apropos .gallery .activite1,
-    #apropos .gallery .activite2,
-    #apropos .gallery .activite3 {
+    #apropos .gallery .activite1, #apropos .gallery .activite2, #apropos .gallery .activite3 {
         margin: 1% 0%;
         padding: 0%;
     }
-    #apropos .gallery .act1,
-    #apropos .gallery .act2,
-    #apropos .gallery .act3 {
+    #apropos .gallery .act1, #apropos .gallery .act2, #apropos .gallery .act3 {
         margin: 0%;
         padding: 0%;
     }
@@ -1962,9 +1933,7 @@ footer #middle-box ul {
         margin-right: 1%;
         margin-left: 1%;
     }
-    #apropos .missions .anim,
-    #apropos .missions .prox,
-    #apropos .missions .renc {
+    #apropos .missions .anim, #apropos .missions .prox, #apropos .missions .renc {
         height: auto;
         margin-bottom: 6%;
         border: 1px solid black;
@@ -1999,8 +1968,7 @@ footer #middle-box ul {
     border-right: 2px solid black;
 }
 
-#apropos .telephone h3,
-#apropos .vacances h3 {
+#apropos .telephone h3, #apropos .vacances h3 {
     margin-top: 1%;
 }
 
@@ -2013,9 +1981,7 @@ footer #middle-box ul {
     padding-top: 5%;
 }
 
-#apropos .missions .anim,
-#apropos .missions .prox,
-#apropos .missions .renc {
+#apropos .missions .anim, #apropos .missions .prox, #apropos .missions .renc {
     height: 280px;
     margin-bottom: 6%;
     border: 1px solid black;
@@ -2056,20 +2022,7 @@ footer #middle-box ul {
     width: 100%;
 }
 
-#menu-assoc ul {
-    text-align: center;
-}
-
-#menu-assoc ul li {
-    display: inline-block;
-    padding-right: 1em;
-    padding-left: 1em;
-    color: white;
-    font-size: 1.3em;
-}
-
-#menu-assoc ul li a,
-#menu-assoc ul li a:hover {
+#menu-assoc ul li a, #menu-assoc ul li a:hover {
     color: white;
     text-decoration: none;
     font-weight: bold;
@@ -2080,21 +2033,15 @@ footer #middle-box ul {
 }
 
 @media screen and (max-width: 991px) {
-    #apropos .gallery .activite1,
-    #apropos .gallery .activite2,
-    #apropos .gallery .activite3 {
+    #apropos .gallery .activite1, #apropos .gallery .activite2, #apropos .gallery .activite3 {
         margin: 1% 0%;
         padding: 0%;
     }
-    #apropos .gallery .act1,
-    #apropos .gallery .act2,
-    #apropos .gallery .act3 {
+    #apropos .gallery .act1, #apropos .gallery .act2, #apropos .gallery .act3 {
         margin: 0%;
         padding: 0%;
     }
-    #apropos .missions .anim,
-    #apropos .missions .prox,
-    #apropos .missions .renc {
+    #apropos .missions .anim, #apropos .missions .prox, #apropos .missions .renc {
         height: auto;
     }
     #apropos .gallery img {
@@ -2107,9 +2054,7 @@ footer #middle-box ul {
         width: 40%;
         height: 40%;
     }
-    #apropos .missions .animation,
-    #apropos .missions .proximite,
-    #apropos .missions .rencontre {
+    #apropos .missions .animation, #apropos .missions .proximite, #apropos .missions .rencontre {
         margin: 0% 1%;
         padding: 0%;
     }
@@ -2128,8 +2073,7 @@ footer #middle-box ul {
     #apropos .missions .rencontre p {
         padding-top: 3%;
     }
-    #apropos .adresseMdq,
-    #apropos .partenariat {
+    #apropos .adresseMdq, #apropos .partenariat {
         border: none;
     }
 }
@@ -2170,7 +2114,7 @@ footer #middle-box ul {
     }
 }
 
-@media screen and (min-width: 200px) and (max-width: 790px) {
+@media screen and (min-width: 200px) and (max-width: 981px) {
     #menu-assoc .glyphicon {
         display: block;
     }
@@ -2212,6 +2156,12 @@ footer #middle-box ul {
     }
     #transition ul li {
         padding-left: 0.6em;
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 781px) {
+    #transition {
+        margin-top: 0%;
     }
 }
 
