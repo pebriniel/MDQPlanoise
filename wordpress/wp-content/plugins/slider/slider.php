@@ -7,6 +7,7 @@ Author: Houda B. - Boussad S.
 
 // Custom Post Type Setup
 add_action( 'init', 'slider_post_type' );
+add_action('save_post', 'slider_save_details');
 
 function slider_post_type() {
 

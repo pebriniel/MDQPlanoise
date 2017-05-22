@@ -79,7 +79,7 @@ function event_asso_meta($object){
 		</div>
 		<div class="meta-box-item-content">
 			<input type="date" name="event_asso_start" style="width:49%;" value="<?= esc_attr(get_post_meta($object->ID, 'event_asso_start', true)); ?>" placeholder="jj/mm/aaaa" />
-			<input type="time" name="event_asso_start_hour" style="width:49%;" value="<?= esc_attr(get_post_meta($object->ID, 'event_asso_hour_start', true)); ?>" placeholder="00h00" />
+			<input type="time" name="event_asso_start_hour" style="width:49%;" value="<?= esc_attr(get_post_meta($object->ID, 'event_asso_start_hour', true)); ?>" placeholder="00h00" />
 		</div>
 		<div class="meta-box-item-title">
 			<h4>Date de fin événement</h4>
@@ -110,7 +110,7 @@ function mdq_listing_assoc($object){
 	?>
 	<form method="post">
 		<input type="hidden" id="sliderasso" name="__nonce" value="<?php echo wp_create_nonce('sliderasso'); ?>" />
-	
+
 		<div class="meta-box-item-content">
 			<select name="event_listing_asso">
 				<?php
@@ -138,7 +138,7 @@ function mdq_listing_assoc($object){
 }
 
 function slider_admin_init_custpost(){
-	add_meta_box("slider_image_url", "Slide Options", "slider_image_url", "slider", "side", "high");
+	// add_meta_box("slider_image_url", "Slide Options", "slider_image_url", "slider", "side", "high");
 	add_meta_box('event_by_asso','Informations sur l\'événement','event_asso_meta','slider','normal','high');
 	add_meta_box('event_list_asso','Association organisatrice de  l\'événement','mdq_listing_assoc','slider','normal', 'high');
 }
@@ -147,11 +147,11 @@ add_action("add_meta_boxes", "slider_admin_init_custpost");
 function slider_save_details(){
 	global $post;
 
-	 if( is_object($post) ) { 
+	 if( is_object($post) ) {
 
 		$start_date = !isset($_POST['event_asso_start']);
 		$end_date = !isset($_POST['event_asso_end']);
-		$end_hour_date = !isset($_POST['event_asso_hour_start']);
+		$end_hour_date = !isset($_POST['event_asso_start_hour']);
 		$start_hour_date = !isset($_POST['event_asso_hour_end']);
 		$address_event = !isset($_POST['event_asso_address']);
 		$list_event_asso = !isset($_POST['event_listing_asso']);
@@ -160,9 +160,9 @@ function slider_save_details(){
 		$img_url_openblank = !isset($_POST["slider_image_url_openblank"]);
 
 		if (!wp_verify_nonce($_POST['__nonce'], 'sliderasso') || $img_url || $start_date || $end_date || $address_event || $list_event_asso || $start_hour_date || $end_hour_date || $desc_event_asso) {
-			
+
 			$openblank = 0;
-			
+
 			if($img_url_openblank == '1') {
 
 				$openblank = 1;
@@ -172,7 +172,7 @@ function slider_save_details(){
 			update_post_meta($post->ID, "slider_image_link_text", sanitize_text_field($_POST["slider_image_link_text"]));
 			update_post_meta($post->ID,'event_asso_start',$_POST['event_asso_start']);
 			update_post_meta($post->ID,'event_asso_end',$_POST['event_asso_end']);
-			update_post_meta($post->ID,'event_asso_hour_start',$_POST['event_asso_start_hour']);
+			update_post_meta($post->ID,'event_asso_start_hour',$_POST['event_asso_start_hour']);
 			update_post_meta($post->ID,'event_asso_hour_end',$_POST['event_asso_hour_end']);
 			update_post_meta($post->ID,'event_asso_address',$_POST['event_asso_address']);
 			update_post_meta($post->ID,'mdq_listing_assoc',$_POST['event_listing_asso']);
@@ -180,5 +180,4 @@ function slider_save_details(){
 		}
 	}
 }
-     
-add_action('save_post', 'slider_save_details');
+
