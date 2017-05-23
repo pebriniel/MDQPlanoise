@@ -51,7 +51,7 @@ header .menu-burger {
 .page-header .navbar-fixed-top {
     height: 100px;
     border-bottom: 1px solid #ff6633;
-    background-color: white;
+    background-color: #fff;
 }
 
 .page-header #nav {
@@ -123,7 +123,7 @@ header .hide-menu {
         margin-top: 0.8em;
         display: none;
         height: auto;
-        color: white;
+        color: #fff;
         background-color: #ff6633;
     }
     header .menu-item {
@@ -141,7 +141,7 @@ header .hide-menu {
         width: 100%;
         height: 100%;
         padding: 1em;
-        color: white;
+        color: #fff;
     }
 }
 
@@ -255,7 +255,7 @@ main .container {
 }
 
 #transition ul .active {
-    background-color: black;
+    background-color: #000;
 }
 
 #transition ul li a {
@@ -290,7 +290,7 @@ main .container {
     position: relative;
     height: 100%;
     margin-top: 16vh;
-    color: white;
+    color: #fff;
 }
 
 #footer #middle-box #association-ul {
@@ -336,7 +336,7 @@ main .container {
 
 #footer #mentions {
     margin-top: 5vh;
-    color: white;
+    color: #fff;
     text-align: center;
 }
 
@@ -347,7 +347,7 @@ main .container {
 #footer #menu-ul li {
     padding-top: 0.3em;
     padding-left: 1em;
-    color: white;
+    color: #fff;
     border-left: 2px solid #ff6633;
     font-size: 1em;
     font-weight: bold;
@@ -363,7 +363,7 @@ main .container {
 }
 
 #footer a, #footer a:hover {
-    color: white;
+    color: #fff;
     text-decoration: none;
 }
 
@@ -430,7 +430,7 @@ main .container {
 }
 
 #contact #input-submit {
-    color: white;
+    color: #fff;
     background: #ff6633;
     font-weight: bold;
     -webkit-transition: .3s;
@@ -503,18 +503,18 @@ main .container {
     padding-right: 0.4em;
     padding-bottom: 0.2em;
     padding-left: 0.4em;
-    color: black;
+    color: #000;
     text-decoration: none;
 }
 
 #page a:hover:not(.current) {
-    color: white;
+    color: #fff;
     background-color: #ff6633;
 }
 
 #page .current {
-    color: white;
-    background-color: black;
+    color: #fff;
+    background-color: #000;
 }
 
 @media screen and (max-width: 480px) {
@@ -898,13 +898,13 @@ main .container {
         width: auto;
         padding-top: 0.3em;
         padding-left: 1em;
-        color: white;
+        color: #fff;
         border-left: 2px solid #ff6633;
         font-size: 1em;
         list-style-type: none;
     }
     #footer #middle-box #association-ul li:hover {
-        border-left: 3px solid white;
+        border-left: 3px solid #fff;
     }
     #footer #middle-box #association-ul li:hover a {
         color: #ff6633;
@@ -947,7 +947,7 @@ main .container {
 
 #annuaire #search input, #annuaire #search select {
     border: none;
-    background: white;
+    background: #fff;
     box-shadow: none;
 }
 
@@ -977,7 +977,7 @@ main .container {
 #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire {
     width: 100%;
     padding-bottom: 0.9em;
-    border: 1px solid black;
+    border: 1px solid #000;
 }
 
 #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption {
@@ -1339,244 +1339,6 @@ main .container {
 
 /* FIN page accueil */
 
-.cd-horizontal-timeline {
-    margin: 2em auto;
-    opacity: 0;
-    background-color: #dedede;
-    -moz-transition: opacity 0.2s;
-    -webkit-transition: opacity 0.2s;
-    transition: opacity 0.2s;
-}
-
-.cd-horizontal-timeline::before {
-    /* never visible - this is used in jQuery to check the current MQ */
-    content: 'mobile';
-    display: none;
-}
-
-.cd-horizontal-timeline.loaded {
-    z-index: 2;
-    content: '';
-    position: absolute;
-    top: 0;
-    width: 20px;
-    height: 100%;
-    opacity: 1;
-}
-
-.cd-horizontal-timeline .events-wrapper::before {
-    left: 0;
-    background-image: -webkit-linear-gradient( left, #f8f8f8, rgba(248, 248, 248, 0));
-    background-image: linear-gradient( to right, #f8f8f8, rgba(248, 248, 248, 0));
-}
-
-.cd-horizontal-timeline .events-wrapper::after {
-    right: 0;
-    background-image: -webkit-linear-gradient( right, #f8f8f8, rgba(248, 248, 248, 0));
-    background-image: linear-gradient( to left, #f8f8f8, rgba(248, 248, 248, 0));
-}
-
-.cd-horizontal-timeline .events {
-    /* this is the grey line/timeline */
-    z-index: 1;
-    position: absolute;
-    top: 49px;
-    left: 0;
-    height: 2px;
-    background: #dfdfdf;
-    -moz-transition: -moz-transform 0.4s;
-    -webkit-transition: -webkit-transform 0.4s;
-    transition: transform 0.4s;
-    /* width will be set using JavaScript */
-}
-
-.cd-horizontal-timeline .filling-line {
-    /* this is used to create the green line filling the timeline */
-    z-index: 1;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #7b9d6f;
-    -moz-transform: scaleX(0);
-    -ms-transform: scaleX(0);
-    -o-transform: scaleX(0);
-    -webkit-transform: scaleX(0);
-    transform: scaleX(0);
-    -moz-transform-origin: left center;
-    -ms-transform-origin: left center;
-    -o-transform-origin: left center;
-    -webkit-transform-origin: left center;
-    transform-origin: left center;
-    -moz-transition: -moz-transform 0.3s;
-    -webkit-transition: -webkit-transform 0.3s;
-    transition: transform 0.3s;
-}
-
-.cd-horizontal-timeline .events a {
-    z-index: 2;
-    position: absolute;
-    bottom: 0;
-    padding-bottom: 15px;
-    color: #383838;
-    text-align: center;
-    font-size: 1.3rem;
-    -moz-transform: translateZ(0);
-    -ms-transform: translateZ(0);
-    -o-transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    /* fix bug on Safari - text flickering while timeline translates */
-}
-
-.cd-horizontal-timeline .events a::after {
-    /* this is used to create the event spot */
-    content: '';
-    position: absolute;
-    right: auto;
-    bottom: -5px;
-    left: 50%;
-    width: 12px;
-    height: 12px;
-    border: 2px solid #dfdfdf;
-    border-radius: 50%;
-    background-color: #f8f8f8;
-    -moz-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    -o-transform: translateX(-50%);
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-50%);
-    -moz-transition: background-color 0.3s, border-color 0.3s;
-    -webkit-transition: background-color 0.3s, border-color 0.3s;
-    transition: background-color 0.3s, border-color 0.3s;
-}
-
-.no-touch .cd-horizontal-timeline .events a:hover::after {
-    border-color: #7b9d6f;
-    background-color: #7b9d6f;
-}
-
-.cd-horizontal-timeline .events a.selected {
-    pointer-events: none;
-}
-
-.cd-horizontal-timeline .events a.selected::after {
-    border-color: #7b9d6f;
-    background-color: #7b9d6f;
-}
-
-.cd-horizontal-timeline .events a.older-event::after {
-    border-color: #7b9d6f;
-}
-
-.cd-timeline-navigation a.next {
-    right: 0;
-}
-
-.no-touch .cd-timeline-navigation a:hover {
-    border-color: #7b9d6f;
-}
-
-.cd-timeline-navigation a.inactive {
-    cursor: not-allowed;
-}
-
-.cd-timeline-navigation a.inactive::after {
-    background-position: 0 -16px;
-}
-
-.no-touch .cd-timeline-navigation a.inactive:hover {
-    border-color: #dfdfdf;
-}
-
-.cd-horizontal-timeline .events-content li {
-    z-index: 1;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 0 5%;
-    opacity: 0;
-    -moz-animation-duration: 0.4s;
-    -webkit-animation-duration: 0.4s;
-    animation-duration: 0.4s;
-    -moz-animation-timing-function: ease-in-out;
-    -webkit-animation-timing-function: ease-in-out;
-    animation-timing-function: ease-in-out;
-    -moz-transform: translateX(-100%);
-    -ms-transform: translateX(-100%);
-    -o-transform: translateX(-100%);
-    -webkit-transform: translateX(-100%);
-    transform: translateX(-100%);
-}
-
-.cd-horizontal-timeline .events-content li.selected {
-    /* visible event content */
-    z-index: 2;
-    position: relative;
-    opacity: 1;
-    -moz-transform: translateX(0);
-    -ms-transform: translateX(0);
-    -o-transform: translateX(0);
-    -webkit-transform: translateX(0);
-    transform: translateX(0);
-}
-
-.cd-horizontal-timeline .events-content li.enter-right, .cd-horizontal-timeline .events-content li.leave-right {
-    -moz-animation-name: cd-enter-right;
-    -webkit-animation-name: cd-enter-right;
-    animation-name: cd-enter-right;
-}
-
-.cd-horizontal-timeline .events-content li.enter-left, .cd-horizontal-timeline .events-content li.leave-left {
-    -moz-animation-name: cd-enter-left;
-    -webkit-animation-name: cd-enter-left;
-    animation-name: cd-enter-left;
-}
-
-.cd-horizontal-timeline .events-content li.leave-left, .cd-horizontal-timeline .events-content li.leave-right {
-    -moz-animation-direction: reverse;
-    -webkit-animation-direction: reverse;
-    animation-direction: reverse;
-}
-
-.cd-horizontal-timeline .events-content li>* {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.cd-horizontal-timeline .events-content em {
-    display: block;
-    margin: 10px auto;
-    font-style: italic;
-}
-
-.cd-horizontal-timeline .events-content em::before {
-    content: '- ';
-}
-
-.cd-horizontal-timeline .events-content p {
-    color: #000;
-    font-size: 1.4em;
-}
-
-.cd-horizontal-timeline .events-content em, .cd-horizontal-timeline .events-content p {
-    line-height: 1.6;
-}
-
-@media only screen and (min-width: 768px) {
-    .cd-horizontal-timeline .events-content h2 {
-        font-size: 7rem;
-    }
-    .cd-horizontal-timeline .events-content em {
-        font-size: 2rem;
-    }
-    .cd-horizontal-timeline .events-content p {
-        font-size: 1.8rem;
-    }
-}
-
 
 /* -- AJOUT SELECT FILTRE PAGE ANNUAIRE -- */
 
@@ -1637,13 +1399,9 @@ main .container {
 }
 
 
-/* start test */
-
 
 /* page a propos */
 
-
-/* OK */
 
 #apropos .logo .thumbnail {
     width: 90%;
@@ -1936,7 +1694,7 @@ main .container {
     #apropos .missions .anim, #apropos .missions .prox, #apropos .missions .renc {
         height: auto;
         margin-bottom: 6%;
-        border: 1px solid black;
+        border: 1px solid #000;
     }
     /* #apropos .missions .thumbnail{ margin-left: 1%; margin-right: 1%; } */
 }
@@ -1959,13 +1717,13 @@ main .container {
 #apropos .adresseMdq {
     margin-bottom: 1%;
     padding-right: 5%;
-    border-right: 2px solid black;
+    border-right: 2px solid #000;
 }
 
 #apropos .partenariat {
     margin-top: 2%;
     padding-right: 5%;
-    border-right: 2px solid black;
+    border-right: 2px solid #000;
 }
 
 #apropos .telephone h3, #apropos .vacances h3 {
@@ -1984,7 +1742,7 @@ main .container {
 #apropos .missions .anim, #apropos .missions .prox, #apropos .missions .renc {
     height: 280px;
     margin-bottom: 6%;
-    border: 1px solid black;
+    border: 1px solid #000;
 }
 
 #apropos .missions .proximite {
@@ -2023,7 +1781,7 @@ main .container {
 }
 
 #menu-assoc ul li a, #menu-assoc ul li a:hover {
-    color: white;
+    color: #fff;
     text-decoration: none;
     font-weight: bold;
 }
@@ -2185,3 +1943,54 @@ main .container {
     }
 }
 
+#agenda, .fc-view-container, .fc-day, .fc-widget-header a{
+    color: #ff6633 !important;
+}
+
+
+#agenda a.fc-more {
+    color: #ff6633 !important;
+    text-decoration: none !important;
+
+}
+.fc-day-header{
+     background-color: #000 !important;
+     color : #fff !important;
+
+}
+
+.fc td {
+    border-color: #ff6633 !important;
+}
+
+.fc-day-top a{
+    color: #000 !important;
+}
+
+.fc button, .fc button span, .fc-state-default {
+    border-radius: 0 !important;
+    background-color: #000 !important;
+    border-color: #fff;
+    color : #fff !important;
+    background-image: none !important;
+    text-shadow: none !important;
+}
+
+.fc .fc-toolbar > * > *{
+    margin-left : 0 !important;
+}
+
+#agenda .fc-center h2 {
+    font-size: 3em !important;
+    margin-top: 5% !important;
+}
+
+#articleUne .entry-meta, #articleUne h1{
+    padding: 0 !important;
+
+}
+
+#articleUne img{
+    max-width: 100%;
+    height: auto;
+}

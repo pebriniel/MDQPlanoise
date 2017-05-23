@@ -47,24 +47,23 @@ function callEvent($limit, $offset){
 
                     $t = $wpdb->get_results($query, OBJECT);
 
-					$images[] = array('post_id' => $post_id,
-														'title' => $title,
-														'dateStart' => date_i18n("m/d/Y", strtotime($dateStart)),
-														'dateEnd' => date_i18n("m/d/Y", strtotime($dateEnd)),
-														// 'dateStart' => $dateStart,
-														// 'dateEnd' => $dateEnd,
-                                                        'dateHourStart' => $dateHourStart,
-                                                        'dateHourEnd' => $dateHourEnd,
-														'location' => $location_event,
-														'content' => $content,
-														'image' => $image,
-														'img_src' => $image_src,
-														'url' => esc_url($url),
-														'url_openblank' => $url_openblank == "1" ? true : false,
-														'link_text' => $link_text,
-														'association' => $asso_orga,
-                                                        'association_name' => $t[0]->post_title
-                                                );
+					$images[] = array(
+						'post_id' => $post_id,
+						'title' => htmlspecialchars($title),
+						'dateStart' => date_i18n("m/d/Y", strtotime($dateStart)),
+						'dateEnd' => date_i18n("m/d/Y", strtotime($dateEnd)),
+						'dateHourStart' => $dateHourStart,
+						'dateHourEnd' => $dateHourEnd,
+						'location' => $location_event,
+						'content' => $content,
+						'image' => $image,
+						'img_src' => $image_src,
+						'url' => esc_url($url),
+						'url_openblank' => $url_openblank == "1" ? true : false,
+						'link_text' => $link_text,
+						'association' => $asso_orga,
+						'association_name' => $t[0]->post_title
+				);
 			}
 		}
 	}
@@ -103,14 +102,9 @@ $images = callEvent(3, 0);
           			<div class="carousel-caption">
 						 <h3 class="img-modal img-responsive" title="<?php echo  $image['title']; ?>"><?php echo  $image['title'];?></h3>
 
-						 <!-- <a href="<?php echo   get_site_url()."/association/?fiche=".$image['url_openblank']; ?>"  class="btn-association" role="button">voir l'événement</a> -->
 						 <p> Le <?php echo  $image['dateStart']; ?> </p>
 						 <p><?php echo  $image['association_name'];?></p>
-						 <a class="btn-association img-modal img-moda-click" id="image-<?php echo  $images['post_id']; ?>" data-title="<?php echo  $image['title']; ?>" data-content="test <?php echo  $image['content']; ?>" data-img="<?php echo  $image['img_src'] ?>" data-date="<?php echo  $image['dateStart']; ?>" data-dateend="<?php echo  $image['dateEnd']; ?>" data-hourstart="<?php echo  $image['dateHourStart']; ?>" data-hourend="<?php echo  $image['dateHourEnd']; ?>" data-location="<?php echo  $image['location']; ?>" data-url="<?php echo   get_site_url()."/association/?fiche=".$image['association']; ?>" role="button">Voir l'événement</a>
-						 <!-- <p><?php echo  $image['location'];?></p> -->
-
-						 <!-- <a data-url="<?php echo  get_site_url()."/association/?fiche=".$images['post_id']; ?>" class="btn btn-association" role="button">voir la fiche</a> -->
-
+						 <a class="btn-association img-modal img-moda-click" id="image-<?php echo  $images['post_id']; ?>" data-title="<?php echo  $image['title']; ?>" data-content="test <?php echo  $image['content']; ?>" data-img="<?php echo  $image['img_src'] ?>" data-date="<?php echo  $image['dateStart']; ?>" data-dateend="<?php echo  $image['dateEnd']; ?>" data-hourstart="<?php echo  $image['dateHourStart']; ?>" data-hourend="<?php echo  $image['dateHourEnd']; ?>" data-location="<?php echo  $image['location']; ?>" data-url="<?php echo  get_site_url()."/association/?fiche=".$image['association']; ?>" role="button">Voir l'événement</a>
 					 </div>
 				 </div>
 				 <?php
@@ -191,14 +185,20 @@ $images = callEvent(3, 0);
 	$eventcal = callEvent(1000, 0);
 
 	$event= array();
+	$start= array();
+	$end =  array();
 
 	foreach ($eventcal as $e)
 	{
+		$start['dstart'] = $e['dateStart']. " " .$e['dateHourStart'];
+		$end['dend'] = $e['dateEnd']. " " .$e['dateHourEnd'];
+
 		$event[] = [
 			'id' => $e['post_id'],
 			'title' => $e['title'],
-			'start' => $e['dateStart'],
-			'end' => $e['dateEnd']
+			'start' => $start['dstart'],
+			'end' => $end['dend']
+
 		];
 	}
 
@@ -207,24 +207,30 @@ $images = callEvent(3, 0);
 
 		$(document).ready(function() {
 			var allevent = '<?php echo json_encode($event); ?>';
-
 			data = JSON.parse(allevent);
 
 			console.log(data);
 
-			$('#calendar').fullCalendar({
+			$('#agenda').fullCalendar({
 				theme: false,
 				locale: 'fr',
 				header: {
 					left: 'prev,next today',
 					center: 'title',
-					right: 'month,agendaWeek,agendaDay,listMonth'
+					right: 'month,listMonth'
 				},
 				defaultDate: '<?php echo the_date(); ?>',
 				navLinks: true,
 				editable: false,
-				eventLimit: true,
-				events: data
+				eventLimit: false,
+				events: data,
+				eventColor: '#ff6633',
+				eventTextColor: '#fff',
+				height: 305,
+				contentHeight: 305,
+				aspectRatio: 1,
+				fixedWeekCount: false
+				// timeFormat: 'H:mm'
 
 			});
 
@@ -232,7 +238,7 @@ $images = callEvent(3, 0);
 
 	</script>
 
-	<section id="calendar" class='col-md-12'></section>
+	<section id="agenda" class='col-md-5'></section>
 <?php
 /* --
 --
@@ -248,21 +254,22 @@ $images = callEvent(3, 0);
 			the_post();
 			if(is_sticky()){
 				?>
-				<section id="articleUne" class="col-md-12" <?php post_class(); ?>>
+				<section id="articleUne" class="col-md-7" <?php post_class(); ?>>
 					<article class=" contenu blockArticle">
 						<div class="globalArticle col-md-12">
-              				<div class="text-center img-article-une">
-                			<?php echo  get_the_post_thumbnail($post->ID, 'resizing-img-article'); ?>
+              				<div class="text-center img-article-une col-md-7">
+                			<?php echo  get_the_post_thumbnail($post->ID); ?>
 			  				</div>
-							<header class="entry-header">
-								<h1 class="entry-title"><?php the_title(); ?></h1>
-								<div class="entry-meta">
+
+							<header class="entry-header col-md-5">
+								<h1 class="entry-title col-md-12"><?php the_title(); ?></h1>
+								<div class="entry-meta col-md-12">
 									<?php bootstrapBasicPostOn(); ?>
-                  					<div class="text-center">
+                  					<div class="text-center col-md-12">
                   					</div>
 								</div>
 							</header>
-							<div class="entry-content">
+							<div class="entry-content  col-md-12">
                 			<?php
                  			if(isset($_GET['article']) && intval($_GET['article']) == $post->ID) {
                     			echo $post->post_content;
@@ -315,16 +322,16 @@ $images = callEvent(3, 0);
 						?>
 						<article class="col-md-4 contenu blockArticle">
 							<div class="globalArticle col-md-12" id="article-<?php echo  $post->ID;?>">
+								<h1 class="entry-title"><?php the_title(); ?></h1>
+								<div class="text-center img-article">
+									<?php echo  get_the_post_thumbnail($post->ID, 'resizing-img-article'); ?>
+								</div>
 								<header class="entry-header">
-									<h1 class="entry-title"><?php the_title(); ?></h1>
 									<?php if ('post' == get_post_type()) {  ?>
 									<div class="entry-meta">
 										<?php bootstrapBasicPostOn(); ?>
 									</div><!-- .entry-meta -->
 									<?php } //endif; ?>
-									<div class="text-center img-article">
-									<?php echo  get_the_post_thumbnail($post->ID, 'resizing-img-article'); ?>
-									</div>
 								</header>
 								<?php if (is_search()) { // Only display Excerpts for Search ?>
 								<div class="entry-summary">
