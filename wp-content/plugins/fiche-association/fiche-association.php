@@ -219,7 +219,6 @@ function ficheassociation_horaires_metabox($object){
 	// wp_nonce_field('ficheassociation','ficheassociation_nonce');
 
 	?>
-	<form method="post">
 
 		<input type="hidden" id="ficheassociation" name="__nonce" value="<?php echo wp_create_nonce('ficheassociation'); ?>" />
 
@@ -243,7 +242,6 @@ function ficheassociation_horaires_metabox($object){
 		<div class="meta-box-item-content">
 			<textarea name="ficheassociation_bigHolidays" rows="4" cols="50" style="width:100%; resize:none;"><?= esc_attr(get_post_meta($object->ID, '_bigHolidays', true)); ?></textarea>
 		</div>
-	</form>
 
 	<?php
 }
@@ -258,7 +256,7 @@ function ficheassociation_showbox_metabox($object){
 	// wp_nonce_field('ficheassociation','ficheassociation_nonce');
 
 	?>
-	<form method="post">
+
 		<input type="hidden" id="ficheassociation" name="__nonce" value="<?php echo wp_create_nonce('ficheassociation'); ?>" />
 
 		<div class="meta-box-item-title">
@@ -320,7 +318,7 @@ function ficheassociation_showbox_metabox($object){
 			<input type="checkbox" name="showMembership" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showMembership', true)), 1 ); ?> />
 			<label for="showMembership">Affichage du montant de l'adhésion</label>
 		</div>
-	</form>
+
 	<?php
 }
 
@@ -347,7 +345,8 @@ function ficheassociation_savepost($post_id, $post){
 	$bigHolidays = !isset($_POST['ficheassociation_bigHolidays']);
 
 
-	if(!wp_verify_nonce($_POST['__nonce'], 'ficheassociation') && ($nameAsso || $logo || $email || $phone || $address || $postalcode || $city || $siteweb || $partner || $school || $smallHolidays || $bigHolidays || $facebook || $twitter || $membership))
+	// if(!wp_verify_nonce($_POST['__nonce'], 'ficheassociation') && ($nameAsso || $logo || $email || $phone || $address || $postalcode || $city || $siteweb || $partner || $school || $smallHolidays || $bigHolidays || $facebook || $twitter || $membership))
+	if(!wp_verify_nonce($_POST['__nonce'], 'ficheassociation') && ($nameAsso || $logo))
 	{
 		return $post_id;
 	}

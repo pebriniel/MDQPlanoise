@@ -120,11 +120,11 @@ get_header();
 								</div>
 							</div>
 								<?php
-							// if($infosAsso->showMembership){
+							if($infosAsso->showMembership){
 								?>
-							<div class="tarifAdhesion">Tarif d'adhésion : <?php echo  $infosAsso->_membership; ?></div>
+								<div class="tarifAdhesion">Tarif d'adhésion : <?php echo  $infosAsso->_membership; ?></div>
 								<?php
-							// }
+							}
 								?>
 							<button type="button" name="button" class="btn btn-link-leaflet center-block">Télécharger la plaquette</button>
 
