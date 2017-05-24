@@ -1,4 +1,3 @@
-
 <?php
 /*
 Plugin Name: Add "age" custom taxonomy
@@ -68,3 +67,58 @@ function age_taxonomy_messages( $messages ) {
 
 	return $messages;
 }
+
+
+
+/* -- boussad update -- */
+/* -- permet de changer l'ordre d'affichage des filtres... nous indiquer une valeur de 0 à X (valeur numérique) et nous l'utilisons comme ordre d'affichage --*/
+// Add term page
+function ordershow_taxonomy_add_new_meta_field() {
+	// this will add the custom meta field to the add new term page
+	?>
+	<div class="form-field">
+		<label for="term_meta[custom_term_meta_ordershow]"><?php _e( 'Example meta field', 'pippin' ); ?></label>
+		<input type="numeric" name="term_meta[custom_term_meta_ordershow]" id="term_meta[custom_term_meta_ordershow]" value="" placeholder="0-100">
+		<p class="description"><?php _e( 'Enter a value for this field','pippin' ); ?></p>
+	</div>
+<?php
+}
+add_action( 'age_mdq_add_form_fields', 'ordershow_taxonomy_add_new_meta_field', 10, 2 );
+
+// Edit term page
+function ordershow_taxonomy_edit_meta_field($term) {
+
+	// put the term ID into a variable
+	$t_id = $term->term_id;
+
+	// retrieve the existing value(s) for this meta field. This returns an array
+	$term_meta = get_option( "taxonomy_$t_id" ); ?>
+
+	<tr class="form-field">
+	<th scope="row" valign="top"><label for="term_meta[custom_term_meta_ordershow]"><?php _e( 'Ordre d\'affichage', 'ordershow' ); ?></label></th>
+		<td>
+			<input type="numeric" name="term_meta[custom_term_meta_ordershow]" id="term_meta[custom_term_meta_ordershow]" value="<?php echo esc_attr( $term_meta['custom_term_meta_ordershow'] ) ? esc_attr( $term_meta['custom_term_meta_ordershow'] ) : ''; ?>" placeholder="0-100">
+			<p class="description"><?php _e( 'Enter a value for this field','ordershow' ); ?></p>
+		</td>
+	</tr>
+<?php
+}
+add_action( 'age_mdq_edit_form_fields', 'ordershow_taxonomy_edit_meta_field', 10, 2 );
+
+// Save extra taxonomy fields callback function.
+function save_taxonomy_custom_meta( $term_id ) {
+	if ( isset( $_POST['term_meta'] ) ) {
+		$t_id = $term_id;
+		$term_meta = get_option( "taxonomy_$t_id" );
+		$cat_keys = array_keys( $_POST['term_meta'] );
+		foreach ( $cat_keys as $key ) {
+			if ( isset ( $_POST['term_meta'][$key] ) ) {
+				$term_meta[$key] = $_POST['term_meta'][$key];
+			}
+		}
+		// Save the option array.
+		update_option( "taxonomy_$t_id", $term_meta );
+	}
+}
+add_action( 'edited_age_mdq', 'save_taxonomy_custom_meta', 10, 2 );
+add_action( 'create_age_mdq', 'save_taxonomy_custom_meta', 10, 2 );

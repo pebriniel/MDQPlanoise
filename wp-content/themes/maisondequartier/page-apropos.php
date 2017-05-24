@@ -35,12 +35,6 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
             </a>
           </li>
           <li>
-            <a class="link" data-id="compteur">
-              <span class="glyphicon glyphicon-bullhorn"></span>
-              <span class="text">Vie Associative</span>
-            </a>
-          </li>
-          <li>
             <a class="link" data-id="gallery">
               <span class="glyphicon glyphicon-picture"></span>
                           <span class="text">Galerie photos</span>
@@ -132,7 +126,7 @@ $main_column_size = bootstrapBasicGetMainColumnSize();
 <!-- fin missions -->
 
 <!-- vie Associative -->
-<div class="container compteur" id="compteur">
+<div class="container compteur">
   <div class="row">
     <div class="col-md-12">
     <h2>La Maison de Quartier, c'est aussi:</h2>

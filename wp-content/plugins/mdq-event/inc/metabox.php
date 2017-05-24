@@ -50,7 +50,8 @@ function mdq_event_meta_liste_assoc($object){
 		<select name="event_assoc_list">
 			<?php
 			query_posts(array(
-				"post_type" => "fiche"
+				"post_type" => "fiche",
+				'posts_per_page'=> -1
 			));
 
 			if ( have_posts() ){

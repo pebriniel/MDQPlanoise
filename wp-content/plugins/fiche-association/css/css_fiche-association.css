@@ -89,25 +89,29 @@ body {
     font-size: 1.2em;
     text-align: justify;
 }
-#onepageasso .tarifAdhesion{
-  text-align: center;
-}
-#onepageasso .carteVisite button{
-  color            : #ffffff;
-  border           : 1px solid #ff6633;
-  border-radius    : 0%;
-  background-color : #ff6633;
-  font-size        : 1.1em;
-  margin-top: 3%;
+
+#onepageasso .tarifAdhesion {
+    text-align: center;
 }
 
-#onepageasso .carteVisite button:hover{
-  color            : #ff6633;
-  background-color : #ffffff;
+#onepageasso .carteVisite button {
+    color: #ffffff;
+    border: 1px solid #ff6633;
+    border-radius: 0%;
+    background-color: #ff6633;
+    font-size: 1.1em;
+    margin-top: 3%;
 }
-#onepageasso .carteVisite .logo .thumbnail{
-  text-align: center;
+
+#onepageasso .carteVisite button:hover {
+    color: #ff6633;
+    background-color: #ffffff;
 }
+
+#onepageasso .carteVisite .logo .thumbnail {
+    text-align: center;
+}
+
 #onepageasso .carousel {
     padding: 0;
     margin-bottom: 3%;
@@ -148,56 +152,57 @@ body {
     height: 100%;
 }
 
+
 /*#onepageasso .membres .thumbnail .caption {
     background-color: #ff6633;
     color: #ffffff;
 }*/
-#onepageasso .membres .nomMembres{
-  border: 2px solid #ff6633;
-  text-align: center;
-  margin-bottom: 10%;
-  display: inline-block;
-}
-#onepageasso .membres .nomMembres h3{
-  font-size: 1.2em;
-}
-#onepageasso .membres .triangle-obtuse
-{
-position: relative;
-padding: 0px;
-background: #FFFFFF;
--webkit-border-radius: 0px;
--moz-border-radius: 0px;
-border-radius: 0px;
-border: #FF6633 solid 2px;
+
+#onepageasso .membres .nomMembres {
+    border: 2px solid #ff6633;
+    text-align: center;
+    margin-bottom: 10%;
+    display: inline-block;
 }
 
-.triangle-obtuse:after
-{
-content: '';
-position: absolute;
-border-style: solid;
-border-width: 15px 15px 0;
-border-color: #FFFFFF transparent;
-display: block;
-width: 0;
-z-index: 1;
-bottom: -15px;
-left: 110px;
+#onepageasso .membres .nomMembres h3 {
+    font-size: 1.2em;
 }
 
-.triangle-obtuse:before
-{
-content: '';
-position: absolute;
-border-style: solid;
-border-width: 16px 16px 0;
-border-color: #FF6633 transparent;
-display: block;
-width: 0;
-z-index: 0;
-bottom: -18px;
-left: 109px;
+#onepageasso .membres .triangle-obtuse {
+    position: relative;
+    padding: 0px;
+    background: #FFFFFF;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    border: #FF6633 solid 2px;
+}
+
+.triangle-obtuse:after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 15px 15px 0;
+    border-color: #FFFFFF transparent;
+    display: block;
+    width: 0;
+    z-index: 1;
+    bottom: -15px;
+    left: 110px;
+}
+
+.triangle-obtuse:before {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 16px 16px 0;
+    border-color: #FF6633 transparent;
+    display: block;
+    width: 0;
+    z-index: 0;
+    bottom: -18px;
+    left: 109px;
 }
 
 #onepageasso .prezmembres {
@@ -308,20 +313,25 @@ left: 109px;
     margin-right: auto;
     margin-bottom: 2%;
 }
-#onepageasso input:focus{
-  border: 1px solid #A9A9A9;
-  box-shadow: none;
+
+#onepageasso input:focus {
+    border: 1px solid #A9A9A9;
+    box-shadow: none;
 }
-#onepageasso textarea:focus{
-  border: 1px solid #A9A9A9;
-  box-shadow: none;
+
+#onepageasso textarea:focus {
+    border: 1px solid #A9A9A9;
+    box-shadow: none;
 }
-#onepageasso #as-activite .thumbnail{
-  padding: 2%;
-  margin-bottom: 4%;
-  margin-top: 3%;
-  border-radius: 0%;
+
+#onepageasso #as-activite .thumbnail {
+    padding: 2%;
+    margin-bottom: 4%;
+    margin-top: 3%;
+    border-radius: 0%;
 }
+
+
 /*#onepageasso .btn-link, #onepageasso .btn-link-leaflet {
     background-color: #ff6633 !important;
     color: #ffffff;
@@ -356,6 +366,7 @@ left: 109px;
 
 #menu-assoc ul {
     text-align: center;
+    padding-left: 0;
 }
 
 #menu-assoc ul li {
@@ -388,7 +399,7 @@ left: 109px;
     -- activité one page assoc
 */
 
-#as-activite{
+#as-activite {
     margin-top: 2em;
 }
 
@@ -403,7 +414,7 @@ left: 109px;
 
 #as-activite .content-hidden {
     position: absolute;
-    height: 300px;
+    height: 90%;
 }
 
 #as-activite .overflow {
@@ -419,7 +430,7 @@ left: 109px;
     width: 100%;
 }
 
-#as-activite .image img{
+#as-activite .image img {
     height: 100%;
     width: auto;
 }
@@ -473,28 +484,40 @@ left: 109px;
     opacity: 0.7;
 }
 
-#onepageasso .form-group .center-block{
-  color            : #ffffff;
-  border           : 1px solid #ff6633;
-  border-radius    : 0%;
-  background-color : #ff6633;
-  font-size        : 1.1em;
-}
-#onepageasso .form-group .center-block:hover{
-  color            : #ff6633;
-  background-color : #ffffff;
-}
-#onepageasso .contact form{
-  border-radius: 0%;
-}
-#onepageasso .contact input, #onepageasso .contact span, #onepageasso .contact textarea{
-  border-radius: 0%;
-}
-#onepageasso .contact .thanks #form{
-  text-align: center;
+#onepageasso .form-group .center-block {
+    color: #ffffff;
+    border: 1px solid #ff6633;
+    border-radius: 0%;
+    background-color: #ff6633;
+    font-size: 1.1em;
 }
 
+#onepageasso .form-group .center-block:hover {
+    color: #ff6633;
+    background-color: #ffffff;
+}
+
+#onepageasso .contact form {
+    border-radius: 0%;
+}
+
+#onepageasso .contact input, #onepageasso .contact span, #onepageasso .contact textarea {
+    border-radius: 0%;
+}
+
+#onepageasso .contact .thanks #form {
+    text-align: center;
+}
+
+
 /*# sourceMappingURL=style_onepageasso.css.map */
+
+@media screen and (max-width: 1235px) {
+    #menu-assoc ul li {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
 
 @media screen and (min-width: 490px) and (max-width: 830px) {
     #onepageasso .content-onepage .btn-link-leaflet {
@@ -503,13 +526,13 @@ left: 109px;
     #onepageasso .carousel-indicators {
         display: none;
     }
-    #onepageasso .map{
+    #onepageasso .map {
         padding-left: 0%;
         height: 300px;
     }
-    #onepageasso .prezmembres .membres .triangle-obtuse{
-      text-align: center;
-      width: 100%;
+    #onepageasso .prezmembres .membres .triangle-obtuse {
+        text-align: center;
+        width: 100%;
     }
 }
 
@@ -526,13 +549,19 @@ left: 109px;
     #onepageasso .container .carousel {
         width: 100%;
     }
+    #onepageasso .content-hidden {
+        height: 95%;
+    }
+    #as-activite .div-hover {
+        height: 31%;
+    }
+    #as-activite .thumbnail {
+        margin-left: 3%;
+        margin-right: 3%;
+    }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
-    #menu-assoc ul li {
-        padding-left: 0.6em;
-        padding-right: 0.6em;
-    }
     #onepageasso .content-onepage .btn-link-leaflet {
         display: none;
     }
@@ -553,4 +582,35 @@ left: 109px;
         margin-left: 3%;
     }
 }
-²
+
+² ontainer .carousel {
+    width: 100%;
+}
+
+
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    #menu-assoc ul li {
+        padding-left: 0.6em;
+        padding-right: 0.6em;
+    }
+
+    #onepageasso .content-onepage .btn-link-leaflet {
+        display: none;
+    }
+
+    #onepageasso .carousel-indicators {
+        display: none;
+    }
+}
+@media screen and (min-width: 1200px) and (max-width: 1400px) {
+    #onepageasso .carousel-inner img {
+        height: 100%;
+    }
+}
+@media screen and (max-width: 769px) {
+    .carteVisite, #join, #coordonnees, #membres, #evenements {
+        margin-right: 3%;
+        margin-left: 3%;
+    }
+}

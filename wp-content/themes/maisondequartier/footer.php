@@ -10,7 +10,7 @@
 		<div class="container">
 				<div class="row">
 						<div class="col-md-3 col-sm-12 col-xs-12" id="logo">
-								<img src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/logo-planoisactive_Vfooter.svg" alt="logo-planoisactive">
+								<img src="<?php echo  get_site_url(); ?>/wp-content/themes/maisondequartier/img/logo-planoisactive_Vfooter.svg" alt="logo-planoisactive">
 						</div>
 						<div class="col-md-6 col-sm-6 col-xs-12">
 								<div id="middle-box">
@@ -26,9 +26,9 @@
 
 
 										    $list_cat = "";
-										    foreach( $categories as $category ) {
+										    foreach( $categories as $category ){
 										        $category_link = sprintf(
-										            '<li><a href="">%1$s</a></li>',
+										            '<li><a href="'.get_site_url().'/annuaire/?action='.$category->term_id.'">%1$s</a></li>',
 										            esc_html( $category->name )
 										        );
 
@@ -40,7 +40,7 @@
 
 <!--
 												<li><a href="">Sport et Loisirs</a></li>
-												<li><a href="">Culturelles</a></li>
+												<li><a href="">Culture</a></li>
 												<li><a href="">Éducation</a></li> -->
 										</ul>
 								</div>
@@ -64,14 +64,15 @@
 		</div>
 </footer>
 
-
 <script src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/js/jquery-2.1.4.js" type="text/javascript"></script>
-<script src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/js/jquery.mobile.custom.min.js" type="text/javascript"></script>
-<script src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/js/modernizr.js" type="text/javascript"></script>
-<script src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/js/main.js" type="text/javascript"></script>
-<script src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/js/form-validator-fiche-asso.js" type="text/javascript"></script>
+<script src="<?php echo  get_site_url(); ?>/wp-content/themes/maisondequartier/js/main.js" type="text/javascript"></script>
+<script src="<?php echo  get_site_url(); ?>/wp-content/themes/maisondequartier/js/fullcalendar-3.4.0/lib/moment.min.js" type="text/javascript"></script>
+<script src="<?php echo  get_site_url(); ?>/wp-content/themes/maisondequartier/js/fullcalendar-3.4.0/fullcalendar.js" type="text/javascript"></script>
+<script src="<?php echo  get_site_url(); ?>/wp-content/themes/maisondequartier/js/fullcalendar-3.4.0/locale/fr.js" type="text/javascript"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.js"></script>
 
-		<!--wordpress footer-->
-		<?php wp_footer(); ?>
+
+	<?php wp_footer(); ?>
 	</body>
 </html>

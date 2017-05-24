@@ -61,7 +61,7 @@ get_header();
 						<li>
 							<a class="link" data-id="evenements">
 								<span class="glyphicon glyphicon-calendar"></span>
-	              <span class="text">Évènements</span>
+	              <span class="text">Actualités</span>
 							</a>
 						</li>
 						<?php
@@ -71,7 +71,7 @@ get_header();
 						<li>
 							<a class="link" data-id="membres">
 								<span class="glyphicon glyphicon-user"></span>
-	                       		<span class="text">Membres</span>
+	                       		<span class="text">Vos interlocuteurs</span>
 							</a>
 						</li>
 						<?php
@@ -89,7 +89,7 @@ get_header();
 						if($infosAsso->showFormulaire){
 						?>
 						<li>
-							<a class="link" data-id="join">
+							<a class="link" data-id="contact">
 								<span class="glyphicon glyphicon-envelope"></span>
 	                       		<span class="text">Contact</span>
 							</a>
@@ -97,8 +97,8 @@ get_header();
 						<?php
 						}
 						?>
-						<li><a href="<?= $infosAsso->_fb; ?>"><span class="fa fa-facebook"></span></a></li>
-						<li><a href="<?= $infosAsso->_twitter; ?>"><span class="fa fa-twitter"></span></a></li>
+						<li><a href="<?php echo  $infosAsso->_fb; ?>"><span class="fa fa-facebook"></span></a></li>
+						<li><a href="<?php echo  $infosAsso->_twitter; ?>"><span class="fa fa-twitter"></span></a></li>
 					</ul>
 				</div>
 			</div>
@@ -114,17 +114,23 @@ get_header();
 						<div class="col-md-4 logo">
 
 							<div class="thumbnail">
-								<span><?= get_the_post_thumbnail($infosAsso->ID, 'resizing-img'); ?></span>
+								<span><?php echo  get_the_post_thumbnail($infosAsso->ID, 'resizing-img'); ?></span>
 								<div class="caption">
-									<h3><?= $infosAsso->_name; ?></h3>
+									<h3><?php echo  $infosAsso->_name; ?></h3>
 								</div>
 							</div>
-							<div class="tarifAdhesion">Tarif d'adhésion : <?= $infosAsso->_membership; ?></div>
+								<?php
+							// if($infosAsso->showMembership){
+								?>
+							<div class="tarifAdhesion">Tarif d'adhésion : <?php echo  $infosAsso->_membership; ?></div>
+								<?php
+							// }
+								?>
 							<button type="button" name="button" class="btn btn-link-leaflet center-block">Télécharger la plaquette</button>
 
 						</div>
 						<div class="col-md-8 descrip text-justify">
-							<p><?= $infosAsso->post_content;?></p>
+							<p><?php echo  $infosAsso->post_content;?></p>
 						</div>
 					</div>
 				</div>
@@ -207,7 +213,7 @@ get_header();
 		     		 {
 		 				 static $i = 0;
 		 			?>
-		 		   		<li data-target="#carousel" data-slide-to="<?= $i; ?>" <?= $active; ?>></li>
+		 		   		<li data-target="#carousel" data-slide-to="<?php echo  $i; ?>" <?php echo  $active; ?>></li>
 		 			<?php
 		 				$i ++;
 		 				$active = "";
@@ -219,14 +225,14 @@ get_header();
 		 		 foreach ($images as $key => $image)
 		 		 {
 		 			 ?>
-					 <div class="item <?= $active; ?>  modal-click">
-						<?= $image['image']; ?>
+					 <div class="item <?php echo  $active; ?>  modal-click">
+						<?php echo  $image['image']; ?>
 						 <div class="carousel-caption">
-							 <h3 class="img-modal img-responsive" title="<?= $image['title']; ?>"><?= $image['title'];?></h3>
+							 <h3 class="img-modal img-responsive" title="<?php echo  $image['title']; ?>"><?php echo  $image['title'];?></h3>
 
-							 <p> Le <?= $image['dateStart'];?> à <?= $image['heure'];?></p>
-							 <p><?= $image['association'];?></p>
-							 <a class="btn-association img-modal img-moda-click" id="image-<?= $images['post_id']; ?>" data-title="<?= $image['title']; ?>" data-content="<?= $image['content']; ?>" data-img="<?= $image['img_src'] ?>" data-date="<?= $image['dateStart']; ?>" data-location="<?= $image['location']; ?>" data-url="<?=  get_site_url()."/association/?fiche=".$image['association']; ?>" role="button">voir l'événement</a>
+							 <p> Le <?php echo  $image['dateStart'];?> à <?php echo  $image['heure'];?></p>
+							 <p><?php echo  $image['association'];?></p>
+							 <a class="btn-association img-modal img-moda-click" id="image-<?php echo  $images['post_id']; ?>" data-title="<?php echo  $image['title']; ?>" data-content="<?php echo  $image['content']; ?>" data-img="<?php echo  $image['img_src'] ?>" data-date="<?php echo  $image['dateStart']; ?>" data-location="<?php echo  $image['location']; ?>" data-url="<?php echo   get_site_url()."/association/?fiche=".$image['association']; ?>" role="button">voir l'actualité</a>
 
 						 </div>
 					 </div>
@@ -329,31 +335,31 @@ get_header();
 						global $post;
 						?>
 					  <div class="col-md-4 thumbnail thumbnail-activite">
-						<div id="acti-<?= $post->ID; ?>" data-id="<?= $post->ID; ?>" class="block-activite acti-<?= $post->ID; ?> content-hidden overflow background-white">
+						<div id="acti-<?php echo  $post->ID; ?>" data-id="<?php echo  $post->ID; ?>" class="block-activite acti-<?php echo  $post->ID; ?> content-hidden overflow background-white">
 							<div class="image">
-								<?= get_the_post_thumbnail($post->ID); ?>
+								<?php echo  get_the_post_thumbnail($post->ID); ?>
 							</div>
 							<div class="title">
-								<h3><?= $post->post_title; ?></h3>
+								<h3><?php echo  $post->post_title; ?></h3>
 							</div>
 							<div class="description mtop">
-								<?= $post->mdq_event_description; ?>
+								<?php echo  $post->mdq_event_description; ?>
 							</div>
 							<div class="horaire mtop"></div>
 								<h4>Horaires</h4>
-								<?= $post->mdq_event_date; ?>
+								<?php echo  $post->mdq_event_date; ?>
 
-							<div id="mapid-<?= $post->ID; ?>" class="map mtop mbot">
+							<div id="mapid-<?php echo  $post->ID; ?>" class="map mtop mbot">
 
 							</div>
 							<script>
 							$(document).ready(function(){
-								callMap('<?= $post->mdq_event_adresse; ?>', '<?= $post->ID; ?>');
+								callMap('<?php echo  $post->mdq_event_adresse; ?>', '<?php echo  $post->ID; ?>');
 							});
 							</script>
 
-							<div class="div-hover" data-id="<?= $post->ID; ?>">
-								<span class="gly-<?= $post->ID; ?> glyphicon glyphicon-chevron-down down-chevron" aria-hidden="true"></span>
+							<div class="div-hover" data-id="<?php echo  $post->ID; ?>">
+								<span class="gly-<?php echo  $post->ID; ?> glyphicon glyphicon-chevron-down down-chevron" aria-hidden="true"></span>
 							</div>
 
 						</div>
@@ -433,7 +439,7 @@ get_header();
 
 						<!-- membres asso -->
 						<div id="membres" class="container prezmembres">
-							<h2>Les Membres</h2>
+							<h2>Vos interlocuteurs</h2>
 							<div class="row">
 							<!-- <div class="col-md-12"> -->
 								<?php
@@ -447,11 +453,23 @@ get_header();
 										while ( have_posts() ){
 											the_post();
 											global $post;
-											?>
+
+											/* -- boussad update -- */
+											$term_list = wp_get_post_terms( get_the_ID(), 'status_members_mdq' );
+									?>
 											<div class="col-md-3 membres">
 												<div class="col-md-12 nomMembres triangle-obtuse">
-														<h3><?= get_the_title();?></h3>
-														<p><?= $post->mdq_members_description; ?>Président</p>
+														<h3><?php echo  get_the_title();?></h3>
+														<!-- <p><?php echo  $post->mdq_; ?></p> -->
+														<p><?php echo  $post->mdq_members_description; ?></p>
+														<p>
+														<?php
+															/* -- boussad update -- */
+															foreach($term_list as $term_single) {
+																echo $term_single->name."<br/>";
+															}
+														?>
+														</p>
 													</div>
 												</div>
 											<!-- </div> -->
@@ -462,7 +480,6 @@ get_header();
 									?></div>
 								</div>
 							</div>
->
 							<!-- fin membres asso -->
 			<?php
 
@@ -475,27 +492,27 @@ get_header();
 								<div class="row">
 									<div class="col-md-12">
 										<div id="infos_asso" class="adresseAsso col-md-7">
-											<h2><?= $infosAsso->_name; ?></h2>
-											<h4><?= $infosAsso->_address; ?></h4>
-											<h4><?= $infosAsso->_pc; ?> - <?= $infosAsso->_city; ?></h4>
-											<h4>Téléphone : <a href="tel:<?= $infosAsso->_tel; ?>"><?= $infosAsso->_tel; ?></a></h4>
+											<h2><?php echo  $infosAsso->_name; ?></h2>
+											<h4><?php echo  $infosAsso->_address; ?></h4>
+											<h4><?php echo  $infosAsso->_pc; ?> - <?php echo  $infosAsso->_city; ?></h4>
+											<h4>Téléphone : <a href="tel:<?php echo  $infosAsso->_tel; ?>"><?php echo  $infosAsso->_tel; ?></a></h4>
 
-											<h4><a href="<?=  $infosAsso->_link;  ?>"><?= $infosAsso->_link; ?></a></h4>
+											<h4><a href="<?php echo   $infosAsso->_link;  ?>"><?php echo  $infosAsso->_link; ?></a></h4>
 											<h3>Ouverture - période scolaire :</h3>
-											<p><?= $infosAsso->_school;?></p>
+											<p><?php echo  $infosAsso->_school;?></p>
 	<?php if($infosAsso->showsmallHolidays){  ?>
 											<h3>Ouverture - petites vacances :</h3>
-											<p><?= $infosAsso->_smallHolidays; }?></p>
+											<p><?php echo  $infosAsso->_smallHolidays; }?></p>
 	<?php if($infosAsso->showbigHolidays){  ?>
 											<h3>Ouverture - grandes vacances : </h3>
-											<p><?= $infosAsso->_bigHolidays; }?></p>
+											<p><?php echo  $infosAsso->_bigHolidays; }?></p>
 										</div>
 
 										<div class="map col-md-5">
 											<div id="mapid-association">
 											</div>
 											<script>
-											callMap('<?= $infosAsso->_address; ?> <?= $infosAsso->_city; ?> <?= $infosAsso->_pc; ?>', "association");
+											callMap('<?php echo  $infosAsso->_address; ?> <?php echo  $infosAsso->_city; ?> <?php echo  $infosAsso->_pc; ?>', "association");
 											</script>
 										</div>
 									</div>
@@ -516,7 +533,7 @@ get_header();
 						<div class="col-md-12">
 							<div class="col-md-7">
 								<h2>Les partenaires</h2>
-								<p><?= $infosAsso->_partner; ?></p>
+								<p><?php echo  $infosAsso->_partner; ?></p>
 							</div>
 						</div>
 					</div>
@@ -534,7 +551,6 @@ get_header();
 
 						//Check to make sure that the name field is not empty
 						if(trim($_POST['contactName']) === '') {
-							$nameError = 'Indiquez votre nom.';
 							$hasError = true;
 						} else {
 							$name = trim($_POST['contactName']);
@@ -547,7 +563,6 @@ get_header();
 							$hasError = true;
 						}
 						else if (!filter_var(trim($_POST['email'], FILTER_VALIDATE_EMAIL))) {
-							$emailError = 'Adresse e-mail invalide.';
 							$hasError = true;
 						}
 						 else {
@@ -556,7 +571,6 @@ get_header();
 
 						//Check to make sure comments were entered
 						if(trim($_POST['comments']) === '') {
-							$commentError = 'Entrez votre message.';
 							$hasError = true;
 						} else {
 							if(function_exists('stripslashes')) {
@@ -591,7 +605,7 @@ get_header();
 
 							if($sendCopy == true) {
 								$subject = 'Formulaire de contact';
-								// $headers = 'De : <noreply@student.codeur.online>';
+
 								$headers = 'From: '.$emailTo . "\r\n" .
 	     										'Reply-To: '.$email . "\r\n" .
 	     										'X-Mailer: PHP/' . phpversion();
@@ -601,21 +615,22 @@ get_header();
 
 							$emailSent = true;
 
-						}  } } // FIN IF POST SUBMITTED   // fin send the email
+						}  } } // FIN IF POST SUBMITTED
 						?>
 
 						<!-- formulaire -->
-						<div class="container contact" id="join">
+						<div class="container contact" id="contact">
 
-	<?php
-						if(isset($emailSent) && $emailSent == true) { ?>
+						<?php
+							if(isset($emailSent) && wp_verify_nonce($_POST['__nonce'], 'form_asso')) { ?>
 
-				 	<div class="thanks" id="form">
-				 		<h1>Merci, <?=$name;?></h1>
-				 		<p>Votre e-mail a &eacute;t&eacute; envoy&eacute; avec succ&egrave;s. Vous recevrez une r&eacute;ponse dans les meilleurs délais.</p>
-				 	</div>
+							<div class="col-md-8 push-col-md-2 col-xs-12" id="form">
+								<h1>Merci, <?php echo $name;?></h1>
+								<p>Votre e-mail a &eacute;t&eacute; envoy&eacute; avec succ&egrave;s. Vous recevrez une r&eacute;ponse dans les meilleurs délais.</p>
+							</div>
 
-				 <?php } else { ?>
+
+						<?php } else { ?>
 
 
 
@@ -623,46 +638,36 @@ get_header();
 				 			<p class="error">Une erreur est survenue lors de l'envoi du formulaire.</p>
 				 		<?php } ?>
 
-						<form method="post" action="#form" id="contact_form"  class="well form-horizontal" onsubmit=" return verification();">
+						<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>" id="contact_form"  class="well form-horizontal" onsubmit=" return verification();">
+
+							<input type="hidden" id="form_asso" name="__nonce" value="<?php echo wp_create_nonce('form_asso'); ?>" />
+
 							<h1>Formulaire de contact</h1>
 							<fieldset>
 								<div class="input-group">
 									<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-									<input class="form-control" type="text" name="contactName" id="nom" placeholder="votre nom et prénom*" value="<?php if(isset($_POST['contactName'])) echo $_POST['contactName'];?>"/>
-									<?php if($nameError != '') { ?>
-										<span class="error"><?=$nameError;?></span>
-									<?php } ?>
+									<input class="form-control" required type="text" name="contactName" id="nom" placeholder="votre nom et prénom*" value="<?php if(isset($_POST['contactName'])) echo $_POST['contactName'];?>"/>
 								</div>
 
 								<div class="input-group">
 									<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-									<input class="form-control" type="email" name="email" id="email" placeholder="votre email *" value="<?php if(isset($_POST['email']))  echo $_POST['email'];?>"/>
-									<?php if($emailError != '') { ?>
-				 						<span class="error"><?=$emailError;?></span>
-				 					<?php } ?>
+									<input class="form-control" required type="email" name="email" id="email" placeholder="votre email *" value="<?php if(isset($_POST['email']))  echo $_POST['email'];?>"/>
 								</div>
 							</fieldset>
 
 							<fieldset>
-								<textarea  name="comments" class="form-control message center-block" rows="12" placeholder="Ecrivez votre message ici..."><?php if(isset($_POST['comments'])) { if(function_exists('stripslashes')) { echo stripslashes($_POST['comments']); } else { echo $_POST['comments']; } } ?></textarea>
-								<?php if($commentError != '') { ?>
-									<span class="error"><?=$commentError;?></span>
-								<?php } ?>
-							</fieldset>
-							<fieldset class="input-group">
-								<input type="checkbox" name="sendCopy" id="sendCopy" value="true"<?php if(isset($_POST['sendCopy']) && $_POST['sendCopy'] == true) echo ' checked="checked"'; ?> />
-								<label for="sendCopy">Recevoir une copie du message</label>
+								<textarea  name="comments" required class="form-control message center-block" rows="12" placeholder="Ecrivez votre message ici..."><?php if(isset($_POST['comments'])) { if(function_exists('stripslashes')) { echo stripslashes($_POST['comments']); } else { echo $_POST['comments']; } } ?></textarea>
 							</fieldset>
 							<div class="form-group">
 								<label class="col-md-4 control-label"></label>
 								<div class="col-md-4">
-									<input type="hidden" name="submitted" id="submitted" value="true" /><button type="submit" class="btn center-block">Envoyer <span class="glyphicon glyphicon-send"></span></button>
+									<button type="submit" class="btn center-block">Envoyer <span class="glyphicon glyphicon-send"><input type="hidden" name="submitted" id="submitted" value="true" /></span></button>
 								</div>
 							</div>
 						</form>
 					</div>
 
-				 <?php  } // fin de vérif isset $emailSent
+				 <?php  }
 		}
 		?>
 	</div>
@@ -681,5 +686,5 @@ get_header();
 	</script>
 </main>
 
-						<?php 	// }
+						<?php
 					 } get_footer(); ?>

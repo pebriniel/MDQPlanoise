@@ -37,7 +37,7 @@ if(!empty( $_POST)){
     get_post_activite('select-cat', 'theme_mdq', $search_tax_cat, $search_tax_cat_id);
     get_post_activite('select-age', 'age_mdq', $search_tax_age, $search_tax_age_id);
 }
-if(!wp_verify_nonce($_POST['rechercheannuaire_nonce'], 'rechercheannuaire')){
+if(!wp_verify_nonce('rechercheannuaire')){
     $search_input = "";
 }
 else{
@@ -112,7 +112,7 @@ function mdq_showActiviteHtml($post){
                     <!-- <a href="<?= get_site_url()."/association/?fiche=".$post->mdq_association_id; ?>" data-id="$post->ID">
                     </a> -->
                     <span class="glyphicon glyphicon-info-sign"></span><br />
-                        Association
+                        Information
                     </span>
                 </li>
             </ul>
@@ -151,29 +151,62 @@ function mdq_showActiviteHtml($post){
     <?php
 }
 
-function mdq_list_cat($name_tax, $val = null){
-    $categories = get_categories( array(
-        'orderby' => 'name',
+/* -- boussad update -- */
+function mdq_get_categories($name_tax, $orderby){
+    return get_categories( array(
+        'orderby' => $orderby,
         'order'   => 'ASC',
-
         'taxonomy' => $name_tax
     ) );
+}
+function mdq_showlist_categories($category, $val, &$list_cat){
+    $select = "";
 
+    if($category->parent == 0){
+        $select = "";
+        if($val == $category->term_id){
+            $select = "selected";
+        }
+
+
+
+        $category_link = sprintf(
+            '<option value="%1$s" '.$select.'>%2$s</option>',
+            esc_html( $category->term_id ),
+            esc_html( $category->name )
+        );
+
+        $list_cat .= $category_link;
+    }
+}
+function mdq_list_cat($name_tax, $orderby, $val = null){
+    $categories = mdq_get_categories($name_tax, $orderby);
 
     $list_cat = "";
     foreach( $categories as $category ) {
-        if($category->parent == 0){
-            $select = "";
-            if($val == $category->term_id){
-                $select = "selected";
-            }
-            $category_link = sprintf(
-                '<option value="%1$s" '.$select.'>%2$s</option>',
-                esc_html( $category->term_id ),
-                esc_html( $category->name )
-            );
+        mdq_showlist_categories($category, $val, $list_cat);
+    }
 
-            $list_cat .= $category_link;
+    return $list_cat;
+}
+function mdq_list_age($name_tax, $orderby, $val = null){
+    $categories = mdq_get_categories($name_tax, $orderby);
+
+    $list_cat = "";
+    $cat = "";
+
+    foreach( $categories as $category ) {
+        $cat_data = get_option("taxonomy_".$category->term_id);
+        if(!is_null($cat_data['custom_term_meta_ordershow'])){
+            $ordershow = $cat_data['custom_term_meta_ordershow'];
+            $cat[$ordershow] = $category;
+        }
+    }
+
+    for($i = 0; $i <= sizeof($cat); $i ++) {
+        if(key_exists($i, $cat)){
+            $category = $cat[$i];
+            mdq_showlist_categories($category, $val, $list_cat);
         }
     }
 
@@ -190,8 +223,11 @@ function mdq_list_cat($name_tax, $val = null){
                 <div class="col-md-4 col-xs-10 col-xs-offset-1">
                     <div class="search-box-acti">
                     <form class="search-form" method="POST" action="#">
+
+					<input type="hidden" id="rechercheannuaire" name="rechercheannuaire" value="<?php wp_create_nonce('rechercheannuaire'); ?>" />
+
                         <?php
-                        wp_nonce_field('rechercheannuaire','rechercheannuaire_nonce');
+                        // wp_nonce_field('rechercheannuaire','rechercheannuaire_nonce');
                         ?>
                         <input class="form-control" name="search-activite" type="text">
                         <!-- <button class="btn btn-link search-btn"> -->
@@ -207,14 +243,13 @@ function mdq_list_cat($name_tax, $val = null){
                     <!-- <select class="select-menu" name="select-cat"> -->
                     <select class="select-menu-acti" name="select-cat">
                         <option value="null"> Champs d'actions</option>
-                        <?= mdq_list_cat("theme_mdq", $search_tax_cat_id); ?>
+                        <?= mdq_list_cat("theme_mdq", 'name', $search_tax_cat_id); ?>
                     </select>
                 </div>
                 <div class="col-md-2 col-xs-3 col-xs-push-1 select-container">
-
                     <select class="select-menu-acti" name="select-age">
                         <option value="null"> Tranches d'âge</option>
-                        <?= mdq_list_cat("age_mdq", $search_tax_age_id); ?>
+                        <?= mdq_list_age("age_mdq", 'custom_term_meta_ordershow', $search_tax_age_id); ?>
                     </select>
                 </div>
                 <div class="col-md-2 col-xs-4 col-xs-push-1">

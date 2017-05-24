@@ -50,7 +50,7 @@ function register_Status_members_taxonomy() {
 	);
 	register_taxonomy( 'status_members_mdq', array( 'post' ), $args );
 
-} 
+}
 
 add_filter( 'term_updated_messages', 'status_members_taxonomy_messages' );
 function status_members_taxonomy_messages( $messages ) {

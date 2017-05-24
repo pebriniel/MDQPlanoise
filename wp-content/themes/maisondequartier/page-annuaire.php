@@ -7,7 +7,7 @@
 
 get_header();
 
-if ( has_post_thumbnail() ) { the_post_thumbnail( 'img_activite' ); }
+if ( has_post_thumbnail() ) { the_post_thumbnail( 'resizing-img-article' ); }
 
 $search_tax_field = null;
 $search_tax_field_id = null;
@@ -15,12 +15,17 @@ $search_tax_field_id = null;
 if(!empty($_POST)){
 	get_post_activite('select-field', 'theme_mdq', $search_tax_field, $search_tax_field_id);
 }
+/* -- boussad update -- */
+//permet de chercher selon l'url le paramètre "action"
+else{
+	get_post_activite('action', 'theme_mdq', $search_tax_field, $search_tax_field_id);
+}
 
-if(!wp_verify_nonce($_POST['rechercheannuaire_nonce'], 'rechercheannuaire')){
-	$search_input = "";
+if(!wp_verify_nonce('rechercheannuaire')){
+	$search_input = $_POST['search-annuaire'];
 }
 else{
-	$search_input = $_POST['search-annuaire'];
+	$search_input = "";
 }
 
 function mdq_list_field($name_taxo, $value=null){
@@ -61,8 +66,11 @@ function mdq_list_field($name_taxo, $value=null){
 			<div class="col-xs-10 col-xs-offset-1 col-md-5 col-sm-5">
 				<div class="search-box">
 					<form class="search-form" action="#" method="post">
+
+					<input type="hidden" id="rechercheannuaire" name="rechercheannuaire" value="<?php echo wp_create_nonce('rechercheannuaire'); ?>" />
+
 						<?php
-						wp_nonce_field('rechercheannuaire','rechercheannuaire_nonce');
+						// wp_nonce_field('rechercheannuaire','rechercheannuaire_nonce');
 						?>
 						<input class="form-control" name="search-annuaire" type="text">
 						<button class="btn btn-link search-btn">
@@ -75,7 +83,7 @@ function mdq_list_field($name_taxo, $value=null){
 				<div class="col-md-2 col-md-push-2 col-sm-2 col-xs-5 col-xs-push-1 select-container">
 					<select class="select-menu" name="select-field">
 						<option value="null"> Champs d'actions</option>
-						<?= mdq_list_field("theme_mdq"); ?>
+						<?php echo  mdq_list_field("theme_mdq"); ?>
 					</select>
 				</div>
 				<div class="col-md-2 col-md-push-2 col-sm-2 col-xs-5 col-xs-push-1">
@@ -103,7 +111,8 @@ function mdq_list_field($name_taxo, $value=null){
 			while ( have_posts() ){
 				the_post();
 				global $post;
-				$url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'img_activite' );
+				// $url = wp_get_attachment_url( get_post_thumbnail_id($post->ID), array(100,200));
+				$url = get_the_post_thumbnail_url($post->ID, array(1,1));
 				?>
 
 				<div class="col-md-6">
@@ -111,14 +120,14 @@ function mdq_list_field($name_taxo, $value=null){
 						<div class="content-ta">
 								<div class="thumbnail-annuaire hvr-grow col-md-12 col-sm-12">
 									<div class="logo col-md-2 col-sm-2" style="overflow: hidden; height: 125px;">
-										<img src="<?= $url ?>" alt="<?= $url; ?>">
+										<img src="<?php echo  $url ?>" alt="<?php echo  $url; ?>">
 									</div>
 									<div class="caption  col-md-8 col-sm-8">
-										<h3 class="col-md-12 col-sm-12"><?= $post->_name; ?></h3>
+										<h3 class="col-md-12 col-sm-12"><?php echo  $post->_name; ?></h3>
 
-										<p class="col-md-12 col-sm-12"><?= max_caracter_length($post->_desc, 100);?></p>
+										<p class="col-md-12 col-sm-12"><?php echo  max_caracter_length($post->_desc, 100);?></p>
 										<p class="col-md-12 col-sm-12">
-											<a href="<?= get_site_url()."/association/?fiche=".$post->ID; ?>" class="btn btn-association" role="button">voir la fiche</a>
+											<a href="<?php echo  get_site_url()."/association/?fiche=".$post->ID; ?>" class="btn btn-association" role="button">voir la fiche</a>
 										</p>
 									</div>
 						</div>
@@ -132,7 +141,7 @@ function mdq_list_field($name_taxo, $value=null){
 			$page = paginate_links( $args );
 			?>
 			<div class="col-md-12 col-xs-12" id="page">
-				<?= $page ; ?>
+				<?php echo  $page ; ?>
 			</div>
 			<?php
 		}
