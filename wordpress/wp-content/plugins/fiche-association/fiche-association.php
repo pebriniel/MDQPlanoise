@@ -6,7 +6,7 @@ Version:     0.1
 Author:      Houda B. - Boussad S.
 */
 
-add_action('init', 'ficheassociation_init');	
+add_action('init', 'ficheassociation_init');
 
 @ini_set('display_errors', 0);
 
@@ -15,7 +15,7 @@ add_action('init', 'ficheassociation_init');
 add_action( 'wp_enqueue_scripts', 'register_plugin_styles');
 
 // Ajout des meta_box
-add_action('add_meta_boxes', 'ficheassociation_metaboxes');					
+add_action('add_meta_boxes', 'ficheassociation_metaboxes');
 add_action('save_post', 'ficheassociation_savepost',10, 2);	// Capture l'édition d'article avec 2 arguments
 
 add_action('manage_edit-fiche_columns', 'ficheassociation_columnfilter');	// Capture la liste des colonnes pour les slides
@@ -99,7 +99,7 @@ add_theme_support( 'post-thumbnails' );
 // resizing img
 if ( function_exists( 'add_image_size' ) ) {
 
-	add_image_size( 'fiche-association', 180, 100, true ); 
+	add_image_size( 'fiche-association', 180, 100, true );
 }
 
 
@@ -108,7 +108,7 @@ if ( function_exists( 'add_image_size' ) ) {
 **/
 function ficheassociation_metaboxes(){
 	if(function_exists('add_meta_box')){
-	
+
 		add_meta_box('ficheassociation_coordonnees','Profil','ficheassociation_coordonnees_metabox','fiche','normal','high');
 		add_meta_box('ficheassociation_horaires','Horaires d\'ouvertures','ficheassociation_horaires_metabox','fiche','normal','high');
 		add_meta_box('ficheassociation_show','Choix d\'affichage des différentes box','ficheassociation_showbox_metabox','fiche','normal','high');
@@ -124,12 +124,12 @@ function ficheassociation_metaboxes(){
 function ficheassociation_coordonnees_metabox($object){
 	// // génération d'un token (SECURITE)
 	// wp_nonce_field('ficheassociation','ficheassociation_nonce');
-	
+
 	?>
 	<form method="post">
 
 		<input type="hidden" id="ficheassociation" name="__nonce" value="<?php echo wp_create_nonce('ficheassociation'); ?>" />
-		
+
 		<div class="meta-box-item-title">
 			<label for="ficheassociation_name">Nom association</label>
 		</div>
@@ -219,10 +219,9 @@ function ficheassociation_horaires_metabox($object){
 	// wp_nonce_field('ficheassociation','ficheassociation_nonce');
 
 	?>
-	<form method="post"> 
 
 		<input type="hidden" id="ficheassociation" name="__nonce" value="<?php echo wp_create_nonce('ficheassociation'); ?>" />
-	
+
 		<div class="meta-box-item-title">
 			<label for="ficheassociation_school">Ouverture - période scolaire</label>
 		</div>
@@ -243,7 +242,6 @@ function ficheassociation_horaires_metabox($object){
 		<div class="meta-box-item-content">
 			<textarea name="ficheassociation_bigHolidays" rows="4" cols="50" style="width:100%; resize:none;"><?= esc_attr(get_post_meta($object->ID, '_bigHolidays', true)); ?></textarea>
 		</div>
-	</form>
 
 	<?php
 }
@@ -258,9 +256,9 @@ function ficheassociation_showbox_metabox($object){
 	// wp_nonce_field('ficheassociation','ficheassociation_nonce');
 
 	?>
-	<form method="post">
+
 		<input type="hidden" id="ficheassociation" name="__nonce" value="<?php echo wp_create_nonce('ficheassociation'); ?>" />
-		
+
 		<div class="meta-box-item-title">
 			<input type="checkbox" name="showDescription" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showDescription', true)), 1 ); ?> />
 			<label for="showDescription">Affichage du titre et de la description</label>
@@ -320,7 +318,7 @@ function ficheassociation_showbox_metabox($object){
 			<input type="checkbox" name="showMembership" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showMembership', true)), 1 ); ?> />
 			<label for="showMembership">Affichage du montant de l'adhésion</label>
 		</div>
-	</form>
+
 	<?php
 }
 
@@ -345,9 +343,10 @@ function ficheassociation_savepost($post_id, $post){
 	$school = !isset($_POST['ficheassociation_school']);
 	$smallHolidays = !isset($_POST['ficheassociation_smallHolidays']);
 	$bigHolidays = !isset($_POST['ficheassociation_bigHolidays']);
- 
 
-	if(!wp_verify_nonce($_POST['__nonce'], 'ficheassociation') && ($nameAsso || $logo || $email || $phone || $address || $postalcode || $city || $siteweb || $partner || $school || $smallHolidays || $bigHolidays || $facebook || $twitter || $membership))
+
+	// if(!wp_verify_nonce($_POST['__nonce'], 'ficheassociation') && ($nameAsso || $logo || $email || $phone || $address || $postalcode || $city || $siteweb || $partner || $school || $smallHolidays || $bigHolidays || $facebook || $twitter || $membership))
+	if(!wp_verify_nonce($_POST['__nonce'], 'ficheassociation') && ($nameAsso || $logo))
 	{
 		return $post_id;
 	}

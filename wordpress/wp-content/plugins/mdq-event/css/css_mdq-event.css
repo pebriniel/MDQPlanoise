@@ -322,7 +322,8 @@
 
 
 /* block qui affiche l'activité elle même */
-h3 {
+#activite h3 {
+    font-size: 1.6em;
     color: #ff6633!important;
     font-weight: bold!important;
 }

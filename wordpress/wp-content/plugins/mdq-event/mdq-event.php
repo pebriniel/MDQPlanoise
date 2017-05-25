@@ -62,7 +62,7 @@ function register_plugin_style_activite() {
 **/
 function mdq_event_metaboxes(){
     add_meta_box('monsuperslide','Description','mdq_event_meta_description','activite','normal','high');
-    add_meta_box('monsuperslide_association','Association liée à l\'activité','mdq_event_meta_liste_assoc','activite','normal');
+    add_meta_box('monsuperslide_association','Association lié à l\'activité','mdq_event_meta_liste_assoc','activite','normal');
     add_meta_box('monsuperslide_time','Date de début','mdq_event_meta_date','activite','normal');
 }
 

@@ -75,6 +75,11 @@ header .menu-burger {
     text-decoration: none;
 }
 
+.page-header #nav .active, .page-header #nav .active a {
+    background-color: #ff6633;
+    color: white;
+}
+
 .class_css_hover {
     color: #ffffff;
     text-decoration: none;
@@ -368,6 +373,16 @@ main .container {
 }
 
 
+/* MENTION LEGALE */
+#mentionlegale h2{
+    color: #ff6633;
+    font-size: 3.6rem;
+    font-weight: bold;
+    font-weight: 700;
+    line-height: 3.2;
+    text-align: center;
+}
+
 /* CONTACT */
 
 #contact {
@@ -404,7 +419,7 @@ main .container {
 }
 
 #contact form {
-    max-width: 600px;
+    /*  max-width: 600px;*/
     margin: 20px auto;
     text-align: center;
 }
@@ -1994,3 +2009,17 @@ main .container {
     max-width: 100%;
     height: auto;
 }
+
+
+#articlesAutres .tags-links, #articleUne .tags-links{
+    color: #ff6633 !important;
+}
+#articleUne .tags-links{
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+#home .modal-footer{
+    margin-bottom: 5%;
+}
+

@@ -78,15 +78,17 @@ function event_asso_meta($object){
 			<h4>Date de début événement</h4>
 		</div>
 		<div class="meta-box-item-content">
-			<input type="date" name="event_asso_start" style="width:49%;" value="<?= esc_attr(get_post_meta($object->ID, 'event_asso_start', true)); ?>" placeholder="jj/mm/aaaa" />
-			<input type="time" name="event_asso_start_hour" style="width:49%;" value="<?= esc_attr(get_post_meta($object->ID, 'event_asso_start_hour', true)); ?>" placeholder="00h00" />
+			<input type="datetime-local" name="event_asso_start" style="width:49%;" value="<?= esc_attr(get_post_meta($object->ID, 'event_asso_start', true)); ?>" placeholder="jj/mm/aaaa" />
+			<!--<input type="time" name="event_asso_start_hour" style="width:49%;" value="<?= esc_attr(get_post_meta($object->ID, 'event_asso_start_hour', true)); ?>" placeholder="00h00" />
+		-->
 		</div>
 		<div class="meta-box-item-title">
 			<h4>Date de fin événement</h4>
 		</div>
 		<div class="meta-box-item-content">
-			<input type="date" name="event_asso_end" style="width:49%;" value="<?= esc_attr(get_post_meta($object->ID, 'event_asso_end', true)); ?>" placeholder="jj/mm/aaaa" />
-			<input type="time" name="event_asso_hour_end" style="width:49%;" value="<?= esc_attr(get_post_meta($object->ID, 'event_asso_hour_end', true)); ?>" placeholder="00h00" />
+			<input type="datetime-local" name="event_asso_end" style="width:49%;" value="<?= esc_attr(get_post_meta($object->ID, 'event_asso_end', true)); ?>" placeholder="jj/mm/aaaa" />
+			<!--<input type="time" name="event_asso_hour_end" style="width:49%;" value="<?= esc_attr(get_post_meta($object->ID, 'event_asso_hour_end', true)); ?>" placeholder="00h00" />
+		-->
 		</div>
 		<div class="meta-box-item-title">
 			<h4>Adresse de l'évènement</h4>
@@ -108,13 +110,16 @@ function event_asso_meta($object){
 function mdq_listing_assoc($object){
 	// wp_nonce_field('slider_asso','sliderasso_nonce');
 	?>
-	<form method="post">
+
 		<input type="hidden" id="sliderasso" name="__nonce" value="<?php echo wp_create_nonce('sliderasso'); ?>" />
 
 		<div class="meta-box-item-content">
 			<select name="event_listing_asso">
 				<?php
-				query_posts(array('post_type' => 'fiche'));
+				query_posts(array(
+						'post_type' => 'fiche',
+						'posts_per_page'=> -1
+				));
 
 				if ( have_posts() ){
 					while ( have_posts() ){
@@ -133,7 +138,6 @@ function mdq_listing_assoc($object){
 			?>
 			</select>
 		</div>
-	</form>
 	<?php
 }
 
@@ -180,4 +184,3 @@ function slider_save_details(){
 		}
 	}
 }
-

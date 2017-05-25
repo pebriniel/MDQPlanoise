@@ -21,9 +21,9 @@ function special_nav_class ($classes, $item) {
 
 add_filter('nav_menu_css_class' , 'special_nav_class' , 10 , 2);
 
-function get_post_activite($input, $tax, &$search_array, &$search_id){
-    if(isset($_POST[$input])){
-        $search_id = intval($_POST[$input]);
+function get_post_activite($filter, $tax, &$search_array, &$search_id){
+    if(isset($_POST[$filter])){
+        $search_id = intval($_POST[$filter]);
         if($search_id != "null"){
             $search_array = array(
                 'taxonomy' => $tax, //or tag or custom taxonomy
@@ -31,6 +31,15 @@ function get_post_activite($input, $tax, &$search_array, &$search_id){
                 'terms' => array(intval($search_id))
             );
         }
+    }
+    /* -- boussad update -- */
+    /* permet de filtrer selon des paramètres de l'url en plus du formulaire de recherche... */
+    else if($search_id = get_query_var($filter, null)){
+        $search_array = array(
+            'taxonomy' => $tax, //or tag or custom taxonomy
+            'field' => 'id',
+            'terms' => array(intval($search_id))
+        );
     }
 }
 
@@ -151,5 +160,5 @@ if ( function_exists( 'add_image_size' ) ) {
 }
 
 
-
-
+/* -- boussad update -- */
+/* pour permettre de mettre en surbrillance les liens du menu dans le header */

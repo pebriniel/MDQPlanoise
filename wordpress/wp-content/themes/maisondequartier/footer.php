@@ -26,9 +26,9 @@
 
 
 										    $list_cat = "";
-										    foreach( $categories as $category ) {
+										    foreach( $categories as $category ){
 										        $category_link = sprintf(
-										            '<li><a href="">%1$s</a></li>',
+										            '<li><a href="'.get_site_url().'/annuaire/?action='.$category->term_id.'">%1$s</a></li>',
 										            esc_html( $category->name )
 										        );
 
@@ -40,7 +40,7 @@
 
 <!--
 												<li><a href="">Sport et Loisirs</a></li>
-												<li><a href="">Culturelles</a></li>
+												<li><a href="">Culture</a></li>
 												<li><a href="">Éducation</a></li> -->
 										</ul>
 								</div>

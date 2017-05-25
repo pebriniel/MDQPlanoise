@@ -79,7 +79,6 @@
     {
 
 			$('.page-header #nav li:hover a').on( "click", function() {
-				console.log("ok");
 				// $('.page-header #nav li a').css({"color": "#ffffff"; "text-decoration": "none"; });
 
 				// $('.page-header #nav li').css("background-color", "#ff6633");

@@ -43,6 +43,14 @@ body {
     background: #ff6633;
 }
 
+#onepageasso h2 {
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    color: #ff6633;
+    padding-bottom: 3%;
+}
+
 #onepageasso .navbar-default a {
     color: #ffffff;
 }
@@ -127,16 +135,14 @@ body {
 
 #onepageasso .carousel-inner .carousel-caption {
     color: #ff6633;
-}
-
-#onepageasso .carousel-indicators li {
+}evenements
     background-color: #ff6633;
     border: 1px solid #ff6633;
     width: 14px;
     height: 14px;
 }
 
-#onepageasso #evenements {
+#onepageasso #evenements .block{
     height: 400px;
 }
 
@@ -206,9 +212,7 @@ body {
 }
 
 #onepageasso .prezmembres {
-    position: relative;
-    border: 1px solid black;
-    padding: 2% 2%;
+    margin-bottom: 5%;
     margin-bottom: 5%;
 }
 
@@ -226,14 +230,6 @@ body {
     bottom: 1em;
     right: 1em;
     cursor: pointer;
-}
-
-#onepageasso .prezmembres h2 {
-    font-weight: bold;
-    text-transform: uppercase;
-    text-align: center;
-    color: #ff6633;
-    padding-bottom: 3%;
 }
 
 #onepageasso .prezmembres svg {

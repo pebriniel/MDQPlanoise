@@ -59,9 +59,9 @@ get_header();
 						if($infosAsso->showCaroussel){
 						?>
 						<li>
-							<a class="link" data-id="evenements">
+							<a class="link actualite-link" data-id="evenements">
 								<span class="glyphicon glyphicon-calendar"></span>
-	              <span class="text">Actualités</span>
+	              				<span class="text">Actualités</span>
 							</a>
 						</li>
 						<?php
@@ -97,8 +97,18 @@ get_header();
 						<?php
 						}
 						?>
-						<li><a href="<?php echo  $infosAsso->_fb; ?>"><span class="fa fa-facebook"></span></a></li>
-						<li><a href="<?php echo  $infosAsso->_twitter; ?>"><span class="fa fa-twitter"></span></a></li>
+						<?php
+							if('' !== $infosAsso->_fb){
+						?>
+						<li><a href="<?php echo  $infosAsso->_fb; ?>" target="__blank"><span class="fa fa-facebook"></span></a></li>
+						<?php
+							}
+							if('' !== $infosAsso->_twitter){
+						?>
+						<li><a href="<?php echo  $infosAsso->_twitter; ?>" target="__blank"><span class="fa fa-twitter"></span></a></li>
+						<?php
+							}
+						?>
 					</ul>
 				</div>
 			</div>
@@ -119,7 +129,13 @@ get_header();
 									<h3><?php echo  $infosAsso->_name; ?></h3>
 								</div>
 							</div>
-							<div class="tarifAdhesion">Tarif d'adhésion : <?php echo  $infosAsso->_membership; ?></div>
+								<?php
+							if($infosAsso->showMembership){
+								?>
+								<div class="tarifAdhesion">Tarif d'adhésion : <?php echo  $infosAsso->_membership; ?></div>
+								<?php
+							}
+								?>
 							<button type="button" name="button" class="btn btn-link-leaflet center-block">Télécharger la plaquette</button>
 
 						</div>
@@ -136,25 +152,22 @@ get_header();
 
 			if($infosAsso->showCaroussel){
 
-			?>
-
-			<!-- carousel bootstrap -->
-		  <div id="evenements" class="container carousel">
-
-		 <?php
 		 query_posts(array('post_type'=>'slider',
 		 					'meta_key'  => 'mdq_listing_assoc',
 		 					'meta_value' => $infosAsso->ID));
 
 		 $images = array();
-		 ?>
-
-		 <div id="carousel" class="carousel slide" data-ride="carousel">
-		 	 <!-- Wrapper for slides -->
-
-		 <?php
 
 		  if(have_posts()){
+
+			  ?>
+			  	<!-- carousel bootstrap -->
+  		  		<div id="evenements" class="container block carousel">
+
+			  		<div id="carousel" class="carousel slide" data-ride="carousel">
+				  	<!-- Wrapper for slides -->
+			  <?php
+
 		 	while ( have_posts() ) {
 		 			the_post();
 		 			global $post;
@@ -174,17 +187,33 @@ get_header();
 		 			 	$asso_orga = $infosAsso->_name;
 
 		 			// 	$asso_orga = get_post_meta(get_the_ID(), 'mdq_listing_assoc', true);
-		 				$dateStart = get_post_meta(get_the_ID(), 'event_asso_start', true);
-						$dateDisplayStart = date_i18n("d/m/Y", strtotime($dateStart));
-						$dateEnd = get_post_meta(get_the_ID(), 'event_asso_end', true);
-						$dateDisplayEnd = date_i18n("d/m/Y", strtotime($dateEnd));
+		 				echo $dateStart = get_the_date(__(get_post_meta(get_the_ID(), 'event_asso_start', true)));
+
+						echo $dateDisplayStart = date_i18n("d/m/Y", strtotime($dateStart));
+						echo "<br/>";
+						echo strtotime($dateStart);
+						echo "<br/>";
+
+
+						$eventHourStart = date_i18n("H:i", strtotime($dateStart));
+
+						echo $eventHourStart;
+						echo "<br/>";
+
+						$dateEnd = get_the_date(__(get_post_meta(get_the_ID(), 'event_asso_end', true)));
+						echo $dateDisplayEnd = date_i18n("d/m/Y", strtotime($dateEnd));
+						echo date_i18n("H:i", strtotime($dateEnd));
+
 						$hour = get_post_meta(get_the_ID(), 'event_asso_hour_start', true);
-						$eventHourStart = date_i18n("G:i", strtotime($hour));
+
 						$location_event = get_post_meta(get_the_ID(), 'event_asso_address', true);
 		 				$images[] = array('post_id' => $post_id,
 		 													'title' => $title,
 		 													'dateStart' => $dateDisplayStart,
 		 													'dateEnd' => $dateDisplayEnd,
+
+															'DE' => $dateEnd,
+
 															'heure' => $eventHourStart,
 		 													'location' => $location_event,
 		 													'content' => $content,
@@ -196,7 +225,7 @@ get_header();
 		 													'association' => $asso_orga);
 
 		 		}
-		  }
+
 
 		 	?>
 		 	<div class="carousel-inner" role="listbox">
@@ -222,8 +251,7 @@ get_header();
 					 <div class="item <?php echo  $active; ?>  modal-click">
 						<?php echo  $image['image']; ?>
 						 <div class="carousel-caption">
-							 <h3 class="img-modal img-responsive" title="<?php echo  $image['title']; ?>"><?php echo  $image['title'];?></h3>
-
+							 <h3 class="img-modal img-responsive" title="<?php echo  $image['title']; ?>"><?php echo  $image['dateEnd'];?></h3>
 							 <p> Le <?php echo  $image['dateStart'];?> à <?php echo  $image['heure'];?></p>
 							 <p><?php echo  $image['association'];?></p>
 							 <a class="btn-association img-modal img-moda-click" id="image-<?php echo  $images['post_id']; ?>" data-title="<?php echo  $image['title']; ?>" data-content="<?php echo  $image['content']; ?>" data-img="<?php echo  $image['img_src'] ?>" data-date="<?php echo  $image['dateStart']; ?>" data-location="<?php echo  $image['location']; ?>" data-url="<?php echo   get_site_url()."/association/?fiche=".$image['association']; ?>" role="button">voir l'actualité</a>
@@ -251,6 +279,8 @@ get_header();
 			 </a>
 		 </div>
 		</div>
+
+
 		<!-- fin de carousel -->
 
 		<!-- la modal -->
@@ -310,7 +340,17 @@ get_header();
 	});
 	</script>
 
-		  <?php
+		  	<?php
+			  }
+			  else{
+				  ?>
+				  <script type="text/javascript">
+						$(".actualite-link").hide();
+				  </script>
+				  <?php
+				  //aucune activité ?
+				  //On met un message ou pas ?
+			  }
 	  }
 
 	 if($infosAsso->showAgenda){
@@ -369,13 +409,18 @@ get_header();
 		<script>
 					$(document).ready(function(){
 						var last_id = null;
-						$("html").click(function(){
+						$(document).on('click', 'html, .thumbnail-activite', function(){
+
 							$(".block-activite").each(function( index ){
 								let i = $(this).data('id');
 								$("#acti-"+i).addClass("overflow");
 								$("#acti-"+i).removeClass("active");
+								$("#acti-"+i).addClass("content-hidden");
 								$(".gly-"+i).addClass("glyphicon-chevron-down");
 								$(".gly-"+i).removeClass("glyphicon-chevron-up");
+								console.log('ololo');
+							}).children('.map').click(function(e) {
+							  return false;
 							});
 						});
 
@@ -392,6 +437,7 @@ get_header();
 										//on cache
 										console.log('lol');
 										$("#acti-"+id).removeClass("overflow");
+										$("#acti-"+id).removeClass("content-hidden");
 										$("#acti-"+id).addClass("active");
 										$(".gly-"+id).removeClass("glyphicon-chevron-down");
 										$(".gly-"+id).addClass("glyphicon-chevron-up");
@@ -401,6 +447,7 @@ get_header();
 										console.log('dev');
 										$("#acti-"+id).addClass("overflow");
 										$("#acti-"+id).removeClass("active");
+										$("#acti-"+id).addClass("content-hidden");
 										$(".gly-"+id).addClass("glyphicon-chevron-down");
 										$(".gly-"+id).removeClass("glyphicon-chevron-up");
 										$(button).removeClass("che-down");
@@ -447,11 +494,28 @@ get_header();
 										while ( have_posts() ){
 											the_post();
 											global $post;
-											?>
+
+											/* -- boussad update -- */
+											$term_list = wp_get_post_terms( get_the_ID(), 'status_members_mdq' );
+									?>
 											<div class="col-md-3 membres">
 												<div class="col-md-12 nomMembres triangle-obtuse">
 														<h3><?php echo  get_the_title();?></h3>
-														<p><?php echo  $post->mdq_members_description; ?>Président</p>
+														<!-- <p><?php echo  $post->mdq_; ?></p> -->
+														<p><?php echo  $post->mdq_members_description; ?></p>
+														<p>
+														<?php
+															$count = 0;
+															/* -- boussad update -- */
+															foreach($term_list as $term_single) {
+																if($count > 0){
+																	echo ", ";
+																}
+																echo $term_single->name;
+																$count ++;
+															}
+														?>
+														</p>
 													</div>
 												</div>
 											<!-- </div> -->
@@ -462,7 +526,6 @@ get_header();
 									?></div>
 								</div>
 							</div>
->
 							<!-- fin membres asso -->
 			<?php
 
@@ -514,10 +577,8 @@ get_header();
 				<div class="container loc">
 					<div class="row">
 						<div class="col-md-12">
-							<div class="col-md-7">
-								<h2>Les partenaires</h2>
-								<p><?php echo  $infosAsso->_partner; ?></p>
-							</div>
+							<h2>Les partenaires</h2>
+							<p><?php echo  $infosAsso->_partner; ?></p>
 						</div>
 					</div>
 				</div>
@@ -625,7 +686,7 @@ get_header();
 
 							<input type="hidden" id="form_asso" name="__nonce" value="<?php echo wp_create_nonce('form_asso'); ?>" />
 
-							<h1>Formulaire de contact</h1>
+							<h2>Formulaire de contact</h2>
 							<fieldset>
 								<div class="input-group">
 									<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>

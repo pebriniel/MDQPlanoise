@@ -15,12 +15,17 @@ $search_tax_field_id = null;
 if(!empty($_POST)){
 	get_post_activite('select-field', 'theme_mdq', $search_tax_field, $search_tax_field_id);
 }
+/* -- boussad update -- */
+//permet de chercher selon l'url le paramètre "action"
+else{
+	get_post_activite('action', 'theme_mdq', $search_tax_field, $search_tax_field_id);
+}
 
 if(!wp_verify_nonce('rechercheannuaire')){
-	$search_input = "";
+	$search_input = $_POST['search-annuaire'];
 }
 else{
-	$search_input = $_POST['search-annuaire'];
+	$search_input = "";
 }
 
 function mdq_list_field($name_taxo, $value=null){
@@ -61,9 +66,9 @@ function mdq_list_field($name_taxo, $value=null){
 			<div class="col-xs-10 col-xs-offset-1 col-md-5 col-sm-5">
 				<div class="search-box">
 					<form class="search-form" action="#" method="post">
-					
+
 					<input type="hidden" id="rechercheannuaire" name="rechercheannuaire" value="<?php echo wp_create_nonce('rechercheannuaire'); ?>" />
-	
+
 						<?php
 						// wp_nonce_field('rechercheannuaire','rechercheannuaire_nonce');
 						?>
