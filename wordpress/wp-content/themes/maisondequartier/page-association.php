@@ -668,7 +668,8 @@ get_header();
 						<?php
 							if(isset($emailSent) && wp_verify_nonce($_POST['__nonce'], 'form_asso')) { ?>
 
-							<div class="col-md-8 push-col-md-2 col-xs-12" id="form">
+
+							<div id="form">
 								<h1>Merci, <?php echo $name;?></h1>
 								<p>Votre e-mail a &eacute;t&eacute; envoy&eacute; avec succ&egrave;s. Vous recevrez une r&eacute;ponse dans les meilleurs délais.</p>
 							</div>
