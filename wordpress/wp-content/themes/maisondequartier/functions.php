@@ -162,3 +162,18 @@ if ( function_exists( 'add_image_size' ) ) {
 
 /* -- boussad update -- */
 /* pour permettre de mettre en surbrillance les liens du menu dans le header */
+
+
+/*Redirection page 404*/
+function page404_redirection()
+{
+    if(is_404())
+    {
+        wp_redirect(home_url("404.php"));
+        exit;
+
+    }
+
+}
+
+add_action('wp', 'page404_redirection',1);

@@ -135,9 +135,13 @@ get_header();
 								<div class="tarifAdhesion">Tarif d'adhésion : <?php echo  $infosAsso->_membership; ?></div>
 								<?php
 							}
-								?>
-							<button type="button" name="button" class="btn btn-link-leaflet center-block">Télécharger la plaquette</button>
 
+							if($infosAsso->showBooklet) {
+							?>
+							<button type="button" name="button" class="btn btn-link-leaflet center-block"><a download href="<?php echo $infosAsso->ficheassociation_pres; ?>" >Télécharger la plaquette</a></button>
+							<?php
+							}
+							?>
 						</div>
 						<div class="col-md-8 descrip text-justify">
 							<p><?php echo  $infosAsso->post_content;?></p>
@@ -185,36 +189,19 @@ get_header();
 		 				$url_openblank = get_post_meta(get_the_ID(), 'slider_image_url_openblank', true);
 		 				$link_text = get_post_meta(get_the_ID(), 'slider_image_link_text', true);
 		 			 	$asso_orga = $infosAsso->_name;
-
 		 			// 	$asso_orga = get_post_meta(get_the_ID(), 'mdq_listing_assoc', true);
-		 				echo $dateStart = get_the_date(__(get_post_meta(get_the_ID(), 'event_asso_start', true)));
-
-						echo $dateDisplayStart = date_i18n("d/m/Y", strtotime($dateStart));
-						echo "<br/>";
-						echo strtotime($dateStart);
-						echo "<br/>";
-
-
-						$eventHourStart = date_i18n("H:i", strtotime($dateStart));
-
-						echo $eventHourStart;
-						echo "<br/>";
-
-						$dateEnd = get_the_date(__(get_post_meta(get_the_ID(), 'event_asso_end', true)));
-						echo $dateDisplayEnd = date_i18n("d/m/Y", strtotime($dateEnd));
-						echo date_i18n("H:i", strtotime($dateEnd));
-
-						$hour = get_post_meta(get_the_ID(), 'event_asso_hour_start', true);
-
+						$dateStart = get_post_meta(get_the_ID(), 'event_asso_start', true);
+						$dateEnd = get_post_meta(get_the_ID(), 'event_asso_end', true);
+						$dateHourStart = get_post_meta(get_the_ID(), 'event_asso_hour_start', true);
+						$dateHourEnd = get_post_meta(get_the_ID(), 'event_asso_hour_end', true);
 						$location_event = get_post_meta(get_the_ID(), 'event_asso_address', true);
-		 				$images[] = array('post_id' => $post_id,
+
+						 $images[] = array('post_id' => $post_id,
 		 													'title' => $title,
-		 													'dateStart' => $dateDisplayStart,
-		 													'dateEnd' => $dateDisplayEnd,
-
-															'DE' => $dateEnd,
-
-															'heure' => $eventHourStart,
+		 													'dateStart' => date_i18n("d/m/Y", strtotime($dateStart)),
+		 													'dateEnd' => date_i18n("d/m/Y", strtotime($dateEnd)),
+															'hstart' => date_i18n("H:m", strtotime($dateStart)),
+															'hend' => date_i18n("H:i", strtotime($dateEnd)),
 		 													'location' => $location_event,
 		 													'content' => $content,
 		 													'image' => $image,
@@ -222,8 +209,8 @@ get_header();
 		 													'url' => esc_url($url),
 		 													'url_openblank' => $url_openblank == "1" ? true : false,
 		 													'link_text' => $link_text,
-		 													'association' => $asso_orga);
-
+		 													'association' => $asso_orga
+															 );
 		 		}
 
 
@@ -251,10 +238,10 @@ get_header();
 					 <div class="item <?php echo  $active; ?>  modal-click">
 						<?php echo  $image['image']; ?>
 						 <div class="carousel-caption">
-							 <h3 class="img-modal img-responsive" title="<?php echo  $image['title']; ?>"><?php echo  $image['dateEnd'];?></h3>
-							 <p> Le <?php echo  $image['dateStart'];?> à <?php echo  $image['heure'];?></p>
+							 <h3 class="img-modal img-responsive" title="<?php echo  $image['title']; ?>"></h3>
+							 <p> Le <?php echo  $image['dateStart'];?> à <?php echo  $image['hstart'];?></p>
 							 <p><?php echo  $image['association'];?></p>
-							 <a class="btn-association img-modal img-moda-click" id="image-<?php echo  $images['post_id']; ?>" data-title="<?php echo  $image['title']; ?>" data-content="<?php echo  $image['content']; ?>" data-img="<?php echo  $image['img_src'] ?>" data-date="<?php echo  $image['dateStart']; ?>" data-location="<?php echo  $image['location']; ?>" data-url="<?php echo   get_site_url()."/association/?fiche=".$image['association']; ?>" role="button">voir l'actualité</a>
+							 <a class="btn-association img-modal img-moda-click" id="image-<?php echo  $images['post_id']; ?>" data-title="<?php echo  $image['title']; ?>" data-content="<?php echo  $image['content']; ?>" data-img="<?php echo  $image['img_src'] ?>" data-date="<?php echo  $image['dateStart']; ?>" data-hstart="<?php echo $image['hstart']; ?>" data-dateend="<?php echo  $image['dateEnd']; ?>" data-hend="<?php echo $image['hend']; ?>" data-location="<?php echo  $image['location']; ?>" data-url="<?php echo   get_site_url()."/association/?fiche=".$image['association']; ?>" role="button">voir l'actualité</a>
 
 						 </div>
 					 </div>
@@ -317,8 +304,8 @@ get_header();
 		 var description = $(this).data('content');
 		 var date = $(this).data('date');
 		 var date_end = $(this).data('dateend');
-		 var date_hour = $(this).data('hourstart');
-		 var date_hour_end = $(this).data('hourend');
+		 var date_hour = $(this).data('hstart');
+		 var date_hour_end = $(this).data('hend');
 		 var image = $(this).data('img');
 		 var location = $(this).data('location');
 		 var url = $(this).data('url');
@@ -543,7 +530,7 @@ get_header();
 											<h4><?php echo  $infosAsso->_pc; ?> - <?php echo  $infosAsso->_city; ?></h4>
 											<h4>Téléphone : <a href="tel:<?php echo  $infosAsso->_tel; ?>"><?php echo  $infosAsso->_tel; ?></a></h4>
 
-											<h4><a href="<?php echo   $infosAsso->_link;  ?>"><?php echo  $infosAsso->_link; ?></a></h4>
+											<h4>site web : <a href="<?php echo   $infosAsso->_link;  ?>"><?php echo  $infosAsso->_link; ?></a></h4>
 											<h3>Ouverture - période scolaire :</h3>
 											<p><?php echo  $infosAsso->_school;?></p>
 	<?php if($infosAsso->showsmallHolidays){  ?>
@@ -574,11 +561,14 @@ get_header();
 				?>
 
 				<!-- partenaires association -->
-				<div class="container loc">
+				<div class="container loc partner">
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-md-12 text-center">
 							<h2>Les partenaires</h2>
-							<p><?php echo  $infosAsso->_partner; ?></p>
+							<img src="<?php echo  $infosAsso->file1; ?>" alt="<?php echo  $infosAsso->file1; ?>" width="15%" />
+							<img src="<?php echo  $infosAsso->file2; ?>" alt="<?php echo  $infosAsso->file2; ?>" width="15%" />
+							<img src="<?php echo  $infosAsso->file3; ?>" alt="<?php echo  $infosAsso->file3; ?>" width="15%" />
+							<img src="<?php echo  $infosAsso->file4; ?>" alt="<?php echo  $infosAsso->file4; ?>" width="15%" />
 						</div>
 					</div>
 				</div>

@@ -522,6 +522,7 @@ main .container {
   text-align: center;
   font-size: 2em;
   font-weight: bold;
+  margin-bottom: 2em;
 }
 
 #page .current, #page a {
@@ -2028,4 +2029,18 @@ main .container {
 
 #home .modal-footer {
   margin-bottom: 5%;
+}
+
+#onepageasso #cartevisite button a {
+  text-decoration: none;
+  color: #fff;
+}
+
+#onepageasso #cartevisite button a:hover {
+  color: #ff6633;
+}
+
+#onepageasso .partner img {
+  margin : 2%;
+
 }

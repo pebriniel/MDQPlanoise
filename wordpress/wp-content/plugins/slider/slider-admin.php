@@ -79,16 +79,12 @@ function event_asso_meta($object){
 		</div>
 		<div class="meta-box-item-content">
 			<input type="datetime-local" name="event_asso_start" style="width:49%;" value="<?= esc_attr(get_post_meta($object->ID, 'event_asso_start', true)); ?>" placeholder="jj/mm/aaaa" />
-			<!--<input type="time" name="event_asso_start_hour" style="width:49%;" value="<?= esc_attr(get_post_meta($object->ID, 'event_asso_start_hour', true)); ?>" placeholder="00h00" />
-		-->
 		</div>
 		<div class="meta-box-item-title">
 			<h4>Date de fin événement</h4>
 		</div>
 		<div class="meta-box-item-content">
 			<input type="datetime-local" name="event_asso_end" style="width:49%;" value="<?= esc_attr(get_post_meta($object->ID, 'event_asso_end', true)); ?>" placeholder="jj/mm/aaaa" />
-			<!--<input type="time" name="event_asso_hour_end" style="width:49%;" value="<?= esc_attr(get_post_meta($object->ID, 'event_asso_hour_end', true)); ?>" placeholder="00h00" />
-		-->
 		</div>
 		<div class="meta-box-item-title">
 			<h4>Adresse de l'évènement</h4>

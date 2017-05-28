@@ -8,7 +8,7 @@ Author:      Houda B. - Boussad S.
 
 add_action('init', 'ficheassociation_init');
 
-@ini_set('display_errors', 0);
+@ini_set('display_errors', 1);
 
 
 // Register style sheet
@@ -17,7 +17,6 @@ add_action( 'wp_enqueue_scripts', 'register_plugin_styles');
 // Ajout des meta_box
 add_action('add_meta_boxes', 'ficheassociation_metaboxes');
 add_action('save_post', 'ficheassociation_savepost',10, 2);	// Capture l'édition d'article avec 2 arguments
-
 add_action('manage_edit-fiche_columns', 'ficheassociation_columnfilter');	// Capture la liste des colonnes pour les slides
 add_action('manage_posts_custom_column', 'ficheassociation_column');		// Permet d'afficher du contenu en plus pour chaque column
 
@@ -71,7 +70,7 @@ function register_plugin_styles() {
 
 /**
 * Gestion des colonnes pour les slides
-* @param array $columns tableau associatif contenant les column $id => $name
+* @param array $columns tableau associatif contenant les column $post_id => $name
 **/
 function ficheassociation_columnfilter($columns){
 	$thumb = array('thumbnail' => 'Image');
@@ -99,7 +98,7 @@ add_theme_support( 'post-thumbnails' );
 // resizing img
 if ( function_exists( 'add_image_size' ) ) {
 
-	add_image_size( 'fiche-association', 180, 100, true );
+	add_image_size( 'fiche-association', 150, 100, true );
 }
 
 
@@ -112,10 +111,10 @@ function ficheassociation_metaboxes(){
 		add_meta_box('ficheassociation_coordonnees','Profil','ficheassociation_coordonnees_metabox','fiche','normal','high');
 		add_meta_box('ficheassociation_horaires','Horaires d\'ouvertures','ficheassociation_horaires_metabox','fiche','normal','high');
 		add_meta_box('ficheassociation_show','Choix d\'affichage des différentes box','ficheassociation_showbox_metabox','fiche','normal','high');
+		add_meta_box('ficheassociation_partners','Plaquette de l\'association et Logos des partenaires','files_attachment','fiche','normal','high');
+
 	}
 }
-
-
 
 /**
 * Metabox pour gérer les coordonnées
@@ -128,81 +127,74 @@ function ficheassociation_coordonnees_metabox($object){
 	?>
 	<form method="post">
 
-		<input type="hidden" id="ficheassociation" name="__nonce" value="<?php echo wp_create_nonce('ficheassociation'); ?>" />
+		<input type="hidden" id="ficheassociation_nonce" name="__nonce" value="<?php echo wp_create_nonce('ficheassociation_nonce'); ?>" />
 
 		<div class="meta-box-item-title">
 			<label for="ficheassociation_name">Nom association</label>
 		</div>
 		<div class="meta-box-item-content">
-			<input type="text" name="ficheassociation_name" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_name', true)); ?>">
+			<input type="text" name="ficheassociation_name" style="width:50%;" value="<?php echo esc_attr(get_post_meta($object->ID, '_name', true)); ?>">
 		</div>
 
 		<div class="meta-box-item-title">
 			<label for="ficheassociation_email">Email</label>
 		</div>
 		<div class="meta-box-item-content">
-			<input type="email" name="ficheassociation_email" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_email', true)); ?>">
+			<input type="email" name="ficheassociation_email" style="width:50%;" value="<?php echo esc_attr(get_post_meta($object->ID, '_email', true)); ?>">
 		</div>
 
 		<div class="meta-box-item-title">
 			<label for="ficheassociation_address">Adresse</label>
 		</div>
 		<div class="meta-box-item-content">
-			<input type="text" name="ficheassociation_address" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_address', true)); ?>">
+			<input type="text" name="ficheassociation_address" style="width:50%;" value="<?php echo esc_attr(get_post_meta($object->ID, '_address', true)); ?>">
 		</div>
 		<div class="meta-box-item-title">
 			<label for="ficheassociation_pc">Code postal</label>
 		</div>
 		<div class="meta-box-item-content">
-			<input type="text" name="ficheassociation_pc" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_pc', true)); ?>">
+			<input type="text" name="ficheassociation_pc" style="width:50%;" value="<?php echo esc_attr(get_post_meta($object->ID, '_pc', true)); ?>">
 		</div>
 		<div class="meta-box-item-title">
 			<label for="ficheassociation_city">Ville</label>
 		</div>
 		<div class="meta-box-item-content">
-			<input type="text" name="ficheassociation_city" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_city', true)); ?>">
+			<input type="text" name="ficheassociation_city" style="width:50%;" value="<?php echo esc_attr(get_post_meta($object->ID, '_city', true)); ?>">
 		</div>
 
 		<div class="meta-box-item-title">
 			<label for="ficheassociation_tel">Téléphone</label>
 		</div>
 		<div class="meta-box-item-content">
-			<input type="tel" name="ficheassociation_tel" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_tel', true)); ?>">
+			<input type="tel" name="ficheassociation_tel" style="width:50%;" value="<?php echo esc_attr(get_post_meta($object->ID, '_tel', true)); ?>">
 		</div>
 
 		<div class="meta-box-item-title">
 			<label for="ficheassociation_link">Lien siteweb</label>
 		</div>
 		<div class="meta-box-item-content">
-			<input type="url" name="ficheassociation_link" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_link', true)); ?>">
+			<input type="url" name="ficheassociation_link" style="width:50%;" value="<?php echo esc_attr(get_post_meta($object->ID, '_link', true)); ?>">
 		</div>
 
 		<div class="meta-box-item-title">
 			<label for="ficheassociation_fb">Lien facebook</label>
 		</div>
 		<div class="meta-box-item-content">
-			<input type="url" name="ficheassociation_fb" style="width:100%;" value="<?= esc_attr(get_post_meta($object->ID, '_fb', true)); ?>">
+			<input type="url" name="ficheassociation_fb" style="width:100%;" value="<?php echo esc_attr(get_post_meta($object->ID, '_fb', true)); ?>">
 		</div>
 
 		<div class="meta-box-item-title">
 			<label for="ficheassociation_tw">Lien twitter</label>
 		</div>
 		<div class="meta-box-item-content">
-			<input type="url" name="ficheassociation_tw" style="width:100%;" value="<?= esc_attr(get_post_meta($object->ID, '_twitter', true)); ?>">
-		</div>
-
-		<div class="meta-box-item-title">
-			<label for="ficheassociation_partner">Partenaires</label>
-		</div>
-		<div class="meta-box-item-content">
-			<textarea name="ficheassociation_partner" rows="5" cols="50" style="width:100%; resize:none;"><?= esc_attr(get_post_meta($object->ID, '_partner', true)); ?></textarea>
+			<input type="url" name="ficheassociation_tw" style="width:100%;" value="<?php echo esc_attr(get_post_meta($object->ID, '_twitter', true)); ?>">
 		</div>
 
 		<div class="meta-box-item-title">
 			<label for="ficheassociation_membership">Adhésion (préciser la périodicité)</label>
 		</div>
 		<div class="meta-box-item-content">
-			<input type="text" name="ficheassociation_membership" style="width:50%;" value="<?= esc_attr(get_post_meta($object->ID, '_membership', true)); ?>">
+			<input type="text" name="ficheassociation_membership" style="width:50%;" value="<?php echo esc_attr(get_post_meta($object->ID, '_membership', true)); ?>">
 		</div>
 	</form>
 
@@ -219,33 +211,89 @@ function ficheassociation_horaires_metabox($object){
 	// wp_nonce_field('ficheassociation','ficheassociation_nonce');
 
 	?>
+	<form method="post">
 
-		<input type="hidden" id="ficheassociation" name="__nonce" value="<?php echo wp_create_nonce('ficheassociation'); ?>" />
+		<input type="hidden" id="ficheassociation" name="__nonce" value="<?php echo wp_create_nonce('ficheassociation_nonce'); ?>" />
 
 		<div class="meta-box-item-title">
 			<label for="ficheassociation_school">Ouverture - période scolaire</label>
 		</div>
 		<div class="meta-box-item-content">
-			<textarea name="ficheassociation_school" rows="4" cols="50" style="width:100%; resize:none;"><?= esc_attr(get_post_meta($object->ID, '_school', true)); ?></textarea>
+			<textarea name="ficheassociation_school" rows="4" cols="50" style="width:100%; resize:none;"><?php echo esc_attr(get_post_meta($object->ID, '_school', true)); ?></textarea>
 		</div>
 
 		<div class="meta-box-item-title">
 			<label for="ficheassociation_smallHolidays">Ouverture - petites vacances</label>
 		</div>
 		<div class="meta-box-item-content">
-			<textarea name="ficheassociation_smallHolidays" rows="4" cols="50" style="width:100%; resize:none;"><?= esc_attr(get_post_meta($object->ID, '_smallHolidays', true)); ?></textarea>
+			<textarea name="ficheassociation_smallHolidays" rows="4" cols="50" style="width:100%; resize:none;"><?php echo esc_attr(get_post_meta($object->ID, '_smallHolidays', true)); ?></textarea>
 		</div>
 
 		<div class="meta-box-item-title">
 			<label for="ficheassociation_bigHolidays">Ouverture - grandes vacances</label>
 		</div>
 		<div class="meta-box-item-content">
-			<textarea name="ficheassociation_bigHolidays" rows="4" cols="50" style="width:100%; resize:none;"><?= esc_attr(get_post_meta($object->ID, '_bigHolidays', true)); ?></textarea>
+			<textarea name="ficheassociation_bigHolidays" rows="4" cols="50" style="width:100%; resize:none;"><?php echo esc_attr(get_post_meta($object->ID, '_bigHolidays', true)); ?></textarea>
 		</div>
+	</form>
 
 	<?php
 }
 
+if (is_admin()) {
+    wp_enqueue_script('customadminjs', plugins_url( 'fiche-association/js/admin.js' ));
+
+}
+
+function files_attachment($object) {
+
+    wp_enqueue_media();
+
+    ?>
+    <div class="wrap theme-options-page">
+
+        <form  method="post">
+			<input type="hidden" id="ficheassociation" name="__nonce" value="<?php echo wp_create_nonce('ficheassociation_nonce'); ?>" />
+
+			<div class="theme-options-group">
+				<div class="meta-box-item-title">
+					<label for="ficheassociation_pres">Plaquette ou autre document de présentation : </label>
+				</div>
+				<div class="meta-box-item-content">
+					<input type="text" name="ficheassociation_pres" value="<?php echo esc_attr(get_post_meta($object->ID, 'ficheassociation_pres', true)); ?>" size="75">
+					<a href="#" class="button customaddmedia">Choisir un fichier</a>
+				</div>
+			</div>
+			<div class="meta-box-item-title">
+				<label>Logos des partenaires : </label>
+			</div>
+            <div class="theme-options-group">
+				<img src="<?php echo get_post_meta($object->ID, 'file1', true); ?>" width="50" class="customaddmedia"/>
+				<input type="text" name="file1" value="<?php echo esc_attr(get_post_meta($object->ID, 'file1', true)); ?>" size="75">
+				<a href="#" class="button customaddmedia">Choisir une image</a>
+            </div>
+			<div class="theme-options-group">
+				<img src="<?php echo get_post_meta($object->ID, 'file2', true); ?>" width="50" class="customaddmedia"/>
+				<input type="text" name="file2" value="<?php echo esc_attr(get_post_meta($object->ID, 'file2', true)); ?>" size="75">
+				<a href="#" class="button customaddmedia">Choisir une image</a>
+            </div>
+			<div class="theme-options-group">
+				<img src="<?php echo get_post_meta($object->ID, 'file3', true); ?>" width="50" class="customaddmedia"/>
+				<input type="text" name="file3" value="<?php echo esc_attr(get_post_meta($object->ID, 'file3', true)); ?>" size="75">
+				<a href="#" class="button customaddmedia">Choisir une image</a>
+            </div>
+			<div class="theme-options-group">
+				<img src="<?php echo get_post_meta($object->ID, 'file4', true); ?>" width="50" class="customaddmedia"/>
+				<input type="text" name="file4" value="<?php echo esc_attr(get_post_meta($object->ID, 'file4', true)); ?>" size="75">
+				<a href="#" class="button customaddmedia">Choisir une image</a>
+            </div>
+            <p class="submit">
+                <input type="submit" name="pannel_update" class="button-primary autowidth" value="Sauvegarder">
+            </p>
+        </form>
+    </div>
+    <?php
+}
 
 /**
 * Metabox pour gérer l'affichage des différents blocks
@@ -257,7 +305,8 @@ function ficheassociation_showbox_metabox($object){
 
 	?>
 
-		<input type="hidden" id="ficheassociation" name="__nonce" value="<?php echo wp_create_nonce('ficheassociation'); ?>" />
+
+		<input type="hidden" id="ficheassociation" name="__nonce" value="<?php echo wp_create_nonce('ficheassociation_nonce'); ?>" />
 
 		<div class="meta-box-item-title">
 			<input type="checkbox" name="showDescription" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showDescription', true)), 1 ); ?> />
@@ -266,12 +315,12 @@ function ficheassociation_showbox_metabox($object){
 
 		<div class="meta-box-item-title">
 			<input type="checkbox" name="showCaroussel" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showCaroussel', true)), 1 ); ?> />
-			<label for="showCaroussel">Affichage du caroussel</label>
+			<label for="showCaroussel">Affichage des évenements</label>
 		</div>
 
 		<div class="meta-box-item-title">
 			<input type="checkbox" name="showAgenda" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showAgenda', true)), 1 ); ?> />
-			<label for="showAgenda">Affichage de l'agenda</label>
+			<label for="showAgenda">Affichage des activités</label>
 		</div>
 
 		<div class="meta-box-item-title">
@@ -292,6 +341,11 @@ function ficheassociation_showbox_metabox($object){
 		<div class="meta-box-item-title">
 			<input type="checkbox" name="showPartner" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showPartner', true)), 1 ); ?> />
 			<label for="showPartner">Affichage des partenaires</label>
+		</div>
+
+		<div class="meta-box-item-title">
+			<input type="checkbox" name="showBooklet" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showBooklet', true)), 1 ); ?> />
+			<label for="showBooklet">Affichage de la plaquette</label>
 		</div>
 
 		<div class="meta-box-item-title">
@@ -319,6 +373,7 @@ function ficheassociation_showbox_metabox($object){
 			<label for="showMembership">Affichage du montant de l'adhésion</label>
 		</div>
 
+
 	<?php
 }
 
@@ -344,9 +399,8 @@ function ficheassociation_savepost($post_id, $post){
 	$smallHolidays = !isset($_POST['ficheassociation_smallHolidays']);
 	$bigHolidays = !isset($_POST['ficheassociation_bigHolidays']);
 
-
-	// if(!wp_verify_nonce($_POST['__nonce'], 'ficheassociation') && ($nameAsso || $logo || $email || $phone || $address || $postalcode || $city || $siteweb || $partner || $school || $smallHolidays || $bigHolidays || $facebook || $twitter || $membership))
-	if(!wp_verify_nonce($_POST['__nonce'], 'ficheassociation') && ($nameAsso || $logo))
+	if(!wp_verify_nonce($_POST['__nonce'], 'ficheassociation_nonce') && ($nameAsso || $logo || $email || $phone || $address || $postalcode || $city || $siteweb))
+	// if(!wp_verify_nonce($_POST['__nonce'], 'ficheassociation_nonce'))
 	{
 		return $post_id;
 	}
@@ -354,6 +408,9 @@ function ficheassociation_savepost($post_id, $post){
 	// selon droit utilisateur
 	$type = get_post_type_object($post->post_type);
 	if(!current_user_can($type->cap->edit_post)){
+		return $post_id;
+	}
+	if(defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
 		return $post_id;
 	}
 
@@ -384,5 +441,15 @@ function ficheassociation_savepost($post_id, $post){
 	update_post_meta($post_id,'showfacebook',$_POST['showfacebook']);
 	update_post_meta($post_id,'showtwitter',$_POST['showtwitter']);
 	update_post_meta($post_id,'showMembership',$_POST['showMembership']);
+	update_post_meta($post_id,'showBooklet',$_POST['showBooklet']);
+	update_post_meta($post_id,'file1',$_POST['file1']);
+	update_post_meta($post_id,'file2',$_POST['file2']);
+	update_post_meta($post_id,'file3',$_POST['file3']);
+	update_post_meta($post_id,'file4',$_POST['file4']);
+	update_post_meta($post_id,'ficheassociation_pres',$_POST['ficheassociation_pres']);
+
+	// update_post_meta($post_id,'pannel_update',$_POST['pannel_update']);
+
+
 
 }

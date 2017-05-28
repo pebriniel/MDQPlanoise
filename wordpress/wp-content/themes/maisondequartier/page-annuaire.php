@@ -98,7 +98,7 @@ function mdq_list_field($name_taxo, $value=null){
 		$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
 		query_posts(array(
-			"posts_per_page" => 50,
+			"posts_per_page" => 5,
 			"paged" => $paged,
 			'post_type'=>'fiche',
 			's' => $search_input,

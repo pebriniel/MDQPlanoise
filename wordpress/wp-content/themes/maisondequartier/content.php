@@ -1,14 +1,15 @@
 <main class="container" id="home">
 
 <?php
+
 function callEvent($limit, $offset){
+
 	$queryAgenda = new WP_Query( array( 'post_type'=>'slider',
 												'posts_per_page' => $limit,
 												'orderby' => 'event_asso_start',
 												'order' => 'DESC',
 												'offset' => $offset
 											));
-
 
 	if($queryAgenda->have_posts()){
 
@@ -32,19 +33,26 @@ function callEvent($limit, $offset){
 					$dateEnd = get_post_meta(get_the_ID(), 'event_asso_end', true);
 					$dateHourStart = get_post_meta(get_the_ID(), 'event_asso_hour_start', true);
 					$dateHourEnd = get_post_meta(get_the_ID(), 'event_asso_hour_end', true);
-					$location_event = get_post_meta(get_the_ID(), 'event_asso_address', true);
 
+					$location_event = get_post_meta(get_the_ID(), 'event_asso_address', true);
 
                     global $wpdb;
 
-					$query = "SELECT event.*, $wpdb->postmeta.*
-								FROM $wpdb->posts as event, $wpdb->postmeta
-								WHERE event.post_type = 'fiche'
-								AND event.ID = $wpdb->postmeta.post_id
-								LIMIT 0,1
-								";
+                	$query = "SELECT event.*, $wpdb->postmeta.*
+                        FROM $wpdb->posts as event, $wpdb->postmeta
+                        WHERE event.post_type IN ('fiche', 'slider')
+                        AND event.ID = $asso_orga
+                        LIMIT 0,1
+                        ";
 
 					$t = $wpdb->get_results($query, OBJECT);
+
+					$asso = array();
+
+					foreach ($t as $key => $v ) {
+
+						$asso[] = $v->post_title;
+					}
 
 					$images[] = array(
 						'post_id' => $post_id,
@@ -63,9 +71,8 @@ function callEvent($limit, $offset){
 						'url_openblank' => $url_openblank == "1" ? true : false,
 						'link_text' => $link_text,
 						'association' => $asso_orga,
-						'association_name' => $t[0]->post_title
+						'association_name' => $asso[0]
 					);
-
 
 			}
 		}
@@ -185,9 +192,11 @@ $images = callEvent(5, 0);
 	$eventagenda = callEvent(1000, 0);
 
 	$event= array();
+	$event_next= array();
 
 	foreach ($eventagenda as $e)
 	{
+
 		$start= array();
 		$end =  array();
 
@@ -195,21 +204,53 @@ $images = callEvent(5, 0);
 		$end[] = substr($e['dateEnd'], 0, -6);
 
 		$event[] = [
-			'id' => $e['post_id'],
+			'id' => $e['association'],
 			'title' => $e['title'],
 			'start' => $start[0],
-			'end' => $end[0]
+			'end' => $end[0],
+			'imageurl' => $e['img_src'],
+			'location' => $e['location']
+		];
+
+		$event_next[] = [
+			'description' => $e['content'],
+			'dstart' => $e['start'],
+			'dend' => $e['end'],
+			'hstart' => $e['hstart'],
+			'hend' => $e['hend']
 		];
 	}
 
-	?>
+	$data = json_encode($event);
+
+
+		echo "<script>";
+	foreach($event_next as $next){
+		$dnext = json_encode($next);
+
+		echo "var d = JSON.stringify($dnext);";
+		echo "var darray = [d];";
+		// echo "console.log(darray);";
+		echo "for(var i = 0; i < darray.length; i++) {";
+		echo "var data= darray[i];";
+		echo "var df = [data];";
+		echo "}";
+		echo "console.log(df);";
+	}
+echo "</script>";
+
+
+
+
+?>
 	<script>
 
 		$(document).ready(function() {
 
 			var currentTime = new Date();
-			var allevent = '<?php echo json_encode($event); ?>';
+			var allevent = '<?php echo $data; ?>';
 			data = JSON.parse(allevent);
+			console.log(data);
 
 			$('#agenda').fullCalendar({
 				locale: 'fr',
@@ -220,7 +261,7 @@ $images = callEvent(5, 0);
 				},
 				defaultDate: currentTime,
 				navLinks: true,
-				editable: false,
+				editable: true,
 				eventLimit: true,
 				allDay: false,
 				events: data,
@@ -231,7 +272,28 @@ $images = callEvent(5, 0);
 				aspectRatio: 1,
 				fixedWeekCount: false,
 				timeFormat: 'H:mm',
-				refetchResourcesOnNavigate: true
+				refetchResourcesOnNavigate: true,
+				eventRender: function(event, element)
+				{
+					element.find('.fc-title').append("<br/>" + event.description);
+				},
+				eventClick: function(calEvent) {
+					console.log(calEvent);
+
+					var content = $(".modal-body");
+					var footer = $(".modal-footer");
+					var modal_title = $(".modal-title");
+
+					modal_title.empty();
+					modal_title.html(calEvent.title);
+					content.html("<img src='" + calEvent.imageurl + "'><p id='agenda-date'>Date de l'événement : " +  calEvent.start + " à " + calEvent.end + "</p><p id='agenda-location'>Lieu : " + calEvent.location + "</p> <p id='modal-description'>"  + calEvent.description + "</p>");
+					footer.html("<a href='"+window.location.href+"annuaire/association/?fiche=" + calEvent.id +"' class='btn btn-association-asso'> Fiche de l'association</a><button class='btn btn-association' data-dismiss='modal'>Fermer</button>");
+
+			$("#modal-agenda").modal("show");
+		// });
+
+
+    			}
 			});
 
 			$("#agenda").fullCalendar('removeEvents');
@@ -243,6 +305,22 @@ $images = callEvent(5, 0);
 	</script>
 
 	<section id="agenda" class='col-md-5'></section>
+	<div class="modal container" id="modal-agenda" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal">×</button>
+					<h3 class="modal-title"></h3>
+				</div>
+				<div class="modal-body">
+
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal">Fermer</button>
+				</div>
+			</div>
+		</div>
+	</div>
 <?php
 /* --
 --
@@ -319,14 +397,29 @@ $images = callEvent(5, 0);
 				<!-- affichage des articles sauf l'article à la une  -->
 				<section id="articlesAutres"  class="col-md-12" <?php post_class(); ?>>
 					<?php
-
-						$args = array(
+					$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+					$args = array(
 							'post_type'=>'post',
-							'posts_per_page' => 10,
+							'posts_per_page' => 1,
+							'paged' => $paged,
 							'post__not_in'  => $sticky,
 							'ignore_sticky_posts' => 1
 						);
 					$query = new WP_Query( $args );
+					$temp_query = $wp_query;
+					$wp_query = NULL;
+					$wp_query = $query;
+					$big = 999999999;
+					$pagination= array(
+						'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+						'format' => '/page/%#%',
+						'show_all' => true,
+						'prev_next' => true,
+						'current' => max( 1, get_query_var('paged') ),
+						'total' => $query->max_num_pages
+					);
+
+
 					if($query != $sticky) {
 					while($query->have_posts()) {
 						$query->the_post();
@@ -388,6 +481,13 @@ $images = callEvent(5, 0);
 								</footer>
 						</div>
 					</article>
-					<?php  } } ?>
-				</section>
+					<?php  } 	?>
+
+			<?php } ?>
+	</section>
+	<nav class="col-md-12 col-xs-12" id="page">
+		<?php echo paginate_links( $pagination );
+				$wp_query = NULL;
+				$wp_query = $temp_query; ?>
+	</nav>
 </main>
