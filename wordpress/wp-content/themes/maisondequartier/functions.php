@@ -175,5 +175,15 @@ function page404_redirection()
     }
 
 }
-
 add_action('wp', 'page404_redirection',1);
+
+
+//nouveau boubou, trick acccueil pagination
+function my_post_count_queries( $query ) {
+  if (!is_admin() && $query->is_main_query()){
+    if(is_home()){
+       $query->set('posts_per_page', 1);
+    }
+  }
+}
+add_action( 'pre_get_posts', 'my_post_count_queries' );

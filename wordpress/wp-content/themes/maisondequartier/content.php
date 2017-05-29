@@ -194,53 +194,44 @@ $images = callEvent(5, 0);
 	$event= array();
 	$event_next= array();
 
+
 	foreach ($eventagenda as $e)
 	{
-
 		$start= array();
 		$end =  array();
 
 		$start[] = substr($e['dateStart'], 0, -6);
 		$end[] = substr($e['dateEnd'], 0, -6);
 
-		$event[] = [
+		$event[] = array(
 			'id' => $e['association'],
 			'title' => $e['title'],
 			'start' => $start[0],
 			'end' => $end[0],
 			'imageurl' => $e['img_src'],
 			'location' => $e['location']
-		];
+		);
 
-		$event_next[] = [
+
+		$dhstart['dhstart'] = $e['start'] . " à " . $e['hstart'];
+		$dhend['dhend'] = $e['end'] . " à " . $e['hend'];
+
+		$event_next[] = array(
+			'id' => $e['association'],
 			'description' => $e['content'],
-			'dstart' => $e['start'],
-			'dend' => $e['end'],
-			'hstart' => $e['hstart'],
-			'hend' => $e['hend']
-		];
+			'dstart' => $dhstart['dhstart'],
+			'dend' => $dhend['dhend']
+		);
 	}
+
 
 	$data = json_encode($event);
+	$dnext = json_encode($event_next);
 
-
-		echo "<script>";
-	foreach($event_next as $next){
-		$dnext = json_encode($next);
-
-		echo "var d = JSON.stringify($dnext);";
-		echo "var darray = [d];";
-		// echo "console.log(darray);";
-		echo "for(var i = 0; i < darray.length; i++) {";
-		echo "var data= darray[i];";
-		echo "var df = [data];";
-		echo "}";
-		echo "console.log(df);";
-	}
-echo "</script>";
-
-
-
+	echo "<script>";
+	echo "var d = eval($dnext);";
+	echo "console.log(d);";
+	echo "</script>";
 
 ?>
 	<script>
@@ -250,7 +241,6 @@ echo "</script>";
 			var currentTime = new Date();
 			var allevent = '<?php echo $data; ?>';
 			data = JSON.parse(allevent);
-			console.log(data);
 
 			$('#agenda').fullCalendar({
 				locale: 'fr',
@@ -273,32 +263,34 @@ echo "</script>";
 				fixedWeekCount: false,
 				timeFormat: 'H:mm',
 				refetchResourcesOnNavigate: true,
-				eventRender: function(event, element)
-				{
-					element.find('.fc-title').append("<br/>" + event.description);
-				},
 				eventClick: function(calEvent) {
-					console.log(calEvent);
+
+					for(json in d){
+						if (calEvent.id === d[json].id){
+							calEvent.id = d[json].id;
+							calEvent.description = d[json].description;
+							calEvent.start = d[json].dstart;
+							calEvent.end = d[json].dend;
+						}
+					}
 
 					var content = $(".modal-body");
 					var footer = $(".modal-footer");
 					var modal_title = $(".modal-title");
 
-					modal_title.empty();
 					modal_title.html(calEvent.title);
-					content.html("<img src='" + calEvent.imageurl + "'><p id='agenda-date'>Date de l'événement : " +  calEvent.start + " à " + calEvent.end + "</p><p id='agenda-location'>Lieu : " + calEvent.location + "</p> <p id='modal-description'>"  + calEvent.description + "</p>");
+					content.html("<img src='" + calEvent.imageurl + "'><p id='agenda-date'>Date de l'événement : du " +  calEvent.start + " au " + calEvent.end + "</p><p id='agenda-location'>Lieu : " + calEvent.location + "</p> <p id='modal-description'>"  + calEvent.description + "</p>");
 					footer.html("<a href='"+window.location.href+"annuaire/association/?fiche=" + calEvent.id +"' class='btn btn-association-asso'> Fiche de l'association</a><button class='btn btn-association' data-dismiss='modal'>Fermer</button>");
 
-			$("#modal-agenda").modal("show");
-		// });
+					$("#modal-agenda").modal("show");
 
+					$('#agenda').fullCalendar('updateEvent', calEvent);
 
-    			}
+					}
 			});
 
 			$("#agenda").fullCalendar('removeEvents');
     		$("#agenda").fullCalendar('addEventSource', data);
-
 
 		});
 
@@ -329,8 +321,17 @@ echo "</script>";
 -- */
 
 /* affichage de l'article mis-en-avant */
+	$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 	$sticky = get_option('sticky_posts');
-	query_posts(array('showposts' => 1, 'orderby' => 'post_modified',  'post__in' => $sticky , 'order' => 'DESC'));
+	$posts_per_page = 1;
+	$num_sticky_pages = (count($sticky) / $posts_per_page);
+	query_posts(array(
+		'showposts' => 1,
+		'post_type'=>'post',
+		'orderby' => 'post_modified',
+		'post__in' => $sticky,
+		'paged'=> $paged,
+		'order' => 'DESC'));
 	if ( have_posts() ){
 		while ( have_posts() ){
 			the_post();
@@ -397,11 +398,15 @@ echo "</script>";
 				<!-- affichage des articles sauf l'article à la une  -->
 				<section id="articlesAutres"  class="col-md-12" <?php post_class(); ?>>
 					<?php
-					$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+
+					// if( ($paged-1) < $num_sticky_pages && ($paged+1) > $num_sticky_pages ){
+
+
 					$args = array(
 							'post_type'=>'post',
-							'posts_per_page' => 1,
+							// 'posts_per_page' => $posts_per_page,
 							'paged' => $paged,
+							// 'paged'=>$paged - floor($num_sticky_pages),
 							'post__not_in'  => $sticky,
 							'ignore_sticky_posts' => 1
 						);
@@ -419,6 +424,7 @@ echo "</script>";
 						'total' => $query->max_num_pages
 					);
 
+					$page = paginate_links( $pagination );
 
 					if($query != $sticky) {
 					while($query->have_posts()) {
@@ -481,13 +487,13 @@ echo "</script>";
 								</footer>
 						</div>
 					</article>
-					<?php  } 	?>
-
-			<?php } ?>
+					<?php  }  }
+					// } ?>
 	</section>
 	<nav class="col-md-12 col-xs-12" id="page">
-		<?php echo paginate_links( $pagination );
-				$wp_query = NULL;
-				$wp_query = $temp_query; ?>
+		<?php // echo $page;
+				// $wp_query = NULL;
+				// $wp_query = $temp_query;
+				 ?>
 	</nav>
 </main>
