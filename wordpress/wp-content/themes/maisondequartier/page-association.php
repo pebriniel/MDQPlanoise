@@ -319,7 +319,7 @@ get_header();
 
 		modal_title.html(title);
 		content.html("<img src='"+image+"' /> <p id='modal-date'>Date de l'événement : "+  date + " à "+date_hour+" au "+ date_end+" à "+date_hour_end+"</p><p id='modal-location'>Lieu : " + location + "</p> <p id='modal-description'>"  + description + "</p>");
-		footer.html("<a href='"+url+"' class='btn btn-association-asso'> voir la fiche de l'association</a><button class='btn btn-association' data-dismiss='modal'>Fermer</button>");
+		footer.html("<button class='btn btn-association' data-dismiss='modal'>Fermer</button>");
 		// show the modal
 		$("#modal-gallery").modal("show");
 	});
@@ -673,7 +673,7 @@ get_header();
 				 			<p class="error">Une erreur est survenue lors de l'envoi du formulaire.</p>
 				 		<?php } ?>
 
-						<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>" id="contact_form"  class="well form-horizontal" onsubmit=" return verification();">
+						<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>#contact" id="contact_form"  class="well form-horizontal" onsubmit=" return verification();">
 
 							<input type="hidden" id="form_asso" name="__nonce" value="<?php echo wp_create_nonce('form_asso'); ?>" />
 

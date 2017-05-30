@@ -111,7 +111,7 @@ header .menu-burger {
 }
 
 header .menu-burger:hover {
-  color: #ff0132;
+  color: #ff6633;
 }
 
 header .hide-menu {
@@ -148,6 +148,12 @@ header .hide-menu {
     padding: 1em;
     color: #fff;
   }
+
+  .page-header #nav li a:hover {
+
+    color: #000;
+  }
+
 }
 
 
@@ -439,7 +445,7 @@ main .container {
 #contact textarea {
   display: block;
   width: 100%;
-  margin-top: 1em;
+  margin-top: 0em;
   padding: 1em;
   border: 1px solid #ff6633;
   font-family: 'Merriweather', sans-serif;
@@ -447,6 +453,7 @@ main .container {
 }
 
 #contact #input-submit {
+    width: 48%;
   color: #fff;
   background: #ff6633;
   font-weight: bold;
@@ -462,7 +469,7 @@ main .container {
 }
 
 #contact textarea {
-  height: 15.5em;
+  height: 13em;
 }
 
 #contact .half {
@@ -590,21 +597,27 @@ main .container {
   #annuaire #content {
     padding-top: 4em;
   }
-  #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .logo {
-    display: none;
+  #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .logo, #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .logo img{
+    /*display: none;*/
   }
   #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption {
     width: 98%;
   }
+  #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption h3{
+    font-size: 1em;
+  }
   #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire {
-    bottom: 0;
     background: none;
+    margin-bottom: 1em;
   }
   .search-box {
     width: 100%;
   }
   .trans-annuaire {
     height: 110px !important;
+  }
+  #page{
+    font-size: 1em;
   }
 }
 
@@ -1030,6 +1043,8 @@ main .container {
   position: relative;
   width: 25%;
   text-align: center;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 #annuaire #content>div {
@@ -1038,6 +1053,9 @@ main .container {
 
 #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .logo img {
   vertical-align: bottom;
+  width: 100%;
+  height: auto;
+  margin-top: 2.5em;
 }
 
 #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire h3 {
@@ -1046,14 +1064,16 @@ main .container {
 }
 
 #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption h3 {
-  height: 61px;
+  /*height: 61px;*/
   font-size: 2em;
   font-weight: bold;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption p:nth-child(2) {
-  padding-right: 2em;
-  padding-left: 2em;
+  padding-right: 1em;
+  padding-left: 1em;
   letter-spacing: 0.4px;
 }
 
@@ -1163,6 +1183,10 @@ main .container {
   #contact .half {
     width: 80%;
     margin-left: 10%;
+  }
+  #contact #input-submit {
+      width: 80%;
+      margin-left: 10%;
   }
 }
 

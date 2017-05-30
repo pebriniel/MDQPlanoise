@@ -40,7 +40,7 @@ function mdq_members_liste_assoc($object){
 						$selected = "selected";
 					}
 					?>
-						<option value="<?= $post->ID; ?>" <?= $selected; ?>><?= $post->_name; ?></option>
+						<option value="<?= $post->ID; ?>" <?= $selected; ?>><?= the_title(); ?></option>
 					<?php
 				}
 			}

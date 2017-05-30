@@ -63,11 +63,11 @@ function mdq_list_field($name_taxo, $value=null){
 <main id="annuaire" class="site-main" role="main">
 	<div class="container">
 		<div id="transition" class="row trans-annuaire">
-			<div class="col-xs-10 col-xs-offset-1 col-md-5 col-sm-5">
-				<div class="search-box">
-					<form class="search-form" action="#" method="post">
+			<div class="col-xs-10 col-xs-offset-1 col-md-5 col-md-offset-1">
+				<div class="search-box col-xs-12 col-md-12">
+					<form class="search-form col-xs-12 col-md-12" action="#" method="post">
 
-					<input type="hidden" id="rechercheannuaire" name="rechercheannuaire" value="<?php echo wp_create_nonce('rechercheannuaire'); ?>" />
+						<input type="hidden" id="rechercheannuaire" name="rechercheannuaire" value="<?php echo wp_create_nonce('rechercheannuaire'); ?>" />
 
 						<?php
 						// wp_nonce_field('rechercheannuaire','rechercheannuaire_nonce');
@@ -79,14 +79,14 @@ function mdq_list_field($name_taxo, $value=null){
 					</form>
 				</div>
 			</div>
-			<form action="#" method="post">
-				<div class="col-md-2 col-md-push-2 col-sm-2 col-xs-5 col-xs-push-1 select-container">
+			<form action="#" method="post" class="col-xs-12 col-md-6">
+				<div class="col-md-4 col-xs-5 col-xs-push-1 select-container">
 					<select class="select-menu" name="select-field">
 						<option value="null"> Champs d'actions</option>
 						<?php echo  mdq_list_field("theme_mdq"); ?>
 					</select>
 				</div>
-				<div class="col-md-2 col-md-push-2 col-sm-2 col-xs-5 col-xs-push-1">
+				<div class="col-md-4 col-xs-5 col-xs-push-1">
 					<input id="btn-valid" class="btn-valid" type="submit" name="" value="Envoyer" />
 				</div>
 			</form>
@@ -118,16 +118,16 @@ function mdq_list_field($name_taxo, $value=null){
 				<div class="col-md-6">
 					<div class="content-annuaire">
 						<div class="content-ta">
-								<div class="thumbnail-annuaire hvr-grow col-md-12 col-sm-12">
-									<div class="logo col-md-2 col-sm-2" style="overflow: hidden; height: 125px;">
+								<div class="thumbnail-annuaire hvr-grow col-md-12 col-xs-12">
+									<div class="logo col-md-2 col-xs-2">
 										<img src="<?php echo  $url ?>" alt="<?php echo  $url; ?>">
 									</div>
-									<div class="caption  col-md-8 col-sm-8">
-										<h3 class="col-md-12 col-sm-12"><?php echo  $post->_name; ?></h3>
+									<div class="caption col-md-8 col-xs-8">
+										<h3 class="col-md-12 col-xs-12"><?php echo  $post->_name; ?></h3>
 
-										<p class="col-md-12 col-sm-12"><?php echo  max_caracter_length($post->_desc, 100);?></p>
-										<p class="col-md-12 col-sm-12">
-											<a href="<?php echo  get_site_url()."/association/?fiche=".$post->ID; ?>" class="btn btn-association" role="button">voir la fiche</a>
+										<p class="col-md-12 col-xs-12"><?php echo  max_caracter_length($post->_desc, 100);?></p>
+										<p class="col-md-12 col-xs-12">
+											<a href="<?php echo  get_site_url()."/annuaire/association?fiche=".$post->ID; ?>" class="btn btn-association" role="button">voir la fiche</a>
 										</p>
 									</div>
 						</div>
