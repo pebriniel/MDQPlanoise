@@ -167,23 +167,40 @@ if ( function_exists( 'add_image_size' ) ) {
 /*Redirection page 404*/
 function page404_redirection()
 {
-    if(is_404())
+    // wp_redirect(home_url("404.php"));
+    // exit;
+    //
+    // if(is_404())
+    // {
+    //     wp_redirect(home_url("404.php"));
+    //     exit;
+    //
+    // }
+
+    if ( is_404() )
     {
+        //echo "coucou";
+        //wp_redirect(home_url("404.php"));
+        //header("location:".home_url("404/")) or die();
+        //exit;s
+        header("Status: 404 Not Found");
         wp_redirect(home_url("404.php"));
-        exit;
-
+        // global $wp_query;
+        // $wp_query->set_404();
+        // status_header(404);
+        // nocache_headers();
+        // //var_dump(getallheaders()); var_dump(headers_list()); die();
+        // header("location:".home_url("404/")) or die();
     }
-
 }
 add_action('wp', 'page404_redirection',1);
 
-
 //nouveau boubou, trick acccueil pagination
-function my_post_count_queries( $query ) {
-  if (!is_admin() && $query->is_main_query()){
-    if(is_home()){
-       $query->set('posts_per_page', 1);
-    }
-  }
-}
-add_action( 'pre_get_posts', 'my_post_count_queries' );
+// function my_post_count_queries( $query ) {
+//   if (!is_admin() && $query->is_main_query()){
+//     if(is_home()){
+//        $query->set('posts_per_page', 1);
+//     }
+//   }
+// }
+// add_action( 'pre_get_posts', 'my_post_count_queries' );

@@ -115,7 +115,7 @@ $images = callEvent(5, 0);
 
 						 <p> Le <?php echo  $image['start']; ?> </p>
 						 <p><?php echo  $image['association_name'];?></p>
-						 <a class="btn-association img-modal img-moda-click" id="image-<?php echo  $image['post_id']; ?>" data-title="<?php echo  $image['title']; ?>" data-content="<?php echo  $image['content']; ?>" data-img="<?php echo  $image['img_src'] ?>" data-datestart="<?php echo  $image['start']; ?>" data-hstart="<?php echo $image['hstart']; ?>" data-dateend="<?php echo  $image['end']; ?>" data-hend="<?php echo $image['hend']; ?>" data-location="<?php echo  $image['location']; ?>" data-url="<?php echo  get_site_url()."/association/?fiche=".$image['association']; ?>" role="button">Voir l'événement</a>
+						 <a class="btn-association img-modal img-moda-click" id="image-<?php echo  $image['post_id']; ?>" data-title="<?php echo  $image['title']; ?>" data-content="<?php echo  $image['content']; ?>" data-img="<?php echo  $image['img_src'] ?>" data-datestart="<?php echo  $image['start']; ?>" data-hstart="<?php echo $image['hstart']; ?>" data-dateend="<?php echo  $image['end']; ?>" data-hend="<?php echo $image['hend']; ?>" data-location="<?php echo  $image['location']; ?>" data-url="<?php echo  get_site_url()."/annuaire/association?fiche=".$image['association']; ?>" role="button">Voir l'événement</a>
 					 </div>
 				 </div>
 				 <?php
@@ -175,6 +175,7 @@ $images = callEvent(5, 0);
 			var content = $(".modal-body");
 			var footer = $(".modal-footer");
 			var modal_title = $(".modal-title");
+			console.log(url);
 
 			modal_title.empty();
 			modal_title.html(title);
@@ -280,7 +281,7 @@ $images = callEvent(5, 0);
 
 					modal_title.html(calEvent.title);
 					content.html("<img src='" + calEvent.imageurl + "'><p id='agenda-date'>Date de l'événement : du " +  calEvent.start + " au " + calEvent.end + "</p><p id='agenda-location'>Lieu : " + calEvent.location + "</p> <p id='modal-description'>"  + calEvent.description + "</p>");
-					footer.html("<a href='"+window.location.href+"annuaire/association/?fiche=" + calEvent.id +"' class='btn btn-association-asso'> Fiche de l'association</a><button class='btn btn-association' data-dismiss='modal'>Fermer</button>");
+					footer.html("<a href='"+window.location.href+"/annuaire/association?fiche=" + calEvent.id +"' class='btn btn-association-asso'> Fiche de l'association</a><button class='btn btn-association' data-dismiss='modal'>Fermer</button>");
 
 					$("#modal-agenda").modal("show");
 

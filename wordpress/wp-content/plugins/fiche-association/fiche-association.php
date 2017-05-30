@@ -448,8 +448,4 @@ function ficheassociation_savepost($post_id, $post){
 	update_post_meta($post_id,'file4',$_POST['file4']);
 	update_post_meta($post_id,'ficheassociation_pres',$_POST['ficheassociation_pres']);
 
-	// update_post_meta($post_id,'pannel_update',$_POST['pannel_update']);
-
-
-
 }

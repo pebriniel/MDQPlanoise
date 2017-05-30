@@ -127,7 +127,7 @@ function mdq_listing_assoc($object){
 
 						}
 						?>
-							<option value="<?= $post->ID; ?>" <?= $selected; ?>><?= $post->_name; ?></option>
+							<option value="<?= $post->ID; ?>" <?= $selected; ?>><?= the_title(); ?></option>
 						<?php
 					}
 				}
