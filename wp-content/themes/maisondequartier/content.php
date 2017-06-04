@@ -1,16 +1,18 @@
 <main class="container" id="home">
 
 <?php
+
 function callEvent($limit, $offset){
+
 	$queryAgenda = new WP_Query( array( 'post_type'=>'slider',
 												'posts_per_page' => $limit,
 												'orderby' => 'event_asso_start',
-												'order' => 'ASC',
+												'order' => 'DESC',
 												'offset' => $offset
 											));
 
-	$images = array();
 	if($queryAgenda->have_posts()){
+
 		while ($queryAgenda->have_posts() ) {
 
 				$queryAgenda->the_post();
@@ -31,41 +33,36 @@ function callEvent($limit, $offset){
 					$dateEnd = get_post_meta(get_the_ID(), 'event_asso_end', true);
 					$dateHourStart = get_post_meta(get_the_ID(), 'event_asso_hour_start', true);
 					$dateHourEnd = get_post_meta(get_the_ID(), 'event_asso_hour_end', true);
-					$location_event = get_post_meta(get_the_ID(), 'event_asso_address', true);
-					$date_i = date_i18n("d/m/Y", strtotime($dateStart));
 
+					$location_event = get_post_meta(get_the_ID(), 'event_asso_address', true);
 
                     global $wpdb;
 
-					/* -- boussad update -- */
-					//ancienne requête
-                    // $query = "SELECT event.*, $wpdb->postmeta.*
-                    //             FROM $wpdb->posts as event, $wpdb->postmeta
-                    //             WHERE event.ID = $asso_orga
-                    //             AND event.post_type = 'fiche'
-                    //             AND event.ID = $wpdb->postmeta.post_id
-                    //             LIMIT 0, 1
-                    //             ";
-					//
+                	$query = "SELECT event.*, $wpdb->postmeta.*
+                        FROM $wpdb->posts as event, $wpdb->postmeta
+                        WHERE event.post_type IN ('fiche', 'slider')
+                        AND event.ID = $asso_orga
+                        LIMIT 0,1
+                        ";
 
-					//mise-à-jour de la requête
-                    $query = "SELECT event.*, $wpdb->postmeta.*
-                                FROM $wpdb->posts as event, $wpdb->postmeta
-                                WHERE event.post_type = 'fiche'
-                                AND event.ID = $wpdb->postmeta.post_id
-                                LIMIT 0, 1
-                                ";
+					$t = $wpdb->get_results($query, OBJECT);
 
+					$asso = array();
 
-                    $t = $wpdb->get_results($query, OBJECT);
+					foreach ($t as $key => $v ) {
+
+						$asso[] = $v->post_title;
+					}
 
 					$images[] = array(
 						'post_id' => $post_id,
 						'title' => htmlspecialchars($title),
 						'dateStart' => date_i18n("c", strtotime($dateStart)),
 						'dateEnd' => date_i18n("c", strtotime($dateEnd)),
-						'dateHourStart' => $dateHourStart,
-						'dateHourEnd' => $dateHourEnd,
+						'start' => date_i18n("d/m/Y", strtotime($dateStart)),
+						'end' => date_i18n("d/m/Y", strtotime($dateEnd)),
+						'hstart' => date_i18n("H:m", strtotime($dateStart)),
+						'hend' => date_i18n("H:i", strtotime($dateEnd)),
 						'location' => $location_event,
 						'content' => $content,
 						'image' => $image,
@@ -74,8 +71,9 @@ function callEvent($limit, $offset){
 						'url_openblank' => $url_openblank == "1" ? true : false,
 						'link_text' => $link_text,
 						'association' => $asso_orga,
-						'association_name' => $t[0]->post_title
-				);
+						'association_name' => $asso[0]
+					);
+
 			}
 		}
 	}
@@ -106,6 +104,7 @@ $images = callEvent(5, 0);
 
 				 <?php
 				 $active = "active";
+
 				 foreach ($images as $key => $image)
 				 {
 				 	?>
@@ -114,9 +113,9 @@ $images = callEvent(5, 0);
           			<div class="carousel-caption">
 						 <h3 class="img-modal img-responsive" title="<?php echo  $image['title']; ?>"><?php echo  $image['title'];?></h3>
 
-						 <p> Le <?php echo  $image['dateStart']; ?> </p>
+						 <p> Le <?php echo  $image['start']; ?> </p>
 						 <p><?php echo  $image['association_name'];?></p>
-						 <a class="btn-association img-modal img-moda-click" id="image-<?php echo  $images['post_id']; ?>" data-title="<?php echo  $image['title']; ?>" data-content="test <?php echo  $image['content']; ?>" data-img="<?php echo  $image['img_src'] ?>" data-date="<?php echo  $image['dateStart']; ?>" data-dateend="<?php echo  $image['dateEnd']; ?>" data-hourstart="<?php echo  $image['dateHourStart']; ?>" data-hourend="<?php echo  $image['dateHourEnd']; ?>" data-location="<?php echo  $image['location']; ?>" data-url="<?php echo  get_site_url()."/association/?fiche=".$image['association']; ?>" role="button">Voir l'événement</a>
+						 <a class="btn-association img-modal img-moda-click" id="image-<?php echo  $image['post_id']; ?>" data-title="<?php echo  $image['title']; ?>" data-content="<?php echo  $image['content']; ?>" data-img="<?php echo  $image['img_src'] ?>" data-datestart="<?php echo  $image['start']; ?>" data-hstart="<?php echo $image['hstart']; ?>" data-dateend="<?php echo  $image['end']; ?>" data-hend="<?php echo $image['hend']; ?>" data-location="<?php echo  $image['location']; ?>" data-url="<?php if($image['association'] === '554' || $image['association_name'] === 'Maison de quartier Planoise') {  echo get_site_url()."/apropos"; } else { echo get_site_url()."/annuaire/association?fiche=".$image['association'];  } ?>" role="button">Voir l'événement</a>
 					 </div>
 				 </div>
 				 <?php
@@ -163,29 +162,26 @@ $images = callEvent(5, 0);
 				.attr("title"));
 		});
 
-		/* when clicking a thumbnail */
 		$(".img-moda-click").click(function(){
 			var title = $(this).data('title');
 			var description = $(this).data('content');
-			var date = $(this).data('date');
+			var date_start = $(this).data('datestart');
 			var date_end = $(this).data('dateend');
-			var date_hour = $(this).data('hourstart');
-			var date_hour_end = $(this).data('hourend');
+			var hstart =  $(this).data('hstart');
+			var hend =  $(this).data('hend');
 			var image = $(this).data('img');
 			var location = $(this).data('location');
 			var url = $(this).data('url');
 			var content = $(".modal-body");
 			var footer = $(".modal-footer");
-
 			var modal_title = $(".modal-title");
+			console.log(url);
 
 			modal_title.empty();
-
 			modal_title.html(title);
-			content.html("<img src='"+image+"' /> <p id='modal-date'>Date de l'événement : "+  date + " à "+date_hour+" au "+ date_end+" à "+date_hour_end+"</p><p id='modal-location'>Lieu : " + location + "</p> <p id='modal-description'>"  + description + "</p>");
-			footer.html("<a href='"+url+"' class='btn btn-association-asso'> voir la fiche de l'association</a><button class='btn btn-association' data-dismiss='modal'>Fermer</button>");
+			content.html("<img src='"+image+"' /> <p id='modal-date'>Date de l'événement : " +  date_start + " à " + hstart + " au " + date_end + " à " + hend + "</p><p id='modal-location'>Lieu : " + location + "</p> <p id='modal-description'>"  + description + "</p>");
+			footer.html("<a href='"+url+"' class='btn btn-association-asso'> Fiche de l'association</a><button class='btn btn-association' data-dismiss='modal'>Fermer</button>");
 
-			// show the modal
 			$("#modal-gallery").modal("show");
 		});
 
@@ -196,71 +192,127 @@ $images = callEvent(5, 0);
 
 	$eventagenda = callEvent(1000, 0);
 
-
-
 	$event= array();
-	$start= array();
-	$end =  array();
+	$event_next= array();
+
 
 	foreach ($eventagenda as $e)
 	{
-		// $start['dstart'] = $e['dateStart']. " " .$e['dateHourStart'];
-		// $end['dend'] = $e['dateEnd']. " " .$e['dateHourEnd'];
+		$start= array();
+		$end =  array();
+
 		$start[] = substr($e['dateStart'], 0, -6);
 		$end[] = substr($e['dateEnd'], 0, -6);
 
-		$event[] = [
-			'id' => $e['post_id'],
+		$event[] = array(
+			'id' => $e['association'],
 			'title' => $e['title'],
 			'start' => $start[0],
-			'end' => $end[0]
-			// 'start' => $e['dateStart'],
-			// 'end' => $e['dateEnd']
+			'end' => $end[0],
+			'imageurl' => $e['img_src'],
+			'location' => $e['location']
+		);
 
-		];
+
+		$dhstart['dhstart'] = $e['start'] . " à " . $e['hstart'];
+		$dhend['dhend'] = $e['end'] . " à " . $e['hend'];
+
+		$event_next[] = array(
+			'id' => $e['association'],
+			'description' => $e['content'],
+			'dstart' => $dhstart['dhstart'],
+			'dend' => $dhend['dhend']
+		);
 	}
-	// echo "<pre>";
-	// print_r($start);
-	// echo "</pre>";
-	?>
+
+
+	$data = json_encode($event);
+	$dnext = json_encode($event_next);
+
+	echo "<script>";
+	echo "var d = eval($dnext);";
+	echo "console.log(d);";
+	echo "</script>";
+
+?>
 	<script>
 
 		$(document).ready(function() {
 
-			var allevent = '<?php echo json_encode($event); ?>';
+			var currentTime = new Date();
+			var allevent = '<?php echo $data; ?>';
 			data = JSON.parse(allevent);
 
-			console.log(data);
-
 			$('#agenda').fullCalendar({
-				theme: false,
 				locale: 'fr',
 				header: {
 					left: 'prev,next today',
 					center: 'title',
 					right: 'month,listMonth'
 				},
-				defaultDate: '<?php echo the_date(); ?>',
+				defaultDate: currentTime,
 				navLinks: true,
-				editable: false,
-				eventLimit: false,
+				editable: true,
+				eventLimit: true,
 				allDay: false,
 				events: data,
 				eventColor: '#ff6633',
 				eventTextColor: '#fff',
-				height: 305,
-				contentHeight: 305,
+				height: 315,
+				contentHeight: 315,
 				aspectRatio: 1,
 				fixedWeekCount: false,
-				timeFormat: 'H:mm'
+				timeFormat: 'H:mm',
+				refetchResourcesOnNavigate: true,
+				eventClick: function(calEvent) {
+					for(json in d){
+						if (calEvent.id === d[json].id){
+							calEvent.id = d[json].id;
+							calEvent.description = d[json].description;
+							calEvent.start = d[json].dstart;
+							calEvent.end = d[json].dend;
+						}
+					}
 
+					var content = $(".modal-body");
+					var footer = $(".modal-footer");
+					var modal_title = $(".modal-title");
+
+					modal_title.html(calEvent.title);
+					content.html("<img src='" + calEvent.imageurl + "'><p id='agenda-date'>Date de l'événement : du " +  calEvent.start + " au " + calEvent.end + "</p><p id='agenda-location'>Lieu : " + calEvent.location + "</p> <p id='modal-description'>"  + calEvent.description + "</p>");
+					footer.html("<a href='"+window.location.href+"/annuaire/association?fiche=" + calEvent.id +"' class='btn btn-association-asso'> Fiche de l'association</a><button class='btn btn-association' data-dismiss='modal'>Fermer</button>");
+
+					$("#modal-agenda").modal("show");
+
+					$('#agenda').fullCalendar('updateEvent', calEvent);
+
+					}
 			});
+
+			$("#agenda").fullCalendar('removeEvents');
+    		$("#agenda").fullCalendar('addEventSource', data);
 
 		});
 
 	</script>
 
 	<section id="agenda" class='col-md-5'></section>
+	<div class="modal container" id="modal-agenda" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal">×</button>
+					<h3 class="modal-title"></h3>
+				</div>
+				<div class="modal-body">
+
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal">Fermer</button>
+				</div>
+			</div>
+		</div>
+	</div>
 <?php
 /* --
 --
@@ -269,8 +321,17 @@ $images = callEvent(5, 0);
 -- */
 
 /* affichage de l'article mis-en-avant */
+	$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 	$sticky = get_option('sticky_posts');
-	query_posts(array('showposts' => 1, 'orderby' => 'post_modified',  'post__in' => $sticky , 'order' => 'DESC'));
+	$posts_per_page = 1;
+	$num_sticky_pages = (count($sticky) / $posts_per_page);
+	query_posts(array(
+		'showposts' => 1,
+		'post_type'=>'post',
+		'orderby' => 'post_modified',
+		'post__in' => $sticky,
+		'paged'=> $paged,
+		'order' => 'DESC'));
 	if ( have_posts() ){
 		while ( have_posts() ){
 			the_post();
@@ -301,19 +362,30 @@ $images = callEvent(5, 0);
                  			} 		 ?>
 							</div>
 
-							<footer class="entry-meta">
+							<footer class="entry-meta col-md-12">
 								<?php if ('post' == get_post_type()) { // Hide category and tag text for pages on Search ?>
 								<div class="entry-meta-category-tag">
 									<?php
 										$tags_list = get_the_tag_list('', __(', ', 'bootstrap-basic'));
+
+										$posttags = get_the_tags();
+
+										$tags = array();
+										if ($posttags) {
+											foreach($posttags as $tag) {
+											$tags[] = $tag->name;
+											}
+										}
+										$newTags = implode($tags, ',');
+
 										if ($tags_list) {
 									?>
 									<span class="tags-links">
-										<?php echo bootstrapBasicTagsList($tags_list); ?>
+										<?php echo bootstrapBasicTagsList($newTags); ?>
 									</span>
-									<?php } ?>
+									<?php }  ?>
 								</div>
-								<?php } ?>
+								<?php }   ?>
 							</footer>
 									<?php
 								}
@@ -325,37 +397,38 @@ $images = callEvent(5, 0);
 				</section>
 				<!-- affichage des articles sauf l'article à la une  -->
 				<section id="articlesAutres"  class="col-md-12" <?php post_class(); ?>>
-					<?php
-
-						$args = array(
+				<?php
+					$args = array(
 							'post_type'=>'post',
-							'posts_per_page' => 10,
+							'paged' => $paged,
 							'post__not_in'  => $sticky,
 							'ignore_sticky_posts' => 1
-						);
+							);
+
 					$query = new WP_Query( $args );
 
-
-					// $query = new WP_query(array('post_type'=>'post','posts_per_page' => 10));
 					if($query != $sticky) {
-					while($query->have_posts()) {
-						$query->the_post();
-						global $post;
+
+						while($query->have_posts()) {
+
+							$query->the_post();
+
+							global $post;
 						?>
 						<article class="col-md-4 contenu blockArticle">
-							<div class="globalArticle col-md-12" id="article-<?php echo  $post->ID;?>">
-								<h1 class="entry-title"><?php the_title(); ?></h1>
+							<div class="globalArticle col-md-12" id="article-<?php echo $post->ID;?>">
 								<div class="text-center img-article">
-									<?php echo  get_the_post_thumbnail($post->ID, 'resizing-img-article'); ?>
+									<?php echo get_the_post_thumbnail($post->ID, 'resizing-img-article'); ?>
 								</div>
 								<header class="entry-header">
+									<h1 class="entry-title"><?php the_title(); ?></h1>
 									<?php if ('post' == get_post_type()) {  ?>
 									<div class="entry-meta">
 										<?php bootstrapBasicPostOn(); ?>
-									</div><!-- .entry-meta -->
-									<?php } //endif; ?>
+									</div>
+									<?php }  ?>
 								</header>
-								<?php if (is_search()) { // Only display Excerpts for Search ?>
+								<?php if (is_search()) {  ?>
 								<div class="entry-summary">
 									<?php the_excerpt(); ?>
 									<div class="clearfix"></div>
@@ -375,29 +448,36 @@ $images = callEvent(5, 0);
 									<?php if ('post' == get_post_type()) { // Hide category and tag text for pages on Search ?>
 									<div class="entry-meta-category-tag">
 										<?php
-											/* translators: used between list items, there is a space after the comma */
-											$categories_list = get_the_category_list(__(', ', 'bootstrap-basic'));
-											if (!empty($categories_list)) {
-										?>
-										<span class="cat-links">
-											<?php //echo bootstrapBasicCategoriesList($categories_list); ?>
-										</span>
-										<?php } // End if categories ?>
+											$tags_list = get_the_tag_list('', __(', ', 'bootstrap-basic'));
 
-										<?php
-											/* translators: used between list items, there is a space after the comma */
-											//$tags_list = get_the_tag_list('', __(', ', 'bootstrap-basic'));
+											$posttags = get_the_tags();
+
+											$tags = array();
+											if ($posttags) {
+												foreach($posttags as $tag) {
+												$tags[] = $tag->name;
+												}
+											}
+											$newTags = implode($tags, ',');
+
 											if ($tags_list) {
 										?>
 										<span class="tags-links">
-											<?php echo bootstrapBasicTagsList($tags_list); ?>
+											<?php echo bootstrapBasicTagsList($newTags); ?>
 										</span>
-										<?php } // End if $tags_list ?>
-									</div><!--.entry-meta-category-tag-->
-									<?php }  // End if 'post' == get_post_type() ?>
+										<?php }  ?>
+									</div>
+									<?php }   ?>
 								</footer>
 						</div>
 					</article>
-					<?php  } } // End loop ?>
-				</section>
+					<?php  }  }
+					// } ?>
+	</section>
+	<nav class="col-md-12 col-xs-12" id="page">
+		<?php // echo $page;
+				// $wp_query = NULL;
+				// $wp_query = $temp_query;
+				 ?>
+	</nav>
 </main>

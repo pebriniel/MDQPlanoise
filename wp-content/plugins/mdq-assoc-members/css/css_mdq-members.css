@@ -1,0 +1,181 @@
+/* -- page activité -- */
+
+.btn-savoir {
+    background-color: #ff6633;
+    color: #fff;
+    width: 50%;
+    border: 0;
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+
+.btn-savoir:hover {
+    border: inset 1px 1px 1px 1px #ff6633;
+    background-color: #fff;
+    color: #ff6633;
+}
+
+.card {
+    border: 1px solid #000;
+}
+
+.title {
+    color: #ff6633;
+    font-size: 1.6em;
+    margin-top: 0;
+    font-weight: bold;
+    min-height: 50px;
+}
+
+.date {
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.img-activite{
+    width: 100%;
+    overflow: hidden;
+    height: 150px;
+}
+
+.descri-activite {
+    font-size: 1.3em;
+    min-height: 123px;
+    max-height: 123px;
+    text-align: justify;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card-container {
+    margin-top: 30px;
+}
+
+.card-footer {
+    background-color: #000;
+    text-align: center;
+}
+
+.voir-fichasso {
+    color: #fff;
+    font-size: 150%;
+    text-decoration: none;
+    padding-bottom: 3px;
+    padding-top: 1px;
+    padding-left: 3px;
+    padding-right: 3px;
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+
+.voir-fichasso:link {
+    text-decoration: none;
+}
+
+.voir-fichasso:visited {
+    text-decoration: none;
+    color: #fff;
+}
+
+.voir-fichasso:hover {
+    text-decoration: none;
+    color: #ff6633;
+}
+
+.voir-fichasso:active {
+    text-decoration: none;
+}
+
+.search-box {
+    display: inline-block;
+    width: 70%;
+    height: 35px;
+    border: 1px solid #a3a1a1;
+    position: relative;
+    background: #fff;
+}
+
+.search-box input[type=text] {
+    border: none;
+    box-shadow: none;
+    display: inline-block;
+    background: transparent;
+}
+
+.search-box input[type=text]:hover, .search-box input[type=text]:focus, .search-box input[type=text]:active {
+    box-shadow: none;
+}
+
+.search-box .search-btn {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    color: #ff6633;
+    font-size: 17px;
+    padding: 5px 10px 1px;
+}
+
+#transition {
+    background-color: #ff6633;
+    height: 50px;
+    padding-right: 0px;
+    padding-left: 70px;
+}
+
+.select-menu {
+    height: 34px;
+    background-color: #fff;
+    color: #000;
+    font-size: 1em;
+    width: 100%;
+}
+
+.btn-valid {
+    height: 34px;
+    background-color: #fff;
+    color: #000;
+    font-size: 1em;
+    width: 100%;
+}
+
+.savoir-plus:after{
+    content: 'En savoir plus'
+}
+.savoir-plus-close:after{
+    content: 'Fermer'
+}
+
+@media screen and (max-width: 992px) {
+    #acitivte .date {
+        margin-top: 0;
+        font-size: 2em;
+    }
+    #transition {
+        padding-left: 0px;
+        padding-right: 0px;
+        background-color: #fff;
+    }
+    .card-container {
+        margin-top: 50px;
+    }
+    .search-box {
+        width: 100%;
+    }
+    .btn-valid {
+        margin-left: 5%;
+        border: none;
+        margin-top: 10px;
+    }
+    .select-menu {
+        margin-top: 10px;
+    }
+}
+
+
+
+/*# sourceMappingURL=style-activites-bootstrap.css.map */

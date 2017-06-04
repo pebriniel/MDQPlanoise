@@ -7,28 +7,7 @@
 
 get_header();
 
-?>
 
-<style>
-.savoir-plus:after{
-    content: 'En savoir plus'
-}
-.savoir-plus-close:after{
-    content: 'Fermer'
-}
-.map{
-    width: 100%;
-    height: 350px;
-}
-.activite-block-hide{
-    display: none;
-}
-.date-hour{
-    text-align: center;
-}
-</style>
-
-<?php
 $search_tax_cat = null;
 $search_tax_age = null;
 $search_tax_cat_id = null;
@@ -38,10 +17,10 @@ if(!empty( $_POST)){
     get_post_activite('select-age', 'age_mdq', $search_tax_age, $search_tax_age_id);
 }
 if(!wp_verify_nonce('rechercheannuaire')){
-    $search_input = "";
+    $search_input = $_POST['search-activite'];
 }
 else{
-    $search_input = $_POST['search-activite'];
+    $search_input = "";
 }
 
 function mdq_showActiviteHtml($post){
@@ -54,7 +33,6 @@ function mdq_showActiviteHtml($post){
             <div>
                 <?php
                     $v = get_term_by('name', $post->ID, 'tax_mdq_age');
-                    print_r($v);
                     get_term($post->title);
                 ?>
             </div>
@@ -81,9 +59,7 @@ function mdq_showActiviteHtml($post){
                     <div id="acti-<?= $post->ID; ?>"  class="content overflow content-activite acti-<?= $post->ID; ?>">
                         <p>
                             <?= $post->mdq_event_payement; ?>
-                        <p>
-                        <br/>
-
+                        </p>
                         <p>
                             <?php
                                 $terms = wp_get_post_terms( get_the_ID(), 'age_mdq');
@@ -300,12 +276,12 @@ function mdq_list_age($name_tax, $orderby, $val = null){
 
     <script>
     $(document).ready(function(){
-        function callMap(adress, id){
+        function callMap(adress, id, content){
                 $.get('http://maps.googleapis.com/maps/api/geocode/json?address='+adress+'&sensor=true', function(reponse){
                     var pos = reponse['results'][0]['geometry']['location'];
                     if ($('#map-'+id).is(':visible')){
                         var mymap = L.map('map-'+id).setView([pos['lat'], pos['lng']], 16);
-                        var marker = L.marker([pos['lat'], pos['lng']]).addTo(mymap);
+                        var marker = L.marker([pos['lat'], pos['lng']]).addTo(mymap).bindPopup(content);
                         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYm91c3NhZCIsImEiOiJjaXlhMmxnMW0wMDRzMndxcngwNXNyZ2syIn0.aEfKXXy196Ds4KIdWnu-dw', {
                             attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
                             maxZoom: 18,
@@ -344,7 +320,8 @@ function mdq_list_age($name_tax, $orderby, $val = null){
             });
 
             if($(li).data('menu') == 'map'){
-                callMap($(li).data('adress'), id);
+                var adress = $(li).data('adress');
+                callMap(adress, id, adress);
             }
         })
     });

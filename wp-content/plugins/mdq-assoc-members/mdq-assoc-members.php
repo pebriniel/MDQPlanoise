@@ -12,7 +12,8 @@ require_once("inc/metabox.php");
 add_action('init', 'mdq_members_init');                                   // Initialisation de Wordpress
 add_action('add_meta_boxes', 'mdq_members_metaboxes');                    // Ajout des meta_box
 add_action('save_post', 'mdq_members_savepost', 10, 2);					// Capture l'édition d'article avec 2 arguments
-
+// Register style sheet
+add_action( 'wp_enqueue_scripts', 'style_mdq_members');
 /**
  *  Initiation d'un formulaire pour la page
  */
@@ -44,6 +45,15 @@ function mdq_members_init(){
 		'supports' => array('title', 'thumbnail'),
         'taxonomies' => array( 'status_members_mdq' ),
 	));
+}
+
+/**
+* Feuille de syle
+**/
+
+function style_mdq_members() {
+	wp_register_style( 'mdq-assoc-members', plugins_url( 'mdq-assoc-members/css/css_mdq-members.css' ) );
+	wp_enqueue_style( 'mdq-assoc-members' );
 }
 
 /**

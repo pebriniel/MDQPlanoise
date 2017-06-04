@@ -64,7 +64,7 @@ function mdq_event_meta_liste_assoc($object){
 						$selected = "selected";
 					}
 					?>
-						<option value="<?= $post->ID; ?>" <?= $selected; ?>><?= $post->_name; ?></option>
+						<option value="<?php echo $post->ID; ?>" selected="<?php echo $selected; ?>"><?php echo the_title(); ?></option>
 					<?php
 				}
 			}

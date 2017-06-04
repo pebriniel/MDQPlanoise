@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Carrousel des événements de chaque association
+Plugin Name: Événements de chaque association
 Author: Houda B. - Boussad S.
 
 */
@@ -23,7 +23,7 @@ function slider_post_type() {
 		'not_found' => 'Aucun slide trouvé',
 		'not_found_in_trash' => 'Aucun slide dans la corbeille',
 		'parent_item_colon' => '',
-		'menu_name' => 'Carrousel des événements'
+		'menu_name' => 'Événements'
 	);
 	$args = array(
 		'labels' => $labels,
@@ -38,7 +38,7 @@ function slider_post_type() {
 		'hierarchical' => false,
 		'menu_position' => 10,
 		'menu_icon' => 'dashicons-images-alt',
-		'supports' => array('title','excerpt','thumbnail',  'page-attributes')
+		'supports' => array('title','excerpt','thumbnail')
 	);
 	register_post_type('slider', $args);
 }

@@ -30,6 +30,8 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo  get_site_url(); ?>/wp-content/themes/maisondequartier/js/fullcalendar-3.4.0/fullcalendar.css">
 		<link rel="stylesheet" type="text/css" href="<?php echo  get_site_url(); ?>/wp-content/themes/maisondequartier/js/fullcalendar-3.4.0/fullcalendar.print.css"  media="print">
 
+		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
 
@@ -79,7 +81,6 @@
     {
 
 			$('.page-header #nav li:hover a').on( "click", function() {
-				console.log("ok");
 				// $('.page-header #nav li a').css({"color": "#ffffff"; "text-decoration": "none"; });
 
 				// $('.page-header #nav li').css("background-color", "#ff6633");
