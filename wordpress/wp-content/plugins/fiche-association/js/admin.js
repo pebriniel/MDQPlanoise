@@ -4,7 +4,6 @@ $(document).ready(function(){
     $('.customaddmedia').click(function(e){
         var $el = $(this).parent();
         e.preventDefault();
-        console.log('test');
 
         var uploader = wp.media({
             title : 'Envoyer une image',
@@ -30,8 +29,5 @@ $(document).ready(function(){
         })
         .open();
     })
-
-
-
 })
 })(jQuery);

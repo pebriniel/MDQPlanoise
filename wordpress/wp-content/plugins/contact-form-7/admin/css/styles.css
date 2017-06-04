@@ -197,7 +197,8 @@ ul.config-error li a.external {
 
 .tag-generator-panel .control-box > fieldset legend {
 	border: 1px solid #dfdfdf;
-	border-left: 4px solid #00a0d2;
+	/*border-left: 4px solid #00a0d2;*/
+	border-left: 4px solid #000;
 	background: #f7fcfe;
 	padding: 4px 12px;
 	margin: 4px 0;
@@ -379,7 +380,8 @@ ul.config-error li a.external {
 }
 
 .card.active {
-	border-color: #00a0d2;
+	/*border-color: #00a0d2;*/
+	border-color: #000;
 }
 
 .card img.icon {

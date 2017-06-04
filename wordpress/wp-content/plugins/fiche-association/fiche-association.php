@@ -125,8 +125,6 @@ function ficheassociation_coordonnees_metabox($object){
 	// wp_nonce_field('ficheassociation','ficheassociation_nonce');
 
 	?>
-	<form method="post">
-
 		<input type="hidden" id="ficheassociation_nonce" name="__nonce" value="<?php echo wp_create_nonce('ficheassociation_nonce'); ?>" />
 
 		<div class="meta-box-item-title">
@@ -196,7 +194,7 @@ function ficheassociation_coordonnees_metabox($object){
 		<div class="meta-box-item-content">
 			<input type="text" name="ficheassociation_membership" style="width:50%;" value="<?php echo esc_attr(get_post_meta($object->ID, '_membership', true)); ?>">
 		</div>
-	</form>
+
 
 <?php
 }
@@ -211,8 +209,6 @@ function ficheassociation_horaires_metabox($object){
 	// wp_nonce_field('ficheassociation','ficheassociation_nonce');
 
 	?>
-	<form method="post">
-
 		<input type="hidden" id="ficheassociation" name="__nonce" value="<?php echo wp_create_nonce('ficheassociation_nonce'); ?>" />
 
 		<div class="meta-box-item-title">
@@ -235,8 +231,6 @@ function ficheassociation_horaires_metabox($object){
 		<div class="meta-box-item-content">
 			<textarea name="ficheassociation_bigHolidays" rows="4" cols="50" style="width:100%; resize:none;"><?php echo esc_attr(get_post_meta($object->ID, '_bigHolidays', true)); ?></textarea>
 		</div>
-	</form>
-
 	<?php
 }
 
@@ -304,8 +298,6 @@ function ficheassociation_showbox_metabox($object){
 	// wp_nonce_field('ficheassociation','ficheassociation_nonce');
 
 	?>
-
-
 		<input type="hidden" id="ficheassociation" name="__nonce" value="<?php echo wp_create_nonce('ficheassociation_nonce'); ?>" />
 
 		<div class="meta-box-item-title">
@@ -372,8 +364,6 @@ function ficheassociation_showbox_metabox($object){
 			<input type="checkbox" name="showMembership" value="1" <?php checked( esc_attr(get_post_meta($object->ID, 'showMembership', true)), 1 ); ?> />
 			<label for="showMembership">Affichage du montant de l'adhésion</label>
 		</div>
-
-
 	<?php
 }
 
@@ -384,23 +374,7 @@ function ficheassociation_showbox_metabox($object){
 **/
 function ficheassociation_savepost($post_id, $post){
 
-	$nameAsso = !isset($_POST['ficheassociation_name']);
-	$email = !isset($_POST['ficheassociation_email']);
-	$phone = !isset($_POST['ficheassociation_tel']);
-	$address = !isset($_POST['ficheassociation_address']);
-	$postalcode = !isset($_POST['ficheassociation_pc']);
-	$city = !isset($_POST['ficheassociation_city']);
-	$siteweb = !isset($_POST['ficheassociation_link']);
-	$facebook = !isset($_POST['ficheassociation_fb']);
-	$twitter = !isset($_POST['ficheassociation_tw']);
-	$partner = !isset($_POST['ficheassociation_partner']);
-	$membership = !isset($_POST['ficheassociation_membership']);
-	$school = !isset($_POST['ficheassociation_school']);
-	$smallHolidays = !isset($_POST['ficheassociation_smallHolidays']);
-	$bigHolidays = !isset($_POST['ficheassociation_bigHolidays']);
-
-	if(!wp_verify_nonce($_POST['__nonce'], 'ficheassociation_nonce') && ($nameAsso || $logo || $email || $phone || $address || $postalcode || $city || $siteweb))
-	// if(!wp_verify_nonce($_POST['__nonce'], 'ficheassociation_nonce'))
+	if(!wp_verify_nonce($_POST['__nonce'], 'ficheassociation_nonce') && !isset($_POST['ficheassociation_name']))
 	{
 		return $post_id;
 	}
