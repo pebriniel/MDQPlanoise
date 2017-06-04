@@ -12,12 +12,16 @@ get_header();
 
 <main id="onepageasso" class="site-main" role="main">
 	<script>
-		function callMap(adress, id){
-				$.get('http://maps.googleapis.com/maps/api/geocode/json?address='+adress+'&sensor=true', function(reponse){
+		function callMap(adress, id, content){
+
+				$.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address='+adress+'&sensor=true', function(reponse){
 					let pos = reponse['results'][0]['geometry']['location'];
+
 					if ($('#mapid-'+id).is(':visible')){
 						var mymap = L.map('mapid-'+id).setView([pos['lat'], pos['lng']], 16);
-						var marker = L.marker([pos['lat'], pos['lng']]).addTo(mymap);
+
+						var marker = L.marker([pos['lat'], pos['lng']]).addTo(mymap).bindPopup(content);
+
 						L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYm91c3NhZCIsImEiOiJjaXlhMmxnMW0wMDRzMndxcngwNXNyZ2syIn0.aEfKXXy196Ds4KIdWnu-dw', {
 							attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
 							maxZoom: 18,
@@ -35,16 +39,15 @@ get_header();
 	query_posts(array('post_type' => 'fiche'));
 
 	if($infosAsso = get_post($fiche)){
-		// while(have_posts()){
-						the_post();
 
+						the_post();
 
 		if($infosAsso->post_type == 'fiche'){
 			?>
 
 			<div id="transition" class="row transition-assoc">
 				<div class="col-md-12 col-xs-12" id="menu-assoc">
-					<ul>
+					<ul class="col-xs-12">
 						<?php
 						if($infosAsso->showDescription){
 						?>
@@ -178,9 +181,8 @@ get_header();
 
 		 		 if ( '' != get_the_post_thumbnail(get_the_ID(), 'size-carousel-display-home') ) {
 		 				$post_id = get_the_ID();
-
 		 				$title = get_the_title();
-		 				$content = get_the_excerpt();
+		 				$content = get_post_meta(get_the_ID(), 'event_asso_description', true);
 		 			// $size = image_resize($post->ID, 100, 50);
 		 				$image = get_the_post_thumbnail(get_the_ID(), 'size-carousel-display-home');
 		 				$image_src = wp_get_attachment_image_src(get_post_thumbnail_id());
@@ -314,7 +316,7 @@ get_header();
 
 		 var modal_title = $(".modal-title");
 
-		//content.empty();
+		content.empty();
 		modal_title.empty();
 
 		modal_title.html(title);
@@ -352,30 +354,30 @@ get_header();
 				if ( have_posts() ){
 					while (have_posts()){
 						the_post();
-						// add_image_size($post->ID, 1000, 200, false);
+
 						global $post;
 						?>
 					  <div class="col-md-4 thumbnail thumbnail-activite">
-						<div id="acti-<?php echo  $post->ID; ?>" data-id="<?php echo  $post->ID; ?>" class="block-activite acti-<?php echo  $post->ID; ?> content-hidden overflow background-white">
-							<div class="image">
+						<div id="acti-<?php echo  $post->ID; ?>" data-id="<?php echo  $post->ID; ?>" class="col-xs-12 block-activite acti-<?php echo  $post->ID; ?> content-hidden overflow background-white">
+							<div class="image col-xs-5">
 								<?php echo  get_the_post_thumbnail($post->ID); ?>
 							</div>
-							<div class="title">
+							<div class="title col-xs-7">
 								<h3><?php echo  $post->post_title; ?></h3>
 							</div>
-							<div class="description mtop">
+							<div class="description mtop col-xs-12">
 								<?php echo  $post->mdq_event_description; ?>
 							</div>
-							<div class="horaire mtop"></div>
-								<h4>Horaires</h4>
-								<?php echo  $post->mdq_event_date; ?>
+							<div class="horaire mtop col-xs-12"></div>
+								<h4 class="col-xs-12">Horaires</h4>
+								<p class="col-xs-12"><?php echo  $post->mdq_event_date; ?></p>
 
-							<div id="mapid-<?php echo  $post->ID; ?>" class="map mtop mbot">
+							<div id="mapid-<?php echo  $post->ID; ?>" class="map mtop mbot col-xs-12">
 
 							</div>
 							<script>
 							$(document).ready(function(){
-								callMap('<?php echo  $post->mdq_event_adresse; ?>', '<?php echo  $post->ID; ?>');
+								callMap('<?php echo $post->mdq_event_adresse; ?>', '<?php echo $post->ID; ?>', '<?php echo $post->mdq_event_adresse; ?>');
 							});
 							</script>
 
@@ -469,48 +471,39 @@ get_header();
 						<div id="membres" class="container prezmembres">
 							<h2>Vos interlocuteurs</h2>
 							<div class="row">
-							<!-- <div class="col-md-12"> -->
-								<?php
-
+							<?php
 								query_posts(array(
 									'post_type'=>'members',
 									'meta_key'  => 'mdq_members_associations',
-									'meta_value' => $infosAsso->ID));
+									'meta_value' => $infosAsso->ID,
+									'posts_per_page' => -1,
+									'tax_query' => array('taxonomies' => 'status_members_mdq')
+
+										));
+
 
 									if ( have_posts() ){
 										while ( have_posts() ){
 											the_post();
 											global $post;
 
-											/* -- boussad update -- */
-											$term_list = wp_get_post_terms( get_the_ID(), 'status_members_mdq' );
+											$terms  = get_the_term_list( get_the_ID(), 'status_members_mdq', '', ', ', '');
+											$terms = strip_tags( $terms );
 									?>
-											<div class="col-md-3 membres">
-												<div class="col-md-12 nomMembres triangle-obtuse">
-														<h3><?php echo  get_the_title();?></h3>
-														<!-- <p><?php echo  $post->mdq_; ?></p> -->
-														<p><?php echo  $post->mdq_members_description; ?></p>
-														<p>
-														<?php
-															$count = 0;
-															/* -- boussad update -- */
-															foreach($term_list as $term_single) {
-																if($count > 0){
-																	echo ", ";
-																}
-																echo $term_single->name;
-																$count ++;
-															}
-														?>
-														</p>
-													</div>
+											<div class="col-md-4 col-xs-6 membres">
+												<div class="col-md-12 col-xs-12 nomMembres triangle-obtuse">
+													<h3>
+														<span data-hover="<?php echo $terms; ?>">
+														<?php echo $post->post_title; ?>
+														</span>
+													</h3>
 												</div>
-											<!-- </div> -->
+											</div>
 
 											<?php
 										}
 									}
-									?></div>
+									?>
 								</div>
 							</div>
 							<!-- fin membres asso -->
@@ -545,7 +538,7 @@ get_header();
 											<div id="mapid-association">
 											</div>
 											<script>
-											callMap('<?php echo  $infosAsso->_address; ?> <?php echo  $infosAsso->_city; ?> <?php echo  $infosAsso->_pc; ?>', "association");
+											callMap('<?php echo $infosAsso->_address; ?> <?php echo $infosAsso->_city; ?> <?php echo $infosAsso->_pc; ?>', 'association', '<?php echo $infosAsso->_address." - ".$infosAsso->_pc." ".$infosAsso->_city; ?>');
 											</script>
 										</div>
 									</div>
@@ -565,10 +558,10 @@ get_header();
 					<div class="row">
 						<div class="col-md-12 text-center">
 							<h2>Les partenaires</h2>
-							<img src="<?php echo  $infosAsso->file1; ?>" alt="<?php echo  $infosAsso->file1; ?>" width="15%" />
-							<img src="<?php echo  $infosAsso->file2; ?>" alt="<?php echo  $infosAsso->file2; ?>" width="15%" />
-							<img src="<?php echo  $infosAsso->file3; ?>" alt="<?php echo  $infosAsso->file3; ?>" width="15%" />
-							<img src="<?php echo  $infosAsso->file4; ?>" alt="<?php echo  $infosAsso->file4; ?>" width="15%" />
+							<img src="<?php echo  $infosAsso->file1; ?>" alt="<?php echo  $infosAsso->file1; ?>" width="10%" />
+							<img src="<?php echo  $infosAsso->file2; ?>" alt="<?php echo  $infosAsso->file2; ?>" width="10%" />
+							<img src="<?php echo  $infosAsso->file3; ?>" alt="<?php echo  $infosAsso->file3; ?>" width="10%" />
+							<img src="<?php echo  $infosAsso->file4; ?>" alt="<?php echo  $infosAsso->file4; ?>" width="10%" />
 						</div>
 					</div>
 				</div>
@@ -660,7 +653,7 @@ get_header();
 
 
 							<div id="form">
-								<h1>Merci, <?php echo $name;?></h1>
+								<h1>Merci <?php echo $name;?> de votre contact.</h1>
 								<p>Votre e-mail a &eacute;t&eacute; envoy&eacute; avec succ&egrave;s. Vous recevrez une r&eacute;ponse dans les meilleurs délais.</p>
 							</div>
 

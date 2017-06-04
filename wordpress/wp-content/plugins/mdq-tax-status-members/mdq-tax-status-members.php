@@ -46,6 +46,7 @@ function register_Status_members_taxonomy() {
 		'show_admin_column'          => true,
 		'show_in_nav_menus'          => true,
 		'show_tagcloud'              => true,
+		'query_var'					 => true,
 		'rewrite'                    => $rewrite,
 	);
 	register_taxonomy( 'status_members_mdq', array( 'post' ), $args );

@@ -7,28 +7,7 @@
 
 get_header();
 
-?>
 
-<style>
-.savoir-plus:after{
-    content: 'En savoir plus'
-}
-.savoir-plus-close:after{
-    content: 'Fermer'
-}
-.map{
-    width: 100%;
-    height: 350px;
-}
-.activite-block-hide{
-    display: none;
-}
-.date-hour{
-    text-align: center;
-}
-</style>
-
-<?php
 $search_tax_cat = null;
 $search_tax_age = null;
 $search_tax_cat_id = null;
@@ -297,12 +276,12 @@ function mdq_list_age($name_tax, $orderby, $val = null){
 
     <script>
     $(document).ready(function(){
-        function callMap(adress, id){
+        function callMap(adress, id, content){
                 $.get('http://maps.googleapis.com/maps/api/geocode/json?address='+adress+'&sensor=true', function(reponse){
                     var pos = reponse['results'][0]['geometry']['location'];
                     if ($('#map-'+id).is(':visible')){
                         var mymap = L.map('map-'+id).setView([pos['lat'], pos['lng']], 16);
-                        var marker = L.marker([pos['lat'], pos['lng']]).addTo(mymap);
+                        var marker = L.marker([pos['lat'], pos['lng']]).addTo(mymap).bindPopup(content);
                         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYm91c3NhZCIsImEiOiJjaXlhMmxnMW0wMDRzMndxcngwNXNyZ2syIn0.aEfKXXy196Ds4KIdWnu-dw', {
                             attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
                             maxZoom: 18,
@@ -341,7 +320,8 @@ function mdq_list_age($name_tax, $orderby, $val = null){
             });
 
             if($(li).data('menu') == 'map'){
-                callMap($(li).data('adress'), id);
+                var adress = $(li).data('adress');
+                callMap(adress, id, adress);
             }
         })
     });

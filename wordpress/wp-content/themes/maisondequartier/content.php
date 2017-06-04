@@ -115,7 +115,7 @@ $images = callEvent(5, 0);
 
 						 <p> Le <?php echo  $image['start']; ?> </p>
 						 <p><?php echo  $image['association_name'];?></p>
-						 <a class="btn-association img-modal img-moda-click" id="image-<?php echo  $image['post_id']; ?>" data-title="<?php echo  $image['title']; ?>" data-content="<?php echo  $image['content']; ?>" data-img="<?php echo  $image['img_src'] ?>" data-datestart="<?php echo  $image['start']; ?>" data-hstart="<?php echo $image['hstart']; ?>" data-dateend="<?php echo  $image['end']; ?>" data-hend="<?php echo $image['hend']; ?>" data-location="<?php echo  $image['location']; ?>" data-url="<?php echo  get_site_url()."/annuaire/association?fiche=".$image['association']; ?>" role="button">Voir l'événement</a>
+						 <a class="btn-association img-modal img-moda-click" id="image-<?php echo  $image['post_id']; ?>" data-title="<?php echo  $image['title']; ?>" data-content="<?php echo  $image['content']; ?>" data-img="<?php echo  $image['img_src'] ?>" data-datestart="<?php echo  $image['start']; ?>" data-hstart="<?php echo $image['hstart']; ?>" data-dateend="<?php echo  $image['end']; ?>" data-hend="<?php echo $image['hend']; ?>" data-location="<?php echo  $image['location']; ?>" data-url="<?php if($image['association'] === '554' || $image['association_name'] === 'Maison de quartier Planoise') {  echo get_site_url()."/apropos"; } else { echo get_site_url()."/annuaire/association?fiche=".$image['association'];  } ?>" role="button">Voir l'événement</a>
 					 </div>
 				 </div>
 				 <?php
@@ -265,7 +265,6 @@ $images = callEvent(5, 0);
 				timeFormat: 'H:mm',
 				refetchResourcesOnNavigate: true,
 				eventClick: function(calEvent) {
-
 					for(json in d){
 						if (calEvent.id === d[json].id){
 							calEvent.id = d[json].id;
@@ -398,47 +397,31 @@ $images = callEvent(5, 0);
 				</section>
 				<!-- affichage des articles sauf l'article à la une  -->
 				<section id="articlesAutres"  class="col-md-12" <?php post_class(); ?>>
-					<?php
-
-					// if( ($paged-1) < $num_sticky_pages && ($paged+1) > $num_sticky_pages ){
-
-
+				<?php
 					$args = array(
 							'post_type'=>'post',
-							// 'posts_per_page' => $posts_per_page,
 							'paged' => $paged,
-							// 'paged'=>$paged - floor($num_sticky_pages),
 							'post__not_in'  => $sticky,
 							'ignore_sticky_posts' => 1
-						);
-					$query = new WP_Query( $args );
-					$temp_query = $wp_query;
-					$wp_query = NULL;
-					$wp_query = $query;
-					$big = 999999999;
-					$pagination= array(
-						'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-						'format' => '/page/%#%',
-						'show_all' => true,
-						'prev_next' => true,
-						'current' => max( 1, get_query_var('paged') ),
-						'total' => $query->max_num_pages
-					);
+							);
 
-					$page = paginate_links( $pagination );
+					$query = new WP_Query( $args );
 
 					if($query != $sticky) {
-					while($query->have_posts()) {
-						$query->the_post();
-						global $post;
+
+						while($query->have_posts()) {
+
+							$query->the_post();
+
+							global $post;
 						?>
 						<article class="col-md-4 contenu blockArticle">
-							<div class="globalArticle col-md-12" id="article-<?php echo  $post->ID;?>">
-								<h1 class="entry-title"><?php the_title(); ?></h1>
+							<div class="globalArticle col-md-12" id="article-<?php echo $post->ID;?>">
 								<div class="text-center img-article">
-									<?php echo  get_the_post_thumbnail($post->ID, 'resizing-img-article'); ?>
+									<?php echo get_the_post_thumbnail($post->ID, 'resizing-img-article'); ?>
 								</div>
 								<header class="entry-header">
+									<h1 class="entry-title"><?php the_title(); ?></h1>
 									<?php if ('post' == get_post_type()) {  ?>
 									<div class="entry-meta">
 										<?php bootstrapBasicPostOn(); ?>

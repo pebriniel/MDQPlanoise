@@ -83,7 +83,7 @@ function mdq_list_field($name_taxo, $value=null){
 				<div class="col-md-4 col-xs-5 col-xs-push-1 select-container">
 					<select class="select-menu" name="select-field">
 						<option value="null"> Champs d'actions</option>
-						<?php echo  mdq_list_field("theme_mdq"); ?>
+						<?php echo mdq_list_field("theme_mdq"); ?>
 					</select>
 				</div>
 				<div class="col-md-4 col-xs-5 col-xs-push-1">
@@ -98,7 +98,7 @@ function mdq_list_field($name_taxo, $value=null){
 		$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
 		query_posts(array(
-			"posts_per_page" => 5,
+			"posts_per_page" => 4,
 			"paged" => $paged,
 			'post_type'=>'fiche',
 			's' => $search_input,
@@ -106,6 +106,8 @@ function mdq_list_field($name_taxo, $value=null){
 				$search_tax_field
 			),
 		));
+
+
 		if ( have_posts() ){
 
 			while ( have_posts() ){
@@ -115,26 +117,26 @@ function mdq_list_field($name_taxo, $value=null){
 				$url = get_the_post_thumbnail_url($post->ID, array(1,1));
 				?>
 
-				<div class="col-md-6">
-					<div class="content-annuaire">
-						<div class="content-ta">
-								<div class="thumbnail-annuaire hvr-grow col-md-12 col-xs-12">
-									<div class="logo col-md-2 col-xs-2">
-										<img src="<?php echo  $url ?>" alt="<?php echo  $url; ?>">
-									</div>
-									<div class="caption col-md-8 col-xs-8">
-										<h3 class="col-md-12 col-xs-12"><?php echo  $post->_name; ?></h3>
+			<div class="col-md-6">
+				<div class="content-annuaire">
+					<div class="content-ta">
+						<div class="thumbnail-annuaire hvr-grow col-md-12 col-xs-12">
+							<div class="logo col-md-2 col-xs-2">
+								<img src="<?php echo  $url ?>" alt="<?php echo  $url; ?>">
+							</div>
+							<div class="caption col-md-8 col-xs-8">
+								<h3 class="col-md-12 col-xs-12"><?php echo $post->_name; ?></h3>
 
-										<p class="col-md-12 col-xs-12"><?php echo  max_caracter_length($post->_desc, 100);?></p>
-										<p class="col-md-12 col-xs-12">
-											<a href="<?php echo  get_site_url()."/annuaire/association?fiche=".$post->ID; ?>" class="btn btn-association" role="button">voir la fiche</a>
-										</p>
-									</div>
-						</div>
+								<p class="col-md-12 col-xs-12"><?php echo max_caracter_length($post->_desc, 100);?></p>
+								<p class="col-md-12 col-xs-12">
+									<a href="<?php echo get_site_url()."/annuaire/association?fiche=".$post->ID; ?>" class="btn btn-association" role="button">voir la fiche</a>
+								</p>
+							</div>
 						</div>
 					</div>
 				</div>
-				<?php
+			</div>
+			<?php
 			}
 
 			$args = array();
