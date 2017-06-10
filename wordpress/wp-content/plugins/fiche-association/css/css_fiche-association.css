@@ -15,7 +15,7 @@ body {
 
 #transition-asso {
   background-color: #ff6633;
-  height: 60px;
+  height: 50px;
   padding-top: 17px;
   position: relative;
   z-index: 550;
@@ -25,7 +25,7 @@ body {
   content: "";
   position: absolute;
   background-color: #ff6633;
-  height: 60px;
+  height: 50px;
   top: 0;
   bottom: 0;
   width: 100%;
@@ -38,6 +38,18 @@ body {
 #transition-asso:before {
   right: 100%;
 }
+
+#onepageasso #transition ul li{
+  padding-left: 0;
+
+}
+
+
+#onepageasso #transition ul .active {
+  background-color: #000;
+  height: 50px;
+}
+
 
 #onepageasso .navbar-default {
   background: #ff6633;
@@ -52,7 +64,12 @@ body {
 }
 
 #onepageasso .navbar-default a {
-  color: #ffffff;
+  color: #fff;
+}
+
+#onepageasso .fa-facebook{
+  color: #3b5998;
+  font-size: 1.5em;
 }
 
 #onepageasso .onglets {
@@ -188,10 +205,11 @@ height: 14px;
   font-size: 2em;
 }
 #onepageasso .loc .adresseAsso h4 {
-  font-size: 1.5em;
+  font-size: 1.3em;
 }
+
 #onepageasso .loc .adresseAsso p {
-  font-size: 1.5em;
+  font-size: 1em;
   text-align: center;
   margin-left: 5% !important;
   margin-right: 5% !important;
@@ -247,9 +265,6 @@ height: 14px;
   box-shadow: none;
 }
 #onepageasso #as-activite .thumbnail {
-  padding: 2%;
-  margin-bottom: 4%;
-  margin-top: 3%;
   border-radius: 0%;
 }
 
@@ -321,8 +336,7 @@ height: 14px;
 }
 
 #as-activite .map {
-  width: 100%;
-  height: 250px;
+  height: 280px;
 }
 #as-activite .ptop {
   margin-top: 3em;
@@ -383,13 +397,9 @@ height: 14px;
   height: 100%;
 }
 
-
-#onepageasso #transition ul li{
-  padding-left: 0;
-
+#onepageasso .membres {
+  padding: 0;
 }
-
-
 #onepageasso .membres .nomMembres h3 {
 	color: #ff6633;
   text-align: center;
@@ -430,7 +440,7 @@ height: 14px;
 	height: 100%;
 	text-align: center;
 	color: #fff;
-	background-color: #ff6633;
+	background-color: #000;
 	content: attr(data-hover);
 	-webkit-transition: background 0.3s;
 	-moz-transition: background 0.3s;

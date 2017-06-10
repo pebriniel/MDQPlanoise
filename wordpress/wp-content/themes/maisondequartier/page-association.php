@@ -157,7 +157,7 @@ get_header();
 		}
 	}
 
-			if($infosAsso->showCaroussel){
+		if($infosAsso->showCaroussel){
 
 		 query_posts(array('post_type'=>'slider',
 		 					'meta_key'  => 'mdq_listing_assoc',
@@ -214,8 +214,7 @@ get_header();
 		 													'association' => $asso_orga
 															 );
 		 		}
-
-
+			 }
 		 	?>
 		 	<div class="carousel-inner" role="listbox">
 		 		 <ol class="carousel-indicators">
@@ -225,7 +224,7 @@ get_header();
 		     		 {
 		 				 static $i = 0;
 		 			?>
-		 		   		<li data-target="#carousel" data-slide-to="<?php echo  $i; ?>" <?php echo  $active; ?>></li>
+		 		   		<li data-target="#carousel" data-slide-to="<?php echo $i; ?>" <?php echo $active; ?>></li>
 		 			<?php
 		 				$i ++;
 		 				$active = "";
@@ -237,14 +236,13 @@ get_header();
 		 		 foreach ($images as $key => $image)
 		 		 {
 		 			 ?>
-					 <div class="item <?php echo  $active; ?>  modal-click">
-						<?php echo  $image['image']; ?>
+					 <div class="item <?php echo $active; ?> modal-click">
+					 <?php echo $image['image']; ?>
 						 <div class="carousel-caption">
-							 <h3 class="img-modal img-responsive" title="<?php echo  $image['title']; ?>"></h3>
-							 <p> Le <?php echo  $image['dateStart'];?> à <?php echo  $image['hstart'];?></p>
-							 <p><?php echo  $image['association'];?></p>
-							 <a class="btn-association img-modal img-moda-click" id="image-<?php echo  $images['post_id']; ?>" data-title="<?php echo  $image['title']; ?>" data-content="<?php echo  $image['content']; ?>" data-img="<?php echo  $image['img_src'] ?>" data-date="<?php echo  $image['dateStart']; ?>" data-hstart="<?php echo $image['hstart']; ?>" data-dateend="<?php echo  $image['dateEnd']; ?>" data-hend="<?php echo $image['hend']; ?>" data-location="<?php echo  $image['location']; ?>" data-url="<?php echo   get_site_url()."/association/?fiche=".$image['association']; ?>" role="button">voir l'actualité</a>
-
+							 <h3 class="img-modal img-responsive" title="<?php echo $image['title']; ?>"></h3>
+							 <p>Le <?php echo $image['dateStart'];?> à <?php echo $image['hstart'];?></p>
+							 <p><?php echo $image['association'];?></p>
+							 <a class="btn-association img-modal img-moda-click" id="image-<?php echo $image['post_id']; ?>" data-title="<?php echo $image['title']; ?>" data-content="<?php echo $image['content']; ?>" data-img="<?php echo $image['img_src'] ?>" data-date="<?php echo $image['dateStart']; ?>" data-hstart="<?php echo $image['hstart']; ?>" data-dateend="<?php echo $image['dateEnd']; ?>" data-hend="<?php echo $image['hend']; ?>" data-location="<?php echo $image['location']; ?>" data-url="<?php echo  get_site_url()."/association/?fiche=".$image['association']; ?>" role="button">voir l'actualité</a>
 						 </div>
 					 </div>
 
@@ -253,16 +251,14 @@ get_header();
 					$active = "";
 				}
 				?>
-
-			 <?php  	}  ?>
 		 </div>
 
 			 <!-- Left and right controls -->
 			 <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
 				 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true" style="color: #ff6633;"></span>
-				 <span class="sr-only">Précèdent</span>
+				 <span class="sr-only">Précédent</span>
 			 </a>
-			 <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+			 <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
 				 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="color: #ff6633;"></span>
 				 <span class="sr-only">Suivant</span>
 			 </a>
@@ -274,20 +270,18 @@ get_header();
 
 		<!-- la modal -->
 		<div class="modal container" id="modal-gallery" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
 						<button class="close" type="button" data-dismiss="modal">×</button>
 						<h3 class="modal-title"></h3>
-				</div>
-				<div class="modal-body">
-
-				</div>
-				<div class="modal-footer">
+					</div>
+					<div class="modal-body"></div>
+					<div class="modal-footer">
 						<button class="btn btn-default" data-dismiss="modal">Fermer</button>
+					</div>
 				</div>
 			</div>
-		</div>
 		</div>
 
 	<script>
@@ -331,14 +325,11 @@ get_header();
 
 		  	<?php
 			  }
-			  else{
-				  ?>
+			  else{   ?>
 				  <script type="text/javascript">
 						$(".actualite-link").hide();
 				  </script>
 				  <?php
-				  //aucune activité ?
-				  //On met un message ou pas ?
 			  }
 	  }
 
@@ -357,34 +348,31 @@ get_header();
 
 						global $post;
 						?>
-					  <div class="col-md-4 thumbnail thumbnail-activite">
-						<div id="acti-<?php echo  $post->ID; ?>" data-id="<?php echo  $post->ID; ?>" class="col-xs-12 block-activite acti-<?php echo  $post->ID; ?> content-hidden overflow background-white">
-							<div class="image col-xs-5">
-								<?php echo  get_the_post_thumbnail($post->ID); ?>
-							</div>
-							<div class="title col-xs-7">
-								<h3><?php echo  $post->post_title; ?></h3>
-							</div>
-							<div class="description mtop col-xs-12">
-								<?php echo  $post->mdq_event_description; ?>
-							</div>
-							<div class="horaire mtop col-xs-12"></div>
+					<!-- block des activités -->
+					  <div class="col-md-12 thumbnail thumbnail-activite">
+						<div id="acti-<?php echo  $post->ID; ?>" data-id="<?php echo  $post->ID; ?>" class="col-xs-12 block-activite acti-<?php echo  $post->ID; ?> background-white">
+							<div class="col-xs-6">
+								<div class="image col-xs-2">
+									<?php echo  get_the_post_thumbnail($post->ID); ?>
+								</div>
+								<div class="title col-xs-10">
+									<h3 style="margin: 0px"><?php echo  $post->post_title; ?></h3>
+								</div>
+								<div class="description mtop col-xs-12">
+									<?php echo  $post->mdq_event_description; ?>
+								</div>
+								<div class="horaire mtop col-xs-6"></div>
 								<h4 class="col-xs-12">Horaires</h4>
 								<p class="col-xs-12"><?php echo  $post->mdq_event_date; ?></p>
-
-							<div id="mapid-<?php echo  $post->ID; ?>" class="map mtop mbot col-xs-12">
-
 							</div>
+
+							<div id="mapid-<?php echo  $post->ID; ?>" class="map col-xs-6"></div>
+
 							<script>
-							$(document).ready(function(){
-								callMap('<?php echo $post->mdq_event_adresse; ?>', '<?php echo $post->ID; ?>', '<?php echo $post->mdq_event_adresse; ?>');
-							});
+								$(document).ready(function(){
+									callMap('<?php echo $post->mdq_event_adresse; ?>', '<?php echo $post->ID; ?>', '<?php echo $post->mdq_event_adresse; ?>');
+								});
 							</script>
-
-							<div class="div-hover" data-id="<?php echo  $post->ID; ?>">
-								<span class="gly-<?php echo  $post->ID; ?> glyphicon glyphicon-chevron-down down-chevron" aria-hidden="true"></span>
-							</div>
-
 						</div>
 					</div>
 				<?php
@@ -395,70 +383,6 @@ get_header();
 			?>
 		</div>
 
-		<script>
-					$(document).ready(function(){
-						var last_id = null;
-						$(document).on('click', 'html, .thumbnail-activite', function(){
-
-							$(".block-activite").each(function( index ){
-								let i = $(this).data('id');
-								$("#acti-"+i).addClass("overflow");
-								$("#acti-"+i).removeClass("active");
-								$("#acti-"+i).addClass("content-hidden");
-								$(".gly-"+i).addClass("glyphicon-chevron-down");
-								$(".gly-"+i).removeClass("glyphicon-chevron-up");
-								console.log('ololo');
-							}).children('.map').click(function(e) {
-							  return false;
-							});
-						});
-
-						$(".div-hover").click(function(e){
-							e.stopPropagation();
-							var id = $(this).data('id');
-							var button = $(this);
-							console.log(id);
-							$(".block-activite").each(function( index ){
-								console.log(this);
-								if($(this).hasClass("acti-"+id)){
-								console.log('ok');
-									if(!$(this).hasClass("active")){
-										//on cache
-										console.log('lol');
-										$("#acti-"+id).removeClass("overflow");
-										$("#acti-"+id).removeClass("content-hidden");
-										$("#acti-"+id).addClass("active");
-										$(".gly-"+id).removeClass("glyphicon-chevron-down");
-										$(".gly-"+id).addClass("glyphicon-chevron-up");
-										$(button).addClass("che-down");
-									}
-									else{
-										console.log('dev');
-										$("#acti-"+id).addClass("overflow");
-										$("#acti-"+id).removeClass("active");
-										$("#acti-"+id).addClass("content-hidden");
-										$(".gly-"+id).addClass("glyphicon-chevron-down");
-										$(".gly-"+id).removeClass("glyphicon-chevron-up");
-										$(button).removeClass("che-down");
-										//on affiche
-									}
-								}
-								else{
-									console.log('wtf');
-									let i = $(this).data('id');
-										$("#acti-"+i).addClass("overflow");
-										$("#acti-"+i).removeClass("active");
-										$(".gly-"+i).addClass("glyphicon-chevron-down");
-										$(".gly-"+i).removeClass("glyphicon-chevron-up");
-									//on cache
-								}
-
-							});
-
-							last_id = id;
-						});
-					});
-				</script>
 	<?php
 
 
@@ -487,7 +411,7 @@ get_header();
 											the_post();
 											global $post;
 
-											$terms  = get_the_term_list( get_the_ID(), 'status_members_mdq', '', ', ', '');
+											$terms  = get_the_term_list( get_the_ID(), 'status_members_mdq', '<br/>', ', ', '');
 											$terms = strip_tags( $terms );
 									?>
 											<div class="col-md-4 col-xs-6 membres">
@@ -523,7 +447,7 @@ get_header();
 											<h4><?php echo  $infosAsso->_pc; ?> - <?php echo  $infosAsso->_city; ?></h4>
 											<h4>Téléphone : <a href="tel:<?php echo  $infosAsso->_tel; ?>"><?php echo  $infosAsso->_tel; ?></a></h4>
 
-											<h4>site web : <a href="<?php echo   $infosAsso->_link;  ?>"><?php echo  $infosAsso->_link; ?></a></h4>
+											<!--<h4>site web : <a href="<?php // echo   $infosAsso->_link;  ?>"><?php // echo  $infosAsso->_link; ?></a></h4>-->
 											<h3>Ouverture - période scolaire :</h3>
 											<p><?php echo  $infosAsso->_school;?></p>
 	<?php if($infosAsso->showsmallHolidays){  ?>

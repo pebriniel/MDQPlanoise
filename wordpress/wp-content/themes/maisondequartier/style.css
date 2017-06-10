@@ -57,7 +57,7 @@ header .menu-burger {
 
 .page-header #nav li {
   margin-top: 66px;
-  margin-right: 4%;
+  margin-right: 2%;
   padding: 0.28% 1%;
 }
 
@@ -388,6 +388,7 @@ main .container {
 #contact #mdq-logo {
   width: 70%;
   margin-top: 4%;
+  margin-left: 4%;
 }
 
 #contact #mdq-logo img {
@@ -427,7 +428,7 @@ main .container {
 #contact textarea {
   display: block;
   width: 100%;
-  height: 185px;
+  height: 180px;
   margin-top: 0em;
   padding: 1em;
   border: 1px solid #ff6633;
@@ -442,7 +443,7 @@ main .container {
   -webkit-transition: .3s;
   transition: .3s;
   cursor: pointer;
-  margin-left: 30%;
+  margin-left: 0;
 }
 
 #contact #input-submit:hover {
@@ -541,6 +542,9 @@ main .container {
   main {
     padding-top: 0em;
   }
+  #annuaire #transition {
+    padding-top: 1.7em!important;
+  }
   .adminbarfix #transition, #transition:before, #transition:after {
     height: 80px;
     padding-top: 1px;
@@ -595,6 +599,10 @@ main .container {
   }
   .trans-annuaire {
     height: 110px !important;
+  }
+  .page-header img {
+    width: 204px;
+    margin-top: 21px;
   }
   #transition:after, #transition:before {
     height: 110px;
@@ -899,6 +907,7 @@ main .container {
 #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire {
   width: 100%;
   padding-bottom: 0.9em;
+  height: 210px;
   border: 1px solid #000;
 }
 
@@ -936,7 +945,7 @@ main .container {
   vertical-align: bottom;
   width: 100%;
   height: auto;
-  margin-top: 2.5em;
+  margin-top: 2em;
 }
 
 #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire h3 {
@@ -946,27 +955,26 @@ main .container {
 
 #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption h3 {
   /*height: 61px;*/
-  font-size: 2em;
+  font-size: 1.5em;
   font-weight: bold;
   padding-left: 0;
   padding-right: 0;
 }
 
 #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption p:nth-child(2) {
-  padding-right: 1em;
-  padding-left: 1em;
+  padding-right: 0;
+  padding-left: 0;
   letter-spacing: 0.4px;
 }
 
 #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption p:nth-child(3) {
   text-align: center;
+  padding-left: 0;
 }
 
 #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption p:nth-child(3) .btn-association {
   width: 100%;
   height: 34px;
-  padding-right: 3em;
-  padding-left: 3em;
   color: #fff;
   border: none;
   border-radius: 0px;
@@ -1063,6 +1071,9 @@ main .container {
 @media screen and (max-width: 991px) {
   #transition {
     /* background-color: #fff; */
+  }
+  #annuaire #transition .select-container {
+    padding-left: 3px;
   }
   #contact #mdq-logo {
     margin-left: 36%;
@@ -1695,7 +1706,7 @@ main .container {
   }
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 781px) {
   .adminbarfix {
     margin-top: 0.5em !important;
   }
@@ -1712,6 +1723,13 @@ main .container {
   .page-header img {
     width: 160px;
     padding-top: 0px;
+    margin-top: 6px;
+  }
+}
+
+@media screen and (max-width: 372px) {
+  #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire {
+    height: 238px;
   }
 }
 
@@ -1851,4 +1869,3 @@ main .container {
 div.wpcf7-validation-errors {
     border: 2px solid #ff6633;
 }
-

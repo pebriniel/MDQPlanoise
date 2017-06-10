@@ -82,7 +82,7 @@ function mdq_list_field($name_taxo, $value=null){
 			<form action="#" method="post" class="col-xs-12 col-md-6">
 				<div class="col-md-4 col-xs-5 col-xs-push-1 select-container">
 					<select class="select-menu" name="select-field">
-						<option value="null"> Champs d'actions</option>
+						<option value="null">Thèmes</option>
 						<?php echo mdq_list_field("theme_mdq"); ?>
 					</select>
 				</div>
@@ -98,7 +98,7 @@ function mdq_list_field($name_taxo, $value=null){
 		$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
 		query_posts(array(
-			"posts_per_page" => 4,
+			"posts_per_page" => 6,
 			"paged" => $paged,
 			'post_type'=>'fiche',
 			's' => $search_input,
@@ -127,9 +127,9 @@ function mdq_list_field($name_taxo, $value=null){
 							<div class="caption col-md-8 col-xs-8">
 								<h3 class="col-md-12 col-xs-12"><?php echo $post->_name; ?></h3>
 
-								<p class="col-md-12 col-xs-12"><?php echo max_caracter_length($post->_desc, 100);?></p>
+								<p class="col-md-12 col-xs-12"><?php echo max_caracter_length($post->_desc, 90);?></p>
 								<p class="col-md-12 col-xs-12">
-									<a href="<?php echo get_site_url()."/annuaire/association?fiche=".$post->ID; ?>" class="btn btn-association" role="button">voir la fiche</a>
+									<a href="<?php if($post->ID === '554' || $post->post_title === 'Maison de quartier Planoise') {  echo get_site_url()."/apropos"; } else {  echo get_site_url()."/annuaire/association?fiche=".$post->ID; } ?>" class="btn btn-association" role="button">voir la fiche</a>
 								</p>
 							</div>
 						</div>

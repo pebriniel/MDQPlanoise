@@ -35,6 +35,8 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
 
+		<script src="<?php echo  get_site_url(); ?>/wp-content/themes/maisondequartier/js/masonry.pkgd.js" type="text/javascript"></script>
+
 		<!--wordpress head-->
 		<?php wp_head(); ?>
 

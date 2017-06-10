@@ -1,37 +1,57 @@
 <?php get_header(); ?>
 
+<style media="screen">
+    #apropos{
+        margin-top: 8px;
+    }
+    #apropos #transition{
+        height: 38px;
+        padding: 0;
+    }
+    #apropos #transition::before, #apropos #transition::after{
+        height: 39px;
+    }
+    #transition ul .active{
+        height: 38px;
+    }
+    #apropos .btn-mdq, #apropos .btn-mdq:hover{
+        text-decoration: none;
+        padding-top: 0.5em;
+    }
+</style>
+
 <main id="apropos" class="container">
     <!-- 2eme barre de nav -->
     <div id="transition" class="row transition-assoc">
       <div class="col-md-12 col-xs-12" id="menu-assoc">
         <ul>
           <li>
-            <a class="link" data-id="cartevisite">
+            <a class="link" data-id="cartevisite" href="#cartevisite">
               <span class="glyphicon glyphicon-info-sign"></span>
               <span class="text">Description</span>
             </a>
           </li>
           <li>
-            <a class="link" data-id="missionsAsso">
+            <a class="link" data-id="missionsAsso" href="#missionsAsso">
               <span class="glyphicon glyphicon-screenshot"></span>
               <span class="text">Missions</span>
             </a>
           </li>
           <li>
-            <a class="link" data-id="gallery">
+            <a class="link" data-id="gallery" href="#gallery">
               <span class="glyphicon glyphicon-picture"></span>
               <span class="text">Galerie photos</span>
             </a>
           </li>
           <li>
-            <a class="link" data-id="loc">
+            <a class="link" data-id="loc" href="#loc">
               <span class="glyphicon glyphicon-envelope"></span>
               <span class="text">Coordonnées</span>
             </a>
           </li>
         </ul>
       </div>
-    </div>
+        </div>
     <!-- fin de 2eme barre de nav -->
 
     <!-- carte visite -->
@@ -41,7 +61,7 @@
 
           <div class="col-md-3 logo col-xs-12 text-center">
               <img id="imgmdq" src="<?= get_site_url(); ?>/wp-content/themes/maisondequartier/img/img_apropos/logo_mdq.jpg" alt="logo-maison-de-quartie-planoise">
-              <button type="button" name="button" class="btn-mdq center-block">Télécharger la plaquette</button>
+              <a href="http://houdab.public.codeur.online/wordpress/wp-content/uploads/2017/06/plaquette-mdq-planoise.pdf" class="btn-mdq center-block" download>Télécharger la plaquette</a>
           </div>
           <div class="col-md-9 col-xs-12 description">
               <p>
@@ -194,15 +214,43 @@
 <!-- fin coordonnées -->
 
 <script type="text/javascript">
-    function scrollToAnchor(aid){
+    $(".link").click(function() {
         var aTag = $("div[id='"+ aid +"']");
         $('html,body').animate({scrollTop: aTag.offset().top - 200},'slow');
-    }
+    });
 
-    $(".link").click(function() {
-       $(".link").removeClass("active");
-       $(this).addClass("active");
-       scrollToAnchor($(this).data('id'));
+    // Cache selectors
+    var topMenu = $("#menu-assoc"),
+        topMenuHeight = topMenu.outerHeight()+150,
+
+        // All list items
+        menuItems = topMenu.find("a"),
+        // Anchors corresponding to menu items
+        scrollItems = menuItems.map(function(){
+          var item = $($(this).attr("href"));
+          if (item.length) { return item; }
+        });
+
+    // Bind to scroll
+    $(window).scroll(function(){
+       // Get container scroll position
+       var fromTop = $(this).scrollTop()+topMenuHeight;
+
+       // Get id of current scroll item
+       var cur = scrollItems.map(function(){
+            if ($(this).offset().top < fromTop){
+                return this;
+            }
+       });
+
+       // Get the id of the current element
+       cur = cur[cur.length-1];
+
+       var id = cur && cur.length ? cur[0].id : "";
+       // Set/remove active class
+       menuItems
+         .parent().removeClass("active")
+         .end().filter("[href='#"+id+"']").parent().addClass("active");
     });
 </script>
 

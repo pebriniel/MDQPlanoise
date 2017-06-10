@@ -108,23 +108,23 @@ $images = callEvent(5, 0);
 				 foreach ($images as $key => $image)
 				 {
 				 	?>
-				 <div class="item <?php echo  $active; ?>  modal-click">
+				 <div class="item <?php echo $active; ?>  modal-click">
 					<?php echo  $image['image']; ?>
           			<div class="carousel-caption">
-						 <h3 class="img-modal img-responsive" title="<?php echo  $image['title']; ?>"><?php echo  $image['title'];?></h3>
-
-						 <p> Le <?php echo  $image['start']; ?> </p>
-						 <p><?php echo  $image['association_name'];?></p>
-						 <a class="btn-association img-modal img-moda-click" id="image-<?php echo  $image['post_id']; ?>" data-title="<?php echo  $image['title']; ?>" data-content="<?php echo  $image['content']; ?>" data-img="<?php echo  $image['img_src'] ?>" data-datestart="<?php echo  $image['start']; ?>" data-hstart="<?php echo $image['hstart']; ?>" data-dateend="<?php echo  $image['end']; ?>" data-hend="<?php echo $image['hend']; ?>" data-location="<?php echo  $image['location']; ?>" data-url="<?php if($image['association'] === '554' || $image['association_name'] === 'Maison de quartier Planoise') {  echo get_site_url()."/apropos"; } else { echo get_site_url()."/annuaire/association?fiche=".$image['association'];  } ?>" role="button">Voir l'événement</a>
+						 <h3 class="img-modal img-responsive" title="<?php echo $image['title']; ?>"><?php echo $image['title'];?></h3>
+						 <p> Le <?php echo $image['start']; ?> </p>
+						 <p><?php echo $image['association_name'];?></p>
+						 <a class="btn-association img-modal img-moda-click" id="image-<?php echo $image['post_id']; ?>" data-title="<?php echo $image['title']; ?>" data-content="<?php echo $image['content']; ?>" data-img="<?php echo $image['img_src'] ?>" data-datestart="<?php echo $image['start']; ?>" data-hstart="<?php echo $image['hstart']; ?>" data-dateend="<?php echo $image['end']; ?>" data-hend="<?php echo $image['hend']; ?>" data-location="<?php echo $image['location']; ?>" data-url="<?php if($image['association'] === '554' || $image['association_name'] === 'Maison de quartier Planoise') {  echo get_site_url()."/apropos"; } else { echo get_site_url()."/annuaire/association?fiche=".$image['association'];  } ?>" role="button">Voir l'événement</a>
 					 </div>
 				 </div>
 				 <?php
 				 $active = "";
 				 }
+
 				 ?>
 				 <a class="left carousel-control" href="#carousel-home" role="button" data-slide="prev">
 					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true" style="color: #ff6633;"></span>
-					<span class="sr-only">Précèdent</span>
+					<span class="sr-only">Précédent</span>
 				</a>
 				<a class="right carousel-control" href="#carousel-home" role="button" data-slide="next">
 					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="color: #ff6633;"></span>
@@ -175,7 +175,7 @@ $images = callEvent(5, 0);
 			var content = $(".modal-body");
 			var footer = $(".modal-footer");
 			var modal_title = $(".modal-title");
-			console.log(url);
+			// console.log(url);
 
 			modal_title.empty();
 			modal_title.html(title);
@@ -231,7 +231,7 @@ $images = callEvent(5, 0);
 
 	echo "<script>";
 	echo "var d = eval($dnext);";
-	echo "console.log(d);";
+	// echo "console.log(d);";
 	echo "</script>";
 
 ?>
@@ -280,7 +280,16 @@ $images = callEvent(5, 0);
 
 					modal_title.html(calEvent.title);
 					content.html("<img src='" + calEvent.imageurl + "'><p id='agenda-date'>Date de l'événement : du " +  calEvent.start + " au " + calEvent.end + "</p><p id='agenda-location'>Lieu : " + calEvent.location + "</p> <p id='modal-description'>"  + calEvent.description + "</p>");
-					footer.html("<a href='"+window.location.href+"/annuaire/association?fiche=" + calEvent.id +"' class='btn btn-association-asso'> Fiche de l'association</a><button class='btn btn-association' data-dismiss='modal'>Fermer</button>");
+
+					if(calEvent.id === '554'){
+
+						footer.html("<a href='"+window.location.href+"/apropos' class='btn btn-association-asso'>Fiche de l'association</a><button class='btn btn-association' data-dismiss='modal'>Fermer</button>");
+
+
+					} else {
+						footer.html("<a href='"+window.location.href+"/annuaire/association?fiche=" + calEvent.id +"' class='btn btn-association-asso'>Fiche de l'association</a><button class='btn btn-association' data-dismiss='modal'>Fermer</button>");
+
+					}
 
 					$("#modal-agenda").modal("show");
 
@@ -361,32 +370,6 @@ $images = callEvent(5, 0);
                    				the_content(bootstrapBasicMoreLinkText($post));
                  			} 		 ?>
 							</div>
-
-							<footer class="entry-meta col-md-12">
-								<?php if ('post' == get_post_type()) { // Hide category and tag text for pages on Search ?>
-								<div class="entry-meta-category-tag">
-									<?php
-										$tags_list = get_the_tag_list('', __(', ', 'bootstrap-basic'));
-
-										$posttags = get_the_tags();
-
-										$tags = array();
-										if ($posttags) {
-											foreach($posttags as $tag) {
-											$tags[] = $tag->name;
-											}
-										}
-										$newTags = implode($tags, ',');
-
-										if ($tags_list) {
-									?>
-									<span class="tags-links">
-										<?php echo bootstrapBasicTagsList($newTags); ?>
-									</span>
-									<?php }  ?>
-								</div>
-								<?php }   ?>
-							</footer>
 									<?php
 								}
 							}
@@ -444,40 +427,15 @@ $images = callEvent(5, 0);
 										} 		 ?>
 								</div>
 								<?php } ?>
-								<footer class="entry-meta">
-									<?php if ('post' == get_post_type()) { // Hide category and tag text for pages on Search ?>
-									<div class="entry-meta-category-tag">
-										<?php
-											$tags_list = get_the_tag_list('', __(', ', 'bootstrap-basic'));
-
-											$posttags = get_the_tags();
-
-											$tags = array();
-											if ($posttags) {
-												foreach($posttags as $tag) {
-												$tags[] = $tag->name;
-												}
-											}
-											$newTags = implode($tags, ',');
-
-											if ($tags_list) {
-										?>
-										<span class="tags-links">
-											<?php echo bootstrapBasicTagsList($newTags); ?>
-										</span>
-										<?php }  ?>
-									</div>
-									<?php }   ?>
-								</footer>
 						</div>
 					</article>
-					<?php  }  }
-					// } ?>
+					<?php  }  }  ?>
 	</section>
-	<nav class="col-md-12 col-xs-12" id="page">
-		<?php // echo $page;
-				// $wp_query = NULL;
-				// $wp_query = $temp_query;
-				 ?>
-	</nav>
+	<script>
+	$('#articlesAutres').masonry({
+
+		itemSelector: '.blockArticle'
+	});
+	</script>
+
 </main>

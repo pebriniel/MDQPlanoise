@@ -40,6 +40,9 @@ html, body {
   border: none;
   background: white;
 }
+#annuaire #transition .select-container {
+  padding-left: 0!important;
+}
 #annuaire #search:before,
 #annuaire #search:after {
   content: "";
@@ -113,7 +116,7 @@ html, body {
   border: 1px solid black;
 }
 #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption h3 {
-  font-size: 2em;
+  font-size: 1.5em;
   font-weight: bold;
 }
 #annuaire #content .content-annuaire .content-ta .thumbnail-annuaire .caption p:nth-child(2) {
